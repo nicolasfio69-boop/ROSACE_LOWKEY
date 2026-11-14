@@ -10,7 +10,7 @@ Ce fichier est la source de vérité du projet. Il est tenu à jour à chaque d�
 
 **Pour mettre à jour :** quand Nicolas tranche un point, déplace-le de « À trancher » vers « Journal des décisions », avec la date. Si une règle change, modifie aussi la partie concernée plus haut.
 
-Dernière mise à jour : 2026-11-14.
+Dernière mise à jour : 2026-11-14, 16 h 45.
 
 ---
 
@@ -50,7 +50,8 @@ Dernière mise à jour : 2026-11-14.
 - Une barre pointillée = déclaré par le talent. Une barre pleine = observé par un recruteur. Un trait noir = niveau attendu par l'entreprise. Une branche vide = non renseigné, jamais zéro.
 - Les libellés au bout des branches commencent par un verbe d'action.
 - Le logo est une petite rosace avec 3 branches or en haut.
-- La longueur des branches est encore à trancher (voir 10.a).
+- **La longueur d'une branche a toujours un sens en niveau** (décidé le 2026-11-14). L'échelle est fixe : la branche part du petit cercle blanc, le bord du disque gris vaut Foundation, l'anneau intermédiaire vaut Intermediate et le cercle extérieur vaut Advanced. Ça vaut pour le déclaré, l'attendu et l'observé.
+- Une observation se place sur la même échelle : niveau de la situation × performance (A = 1, C = 0,6, F = 0). Par exemple, « vu clairement » sur un exercice Intermediate atteint l'anneau Intermediate, et « vu en partie » s'arrête à 60 % de cette longueur.
 
 ## 5. Le parcours de démo
 
@@ -66,15 +67,46 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
 - Seules couleurs fortes : rouge Centrale `#C8102E` et or `#F0C300`. Plus de crème, de vert ni de police à empattements.
 - Titres en Space Grotesk, texte en Inter, hébergés dans le projet (aucun appel à Google Fonts).
 - Effets inspirés des composants gratuits d'Aceternity : fond « Wavy Background » sur l'accueil, bordure « Glowing Effect » sur les cartes. Tout s'arrête si l'utilisateur demande moins d'animations.
+- Motion design : des animations qui expliquent (la rosace qui se construit, le pointillé qui devient plein, l'arrivée des suggestions, les transitions), plus des effets décoratifs. On le fera après la refonte UX de Codex.
 - Les textes disent ce que fait l'outil. Pas de slogans.
 
 ## 7. Technique
 
 - Next.js 15, React 19, TypeScript, Tailwind 4, Vitest et Playwright.
 - **Stockage** : dans le navigateur pour la démo. Tous les rôles partagent le même navigateur.
-- **IA** (facultative) : Featherless côté serveur, Gemini en option. Une proposition d'IA est toujours relue par une personne.
-- **Contexte entreprise** (facultatif) : Context.dev, côté serveur.
-- **Hébergement : pas de Vercel.** On passe par un tech challenge, a priori **Aiven**. [Aiven Runtime](https://aiven.io/runtime) fait tourner une application en conteneur, ce qui demande d'ajouter un `Dockerfile` (Next.js en mode `standalone`). La base de données serait Aiven PostgreSQL. Restent à vérifier : les crédits, la région européenne et la gestion des clés (voir 10.d).
+- **IA : Featherless** (tech challenge retenu), côté serveur. Elle propose, par exemple des exemples de niveau ou un premier retour sur un exercice, et une personne relit toujours. Gemini n'est plus visé.
+- **Contexte entreprise** (facultatif) : Context.dev, côté serveur. Ce n'est pas un tech challenge visé.
+- **Hébergement : Aiven** (tech challenge retenu), pas Vercel. [Aiven Runtime](https://aiven.io/runtime) fait tourner une application en conteneur, ce qui demande d'ajouter un `Dockerfile` (Next.js en mode `standalone`). La base de données serait Aiven PostgreSQL. Restent à vérifier : les crédits, la région européenne et la gestion des clés.
+- **Données** : on héberge d'abord sur Aiven avec le stockage dans le navigateur, sans base de données. Aiven PostgreSQL ne vient que s'il reste du temps.
+
+## 7 bis. Attester un niveau (proposition à valider)
+
+Déclarer un niveau ne suffit pas. Pour chaque composante, on prévoit comment le vérifier, et c'est toujours **une personne qui note** (A, C, F ou NE). L'IA peut proposer un premier retour, jamais la note.
+
+Il y a trois façons de vérifier :
+- **En ligne, avant l'événement** : un court exercice écrit ou technique, fait par le talent puis relu par un recruteur avec une grille. Au maximum 20 minutes au total par talent.
+- **Sur place, à l'événement** : une courte mise en situation (jeu de rôle, tâche à plusieurs) observée par le recruteur. Au maximum 10 minutes.
+- **Pendant l'entretien** : la question « Racontez-moi une fois où… » avec sa relance. C'est la preuve la plus faible, et elle compte comme telle.
+
+Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. Le talent fait la version du niveau qu'il déclare.
+
+| Composante | Comment on vérifie | Exemple de situation |
+|---|---|---|
+| C1.1 Reach out to people | Sur place | Il manque une information pour avancer : aller la chercher auprès d'un « collègue » joué par un recruteur. |
+| C1.2 Understand and convince | Sur place | Jeu de rôle : un client décrit mal son problème. Reformuler, puis proposer une solution et la faire accepter. |
+| C2.1 Know the rules and stick to them | En ligne | Un extrait de règle (protection des données, règles de code) et 5 cas : dire ce qui est permis et pourquoi. |
+| C2.2 Get it right and spot the error | En ligne | Relire un petit livrable (code ou tableau) et trouver les erreurs, avec une grille de relecture. |
+| C3.1 Scope a job | En ligne | Découper une demande floue en étapes, avec une durée et un risque pour chacune. |
+| C3.2 See it through and hand it over | En ligne et entretien | Écrire la note de passation d'un mini-projet fictif, puis en parler. |
+| C4.1 Work with others | Sur place | Une mini-tâche à 2 ou 3, observée : partage du travail, écoute, résultat commun. |
+| C4.2 Own your decisions | Entretien et sur place | Un choix à faire entre deux options avec des informations incomplètes : décider et justifier. |
+| C4.3 Keep commitments and manage your time | Entretien seulement | On ne peut pas l'observer en 10 minutes. On demande un exemple concret sur plusieurs semaines, marqué « parlé, pas observé ». |
+| C5.1 Break down a problem | En ligne | Un rapport de bug vague : écrire l'analyse et les questions à poser. |
+| C5.2 Learn fast on your own | En ligne | 20 minutes pour prendre en main un petit outil fictif non documenté, puis répondre à 3 questions. |
+| C5.3 Communicate clearly | Sur place | Expliquer en 2 minutes un sujet technique à un non-spécialiste. On juge si c'est compris, jamais l'accent ni la grammaire. |
+| Compétences techniques | En ligne | Un petit test pratique (corriger une fonction C, écrire une requête SQL…). Des tests automatiques peuvent aider le relecteur, mais c'est lui qui note. |
+
+À l'écran, ça reste simple : pour chaque composante demandée, une ligne qui dit comment elle sera vérifiée et où en est la vérification (à faire, faite, notée). L'actuel « Practice studio » devient cette partie.
 
 ## 8. Branches et pull requests
 
@@ -95,38 +127,34 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
   - le front faisait « bullshit » : nouvelle direction artistique, avec les effets gratuits d'Aceternity ;
   - on fait d'abord le parcours guidé, ensuite le motion design ;
   - hébergement par un tech challenge, pas par Vercel ;
-  - ce fichier de cadrage devient la référence commune pour tous les agents.
+  - ce fichier de cadrage devient la référence commune pour tous les agents ;
+  - la longueur des branches a toujours un sens en niveau : échelle fixe pour le déclaré, l'attendu et l'observé ;
+  - les écrans restent simples, mais chaque composante doit pouvoir être attestée : exercices en ligne relus par une personne, mises en situation sur place, questions d'entretien (voir 7 bis) ;
+  - tech challenges retenus : Aiven et Featherless ;
+  - données : Aiven avec stockage dans le navigateur d'abord, PostgreSQL seulement s'il reste du temps (Nicolas a laissé Claude choisir) ;
+  - motion design : des effets qui expliquent, plus des effets décoratifs ;
+  - on attend que Codex finisse de refaire l'UX avant de toucher aux écrans.
 
 ## 10. À trancher ensemble
 
 Pour chaque point : les options, et ma recommandation en gras.
 
-**a. Longueur des branches de la rosace**
-- **Mixte : le déclaré et l'attendu restent sur une échelle fixe (le cercle extérieur vaut Advanced). L'observé suit Centrale : on additionne les observations, et la longueur est relative au meilleur score.**
-- Tout comme Centrale : toutes les longueurs sont relatives au meilleur score de la personne. On perd alors la comparaison avec le niveau attendu.
-- Garder l'échelle fixe partout, avec seulement le disque gris mis à 42 % comme chez Centrale.
+**a. Le plan « Attester un niveau » (7 bis)**
+- **Valider le tableau tel quel, puis coder d'abord la ligne « comment c'est vérifié » sur l'écran du besoin, ainsi que 3 exercices en ligne (C5.1, C2.2 et une compétence technique) pour la démo.**
+- Modifier certaines lignes du tableau avant de coder.
 
-**b. Ce qu'on montre au jury**
-- **Retirer du menu le Practice studio et la page `/demo`, sans supprimer le code. Le menu ne montre que le parcours guidé et les 4 étapes.**
-- Tout garder.
-- Supprimer ces écrans du code.
+**b. Plusieurs observations pour une même composante**
+- **On garde la plus haute, pour que la branche reste lisible en niveau.**
+- On fait la moyenne.
 
-**c. Tech challenges à viser**
-- **Aiven pour l'hébergement, et Featherless seulement si un vrai appel marche avant le rendu.** Context.dev seulement s'il apporte quelque chose de visible dans la démo. Pas d'Oxylabs.
-- Ne viser qu'Aiven.
+**c. Ce qu'on montre au jury**
+- **Le menu montre le parcours guidé, les 4 étapes et la partie « Attester ». La page `/demo` sort du menu, sans supprimer le code.**
+- Tout garder dans le menu.
 
-**d. Données partagées**
-- **Héberger d'abord sur Aiven avec le stockage dans le navigateur, sans base de données. Ajouter Aiven PostgreSQL seulement s'il reste du temps.**
-- Brancher PostgreSQL tout de suite, avec de vrais comptes. C'est plus long et plus risqué.
-
-**e. Motion design**
-- **Animer ce qui explique : la rosace qui se construit, le passage du pointillé au plein, l'arrivée des suggestions et les transitions entre étapes. En CSS, plus un peu de la librairie Motion si besoin.**
-- Ajouter des effets décoratifs en plus.
-
-**f. Le rendu**
+**d. Le rendu**
 - **Une vidéo de 2 à 3 minutes qui suit le parcours guidé, 3 ou 4 slides, et le texte du formulaire Junction.**
 
-**g. Infos manquantes (Nicolas)**
+**e. Infos manquantes (Nicolas)**
 - Heure exacte du rendu.
 - Durée du pitch.
 - Qui est dans l'équipe.
