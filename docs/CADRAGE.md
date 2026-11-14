@@ -33,6 +33,29 @@ Dernière mise à jour : 2026-11-14, 16 h 45.
 7. **Le produit est en anglais** (interface, code, commentaires). Les échanges avec Nicolas sont en français.
 8. Chaque changement garde au vert les tests, TypeScript, ESLint et le build.
 
+## 2 bis. Les 12 composantes : toujours des verbes d'action
+
+Comme dans le système Centrale (grille CLC), chaque composante est une action qu'on peut observer, jamais un nom abstrait comme « Quality » ou « Team ». Les noms complets et les libellés courts de la rosace commencent tous par un verbe. Un agent ne doit jamais les remplacer par des noms.
+
+| Code | Nom (interface) | Libellé court (rosace) |
+|---|---|---|
+| C1.1 | Reach out to people | Reach out |
+| C1.2 | Understand and convince | Convince |
+| C2.1 | Know the rules and stick to them | Follow the rules |
+| C2.2 | Get it right and spot the error | Get it right |
+| C3.1 | Scope a job | Scope the work |
+| C3.2 | See it through and hand it over | See it through |
+| C4.1 | Work with others | Work with others |
+| C4.2 | Own your decisions | Own decisions |
+| C4.3 | Keep commitments and manage your time | Keep commitments |
+| C5.1 | Break down a problem | Break down problems |
+| C5.2 | Learn fast on your own | Learn fast |
+| C5.3 | Communicate clearly | Communicate clearly |
+
+Les compétences techniques suivent la même règle, par exemple « Program embedded systems in C ».
+
+Attention : ces noms sont dans la PR #7. Tant qu'elle n'est pas fusionnée, `feat/visual-workspace` affiche encore les anciens noms (Listen, Present, Rules, Quality, Frame, Team…). Il faut donc fusionner la PR #7 en premier.
+
 ## 3. Besoin d'une entreprise et calcul
 
 - **Exactement 3 composantes majeures** (poids 2), dessinées en or, par-dessus la rosace. Ce sont toujours des composantes Centrale.
@@ -133,7 +156,8 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
   - tech challenges retenus : Aiven et Featherless ;
   - données : Aiven avec stockage dans le navigateur d'abord, PostgreSQL seulement s'il reste du temps (Nicolas a laissé Claude choisir) ;
   - motion design : des effets qui expliquent, plus des effets décoratifs ;
-  - on attend que Codex finisse de refaire l'UX avant de toucher aux écrans.
+  - on attend que Codex finisse de refaire l'UX avant de toucher aux écrans ;
+  - rappel de Nicolas : les composantes sont toujours des verbes d'action, comme dans le système Centrale (voir 2 bis).
 
 ## 10. À trancher ensemble
 
