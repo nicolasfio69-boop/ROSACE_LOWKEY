@@ -18,7 +18,7 @@ import {
 } from "@/lib/need-storage";
 import { JOB_QUESTIONS, prepareNeed, type NeedDraft } from "@/lib/need-draft";
 import { changeSelection, type SelectionRole } from "@/lib/need-selection";
-import { MAX_JOB_SKILLS, MAX_MINORS } from "@/lib/scoring";
+import { MAX_JOB_SKILLS } from "@/lib/scoring";
 import { SkillBars } from "./SkillBars";
 import { spotSkills } from "@/lib/talent-intake";
 import { addNeed } from "@/lib/workspace";
@@ -687,10 +687,7 @@ export function NeedForm() {
                             : !!selected && !selected.major
                       }
                       disabled={
-                        (role === "major" && !selected?.major && majors >= 3) ||
-                        (role === "minor" &&
-                          (!selected || selected.major) &&
-                          minors >= MAX_MINORS)
+                        role === "major" && !selected?.major && majors >= 3
                       }
                       onClick={() => select(c.code, role)}
                     >

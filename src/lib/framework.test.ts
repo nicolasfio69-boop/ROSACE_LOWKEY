@@ -20,6 +20,7 @@ describe("approved framework", () => {
   });
   it("keeps distinct technical actions in four families", () => {
     expect(new Set(JOB_SKILLS.map(s => s.code)).size).toBe(JOB_SKILLS.length);
+    expect(JOB_SKILLS).toHaveLength(20);
     expect(JOB_FAMILIES).toHaveLength(4);
     for (const skill of JOB_SKILLS) {
       expect(JOB_FAMILIES.some(f => f.code === skill.family)).toBe(true);

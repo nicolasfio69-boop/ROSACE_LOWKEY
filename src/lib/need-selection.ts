@@ -1,7 +1,6 @@
 import { isComponent, SKILL_CODES } from "./framework";
 import {
   MAJOR_COUNT,
-  MAX_MINORS,
   MAX_JOB_SKILLS,
   type Requirement,
 } from "./scoring";
@@ -24,11 +23,6 @@ export function changeSelection(
   const next = current.filter((r) => r.skill !== skill);
   if (role === "none") return next;
   if (role === "major" && next.filter((r) => r.major).length >= MAJOR_COUNT)
-    return current;
-  if (
-    role === "minor" &&
-    next.filter((r) => isComponent(r.skill) && !r.major).length >= MAX_MINORS
-  )
     return current;
   if (
     role === "job" &&

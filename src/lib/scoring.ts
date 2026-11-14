@@ -16,7 +16,6 @@ import { isComponent, type ExpectedLevel, type LevelValue } from "./framework";
  */
 export const MAJOR_COUNT = 3;
 /** No real limit: every component that is not a major can be a minor, as in the Centrale grid. */
-export const MAX_MINORS = 12 - MAJOR_COUNT;
 export const MAX_JOB_SKILLS = 3;
 export const MAJOR_WEIGHT = 2;
 export const MINOR_WEIGHT = 1;
@@ -103,7 +102,6 @@ export function checkNeed(need: Need): string[] {
   const majors = components.filter((r) => r.major);
   const problems: string[] = [];
   if (majors.length !== MAJOR_COUNT) problems.push(`Pick exactly ${MAJOR_COUNT} major components (now ${majors.length}).`);
-  if (components.length - majors.length > MAX_MINORS) problems.push(`At most ${MAX_MINORS} minor components.`);
   if (jobSkills.length > MAX_JOB_SKILLS) problems.push(`At most ${MAX_JOB_SKILLS} job skills.`);
   if (jobSkills.some((r) => r.major)) problems.push("A job skill cannot be a major: majors are Centrale components.");
   if (new Set(need.requirements.map((r) => r.skill)).size !== need.requirements.length) problems.push("Each skill only once.");

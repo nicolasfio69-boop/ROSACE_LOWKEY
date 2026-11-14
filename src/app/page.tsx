@@ -9,7 +9,7 @@ const STEPS = [
     icon: "need",
     step: "01",
     title: "Prepare a recruiter need",
-    text: "Choose 3 major components, up to 2 minors and 2 job skills. Compare concrete examples to set the expected levels.",
+    text: "Choose 3 major components, any number of minors and up to 3 technical skills. Compare concrete examples to set the expected levels.",
     href: "/need/new",
     link: "Open the recruiter form",
   },

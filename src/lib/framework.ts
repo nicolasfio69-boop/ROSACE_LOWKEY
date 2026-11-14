@@ -430,6 +430,17 @@ export const JOB_SKILLS: JobSkill[] = [
       3: "Organises the support process (categories, priorities, escalation) so that tickets are solved faster.",
     },
   },
+  {
+    code: "J.DATA_PIPELINES",
+    family: "data",
+    name: "Build data pipelines",
+    activity: "built a repeatable process to move and prepare data between systems",
+    descriptors: {
+      1: "Runs and adapts a small file-to-table pipeline with help, checking the row count and required fields.",
+      2: "Builds a repeatable pipeline alone for real data, with validation, retries and a clear failure report.",
+      3: "Adapts a pipeline when sources or schemas change, preventing duplicate or missing records for teams that depend on it.",
+    },
+  },
 ];
 
 export const SKILL_CODES = new Set<string>([...COMPONENTS.map((c) => c.code), ...JOB_SKILLS.map((j) => j.code)]);

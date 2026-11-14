@@ -20,7 +20,7 @@ Read this file fully before changing anything. It is the short version of the pr
 4. **No bias inputs**: never use nationality, language, age, gender or degree name in a calculation. Communication is judged on being understood, never on accent or grammar.
 9. **Rosace labels start with an action verb** (Reach out, Convince, Follow the rules...).
 10. **Descriptors stay concrete**: each one must be checkable by asking "tell me about a time when...". No reputation ("others rely on them"), no personality trait. Same ladder everywhere: 1 with help on a simple case, 2 alone on a real case, 3 alone when the situation is new or changing and others depend on the result.
-5. **No API key in the repository.** Keys go in the hosting environment settings (Vercel). `.env*` is git-ignored.
+5. **No API key in the repository.** Keys go in the hosting environment settings (Aiven Runtime). `.env*` is git-ignored.
 6. **The CV is never stored**, not even in AI logs. A talent card is kept 6 months only if the talent asks, and can be deleted anytime.
 7. Product language is **English**. Code, comments and UI in English.
 8. Every change keeps `npm test`, `npx tsc --noEmit`, `npx eslint src` and `npm run build` passing.
@@ -55,7 +55,7 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 
 ## What exists
 
-- `src/lib/framework.ts`: the 12 components in English with descriptors per level, 5 job skills.
+- `src/lib/framework.ts`: the 12 components in English with descriptors per level, 20 technical skills in 4 families.
 - `src/lib/scoring.ts`, `src/lib/suggestions.ts`: the rules above. Tests in `src/lib/scoring.test.ts`.
 - `src/data/demo.ts`: event "Espoo Tech Matchmaking", 2 needs (NordChip embedded developer, Lumora support engineer), 6 talents.
 - `/`: workspace home; `/demo`: the original synthetic overview.
@@ -72,12 +72,12 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 
 The following is the original implementation sequence; screens 1–4 now exist, as listed above. Build further changes on their own branch with a pull request. Keep the demo data working at every step.
 
-1. **Screen 1, recruiter need** (`/need/new`): the recruiter types the job title and a short description; at most 4 questions to understand the job; then picks 3 majors and any number of minors from the 12 components (cards), up to 3 technical skills from a closed list grouped by job family, and an expected level for each. Each level shows a **level card**: the fixed Centrale descriptor plus an example adapted to the job (hand-written for now, Gemini later). A live rosace shows the gold majors as they are picked. Capacity defaults to 3. Use `checkNeed()` to block an invalid need.
-2. **Screen 2, talent card from CV** (`/talent/new`): the talent pastes a CV (not stored). Skills are spotted with the CV sentence quoted (hand-written rules or demo stub now, Gemini later). For each skill, three closed questions: done it? alone or with help? simple or new situation? A written rule suggests the level; the talent confirms or changes it. The talent sees only their rosace and grids, never a rank or a fraction.
+1. **Screen 1, recruiter need** (`/need/new`): the recruiter types the job title and a short description; at most 4 questions to understand the job; then picks 3 majors and any number of minors from the 12 components (cards), up to 3 technical skills from a closed list grouped by job family, and an expected level for each. Each level shows a **level card**: the fixed Centrale descriptor plus an example adapted to the job (hand-written for now, Featherless later). A live rosace shows the gold majors as they are picked. Capacity defaults to 3. Use `checkNeed()` to block an invalid need.
+2. **Screen 2, talent card from CV** (`/talent/new`): the talent pastes a CV (not stored). Skills are spotted with the CV sentence quoted (hand-written rules or demo stub now, Featherless later). For each skill, three closed questions: done it? alone or with help? simple or new situation? A written rule suggests the level; the talent confirms or changes it. The talent sees only their rosace and grids, never a rank or a fraction.
 3. **Organiser gesture** (`/organiser`): sees suggestions per need, ties, talents without suggestion and why; approves, adds or removes a talent with a one-line reason; every action goes to a journal.
 4. **Screen 3, brief and observation** (`/brief/[need]/[talent]`): why talk, 3 to 5 questions to verify the claims, what a good answer contains, talent rosace over the need. After the meeting the recruiter fills the A / C / F / NE grid; observed bars become solid.
-5. Storage (Aiven PostgreSQL in Finland, or Supabase as fallback), then deploy on Vercel.
-6. Gemini for: need questions, level-card examples, CV spotting, brief questions. AI output is always checked against the closed list of skills and shown to a human before use.
+5. Deploy a standalone Next.js container on Aiven Runtime. Keep storage in the browser for now; do not add PostgreSQL.
+6. Featherless for: need questions, level-card examples, CV spotting, brief questions. AI output is always checked against the closed list of skills and shown to a human before use.
 
 ## Commands
 
