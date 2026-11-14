@@ -94,7 +94,9 @@ export function Rosace({
             className="rosace-branch"
             data-skill={component.code}
             data-level={0}
-            data-evidence={observedLevels !== undefined ? "observed" : "declared"}
+            data-evidence={
+              observedLevels !== undefined ? "observed" : "declared"
+            }
             cx={dot.x}
             cy={dot.y}
             r={thickness / 2}
@@ -108,11 +110,21 @@ export function Rosace({
         showTalent && observedLevels === undefined && !observed[component.code];
       return (
         <line
-          key={component.code}
+          key={`${component.code}-${observedLevels !== undefined ? "observed" : "declared"}`}
+          style={{
+            animationDelay: `${(major ? 12 + index : index) * 35}ms`,
+            transformOrigin: `${start.x}px ${start.y}px`,
+          }}
           className="rosace-branch"
           data-skill={component.code}
           data-level={level}
-          data-evidence={showTalent ? (observedLevels !== undefined ? "observed" : "declared") : "expected"}
+          data-evidence={
+            showTalent
+              ? observedLevels !== undefined
+                ? "observed"
+                : "declared"
+              : "expected"
+          }
           x1={start.x}
           y1={start.y}
           x2={end.x}

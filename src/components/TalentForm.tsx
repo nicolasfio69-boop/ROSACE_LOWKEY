@@ -1,4 +1,5 @@
 "use client";
+import { BackgroundBeams } from "./BackgroundBeams";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
@@ -187,7 +188,7 @@ export function TalentForm() {
           {step === 0 && (
             <>
               <p className="eyebrow">A CV IS A STARTING POINT</p>
-              <div className="step-heading">
+              <div className="step-heading"><BackgroundBeams />
                 <h1>Build your skills card.</h1>
                 <p>
                   Use a fictional CV for this demo, or start without one. A
@@ -243,7 +244,7 @@ export function TalentForm() {
                   : `TECHNICAL SKILL ${index - 11} / ${jobInPath.length}`}{" "}
                 · {skill.code}
               </p>
-              <div className="step-heading">
+              <div className="step-heading"><BackgroundBeams />
                 <h1>{skill.name}</h1>
                 <p>Have you ever {skill.activity}?</p>
               </div>
@@ -390,7 +391,7 @@ export function TalentForm() {
           {step === 2 && (
             <>
               <p className="eyebrow">YOUR CONFIRMED DECLARATIONS</p>
-              <div className="step-heading">
+              <div className="step-heading"><BackgroundBeams />
                 <h1>
                   {saved
                     ? "Your saved skills card."

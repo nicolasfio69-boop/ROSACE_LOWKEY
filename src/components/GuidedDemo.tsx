@@ -1,4 +1,5 @@
 "use client";
+import { BackgroundBeams } from "./BackgroundBeams";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { SkillBars } from "./SkillBars";
@@ -11,10 +12,7 @@ import {
   skillName,
   type LevelValue,
 } from "@/lib/framework";
-import {
-  OBSERVATION_LABELS,
-  type Observation,
-} from "@/lib/scoring";
+import { OBSERVATION_LABELS, type Observation } from "@/lib/scoring";
 import {
   NO_SUGGESTION_LABELS,
   suggestForNeed,
@@ -106,7 +104,12 @@ function NeedStep() {
           expected={expected}
           majors={majors.map((r) => r.skill)}
         />
-        <SkillBars items={jobSkills.map(r => ({code:r.skill, expected:r.expected}))} />
+        <SkillBars
+          items={jobSkills.map((r) => ({
+            code: r.skill,
+            expected: r.expected,
+          }))}
+        />
       </figure>
       <div className="tour-cards">
         {majors.map((r, i) => (
@@ -263,16 +266,40 @@ function ConversationStep() {
   const observedLevels = Object.fromEntries(
     components.map((r) => [
       r.skill,
-      meanObservedValue([
-        ...(r.skill === "C5.1" ? [{taskLevel: onlineLevel as 1 | 2 | 3, observation: "A" as const}] : []),
-        ...(seen[r.skill] ? [{taskLevel: r.expected, observation: seen[r.skill]}] : []),
-      ], r.expected),
+      meanObservedValue(
+        [
+          ...(r.skill === "C5.1"
+            ? [
+                {
+                  taskLevel: onlineLevel as 1 | 2 | 3,
+                  observation: "A" as const,
+                },
+              ]
+            : []),
+          ...(seen[r.skill]
+            ? [{ taskLevel: r.expected, observation: seen[r.skill] }]
+            : []),
+        ],
+        r.expected,
+      ),
     ]),
   );
   return (
     <div className="tour-scene convo">
       <div className="tour-cards">
-        <article className="tour-card"><span>Online exercise · Graded by the recruiter · fictional example</span><strong>Break down a problem · {LEVELS[onlineLevel].name}</strong><p>Amira identified the missing facts in a sensor bug report. The recruiter marked A — Seen clearly at her declared task level. The solid branch starts at {onlineLevel}; further observations are averaged.</p><Link href="/checks">Try the answer and review flow →</Link></article>
+        <article className="tour-card">
+          <span>
+            Online exercise · Graded by the recruiter · fictional example
+          </span>
+          <strong>Break down a problem · {LEVELS[onlineLevel].name}</strong>
+          <p>
+            Amira identified the missing facts in a sensor bug report. The
+            recruiter marked A — Seen clearly at her declared task level. The
+            solid branch starts at {onlineLevel}; further observations are
+            averaged.
+          </p>
+          <Link href="/checks">Try the answer and review flow →</Link>
+        </article>
         {questions
           .filter((q) => isComponent(q.skill))
           .slice(0, 3)
@@ -370,6 +397,7 @@ export function GuidedDemo() {
 
       <section className="tour-body" key={step} aria-live="polite">
         <header className="tour-head">
+          <BackgroundBeams />
           <p className="eyebrow">
             STEP {step + 1} OF {STEPS.length} · {current.who.toUpperCase()}
           </p>

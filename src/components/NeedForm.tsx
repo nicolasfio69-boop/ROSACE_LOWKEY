@@ -1,4 +1,5 @@
 "use client";
+import { BackgroundBeams } from "./BackgroundBeams";
 import { LivePreview } from "./LivePreview";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -337,7 +338,7 @@ export function NeedForm() {
           {step === 0 && (
             <>
               <p className="eyebrow">FIRST, THE REAL WORK</p>
-              <div className="step-heading">
+              <div className="step-heading"><BackgroundBeams />
                 <h1>Your company. Your role.</h1>
                 <p>
                   Start with a job document or your own words. Context helps
@@ -635,7 +636,7 @@ export function NeedForm() {
               <p className="eyebrow">
                 COMPONENT {String(index + 1).padStart(2, "0")} / 12 · {c.code}
               </p>
-              <div className="step-heading">
+              <div className="step-heading"><BackgroundBeams />
                 <h1>{c.name}</h1>
                 <p>
                   Compare situations, choose an expected level, then decide
@@ -836,7 +837,7 @@ export function NeedForm() {
           {step === 2 && (
             <>
               <p className="eyebrow">ALONGSIDE THE CENTRALE FRAMEWORK</p>
-              <div className="step-heading">
+              <div className="step-heading"><BackgroundBeams />
                 <h1>Add specific know-how.</h1>
                 <p>
                   Choose up to {MAX_JOB_SKILLS} technical skills from the closed
@@ -896,7 +897,7 @@ export function NeedForm() {
           {step === 3 && (
             <>
               <p className="eyebrow">YOUR NEED, READY TO REVIEW</p>
-              <div className="step-heading">
+              <div className="step-heading"><BackgroundBeams />
                 <h1>{draft.title}</h1>
                 <p>
                   {draft.company} · {draft.eventName} · {draft.workMode}

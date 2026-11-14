@@ -1118,3 +1118,22 @@ input::file-selector-button {
 .check-prompt, .check-answer { margin: 18px 0; padding: 18px; border: 1px solid #cbd0db; border-radius: 12px; background: #e0e4ed; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
 .check-status { color: #a40d26; font-weight: 650; margin: 16px 0; }
 @media (max-width: 700px) { .checks-context { grid-template-columns: minmax(0,1fr); } }
+
+/* Decorative accents remain behind content; construction motion explains levels. */
+.overview-path, .step-heading, .tour-head { position: relative; isolation: isolate; }
+.background-beams { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .18; pointer-events: none; z-index: -1; }
+.background-beams path { stroke-dasharray: 24 76; animation: beam-travel 12s linear infinite; }
+.text-generate-word { display: inline-block; animation: word-reveal .45s ease both; }
+.rosace-branch { animation: branch-grow .38s ease-out both; }
+.rosace-branch[data-evidence="observed"] { animation: observation-fill .45s ease both; }
+.meeting-card { animation: scene-reveal .35s ease-out both; }
+.form-panel > div:not([hidden]), .form-panel > section:not([hidden]) { animation: scene-reveal .25s ease-out; }
+@keyframes word-reveal { from { opacity: .2; filter: blur(4px); transform: translateY(4px); } to { opacity: 1; filter: none; transform: none; } }
+@keyframes branch-grow { from { opacity: .2; transform: scale(.08); } to { opacity: 1; transform: scale(1); } }
+@keyframes observation-fill { from { opacity: .25; stroke-width: 1; } to { opacity: 1; } }
+@keyframes scene-reveal { from { opacity: .35; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@keyframes beam-travel { to { stroke-dashoffset: -100; } }
+@media (prefers-reduced-motion: reduce) {
+  .text-generate-word, .rosace-branch, .rosace-branch[data-evidence="observed"], .meeting-card, .background-beams path, .form-panel > div:not([hidden]), .form-panel > section:not([hidden]) { animation: none; transition: none; filter: none; transform: none; }
+  .glowing-effect { display: none; }
+}

@@ -1,3 +1,6 @@
+import { TextGenerateEffect } from "@/components/TextGenerateEffect";
+import { AnimatedCount } from "@/components/AnimatedCount";
+import { GlowingEffect } from "@/components/GlowingEffect";
 import { WorkspaceIcon } from "@/components/WorkspaceIcon";
 import Link from "next/link";
 import { Rosace } from "@/components/Rosace";
@@ -49,9 +52,7 @@ export default function Home() {
             <span className="status-dot" /> Espoo Tech Matchmaking · demo
           </p>
           <h1>
-            Start with the work.
-            <br />
-            Prepare the conversation.
+            <TextGenerateEffect words="Prepare your recruitment event." />
           </h1>
           <p>
             A company says which skills matter for a role. A talent turns their
@@ -68,11 +69,15 @@ export default function Home() {
           </div>
           <dl className="hero-facts">
             <div>
-              <dt>12</dt>
+              <dt>
+                <AnimatedCount value={12} />
+              </dt>
               <dd>Centrale components</dd>
             </div>
             <div>
-              <dt>3</dt>
+              <dt>
+                <AnimatedCount value={3} />
+              </dt>
               <dd>majors per role, in gold</dd>
             </div>
             <div>
@@ -104,6 +109,7 @@ export default function Home() {
       <section className="overview-paths" aria-label="How the event works">
         {STEPS.map((item) => (
           <article className="overview-path" key={item.href}>
+            <GlowingEffect />
             <div className="path-head">
               <span className="path-icon">
                 <WorkspaceIcon name={item.icon} />

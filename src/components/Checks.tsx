@@ -1,4 +1,5 @@
 "use client";
+import { BackgroundBeams } from "./BackgroundBeams";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { NEEDS, TALENTS } from "@/data/demo";
@@ -164,7 +165,7 @@ export function Checks() {
   }
   return (
     <div className="workspace checks-workspace">
-      <header className="step-heading">
+      <header className="step-heading"><BackgroundBeams />
         <p className="eyebrow">CHECK A CONCRETE SITUATION</p>
         <h1>Checks</h1>
         <p>

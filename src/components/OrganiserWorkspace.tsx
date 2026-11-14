@@ -155,7 +155,7 @@ export function OrganiserWorkspace() {
             )}
             <details open>
               <summary>Review the people for this need</summary>
-              {talents.map((talent) => {
+              {talents.map((talent, candidateIndex) => {
                 const key = `${result.need.id}:${talent.id}`;
                 const a = [
                   ...result.suggested,
@@ -177,7 +177,7 @@ export function OrganiserWorkspace() {
                       ? "More information needed"
                       : "No suggestion for this need";
                 return (
-                  <details className="meeting-card" key={talent.id}>
+                  <details className="meeting-card" key={talent.id} style={{animationDelay:`${candidateIndex * 70}ms`}}>
                     <summary className="candidate-summary">
                       <span className="candidate-avatar" aria-hidden="true">
                         {talent.pseudonym.slice(0, 1)}
