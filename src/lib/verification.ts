@@ -1,4 +1,5 @@
 import { JOB_SKILLS, type ExpectedLevel } from "./framework";
+import { ONLINE_EXERCISES } from "@/data/online-exercises";
 export type VerificationMode = "online" | "onsite" | "interview";
 export type Verification = { modes: VerificationMode[]; situation: string };
 export const MODE_LABELS: Record<VerificationMode, string> = {
@@ -88,7 +89,11 @@ export function verificationLabel(skill: string) {
     .modes.map((m) => MODE_LABELS[m])
     .join(" / ");
 }
-export const CHECK_SKILLS = ["C5.1", "C2.2", "J.EMBEDDED_C"] as const;
+export const DEMO_CHECK_SKILLS = ["C5.1", "C2.2", "J.EMBEDDED_C"] as const;
+export const CHECK_SKILLS: readonly string[] = [
+  ...DEMO_CHECK_SKILLS,
+  ...Object.keys(ONLINE_EXERCISES),
+];
 export type CheckExercise = {
   skill: string;
   level: ExpectedLevel;
@@ -117,6 +122,15 @@ export function checkExercise(
   skill: string,
   level: ExpectedLevel,
 ): CheckExercise {
+  const authored = ONLINE_EXERCISES[skill];
+  if (authored && [1, 2, 3].includes(level))
+    return {
+      skill,
+      level,
+      minutes: authored.minutes,
+      prompt: `${authored.inputs}\n\n${authored.tasks[level - 1]}`,
+      checks: [...authored.checks],
+    };
   if (!TASKS[skill] || ![1, 2, 3].includes(level))
     throw new Error("Unknown exercise or level.");
   const checks =

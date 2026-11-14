@@ -1,6 +1,6 @@
 # Cohérence avec le cadrage et le challenge Espoo
 
-Revue du 14 novembre 2026 sur `feat/coherent-ux` (PR #11), après les parcours métier, Claude, la passe Impeccable et le sas d’accueil. Cette revue confronte le code et les tests au cadrage ; elle ne remplace pas un test avec Espoo ou un audit juridique.
+Revue du 14 novembre 2026, actualisée après la demande de démo automatique et de recommandation de note, sur `feat/coherent-ux` (PR #11), après les parcours métier, Claude, la passe Impeccable et le sas d’accueil. Cette revue confronte le code et les tests au cadrage ; elle ne remplace pas un test avec Espoo ou un audit juridique.
 
 ## Sources et conclusion
 
@@ -19,7 +19,7 @@ Le challenge autorise de traiter une seule étape, avant, pendant ou après l’
 | 12 actions et 20 compétences techniques | `framework.ts`, tests de catalogue et parcours `/need/new` | Couverture des vrais métiers d’Espoo non validée ; quatre familles tech seulement |
 | 3 majeures, mineures sans plafond ajouté, 3 techniques maximum | `need-selection.ts`, `scoring.ts`, tests unitaires et Playwright | Seuil de couverture et pondérations issus du cadrage, sans validation prédictive |
 | Rosace fixe, inconnu distinct de zéro, déclaré distinct d’observé | `Rosace.tsx`, `observations.ts`, tests du niveau de tâche et de la moyenne | Une observation décrit une situation ; elle ne certifie pas la compétence dans tous les contextes |
-| A/C/F/NE humains, moyenne hors NE, C4.3 seulement discuté | `workspace.ts`, `verification.ts`, `ConversationBrief.tsx`, `Checks.tsx` | Pas de correction automatique par Claude |
+| A/C/F/NE humains, moyenne hors NE, C4.3 seulement discuté | `workspace.ts`, `verification.ts`, `ConversationBrief.tsx`, `Checks.tsx` | Claude recommande éventuellement A/C/F/NE ; aucune observation sans validation humaine |
 | CV transitoire, carte sur consentement, suppression et six mois | `TalentForm.tsx`, nettoyage dans `workspace.ts`, tests de stockage/import/suppression | Expiration appliquée à la lecture du navigateur, pas un service serveur de purge ; ordinateur partagé non sécurisé par ce prototype |
 | RAG Anthropic sur contexte relu, sources et acceptation | `reviewed-context.ts`, `context.ts`, `ai-proposals.ts`, routes et tests simulés | Aucun appel réel ni qualité des propositions validés ici ; citations présentes ne garantissent pas la véracité |
 | Espaces séparés, parcours local et identité visuelle commune | Sas `/`, accueils dédiés, menu Demo profile, Aurora perle, tests clavier et mobile | Choix de navigation, pas identité ni autorisation ; tous les rôles restent accessibles dans la démo |
@@ -44,8 +44,8 @@ Le challenge autorise de traiter une seule étape, avant, pendant ou après l’
 2. **Valider le rôle de l’organisateur sur une rencontre concrète.** Montrer NordChip/Amira, une égalité et un talent sans suggestion. Vérifier que les raisons permettent une décision utile, sans exclusion invisible. L’absence de nationalité/langue dans le calcul ne démontre pas à elle seule l’absence de biais.
 3. **Tester réellement Claude avec des cas fictifs une fois la clé configurée.** Comparer exemples manuels et propositions sur plusieurs métiers/niveaux, vérifier chaque citation, erreur et refus. Les tests actuels contrôlent le protocole et les garde-fous avec des réponses simulées, pas la qualité du modèle.
 4. **Garder le sas facultatif pour la démo ; valider sa présentation avant l’authentification réelle.** Le code affiché `123456` et les adresses `example.test` ne sont que des accessoires de maquette. Aucune adresse personnelle n’est demandée ou conservée. Une vraie connexion implique emails, sessions, invitations organisateur et permissions, en plus du stockage partagé.
-5. **Limiter honnêtement la promesse des exercices.** Trois compétences ont des exercices livrés, chacune aux trois niveaux ; le plan couvre les autres sans prétendre qu’ils sont disponibles. Confirmer avec un recruteur les budgets de 20 minutes en ligne et 10 sur place.
-6. **Avant un usage réel : valider hébergement, accès concurrents, protection des données et responsabilités.** Les limites d’appel actuelles sont en mémoire du processus ; ce n’est pas une protection de coût par compte sur un service distribué. Ne pas publier avec une clé facturable sans cadrer l’accès. Aucun changement backend n’est fait dans cette livraison.
+5. **Limiter honnêtement la promesse des exercices.** Les six composantes prévues en ligne et les vingt compétences techniques ont maintenant trois variantes chacune. Leur qualité reste à tester avec des recruteurs ; le programme sélectionné reste limité à vingt minutes. Confirmer avec un recruteur les budgets de 20 minutes en ligne et 10 sur place.
+6. **Avant un usage réel : valider hébergement, accès concurrents, protection des données et responsabilités.** Les limites d’appel actuelles sont en mémoire du processus ; ce n’est pas une protection de coût par compte sur un service distribué. Ne pas publier avec une clé facturable sans cadrer l’accès. Le contrôle d’accès et les limites distribuées restent hors de cette livraison. Le dernier suivi ajoute une recommandation de note dans la réponse Anthropic, sans droit d’écrire une observation.
 
 ## Tensions signalées, sans décisions implicites
 
@@ -56,4 +56,4 @@ Le challenge autorise de traiter une seule étape, avant, pendant ou après l’
 
 ## Lecture de la livraison
 
-Le sas et les accueils sont testables localement ; l’authentification est simulée. Les parcours métier, l’approbation humaine et les observations fonctionnent dans un même navigateur. Les appels réels Claude, l’usage entre plusieurs appareils, la charge événementielle et le déploiement restent à réaliser. Les validations de cette livraison sont consignées dans [VALIDATION.md](VALIDATION.md).
+Le sas et les accueils sont testables localement ; l’authentification est simulée. Les parcours métier, la démo préremplie automatique, les exercices à durée limitée, l’approbation humaine et les observations fonctionnent dans un même navigateur. Le minuteur local n’est pas un dispositif de surveillance ; la recommandation montrée dans `/tour` est explicitement préécrite, pas un appel Claude réel. Les appels réels Claude, l’usage entre plusieurs appareils, la charge événementielle et le déploiement restent à réaliser. Les validations de cette livraison sont consignées dans [VALIDATION.md](VALIDATION.md).

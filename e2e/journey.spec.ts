@@ -213,12 +213,18 @@ test("practice redirects to Checks and an unsubmitted draft stays in memory", as
     .getByRole("button", { name: /^Candidate(?: Current)?$/, exact: true })
     .click();
   await page
+    .getByRole("button", { name: /^Start (exercise|a new attempt)$/ })
+    .click();
+  await page
     .getByLabel("Your exercise answer", { exact: true })
     .fill("An unsubmitted fictional answer.");
   expect(await page.evaluate(() => JSON.stringify(localStorage))).not.toContain(
     "An unsubmitted fictional answer",
   );
   await page.reload();
+  await page
+    .getByRole("button", { name: "Start exercise", exact: true })
+    .click();
   await expect(
     page.getByLabel("Your exercise answer", { exact: true }),
   ).toHaveValue("");

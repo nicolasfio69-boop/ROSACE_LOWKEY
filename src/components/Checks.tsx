@@ -19,10 +19,23 @@ import {
   loadWorkspace,
   submitCheck,
   type Workspace,
+  saveCheckPlan,
 } from "@/lib/workspace";
 import { OBSERVATION_LABELS, type Observation } from "@/lib/scoring";
 import { meanObservedValue } from "@/lib/observations";
-import type { ExerciseFeedback } from "@/lib/exercises";
+import { validateFeedback, type ExerciseFeedback } from "@/lib/exercises";
+import {
+  defaultCheckPlan,
+  onlineSkillsFor,
+  planMinutes,
+  validateCheckPlan,
+} from "@/lib/check-plan";
+import {
+  startCheckAttempt,
+  secondsRemaining,
+  formatSeconds,
+  type CheckAttempt,
+} from "@/lib/check-timing";
 import { Rosace } from "./Rosace";
 import { SkillBars } from "./SkillBars";
 import { LivePreview } from "./LivePreview";
@@ -38,6 +51,15 @@ export function Checks({
   const [talentId, setTalentId] = useState("amira");
   const [skill, setSkill] = useState<string>("C5.1");
   const [answer, setAnswer] = useState("");
+  const [attempt, setAttempt] = useState<CheckAttempt | null>(null);
+  const [now, setNow] = useState(0);
+  const answerField = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (!attempt) return;
+    answerField.current?.focus();
+    const timer = window.setInterval(() => setNow(Date.now()), 250);
+    return () => window.clearInterval(timer);
+  }, [attempt]);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [ready, setReady] = useState(false);
@@ -98,6 +120,35 @@ export function Checks({
   const talents = [...TALENTS, ...workspace.talents.map((t) => t.talent)];
   const need = needs.find((n) => n.id === needId)!;
   const talent = talents.find((t) => t.id === talentId)!;
+  let plan: string[];
+  try {
+    const saved = workspace.checkPlans?.find((p) => p.needId === needId);
+    plan = saved
+      ? validateCheckPlan(need, saved.skills)
+      : defaultCheckPlan(need);
+  } catch {
+    plan = defaultCheckPlan(need);
+  }
+  const planKey = plan.join("|");
+  useEffect(() => {
+    const selected = planKey.split("|").filter(Boolean);
+    if (!selected.includes(skill)) {
+      setSkill(selected[0] ?? "");
+      setAnswer("");
+      setAttempt(null);
+      setFeedback(null);
+      requestVersion.current++;
+    }
+  }, [planKey, skill]);
+  useEffect(() => {
+    if (ready)
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}?need=${encodeURIComponent(needId)}&talent=${encodeURIComponent(talentId)}&skill=${encodeURIComponent(skill)}`,
+      );
+  }, [ready, needId, talentId, skill]);
+  const remaining = attempt ? secondsRemaining(attempt, now) : 0;
   const level = talent.statements[skill]?.level;
   const exercise = level
     ? (workspace.exercises.find(
@@ -134,6 +185,7 @@ export function Checks({
   );
   function reset() {
     requestVersion.current++;
+    setAttempt(null);
     setAnswer("");
     setFeedback(null);
     setConsent(false);
@@ -141,19 +193,47 @@ export function Checks({
     setError("");
     setNotice("");
   }
+  function start() {
+    if (!exercise || !plan.includes(skill)) return;
+    const current = Date.now();
+    setNow(current);
+    setAttempt(startCheckAttempt(exercise, current));
+    setAnswer("");
+    setError("");
+    setNotice("");
+  }
+  function changePlan(next: string[]) {
+    try {
+      saveCheckPlan(localStorage, need, next);
+      setWorkspace(loadWorkspace(localStorage));
+      setError("");
+    } catch (e) {
+      setError(
+        e instanceof Error ? e.message : "Could not save the online plan.",
+      );
+    }
+  }
   function submit() {
-    if (!exercise) return;
+    if (!attempt || role !== "talent") return;
+    const submittedExercise = attempt.exercise;
     try {
       submitCheck(localStorage, {
         needId,
         talentId,
         skill,
-        taskLevel: exercise.level,
+        taskLevel: submittedExercise.level,
         answer,
-        exercise,
+        exercise: submittedExercise,
+        timing: {
+          startedAt: attempt.startedAt,
+          submittedAt: Date.now(),
+          allowedSeconds: submittedExercise.minutes * 60,
+        },
       });
       setWorkspace(loadWorkspace(localStorage));
       setNotice("Done · ready for recruiter review.");
+      setAttempt(null);
+      setAnswer("");
       setError("");
       setFeedback(null);
       setConsent(false);
@@ -195,7 +275,15 @@ export function Checks({
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
-      if (version === requestVersion.current) setFeedback(data);
+      if (version === requestVersion.current)
+        setFeedback(
+          validateFeedback(
+            data,
+            submission.answer,
+            (submission.exercise ?? checkExercise(skill, submission.taskLevel))
+              .checks,
+          ),
+        );
     } catch (e) {
       if (version === requestVersion.current)
         setError(e instanceof Error ? e.message : "Feedback unavailable.");
@@ -204,13 +292,16 @@ export function Checks({
     }
   }
   return (
-    <div className="workspace checks-workspace">
+    <div
+      className={`workspace checks-workspace${attempt ? " is-answering" : ""}`}
+    >
       <header className="step-heading">
         <BackgroundBeams />
         <h1>{role === "talent" ? "My checks" : "Prepare and review checks"}</h1>
         <p>
-          Three fictional exercises · 6 + 6 + 8 minutes, at most 20 minutes in
-          total. A recruiter gives the grade.
+          {role === "talent"
+            ? "Complete the selected online exercises before the meeting. The recruiter reviews your work; other skills are discussed or observed on site."
+            : "Choose a short online plan, review submitted work, then prepare the on-site checks. Claude can recommend a grade; you make the final decision."}
         </p>
       </header>
       <div className="checks-context form-panel">
@@ -219,6 +310,7 @@ export function Checks({
           <select
             aria-label="Company need"
             value={needId}
+            disabled={!!attempt}
             onChange={(e) => {
               reset();
               setNeedId(e.target.value);
@@ -241,6 +333,7 @@ export function Checks({
           <select
             aria-label="Talent card"
             value={talentId}
+            disabled={!!attempt}
             onChange={(e) => {
               reset();
               setTalentId(e.target.value);
@@ -263,9 +356,85 @@ export function Checks({
           never stored.
         </p>
       </div>
+      <section className="check-plan" aria-labelledby="online-plan-heading">
+        <div>
+          <h2 id="online-plan-heading">Before the event · online</h2>
+          <p>
+            {planMinutes(plan)} of 20 minutes selected for this role. A clear
+            time limit for each exercise.
+          </p>
+        </div>
+        {role === "recruiter" ? (
+          <details>
+            <summary>Choose the exercises for this role</summary>
+            <p className="quiet-note">
+              All online requirements have a written exercise at each level.
+              Choose the priorities within the event budget; removing one from
+              the plan does not delete submitted work.
+            </p>
+            <div className="check-plan-options">
+              {onlineSkillsFor(need).map((code) => (
+                <label className="consent-line" key={code}>
+                  <input
+                    type="checkbox"
+                    checked={plan.includes(code)}
+                    onChange={(e) =>
+                      changePlan(
+                        e.target.checked
+                          ? [...plan, code]
+                          : plan.filter((s) => s !== code),
+                      )
+                    }
+                  />
+                  {skillName(code)} · {checkExercise(code, 1).minutes} min
+                </label>
+              ))}
+            </div>
+            {onlineSkillsFor(need).length === 0 && (
+              <p>
+                This need is checked at the meeting; no online exercise is
+                required.
+              </p>
+            )}
+          </details>
+        ) : (
+          <ol className="check-plan-list">
+            {plan.map((code) => (
+              <li key={code}>
+                <strong>{skillName(code)}</strong>
+                <span>
+                  {checkExercise(code, 1).minutes} min ·{" "}
+                  {checkStatus(
+                    workspace.checks.some(
+                      (c) =>
+                        c.needId === needId &&
+                        c.talentId === talentId &&
+                        c.skill === code,
+                    ),
+                    seen.some(
+                      (o) => o.skill === code && o.source === checkSource(code),
+                    ),
+                  )}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+        {!plan.length && (
+          <p>
+            No online exercise is selected. Prepare for the meeting using the
+            guidance below.
+          </p>
+        )}
+      </section>
       {error && (
         <p role="alert" className="error-panel">
           {error}
+        </p>
+      )}
+      {attempt && (
+        <p className="check-active-context">
+          {need.company} · {talent.pseudonym} · unsubmitted attempt
         </p>
       )}
       <div className="workspace-grid">
@@ -275,6 +444,7 @@ export function Checks({
             <select
               aria-label="Exercise"
               value={skill}
+              disabled={!!attempt || !plan.length}
               onChange={(e) => {
                 reset();
                 setSkill(e.target.value);
@@ -285,7 +455,10 @@ export function Checks({
                 );
               }}
             >
-              {CHECK_SKILLS.map((s) => (
+              {!plan.length && (
+                <option value="">No online exercise selected</option>
+              )}
+              {plan.map((s) => (
                 <option key={s} value={s}>
                   {skillName(s)}
                 </option>
@@ -293,9 +466,13 @@ export function Checks({
             </select>
           </label>
           <p className="check-status" data-state={status} role="status">
-            {notice || status}
+            {attempt
+              ? remaining
+                ? "In progress · not submitted"
+                : "Time is up · awaiting submission"
+              : notice || status}
           </p>
-          <h2>{skillName(skill)}</h2>
+          <h2>{skill ? skillName(skill) : "At the meeting"}</h2>
           {role === "recruiter" && exercise && (
             <ExerciseDesigner
               key={`${needId}-${skill}-${level}`}
@@ -323,31 +500,88 @@ export function Checks({
             />
           )}
           {role === "talent" &&
+            plan.length > 0 &&
             (exercise ? (
               <>
-                <p className="eyebrow">
+                <p className="check-task-meta">
                   {LEVELS[exercise.level].name} · {exercise.minutes} minutes ·
                   your declared level
                 </p>
-                <p className="check-prompt">{exercise.prompt}</p>
-                <label className="field-label">
-                  Your exercise answer
-                  <textarea
-                    rows={7}
-                    maxLength={6000}
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                  />
-                </label>
-                <button
-                  className="primary-button"
-                  disabled={!ready || !answer.trim()}
-                  onClick={submit}
-                >
-                  {submission
-                    ? "Replace answer and request a new review"
-                    : "Submit for recruiter review"}
-                </button>
+                {!attempt ? (
+                  <div className="check-start">
+                    <p>
+                      Start when you are ready. The task opens with the timer.
+                      At the time limit, writing stops; you can still submit
+                      what you have written.
+                    </p>
+                    <p className="quiet-note">
+                      This is a local practice timer, not a supervised exam.
+                      Unsubmitted text stays in memory and is lost when you
+                      leave or reload. No code is executed.
+                    </p>
+                    <button
+                      className="primary-button"
+                      disabled={!ready}
+                      onClick={start}
+                    >
+                      {submission ? "Start a new attempt" : "Start exercise"}
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="check-timer">
+                      <strong role="timer" aria-label="Time remaining">
+                        {formatSeconds(remaining)}
+                      </strong>
+                      <span>
+                        {remaining
+                          ? "Time remaining"
+                          : "Time is up · submit your current answer"}
+                      </span>
+                    </div>
+                    {remaining === 0 && (
+                      <p role="alert" className="check-time-up">
+                        Writing has stopped. Review and submit the answer
+                        already written; no grade is assigned automatically.
+                      </p>
+                    )}
+                    <p className="check-prompt">{attempt.exercise.prompt}</p>
+                    <label className="field-label">
+                      Your exercise answer
+                      <textarea
+                        ref={answerField}
+                        rows={9}
+                        maxLength={6000}
+                        value={answer}
+                        readOnly={remaining === 0}
+                        onChange={(e) => {
+                          if (secondsRemaining(attempt, Date.now()) > 0)
+                            setAnswer(e.target.value);
+                        }}
+                      />
+                    </label>
+                    <div className="check-attempt-actions">
+                      <button
+                        className="primary-button"
+                        disabled={!ready || !answer.trim()}
+                        onClick={submit}
+                      >
+                        {submission
+                          ? "Replace answer and request a new review"
+                          : "Submit for recruiter review"}
+                      </button>
+                      <button
+                        className="text-button"
+                        onClick={() => {
+                          setAttempt(null);
+                          setAnswer("");
+                        }}
+                      >
+                        Discard this attempt
+                      </button>
+                    </div>
+                  </>
+                )}
                 {submission && (
                   <details className="context-details">
                     <summary>Saved answer</summary>
@@ -364,6 +598,7 @@ export function Checks({
               </p>
             ))}
           {role === "recruiter" &&
+            plan.length > 0 &&
             (submission ? (
               <>
                 <p className="eyebrow">
@@ -377,6 +612,21 @@ export function Checks({
                     ).prompt
                   }
                 </p>
+                {submission.timing && (
+                  <p className="quiet-note">
+                    Local timing:{" "}
+                    {formatSeconds(
+                      Math.floor(
+                        (submission.timing.submittedAt -
+                          submission.timing.startedAt) /
+                          1000,
+                      ),
+                    )}{" "}
+                    elapsed · {formatSeconds(submission.timing.allowedSeconds)}{" "}
+                    writing limit. Timing is contextual information, never an
+                    automatic grade.
+                  </p>
+                )}
                 <h3>Talent answer</h3>
                 <blockquote className="check-answer">
                   {submission.answer}
@@ -414,8 +664,9 @@ export function Checks({
                 <details className="context-details">
                   <summary>Optional Claude feedback</summary>
                   <p>
-                    Only the fictional answer and exercise are sent. Feedback
-                    never assigns a grade.
+                    Only the fictional answer and the submitted exercise are
+                    sent. Claude recommends A/C/F/NE with evidence. You can
+                    accept it, choose another grade or review without AI.
                   </p>
                   <label className="consent-line">
                     <input
@@ -439,7 +690,52 @@ export function Checks({
                   )}
                   {feedback && (
                     <div>
-                      <h3>Suggested feedback · review before use</h3>
+                      <h3>
+                        {grade
+                          ? "AI recommendation · your grade is recorded"
+                          : "AI recommendation · awaiting your decision"}
+                      </h3>
+                      {feedback.recommendation && (
+                        <div className="ai-grade-proposal">
+                          <strong>
+                            {feedback.recommendation.grade} —{" "}
+                            {OBSERVATION_LABELS[feedback.recommendation.grade]}
+                          </strong>
+                          <p>{feedback.recommendation.reason}</p>
+                          <ul>
+                            {feedback.recommendation.criteria.map((c) => (
+                              <li key={c.index}>
+                                <strong>
+                                  {
+                                    (
+                                      submission.exercise ??
+                                      checkExercise(skill, submission.taskLevel)
+                                    ).checks[c.index]
+                                  }
+                                </strong>
+                                <p>
+                                  {c.verdict.replaceAll("_", " ")}: {c.reason}
+                                </p>
+                                {c.quote && (
+                                  <blockquote>“{c.quote}”</blockquote>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                          <button
+                            className="primary-button"
+                            onClick={() => mark(feedback.recommendation!.grade)}
+                          >
+                            Validate recommended grade{" "}
+                            {feedback.recommendation.grade}
+                          </button>
+                          <p className="quiet-note">
+                            Read the answer and criteria first. Use the
+                            recruiter grade buttons above to choose a different
+                            grade. Only your decision changes the rosace.
+                          </p>
+                        </div>
+                      )}
                       {feedback.strengths.map((s, i) => (
                         <p key={i}>
                           “{s.quote}” — {s.comment}
@@ -457,12 +753,44 @@ export function Checks({
               </>
             ) : (
               <p className="quiet-note">
-                To check · waiting for the talent’s answer. Choose Candidate in
-                the header to complete the exercise first.
+                To check · waiting for the talent’s answer. Use Demo profile →
+                Candidate to complete a selected exercise.
               </p>
             ))}
+          <section className="meeting-guidance">
+            <h2>At the meeting</h2>
+            <p className="quiet-note">
+              Share at most 10 minutes across the selected on-site tasks. Ask
+              about concrete examples; the recruiter records what was seen.
+            </p>
+            {need.requirements
+              .filter((r) =>
+                verificationFor(r.skill).modes.some(
+                  (mode) => mode !== "online",
+                ),
+              )
+              .map((r) => (
+                <article className="question-brief" key={r.skill}>
+                  <strong>{skillName(r.skill)}</strong>
+                  <p>{verificationFor(r.skill).situation}</p>
+                  <p className="quiet-note">
+                    {r.skill === "C4.3"
+                      ? "Discussed, not observed. Do not assign an observation from this short meeting."
+                      : "Ask what they did, what help they needed and how they checked the result."}
+                  </p>
+                </article>
+              ))}
+            {!need.requirements.some((r) =>
+              verificationFor(r.skill).modes.some((mode) => mode !== "online"),
+            ) && (
+              <p>
+                Discuss the submitted work and any remaining questions with the
+                recruiter.
+              </p>
+            )}
+          </section>
           <details className="context-details">
-            <summary>Every requirement: how it is checked</summary>
+            <summary>All requirements and their status</summary>
             {need.requirements.map((r) => {
               const submitted = workspace.checks.some(
                 (c) =>
@@ -478,13 +806,21 @@ export function Checks({
                   </strong>
                   <p>How it’s checked: {verificationLabel(r.skill)}</p>
                   <p>{verificationFor(r.skill).situation}</p>
-                  {!CHECK_SKILLS.some((s) => s === r.skill) &&
-                    verificationFor(r.skill).modes.includes("online") && (
+                  {CHECK_SKILLS.includes(r.skill) &&
+                    !plan.includes(r.skill) && (
                       <p className="quiet-note">
-                        Exercise to be prepared by the recruiter; not included
-                        in these three demo exercises.
+                        Available online, but not selected within this role’s
+                        20-minute plan. The recruiter can change the plan; this
+                        skill is not treated as failed.
                       </p>
                     )}
+                  {!verificationFor(r.skill).modes.includes("online") && (
+                    <p className="quiet-note">
+                      {r.skill === "C4.3"
+                        ? "Discussed, not observed. Ask about a commitment over several weeks."
+                        : "Observed by a recruiter at the meeting, within the shared 10-minute allowance."}
+                    </p>
+                  )}
                 </article>
               );
             })}
@@ -520,19 +856,23 @@ export function Checks({
             Declarations stay unchanged.
           </p>
           <SkillBars
-            items={CHECK_SKILLS.filter((s) => !isComponent(s)).map((s) => ({
-              code: s,
-              level: talent.statements[s]?.level ?? null,
-              expected: need.requirements.find((r) => r.skill === s)?.expected,
-              ...(seen.some((o) => o.skill === s)
-                ? {
-                    observedValue: meanObservedValue(
-                      seen.filter((o) => o.skill === s),
-                      1,
-                    ),
-                  }
-                : {}),
-            }))}
+            items={need.requirements
+              .map((r) => r.skill)
+              .filter((s) => !isComponent(s))
+              .map((s) => ({
+                code: s,
+                level: talent.statements[s]?.level ?? null,
+                expected: need.requirements.find((r) => r.skill === s)
+                  ?.expected,
+                ...(seen.some((o) => o.skill === s)
+                  ? {
+                      observedValue: meanObservedValue(
+                        seen.filter((o) => o.skill === s),
+                        1,
+                      ),
+                    }
+                  : {}),
+              }))}
           />
           <details className="chart-help">
             <summary>Original declaration</summary>

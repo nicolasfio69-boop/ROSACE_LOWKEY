@@ -1,4 +1,5 @@
 import { COMPONENTS } from "./framework";
+import type { Observation } from "./scoring";
 export type Exercise = { scenario: string; prompt: string; checks: string[] };
 /** Fictional exercises; never a test result or a claim that a skill is verified. */
 export const EXERCISES: Record<string, Exercise> = {
@@ -140,14 +141,26 @@ export function exerciseFor(skill: string): Exercise {
     throw new Error("Choose one of the twelve components.");
   return EXERCISES[skill];
 }
+export type GradeRecommendation = {
+  grade: Observation;
+  reason: string;
+  criteria: {
+    index: number;
+    verdict: "met" | "partial" | "not_demonstrated" | "not_covered";
+    quote: string | null;
+    reason: string;
+  }[];
+};
 export type ExerciseFeedback = {
   strengths: { quote: string; comment: string }[];
   questions: string[];
   limitations: string;
+  recommendation?: GradeRecommendation;
 };
 export function validateFeedback(
   value: unknown,
   answer: string,
+  checks?: readonly string[],
 ): ExerciseFeedback {
   if (!value || typeof value !== "object") throw new Error("Invalid feedback.");
   const v = value as Record<string, unknown>;
@@ -173,7 +186,52 @@ export function validateFeedback(
     throw new Error(
       "Feedback must cite the answer and keep uncertainty explicit.",
     );
+  let recommendation: GradeRecommendation | undefined;
+  if (checks) {
+    const r = v.recommendation as GradeRecommendation | undefined;
+    if (
+      !r ||
+      !["A", "C", "F", "NE"].includes(r.grade) ||
+      !sentence(r.reason) ||
+      !Array.isArray(r.criteria) ||
+      r.criteria.length !== checks.length ||
+      new Set(r.criteria.map((c) => c?.index)).size !== checks.length ||
+      r.criteria.some(
+        (c) =>
+          !c ||
+          !Number.isInteger(c.index) ||
+          c.index < 0 ||
+          c.index >= checks.length ||
+          !["met", "partial", "not_demonstrated", "not_covered"].includes(
+            c.verdict,
+          ) ||
+          !sentence(c.reason) ||
+          (c.quote !== null &&
+            (!sentence(c.quote) || !answer.includes(c.quote))) ||
+          (["met", "partial"].includes(c.verdict) && c.quote === null),
+      ) ||
+      (r.grade === "A" && r.criteria.some((c) => c.verdict !== "met")) ||
+      (r.grade === "F" &&
+        r.criteria.some((c) => ["met", "partial"].includes(c.verdict)))
+    )
+      throw new Error(
+        "The recommendation must use A/C/F/NE and cite the submitted answer for each demonstrated criterion.",
+      );
+    recommendation = {
+      grade: r.grade,
+      reason: r.reason,
+      criteria: [...r.criteria]
+        .sort((a, b) => a.index - b.index)
+        .map((c) => ({
+          index: c.index,
+          verdict: c.verdict,
+          quote: c.quote,
+          reason: c.reason,
+        })),
+    };
+  }
   return {
+    ...(recommendation ? { recommendation } : {}),
     strengths: v.strengths,
     questions: v.questions,
     limitations: v.limitations,

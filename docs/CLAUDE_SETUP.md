@@ -32,20 +32,20 @@ Open http://localhost:3000. Choose **Candidate** or **Recruiter** on the welcome
 
 1. **Recruiter → Recruiter need:** review fictional job/company context. In the component journey, open **Suggest requirements with Claude**. Read the reasons and cited passages; **Use these requirements** explicitly replaces the selection. Level-card proposals also use Claude.
 2. **Recruiter → Checks:** select the company need and fictional talent. Open **Prepare an exercise with Claude**, review its context, request a draft and inspect its prompt, checklist and sources. **Approve this exercise** publishes it to the candidate workspace in this browser.
-3. **Candidate → My checks:** the declared level selects the exercise version. Submit an answer. No recruiter grading controls appear here.
-4. **Recruiter → Checks:** review the submitted version and the short checklist. Optional Claude feedback requires explicit consent and a button click. Only the recruiter gives A/C/F/NE; the rosace changes from that human observation.
+3. **Candidate → My checks:** the declared level selects the exercise version. Start the timed task, write and submit an answer. At the deadline, writing stops but submission remains available. No recruiter grading controls appear here.
+4. **Recruiter → Checks:** review the submitted version and the short checklist. Optional Claude feedback requires explicit consent and a button click. Claude can recommend A/C/F/NE with criterion-level quotations. The recruiter reads it and chooses **Validate recommended grade** or another grade. Only that human action changes the observed rosace.
 5. Switch between roles using the header. The check's company/talent selection is retained in the URL. Browser storage is shared only within this browser, not across different machines.
 
 ## What the RAG actually does
 
 This is a small, auditable retrieval pipeline, **not model training or a vector database**. It chunks reviewed job/company text, ranks passages against the job/task/skill, and sends a bounded selection to Claude. Proposals must cite existing passage IDs, use the closed catalogue, respect three majors and at most three technical skills, and pass validation before display. Sources and reasons are visible to the recruiter. Unknown citations, invalid levels, truncated output and invalid JSON are rejected.
 
-Exercise duration and level are fixed by application code, not the model. The candidate's submission stores a snapshot of the approved question/checklist, so later edits cannot silently change what the recruiter grades. Feedback receives that exact exercise and the explicitly submitted fictional answer. It cannot set a grade. CVs never enter the retrieval corpus or API payloads.
+Exercise duration and level are fixed by application code, not the model. The candidate's submission stores a snapshot of the approved question/checklist, so later edits cannot silently change what the recruiter grades. Feedback receives that exact exercise and the explicitly submitted fictional answer. It can recommend A/C/F/NE but cannot record a grade. Numeric scores are discarded; invented quotes, malformed recommendations and contradictory A/F assessments are rejected. CVs never enter the retrieval corpus or API payloads.
 
 ## Still required
 
 - Add the API key locally, run the connection test, and try the three proposals with actual Claude responses. Mock tests cannot establish live model quality or account access.
-- Review the proposed questions and examples with Espoo/recruiters. Only the three online demo skills currently have exercise delivery; the other verification modes remain in the framing plan.
+- Review the proposed questions and examples with Espoo/recruiters. All six online Centrale components and twenty technical skills now have three written variants each. Validate their relevance and difficulty with recruiters; the 20-minute plan is a selection, not all available exercises.
 - Confirm Aiven Runtime credits, European region and runtime secret settings before deployment. Set `ANTHROPIC_API_KEY` there as a secret and `ANTHROPIC_MODEL` as a runtime variable, not a build argument.
 - Shared accounts, authenticated permissions and data shared across devices remain a later phase. Role separation here is an interface distinction, not access control.
 - Confirm submission deadline, pitch duration, team and video/slides/submission format.

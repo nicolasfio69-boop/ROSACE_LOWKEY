@@ -15,10 +15,10 @@ Official [Messages documentation](https://platform.claude.com/docs/en/api/messag
 - `/api/need-proposal`: proposes closed-list requirements; exactly three majors and at most three technical skills. Each reason must cite a retrieved passage. The recruiter accepts or discards the proposal.
 - `/api/level-examples`: proposes three contextual examples with validated passage references.
 - `/api/check-proposal`: proposes one exercise and three review criteria at a fixed declared task level and duration. The recruiter must approve it before candidate use.
-- `/api/exercise-feedback`: receives an explicitly consented fictional answer and the exercise snapshot. It returns quoted feedback and questions, never a grade.
+- `/api/exercise-feedback`: receives an explicitly consented fictional answer and the exercise snapshot. For a level-specific online submission it returns quoted feedback, criterion assessments and an advisory A/C/F/NE recommendation. Only the recruiter can validate it into an observation. Legacy non-level formative feedback has no recommendation.
 - `/api/integrations`: exposes configuration availability and provider name only, never credentials. This does not prove a successful paid request.
 
-Prompts treat documents and answers as untrusted data. Outputs are schema-checked, unknown references/codes and invalid levels rejected, score/grade fields discarded. A human supplies every A/C/F/NE observation.
+Prompts treat documents and answers as untrusted data. Outputs are schema-checked, unknown references/codes and invalid levels rejected, numeric scores and unknown fields discarded. Online feedback accepts only a validated A/C/F/NE recommendation, with each demonstrated criterion tied to an exact answer quote. Missing or inconsistent recommendations fail validation. A human supplies every saved observation.
 
 ## Data and limits
 

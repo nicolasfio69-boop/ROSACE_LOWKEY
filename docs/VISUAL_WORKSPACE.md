@@ -23,9 +23,9 @@ The event desk shows reasons, ties and people without suggestions. The brief sho
 
 ## Claude and review
 
-Claude retrieves reviewed job/company passages to propose requirements, level examples and exercises. Sources and reasons are visible. The recruiter must accept a proposal before it changes requirements or becomes an exercise. Three demo skills have three versions each, with a twenty-minute total budget. Other verification tasks are described in the plan but not implemented as online exercises.
+Claude retrieves reviewed job/company passages to propose requirements, level examples and exercises. Sources and reasons are visible. The recruiter must accept a proposal before it changes requirements or becomes an exercise. All 26 online skills have three written versions each. Recruiters select the relevant tasks within a twenty-minute total budget. Candidate attempts use an explicit start and a local writing deadline.
 
-Candidates submit from their own screen. Recruiters review the saved exercise version and answer, optionally request Claude feedback, then personally give A/C/F/NE. Replacing an answer clears its old grade. Submitted fictional answers persist locally; CVs do not. See [CLAUDE_SETUP.md](CLAUDE_SETUP.md) for keys, the real API connection test and remaining work.
+Candidates submit from their own screen. Recruiters review the saved exercise version and answer, optionally request an evidence-backed A/C/F/NE recommendation from Claude, then personally validate or choose the final grade. Replacing an answer clears its old grade. Submitted fictional answers persist locally; CVs do not. See [CLAUDE_SETUP.md](CLAUDE_SETUP.md) for keys, the real API connection test and remaining work.
 
 ## Visual design
 

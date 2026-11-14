@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   addNeed,
+  saveCheckPlan,
   approveExercise,
   submitCheck,
   gradeCheck,
@@ -212,4 +213,35 @@ it("keeps the submitted exercise version when a recruiter approves a later draft
   expect(loadWorkspace(s).exercises[0].exercise.prompt).toBe(
     "Revised fictional task",
   );
+});
+
+it("rejects a stale review after a new attempt even when the answer text is identical", () => {
+  const s = storage();
+  const base = {
+    needId: "n",
+    talentId: "t",
+    skill: "C5.1",
+    taskLevel: 1 as const,
+    answer: "Ask about power and test the connection.",
+    timing: { startedAt: 1000, submittedAt: 5000, allowedSeconds: 360 },
+  };
+  submitCheck(s, base);
+  const old = loadWorkspace(s).checks[0];
+  submitCheck(s, {
+    ...base,
+    timing: { ...base.timing, startedAt: 6000, submittedAt: 8000 },
+  });
+  expect(() => gradeCheck(s, old, "A")).toThrow();
+  gradeCheck(s, loadWorkspace(s).checks[0], "C");
+  expect(loadWorkspace(s).observations[0].observation).toBe("C");
+});
+
+it("shares a valid online plan across local roles and preserves it when an over-budget change fails", () => {
+  const s = storage();
+  saveCheckPlan(s, NEEDS[0], ["C5.2"]);
+  expect(loadWorkspace(s).checkPlans).toEqual([
+    { needId: NEEDS[0].id, skills: ["C5.2"] },
+  ]);
+  expect(() => saveCheckPlan(s, NEEDS[0], ["C5.2", "C5.1"])).toThrow();
+  expect(loadWorkspace(s).checkPlans?.[0].skills).toEqual(["C5.2"]);
 });

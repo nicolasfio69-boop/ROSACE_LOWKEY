@@ -1,3 +1,5 @@
+import { cleanCheckTiming, type CheckTiming } from "./check-timing";
+import { validateCheckPlan } from "./check-plan";
 import {
   cleanExercise,
   validateExercise,
@@ -45,6 +47,7 @@ export type CheckSubmission = {
   taskLevel: ExpectedLevel;
   answer: string;
   exercise?: CheckExercise;
+  timing?: CheckTiming;
 };
 export type Workspace = {
   version: 1;
@@ -54,6 +57,7 @@ export type Workspace = {
   observations: Seen[];
   checks: CheckSubmission[];
   exercises: ApprovedExercise[];
+  checkPlans?: { needId: string; skills: string[] }[];
 };
 export function emptyWorkspace(): Workspace {
   return {
@@ -64,6 +68,7 @@ export function emptyWorkspace(): Workspace {
     observations: [],
     checks: [],
     exercises: [],
+    checkPlans: [],
   };
 }
 function object(v: unknown): v is Record<string, unknown> {
@@ -226,6 +231,22 @@ export function loadWorkspace(
     journal,
     observations,
     exercises,
+    checkPlans: Array.isArray(value.checkPlans)
+      ? value.checkPlans.flatMap((p) => {
+          if (
+            !object(p) ||
+            typeof p.needId !== "string" ||
+            !Array.isArray(p.skills) ||
+            !p.skills.every(
+              (s) => typeof s === "string" && CHECK_SKILLS.includes(s),
+            )
+          )
+            return [];
+          return [
+            { needId: p.needId, skills: [...new Set(p.skills)] as string[] },
+          ];
+        })
+      : [],
     checks: Array.isArray(value.checks)
       ? value.checks.filter(
           (c): c is CheckSubmission =>
@@ -247,6 +268,10 @@ export function loadWorkspace(
       return [
         {
           ...c,
+          timing: cleanCheckTiming(
+            c.timing,
+            checkExercise(c.skill, c.taskLevel).minutes,
+          ),
           ...(c.exercise
             ? { exercise: cleanExercise(c.exercise, c.skill, c.taskLevel) }
             : {}),
@@ -343,7 +368,12 @@ export function submitCheck(storage: Storage, submission: CheckSubmission) {
     c.skill === submission.skill;
   w.checks = [
     ...w.checks.filter((c) => !same(c)),
-    { ...submission, answer: submission.answer.trim(), exercise },
+    {
+      ...submission,
+      answer: submission.answer.trim(),
+      exercise,
+      timing: cleanCheckTiming(submission.timing, exercise.minutes),
+    },
   ];
   w.observations = w.observations.filter(
     (c) => !(same(c) && c.source === checkSource(submission.skill)),
@@ -365,7 +395,21 @@ export function gradeCheck(
   if (
     !saved ||
     saved.answer !== submission.answer ||
-    saved.taskLevel !== submission.taskLevel
+    saved.taskLevel !== submission.taskLevel ||
+    JSON.stringify(
+      saved.exercise ?? checkExercise(saved.skill, saved.taskLevel),
+    ) !==
+      JSON.stringify(
+        submission.exercise
+          ? cleanExercise(
+              submission.exercise,
+              submission.skill,
+              submission.taskLevel,
+            )
+          : checkExercise(submission.skill, submission.taskLevel),
+      ) ||
+    JSON.stringify(saved.timing ?? null) !==
+      JSON.stringify(submission.timing ?? null)
   )
     throw new Error("Submit the current answer before grading.");
   recordObservation(storage, {
@@ -400,6 +444,20 @@ export function approveExercise(
         ),
     ),
     { needId, exercise },
+  ];
+  writeWorkspace(storage, w);
+}
+
+export function saveCheckPlan(
+  storage: Storage,
+  need: Need,
+  skills: readonly string[],
+) {
+  const checked = validateCheckPlan(need, skills);
+  const w = loadWorkspace(storage);
+  w.checkPlans = [
+    ...(w.checkPlans ?? []).filter((p) => p.needId !== need.id),
+    { needId: need.id, skills: checked },
   ];
   writeWorkspace(storage, w);
 }

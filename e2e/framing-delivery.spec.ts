@@ -81,6 +81,9 @@ test("human grade A makes the correct task-level branch solid and survives reloa
   });
   await page.goto("/talent/checks");
   await page
+    .getByRole("button", { name: /^Start (exercise|a new attempt)$/ })
+    .click();
+  await page
     .getByLabel("Your exercise answer", { exact: true })
     .fill(
       "I would ask which sensor fails, check power and capture startup logs before choosing a cause.",
@@ -155,6 +158,9 @@ test("guided tour has four stages and an explicitly human-graded online example"
   await expect(page.locator(".tour-steps button")).toHaveCount(4);
   for (let i = 0; i < 3; i++)
     await page.getByRole("button", { name: /^Next:/ }).click();
+  await page
+    .getByRole("button", { name: "Human validation", exact: true })
+    .click();
   await expect(
     page.getByText(
       "Online exercise · Graded by the recruiter · fictional example",
@@ -162,7 +168,7 @@ test("guided tour has four stages and an explicitly human-graded online example"
     ),
   ).toBeVisible();
   await expect(
-    page.locator(".tour-pair figure").last().locator('[data-skill="C5.1"]'),
+    page.locator('.tour-pair [data-skill="C5.1"][data-evidence="observed"]'),
   ).toHaveAttribute("data-level", "1");
   await expect(
     page
@@ -218,7 +224,7 @@ for (const [width, height] of [
   });
 }
 
-test("Claude feedback is explicit and cannot grade a submitted exercise", async ({
+test("Claude recommends a grade without recording it until a recruiter decides", async ({
   page,
 }) => {
   await page.route("**/api/integrations", (route) =>
@@ -237,6 +243,30 @@ test("Claude feedback is explicit and cannot grade a submitted exercise", async 
         strengths: [],
         questions: ["How would you test wraparound?"],
         limitations: "A human must review this fictional answer.",
+        recommendation: {
+          grade: "C",
+          reason: "The design and tests need more detail.",
+          criteria: [
+            {
+              index: 0,
+              verdict: "partial",
+              quote: "single-producer buffer",
+              reason: "The concurrency model is named but not explained.",
+            },
+            {
+              index: 1,
+              verdict: "partial",
+              quote: "test wraparound",
+              reason: "A test is proposed without details.",
+            },
+            {
+              index: 2,
+              verdict: "not_demonstrated",
+              quote: null,
+              reason: "No timing or memory trade-off is explained.",
+            },
+          ],
+        },
       },
     });
   });
@@ -244,6 +274,9 @@ test("Claude feedback is explicit and cannot grade a submitted exercise", async 
   await page
     .getByRole("combobox", { name: "Exercise", exact: true })
     .selectOption("J.EMBEDDED_C");
+  await page
+    .getByRole("button", { name: /^Start (exercise|a new attempt)$/ })
+    .click();
   await page
     .getByLabel("Your exercise answer", { exact: true })
     .fill(
@@ -284,6 +317,27 @@ test("Claude feedback is explicit and cannot grade a submitted exercise", async 
     ),
   ).toEqual([]);
   await expect(page.getByRole("status")).toHaveText("Done");
+  await page
+    .getByRole("button", { name: "Validate recommended grade C", exact: true })
+    .click();
+  await expect(page.getByRole("status")).toContainText("Graded");
+  expect(
+    await page.evaluate(
+      () =>
+        JSON.parse(localStorage.getItem("rosace.event-workspace.v1")!)
+          .observations[0].observation,
+    ),
+  ).toBe("C");
+  await page
+    .getByRole("button", { name: "A — Seen clearly", exact: true })
+    .click();
+  expect(
+    await page.evaluate(
+      () =>
+        JSON.parse(localStorage.getItem("rosace.event-workspace.v1")!)
+          .observations[0].observation,
+    ),
+  ).toBe("A");
 });
 
 test("candidate and recruiter workspaces are separate and approved Claude exercises travel between them", async ({
@@ -354,7 +408,7 @@ test("candidate and recruiter workspaces are separate and approved Claude exerci
     .getByRole("button", { name: /^Candidate(?: Current)?$/, exact: true })
     .click();
   await expect(page).toHaveURL(/\/talent\/checks/);
-  await expect(page.getByText(prompt, { exact: true })).toBeVisible();
+  await expect(page.getByText(prompt, { exact: true })).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "A — Seen clearly", exact: true }),
   ).toHaveCount(0);
@@ -364,8 +418,12 @@ test("candidate and recruiter workspaces are separate and approved Claude exerci
       .getByRole("link", { name: "Recruiter need", exact: true }),
   ).toHaveCount(0);
   await page
+    .getByRole("button", { name: /^Start (exercise|a new attempt)$/ })
+    .click();
+  await page
     .getByLabel("Your exercise answer", { exact: true })
     .fill("I would ask for the fictional power log and reproduce the reset.");
+  await expect(page.getByText(prompt, { exact: true })).toBeVisible();
   await page
     .getByRole("button", { name: "Submit for recruiter review", exact: true })
     .click();

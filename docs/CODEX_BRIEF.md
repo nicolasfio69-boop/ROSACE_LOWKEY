@@ -1,5 +1,7 @@
 # Brief pour Codex : tout ce qui a été décidé, à appliquer sur `feat/coherent-ux`
 
+> Les dernières demandes ajoutent une démo préremplie automatique et des exercices chronométrés : Claude peut désormais recommander A/C/F/NE sur une réponse soumise, sous validation humaine explicite. Voir `DEMO_CHECKS_REVIEW.md`. Les étapes historiques ci-dessous ne décrivent pas cette dernière évolution.
+
 > Suite demandée après les étapes 0–9 : Anthropic remplace Featherless. Un sas d’accueil et le menu Demo profile séparent les espaces candidat/recruteur/organisateur ; la connexion e-mail/code reste une maquette fictive, sans authentification. Voir les dernières décisions de `CADRAGE.md` et `CLAUDE_SETUP.md`.
 
 Ce brief rassemble toutes les décisions de Nicolas du 14 novembre 2026. La source de vérité reste `docs/CADRAGE.md` : lis-le en entier avant de commencer, puis `AGENTS.md`. Si ce brief et `CADRAGE.md` divergent, `CADRAGE.md` gagne. Si quelque chose n'est pas clair, propose des options au lieu de trancher seul.

@@ -15,10 +15,10 @@ local changes first if Git reports a conflict):
 
 ```bash
 git fetch origin
-git switch feat/visual-workspace
+git switch feat/coherent-ux
 ```
 
-`git switch` creates a tracking branch from `origin/feat/visual-workspace` when
+`git switch` creates a tracking branch from `origin/feat/coherent-ux` when
 needed. Stay on that branch until its PR is merged; `main` does not receive the
 new application just because the PR is open. For subsequent updates on the branch,
 use `git pull --ff-only`. No ZIP download is needed.
@@ -56,12 +56,14 @@ remove only the generated `.next` folder, run `npm ci`, and start again.
 
 ## What to try
 
+Start at `/` to choose your demo workspace, or open `/tour` for the prefilled, automatic three-minute scenario. Pause or jump to any moment; no data is saved by the recording. The sign-in screen is an explicitly fictional preview.
+
 1. **Recruiter — `/need/new`:** enter the company, role, job description, on-site /
    hybrid / remote setting, workplace and available support. Four questions
    clarify the task, collaborators, expected outcome and difficulty. Import a
    text PDF, DOCX, TXT or MD, or paste text. Click a rosace branch (or use Tab, arrows and Enter) to explore the 12 components,
-   compare level cards and pick exactly 3 majors, up to 2 minors, then up to 2
-   job skills. Watch the live rosace and confirm the need.
+   compare level cards and pick exactly 3 majors, any relevant minors, then up to 3
+   technical skills. Watch the live rosace and confirm the need.
 2. **Talent — `/talent/new`:** import a fictional CV or use the example. Local
    keyword rules quote possible clues without assigning a level. Answer factual
    questions, confirm or correct each level and build the other side of the
@@ -72,7 +74,7 @@ remove only the generated `.next` folder, run `npm ci`, and start again.
 4. **Conversation — `/conversations` or “Prepare conversation”:** explore 3–5 questions prioritising unknown or below-expected declarations, compare
    declared and expected skills, and record A/C/F/NE observations. Observed
    values stay separate from declared levels.
-5. **Checks:** candidates answer at `/talent/checks`; recruiters prepare and review at `/checks`. Choose a workspace in the header. Three demo skills each have three level variants; Claude can propose contextual exercises for recruiter approval. Only a recruiter gives a grade. `/practice` redirects to `/checks`.
+5. **Checks:** candidates answer at `/talent/checks`; recruiters prepare and review at `/checks`. Choose a workspace in the header. All 26 online skills have three task-level variants. Recruiters select a plan of at most 20 minutes; candidates start timed tasks and submit. Claude can recommend A/C/F/NE with evidence; only the recruiter validates the final grade. On-site tasks remain in the conversation brief. `/practice` redirects to `/checks`.
 
 The original synthetic overview remains at `/demo`. The organiser handles one
 local event workspace with multiple companies; there are no authenticated roles.

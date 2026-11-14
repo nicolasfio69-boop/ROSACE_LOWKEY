@@ -505,3 +505,273 @@
     transition: none;
   }
 }
+
+/* Readable playback controls and the before-event / meeting distinction. */
+.demo-player,
+.demo-playback,
+.check-timer,
+.check-attempt-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+.demo-player {
+  justify-content: space-between;
+  padding-block: 12px 24px;
+}
+.demo-player > div > p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 8px;
+}
+.demo-playback > span,
+.check-timer strong {
+  font-variant-numeric: tabular-nums;
+}
+.demo-playback > span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.demo-beats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 24px 12px;
+}
+.demo-beats button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  font-size: 14px;
+}
+.demo-beats button[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #f3edf0;
+}
+.demo-caption {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.demo-evidence {
+  min-width: 0;
+}
+.demo-evidence > h2 {
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+.demo-evidence h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-block: 24px 12px;
+}
+.demo-evidence > p,
+.demo-reveal > p,
+.demo-result > p {
+  margin-block: 12px;
+  line-height: 1.65;
+}
+.demo-context > div {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 16px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--stroke);
+}
+.demo-context dt {
+  color: var(--muted);
+  font-size: 13px;
+}
+.demo-context dd {
+  font-size: 15px;
+}
+.demo-requirement {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--stroke);
+}
+.demo-requirement > span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.demo-requirement > p {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  color: var(--muted);
+}
+.demo-result {
+  margin-block: 24px;
+  padding: 20px;
+  border: 1px solid var(--stroke);
+  background: var(--surface);
+  border-radius: 12px;
+  font-size: 15px;
+}
+.demo-recording .tour-scene {
+  align-items: start;
+}
+.demo-recording .tour-nav {
+  margin-top: 32px;
+}
+.check-plan {
+  border-block: 1px solid var(--stroke);
+  padding-block: 24px;
+  margin-block: 24px;
+}
+.check-plan h2 {
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 600;
+}
+.check-plan p {
+  color: var(--muted);
+  margin-top: 12px;
+}
+.check-plan > details {
+  margin-top: 16px;
+}
+.check-plan summary {
+  min-height: 44px;
+  padding-block: 10px;
+  color: var(--accent);
+}
+.check-plan-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin-top: 20px;
+}
+.check-plan-list {
+  list-style: decimal;
+  padding-left: 22px;
+  margin-top: 16px;
+}
+.check-plan-list li {
+  padding: 10px 0;
+}
+.check-plan-list span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+.check-task-meta {
+  color: var(--muted);
+  margin-block: 16px;
+}
+.check-start p {
+  margin-block: 16px;
+}
+.check-start button {
+  margin-block: 12px;
+}
+.check-timer {
+  justify-content: space-between;
+  padding-block: 16px;
+  border-block: 1px solid var(--stroke);
+  margin-block: 20px;
+}
+.check-timer strong {
+  font-size: 28px;
+  font-family: var(--font-display);
+}
+.check-timer > span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.check-time-up {
+  padding: 16px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  color: var(--accent);
+  background: #f3edf0;
+}
+.check-attempt-actions {
+  margin-block: 20px;
+}
+.ai-grade-proposal {
+  margin-block: 20px;
+}
+.ai-grade-proposal > strong {
+  font-size: 20px;
+}
+.ai-grade-proposal > p {
+  margin-block: 14px;
+}
+.ai-grade-proposal li {
+  border-top: 1px solid var(--stroke);
+  padding-block: 16px;
+  font-size: 14px;
+}
+.ai-grade-proposal blockquote {
+  margin-top: 12px;
+  color: var(--muted);
+}
+@media (max-width: 760px) {
+  .demo-player {
+    gap: 20px;
+  }
+  .demo-context > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .demo-requirement {
+    grid-template-columns: 1fr;
+  }
+  .demo-requirement > p {
+    grid-column: auto;
+  }
+  .demo-beats {
+    gap: 8px;
+  }
+  .demo-beats button {
+    flex: 1 1 40%;
+    font-size: 13px;
+  }
+  .check-plan-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .check-timer {
+    align-items: baseline;
+  }
+  .demo-recording .tour-nav {
+    flex-wrap: wrap;
+  }
+}
+.meeting-guidance {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--stroke);
+}
+.meeting-guidance > h2 {
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 600;
+}
+.meeting-guidance > p {
+  margin-block: 12px;
+}
+.demo-recording .tour-pair {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.checks-workspace.is-answering > .checks-context,
+.checks-workspace.is-answering > .check-plan,
+.checks-workspace.is-answering .meeting-guidance,
+.checks-workspace.is-answering .form-panel > .context-details,
+.checks-workspace.is-answering > .step-heading > p {
+  display: none;
+}
+.check-active-context {
+  margin-block: 16px 24px;
+  font-size: 14px;
+  color: var(--muted);
+}

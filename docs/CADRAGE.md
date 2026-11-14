@@ -104,7 +104,7 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
 
 ## 7 bis. Attester un niveau (plan validé par Nicolas le 2026-11-14)
 
-Déclarer un niveau ne suffit pas. Pour chaque composante, on prévoit comment le vérifier, et c'est toujours **une personne qui note** (A, C, F ou NE). L'IA peut proposer un premier retour, jamais la note.
+Déclarer un niveau ne suffit pas. Pour chaque composante, on prévoit comment le vérifier, et c'est toujours **une personne qui note** (A, C, F ou NE). Selon la dernière clarification de Nicolas, l’IA peut proposer A/C/F/NE avec une justification fondée sur la réponse et la grille. Cette recommandation ne devient une observation qu’après validation explicite du recruteur, qui peut choisir une autre note.
 
 Il y a trois façons de vérifier :
 - **En ligne, avant l'événement** : un court exercice écrit ou technique, fait par le talent puis relu par un recruteur avec une grille. Au maximum 20 minutes au total par talent.
@@ -176,7 +176,7 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 ### Changement demandé après le cadrage initial
 
 - Nicolas remplace Featherless par **Anthropic** pour tous les usages IA : propositions de compétences, exemples de niveaux, exercices et retour au recruteur. Les anciennes mentions Featherless dans le journal décrivent le choix précédent.
-- RAG sur les passages de fiche de poste et de contexte entreprise relus, avec références visibles et validation du catalogue fermé. Aucun CV dans ce corpus ; aucune note donnée par Claude.
+- RAG sur les passages de fiche de poste et de contexte entreprise relus, avec références visibles et validation du catalogue fermé. Aucun CV dans ce corpus ; aucune note finale enregistrée par Claude. La dernière décision ci-dessous autorise une recommandation de note sur une réponse soumise.
 - **Espaces séparés** : Candidat (fiche, `/talent/checks`), Recruteur (besoin, préparation/relecture dans `/checks`, conversations), Organisateur (événement). Le sas et le menu de profil décrits ci-dessous remplacent le sélecteur initial. Ils ne constituent pas une authentification.
 - Un exercice généré reste une proposition jusqu’à acceptation explicite du recruteur. La réponse conserve la version de l’exercice effectivement présentée.
 - Clé uniquement dans `.env.local` en local, ou les secrets runtime Aiven. Procédure : `docs/CLAUDE_SETUP.md`. Les tests simulés sont distincts du test API réel, encore dépendant de la configuration de la clé.
@@ -189,6 +189,16 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - Le navigateur mémorise uniquement le mode choisi : le retour sur `/` ouvre son accueil. Le menu **Demo profile** permet de changer d’espace ou de revenir au sas. Les données de démo restent partagées dans ce navigateur.
 - Cible ultérieure : véritable connexion par e-mail/code et organisateurs sur invitation. **À brancher après validation du parcours**, avec permissions côté serveur et stockage partagé. La maquette ne réserve pas réellement l’espace organisateur aux invités.
 - Vérification face au challenge : voir `CHALLENGE_ALIGNMENT.md`. Le cadre Centrale reste le choix de ce projet, pas une exigence formulée par Espoo. Aucun calcul, catalogue ou seuil n’est modifié par cet audit.
+
+### Clarification suivante : démo autonome et vérification en deux temps
+
+- **Demandé par Nicolas** : `/tour` montre automatiquement un cas prérempli à chaque étape. Le scénario fictif dure trois minutes, avec pause, reprise et navigation par moment. Les approbations montrées sont des actions humaines préécrites dans un scénario ; aucune décision réelle, écriture du navigateur ou requête IA n’est déclenchée par la lecture.
+- **Demandé par Nicolas** : avant l’événement, un exercice limité dans le temps est proposé pour les compétences qui s’y prêtent ; le candidat soumet ; Claude peut recommander A/C/F/NE en s’appuyant sur les critères et des citations exactes ; le recruteur relit puis valide ou remplace la recommandation. Aucune note ni observation automatique.
+- **Demandé par Nicolas** : les autres composantes sont vérifiées sur place avec consignes, exercices et questions proposés. C4.3 reste « Discussed, not observed ».
+- **Livraison** : six composantes Centrale en ligne et vingt compétences techniques, chacune aux trois niveaux (78 variantes écrites à la main), avec adaptation facultative par Claude sur contexte relu. Les trois exercices initiaux restent le programme NordChip par défaut.
+- **Limite existante conservée en attendant un éventuel changement de Nicolas** : vingt minutes au total pour le programme sélectionné, pas 78 exercices imposés à une personne. Le recruteur choisit les priorités du besoin ; une compétence non sélectionnée n’est pas considérée comme échouée. Dix minutes partagées sur place.
+- **Choix de fonctionnement annoncé, ajustable** : à la fin du temps, la saisie s’arrête et le candidat peut soumettre sa réponse existante. Le chronomètre est local, sans contrôle d’identité ni surveillance, et un brouillon non soumis ne survit pas au rechargement. Les durées ne donnent jamais une note automatique.
+- Les propositions de compétences/exercices restent distinctes de cette nouvelle recommandation sur une réponse. Les anciennes mentions « jamais la note » dans les comptes rendus décrivent l’étape précédente ; la décision finale appartient toujours à une personne.
 
 ## 10. À trancher ensemble
 

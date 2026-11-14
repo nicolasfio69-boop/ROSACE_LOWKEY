@@ -2,6 +2,7 @@ import { expect, it } from "vitest";
 import { SKILL_CODES } from "./framework";
 import {
   CHECK_SKILLS,
+  DEMO_CHECK_SKILLS,
   checkExercise,
   checkStatus,
   verificationFor,
@@ -25,7 +26,7 @@ it("has three distinct versions per demo exercise and fits the 20-minute total",
         .size,
     ).toBe(3);
   expect(
-    CHECK_SKILLS.reduce((sum, s) => sum + checkExercise(s, 3).minutes, 0),
+    DEMO_CHECK_SKILLS.reduce((sum, s) => sum + checkExercise(s, 3).minutes, 0),
   ).toBe(20);
   expect(() => checkExercise("C1.1", 1)).toThrow();
 });
