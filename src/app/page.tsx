@@ -11,7 +11,8 @@ export default function Home() {
       <nav className="site-nav" aria-label="Main navigation">
         <Logo size={40} />
         <div className="nav-links">
-          <Link href="/demo">Explore the demo</Link>
+          <Link href="/organiser">Organiser workspace</Link>
+          <Link href="/demo">Demo data</Link>
           <span className="event-pill">Junction · Espoo 2026</span>
         </div>
       </nav>
@@ -32,6 +33,14 @@ export default function Home() {
           <Link href="/need/new" className="primary-button">
             Prepare a recruiter need <span aria-hidden="true">→</span>
           </Link>
+          <div className="role-links">
+            <Link href="/talent/new" className="secondary-button">
+              I am a talent →
+            </Link>
+            <Link href="/organiser" className="text-button">
+              I organise the event →
+            </Link>
+          </div>
           <p className="hero-note">Your judgement. A clearer starting point.</p>
           <div className="hero-facts">
             <span>
@@ -89,13 +98,13 @@ export default function Home() {
               "02",
               "Let talent tell their story",
               "Turn experience into a skills card they can review and confirm.",
-              "Coming next",
+              "Available locally",
             ],
             [
               "03",
               "Meet with a purpose",
               "Explore the open questions together. A human makes the decision.",
-              "Planned",
+              "Available locally",
             ],
           ].map(([n, title, body, status]) => (
             <article key={n} className="journey-card">

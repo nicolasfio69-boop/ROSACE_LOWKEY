@@ -1,646 +1,856 @@
 "use client";
-
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Rosace } from "./Rosace";
+import { useEffect, useRef, useState } from "react";
 import {
-  COMPETENCIES,
   COMPONENTS,
   JOB_SKILLS,
   LEVELS,
-  descriptor,
   isComponent,
   skillName,
-  type ExpectedLevel,
 } from "@/lib/framework";
 import {
-  JOB_QUESTIONS,
-  levelExample,
-  prepareNeed,
-  type NeedDraft,
-  type DraftResult,
-} from "@/lib/need-draft";
-import { MAJOR_COUNT } from "@/lib/scoring";
-import { changeSelection, type SelectionRole } from "@/lib/need-selection";
-
-import {
-  decodeStoredNeed,
   emptyNeedDraft,
+  decodeStoredNeed,
   NEED_STORAGE_KEY,
   saveNeed,
 } from "@/lib/need-storage";
+import { JOB_QUESTIONS, prepareNeed, type NeedDraft } from "@/lib/need-draft";
+import { changeSelection, type SelectionRole } from "@/lib/need-selection";
+import { spotSkills } from "@/lib/talent-intake";
+import { addNeed } from "@/lib/workspace";
+import {
+  retrievePassages,
+  type Passage,
+  type LevelExamples,
+} from "@/lib/context";
+import { jobScenario } from "@/data/job-scenarios";
+import { DocumentInput } from "./DocumentInput";
+import { LevelCards } from "./LevelCards";
+import { JourneyRail } from "./JourneyRail";
+import { Rosace } from "./Rosace";
 
-const steps = [
-  "The role",
-  "Your priorities",
-  "Expected levels",
-  "Review & confirm",
-];
-
+const initial = (): NeedDraft => ({
+  ...emptyNeedDraft(),
+  company: "",
+  companyContext: "",
+  eventName: "Espoo Tech Matchmaking",
+  workMode: "Hybrid",
+  location: "Espoo",
+  autonomy: "With guidance at first",
+});
+type Generated = LevelExamples & { passages: Passage[] };
 export function NeedForm() {
-  const [draft, setDraft] = useState<NeedDraft>(emptyNeedDraft);
-  const [result, setResult] = useState<DraftResult | null>(null);
-  const [step, setStep] = useState(0);
-  const [activeSkill, setActiveSkill] = useState("");
-  const [attempted, setAttempted] = useState(false);
-  const heading = useRef<HTMLHeadingElement>(null);
+  const [draft, setDraft] = useState<NeedDraft>(initial);
   const [loaded, setLoaded] = useState(false);
-  const [storageError, setStorageError] = useState("");
-  const [saved, setSaved] = useState(false);
-
+  const [step, setStep] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const [reviewed, setReviewed] = useState(false);
+  const [url, setUrl] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [integrations, setIntegrations] = useState({
+    context: false,
+    gemini: false,
+  });
+  const [pending, setPending] = useState<Generated | null>(null);
+  const [accepted, setAccepted] = useState<Record<string, Generated>>({});
+  const ticket = useRef(0);
+  const [levelChoices, setLevelChoices] = useState<Record<string, 1 | 2 | 3>>(
+    {},
+  );
   useEffect(() => {
     try {
-      const raw = window.localStorage.getItem(NEED_STORAGE_KEY);
+      const raw = localStorage.getItem(NEED_STORAGE_KEY);
       if (raw) {
         const stored = decodeStoredNeed(raw);
-        setDraft(stored.draft);
+        setDraft({
+          ...initial(),
+          ...stored.draft,
+          draftId: stored.draft.draftId ?? crypto.randomUUID(),
+        });
+        setUrl(stored.draft.sourceUrl ?? "");
         if (stored.confirmed) {
-          setResult(prepareNeed(stored.draft));
           setStep(3);
+          setConfirmed(true);
         }
-        setSaved(true);
       }
     } catch {
-      setStorageError(
-        "Your saved need could not be restored. You can continue editing; saving will replace the unreadable copy.",
+      setError(
+        "The saved draft could not be restored. You can start a new one.",
       );
     }
     setLoaded(true);
+    fetch("/api/integrations")
+      .then((r) => r.json())
+      .then(setIntegrations)
+      .catch(() => {});
+    return () => {
+      ticket.current = -1;
+    };
   }, []);
-
-  function persist(next: NeedDraft, confirmed: boolean) {
-    try {
-      saveNeed(window.localStorage, next, confirmed);
-      setSaved(true);
-      setStorageError("");
-    } catch {
-      setSaved(false);
-      setStorageError(
-        "Your latest changes could not be saved in this browser. Keep this page open and retry saving.",
-      );
-    }
-  }
-
-  function clearSavedNeed() {
-    try {
-      window.localStorage.removeItem(NEED_STORAGE_KEY);
-      setDraft(emptyNeedDraft());
-      setStep(0);
-      setAttempted(false);
-      setResult(null);
-      setSaved(false);
-      setStorageError("");
-    } catch {
-      setStorageError(
-        "The saved need could not be deleted. Please allow browser storage and try again.",
-      );
-    }
-  }
-
-  const majors = draft.requirements.filter((r) => r.major).length;
-  const minors = draft.requirements.filter(
-    (r) => isComponent(r.skill) && !r.major,
-  ).length;
-  const jobs = draft.requirements.filter((r) => !isComponent(r.skill)).length;
-  const validation = prepareNeed(draft);
-
+  const c = COMPONENTS[index],
+    selected = draft.requirements.find((r) => r.skill === c.code),
+    majors = draft.requirements.filter((r) => r.major).length,
+    minors = draft.requirements.filter(
+      (r) => isComponent(r.skill) && !r.major,
+    ).length,
+    jobs = draft.requirements.filter((r) => !isComponent(r.skill)).length;
+  const roleReady =
+    !!draft.company?.trim() &&
+    !!draft.title.trim() &&
+    !!draft.description.trim();
+  const jobContext = [
+    `Work arrangement: ${draft.workMode}. Workplace: ${draft.location}. Support: ${draft.autonomy}.`,
+    ...JOB_QUESTIONS.map((q) => `${q.label} ${draft.context[q.key]}`),
+    draft.description,
+  ]
+    .join("\n")
+    .slice(0, 16000);
+  const passages = retrievePassages(
+    [
+      { id: "job", title: "Your job context", text: jobContext },
+      ...(reviewed && draft.companyContext
+        ? [
+            {
+              id: "company",
+              title: "Reviewed company context",
+              text: draft.companyContext,
+              url: draft.sourceUrl,
+            },
+          ]
+        : []),
+    ],
+    c.code,
+    draft.context.task,
+  );
+  const mentions = spotSkills(jobContext);
   function update(patch: Partial<NeedDraft>) {
-    const next = { ...draft, ...patch };
+    const next = {
+      ...draft,
+      draftId: draft.draftId ?? crypto.randomUUID(),
+      ...patch,
+    };
     setDraft(next);
-    setResult(null);
-    persist(next, false);
+    setConfirmed(false);
+    setError("");
+    ticket.current++;
+    setBusy(false);
+    setPending(null);
+    if (!("requirements" in patch) && !("capacity" in patch)) {
+      setReviewed(false);
+      setAccepted({});
+    }
+    try {
+      saveNeed(localStorage, next, false);
+      setStatus("Draft saved in this browser");
+    } catch {
+      setError(
+        "Could not save your latest changes. Keep this page open and try again.",
+      );
+    }
   }
-
-  function select(skill: string, role: SelectionRole) {
-    update({ requirements: changeSelection(draft.requirements, skill, role) });
-  }
-
-  const roleReady = !!draft.title.trim() && !!draft.description.trim();
-  const prioritiesReady = majors === MAJOR_COUNT;
-  const focused =
-    draft.requirements.find((r) => r.skill === activeSkill) ??
-    draft.requirements[0];
-
   function go(next: number) {
+    ticket.current++;
+    setBusy(false);
+    setPending(null);
     setStep(next);
-    setAttempted(false);
-    requestAnimationFrame(() => {
-      heading.current?.focus();
-      heading.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+    setError("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function select(skill: string, role: SelectionRole) {
+    update({
+      requirements: changeSelection(draft.requirements, skill, role).map((r) =>
+        r.skill === skill && levelChoices[skill]
+          ? { ...r, expected: levelChoices[skill] }
+          : r,
+      ),
     });
   }
-
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setAttempted(true);
-    if (step === 0 && !roleReady) return;
-    if (step === 1 && !prioritiesReady) return;
-    if (step < 3) {
-      go(step + 1);
+  async function collect() {
+    const id = ++ticket.current;
+    setBusy(true);
+    setError("");
+    try {
+      const r = await fetch("/api/company-context", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+      if (id !== ticket.current) return;
+      update({ companyContext: data.source.text, sourceUrl: data.source.url });
+      setStatus(
+        `Source collected ${new Date(data.source.fetchedAt).toLocaleString()}${data.cached ? " · cached for this session" : ""}. Review the text before using it.`,
+      );
+    } catch (e) {
+      if (id === ticket.current)
+        setError(
+          e instanceof Error ? e.message : "Could not collect company context.",
+        );
+    } finally {
+      if (id === ticket.current) setBusy(false);
+    }
+  }
+  async function generate() {
+    const id = ++ticket.current;
+    setBusy(true);
+    setPending(null);
+    setError("");
+    try {
+      const r = await fetch("/api/level-examples", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          skill: c.code,
+          title: draft.title,
+          task: draft.context.task,
+          job: jobContext,
+          company: reviewed ? draft.companyContext : "",
+          reviewed,
+        }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+      if (id === ticket.current) setPending(data);
+    } catch (e) {
+      if (id === ticket.current)
+        setError(
+          e instanceof Error ? e.message : "Could not generate examples.",
+        );
+    } finally {
+      if (id === ticket.current) setBusy(false);
+    }
+  }
+  function confirm() {
+    const result = prepareNeed(draft);
+    if (!result.ok) {
+      setError(result.errors.join(" "));
       return;
     }
-    const checked = prepareNeed(draft);
-    setResult(checked);
-    if (checked.ok) persist(draft, true);
+    if (!roleReady) {
+      setError("Add your company, job title and job description.");
+      return;
+    }
+    try {
+      const need = {
+        ...result.need,
+        requirements: result.need.requirements.map((r) => ({
+          ...r,
+          example:
+            accepted[r.skill]?.examples[r.expected] ??
+            jobScenario(r.skill, r.expected, draft.title) ??
+            r.example,
+        })),
+        description: draft.description,
+        context: draft.context,
+        workMode: draft.workMode,
+        location: draft.location,
+        autonomy: draft.autonomy,
+        eventName: draft.eventName ?? "Espoo Tech Matchmaking",
+        companyContext: reviewed ? (draft.companyContext ?? "") : "",
+        sourceUrl: reviewed ? draft.sourceUrl : undefined,
+      };
+      addNeed(localStorage, need);
+      saveNeed(localStorage, draft, true);
+      setConfirmed(true);
+      setStatus(
+        "Need saved. It is now available in the organiser workspace on this browser.",
+      );
+      setError("");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not save the need.");
+    }
   }
-
   if (!loaded)
-    return (
-      <p role="status" className="loading-state">
-        Opening your workspace…
-      </p>
-    );
-
+    return <p className="loading-state">Opening your recruiter workspace…</p>;
   return (
     <div className="workspace">
       <div className="workspace-top">
-        <Link href="/" className="back-link">
-          ← Home
-        </Link>
-        <span className="save-note">
-          {storageError
-            ? "Saving needs attention"
-            : saved
-              ? "● Saved on this browser"
-              : "Your draft saves as you go"}
+        <Link href="/">← Home</Link>
+        <span role="status">
+          {status || "Recruiter workspace · Local demo"}
         </span>
       </div>
-      <ol className="stepper" aria-label="Your progress">
-        {steps.map((label, i) => (
-          <li
-            key={label}
-            className={
-              i === step ? "current-step" : i < step ? "completed-step" : ""
-            }
-          >
-            <button
-              type="button"
-              aria-current={i === step ? "step" : undefined}
-              disabled={i > step && (!roleReady || (i > 1 && !prioritiesReady))}
-              onClick={() => go(i)}
-            >
-              <span>{i < step ? "✓" : i + 1}</span>
-              <span>{label}</span>
-            </button>
-          </li>
-        ))}
+      <ol className="stepper">
+        {["Company & role", "12 components", "Job skills", "Review"].map(
+          (label, i) => (
+            <li key={label} className={i === step ? "current-step" : ""}>
+              <button
+                type="button"
+                disabled={i > 0 && !roleReady}
+                onClick={() => go(i)}
+              >
+                <span>{i + 1}</span>
+                <span>{label}</span>
+              </button>
+            </li>
+          ),
+        )}
       </ol>
-      {storageError && (
-        <div className="error-panel" role="alert">
-          {storageError}{" "}
-          <button
-            type="button"
-            onClick={() => persist(draft, result?.ok === true)}
-          >
-            Retry saving
-          </button>
+      {error && (
+        <div role="alert" className="error-panel">
+          {error}
         </div>
       )}
-      <form onSubmit={submit} className="workspace-grid">
-        <div className="form-panel">
-          <div className="step-heading">
-            <p className="eyebrow">STEP 0{step + 1} / 04</p>
-            <h1 ref={heading} tabIndex={-1}>
-              {
-                [
-                  "Start with the real work.",
-                  "What matters most?",
-                  "Make your expectations clear.",
-                  result?.ok
-                    ? "Ready for a better conversation."
-                    : "A clear picture of your role.",
-                ][step]
-              }
-            </h1>
-            <p>
-              {
-                [
-                  "Describe the role in your own words. We’ll turn it into a focused skills profile.",
-                  "Choose three major components. Think about the work, not an idealised candidate.",
-                  "Choose a level for each skill. Ask for what the role needs, not the highest level by default.",
-                  "Take a moment to review. These are conversation starters, not a verdict on anyone.",
-                ][step]
-              }
-            </p>
-          </div>
-          <div className="step-content" key={step}>
-            {step === 0 && (
-              <>
+      <div className={`intake-layout ${step === 1 ? "with-rail" : ""}`}>
+        {step === 1 && (
+          <JourneyRail
+            index={index}
+            onSelect={(i) => {
+              setIndex(i);
+              setPending(null);
+              ticket.current++;
+              setBusy(false);
+            }}
+            selected={draft.requirements
+              .filter((r) => r.major)
+              .map((r) => r.skill)}
+          />
+        )}
+        <section className="form-panel">
+          {step === 0 && (
+            <>
+              <p className="eyebrow">FIRST, THE REAL WORK</p>
+              <div className="step-heading">
+                <h1>Your company. Your role.</h1>
+                <p>
+                  Start with a job document or your own words. Context helps
+                  explain skills; you decide the requirements.
+                </p>
+              </div>
+              <div className="context-grid">
                 <label className="field-label">
-                  Job title
+                  Event
                   <input
-                    autoComplete="off"
-                    placeholder="e.g. Junior embedded developer"
-                    required
+                    value={draft.eventName ?? ""}
                     maxLength={120}
-                    value={draft.title}
-                    onChange={(e) => update({ title: e.target.value })}
+                    onChange={(e) => update({ eventName: e.target.value })}
                   />
                 </label>
                 <label className="field-label">
-                  What will this person do?
-                  <textarea
-                    placeholder="Describe a typical task and what you want them to achieve…"
-                    required
-                    maxLength={1000}
-                    rows={4}
-                    value={draft.description}
-                    onChange={(e) => update({ description: e.target.value })}
+                  Company name
+                  <input
+                    placeholder="e.g. NordChip (fictional demo)"
+                    value={draft.company ?? ""}
+                    maxLength={120}
+                    onChange={(e) => update({ company: e.target.value })}
                   />
                 </label>
-                <details className="context-details">
-                  <summary>
-                    Add a little context <span>4 optional questions</span>
-                  </summary>
-                  <div className="context-grid">
-                    {JOB_QUESTIONS.map((q) => (
-                      <label key={q.key} className="field-label">
-                        {q.label}
-                        <input
-                          maxLength={240}
-                          placeholder={q.placeholder}
-                          value={draft.context[q.key]}
-                          onChange={(e) =>
-                            update({
-                              context: {
-                                ...draft.context,
-                                [q.key]: e.target.value,
-                              },
-                            })
-                          }
-                        />
-                      </label>
-                    ))}
-                  </div>
-                </details>
-                <p className="quiet-note">
-                  Use a fictional role for this demo. No personal information
-                  needed.
-                </p>
-                {attempted && !roleReady && (
-                  <p role="alert" className="inline-error">
-                    Add a job title and a short description to continue.
+              </div>
+              <details className="context-details">
+                <summary>
+                  Company context{" "}
+                  <span>Public website or a description you provide</span>
+                </summary>
+                <div className="optional-skills">
+                  <label className="field-label">
+                    Company website
+                    <input
+                      type="url"
+                      placeholder="https://company.example/about"
+                      value={url}
+                      onChange={(e) => {
+                        ticket.current++;
+                        setBusy(false);
+                        setUrl(e.target.value);
+                      }}
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    className="secondary-button"
+                    disabled={!integrations.context || busy || !url}
+                    onClick={collect}
+                  >
+                    {busy ? "Collecting…" : "Read this company page"}
+                  </button>
+                  <p className="quiet-note">
+                    {integrations.context
+                      ? "Context.dev reads only the public company page you choose. No people searches."
+                      : "Website collection is not configured yet. You can paste company context below."}
                   </p>
-                )}
-              </>
-            )}
-            {step === 1 && (
-              <>
-                <div className="priority-slots" aria-live="polite">
-                  {Array.from({ length: 3 }, (_, i) => {
-                    const r = draft.requirements.filter((r) => r.major)[i];
-                    return (
-                      <div key={i} className={r ? "filled-slot" : ""}>
-                        <span>0{i + 1}</span>
-                        {r ? skillName(r.skill) : "Choose a priority"}
-                      </div>
-                    );
-                  })}
-                </div>
-                <p className="selection-count">
-                  {majors} of 3 majors selected · gold on your rosace
-                </p>
-                {COMPETENCIES.map((group) => (
-                  <fieldset className="component-group" key={group.code}>
-                    <legend>
-                      <span style={{ background: group.color }} />
-                      {group.name}
-                    </legend>
-                    <div className="component-grid">
-                      {COMPONENTS.filter(
-                        (c) => c.competency === group.code,
-                      ).map((c) => {
-                        const r = draft.requirements.find(
-                          (r) => r.skill === c.code,
-                        );
-                        return (
-                          <button
-                            type="button"
-                            key={c.code}
-                            className={`component-card ${r?.major ? "selected-major" : ""}`}
-                            aria-pressed={!!r?.major}
-                            disabled={!r?.major && majors >= 3}
-                            onClick={() =>
-                              select(c.code, r?.major ? "none" : "major")
-                            }
-                          >
-                            <span className="component-code">{c.code}</span>
-                            <strong>{c.name}</strong>
-                            <span className="card-check" aria-hidden="true">
-                              {r?.major ? "✓" : "+"}
-                            </span>
-                            {r && !r.major && <small>Currently a minor</small>}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </fieldset>
-                ))}
-                <details className="context-details">
-                  <summary>
-                    Add supporting skills <span>Optional</span>
-                  </summary>
-                  <div className="optional-skills">
-                    <h3>
-                      Minor components <span>{minors} / 2</span>
-                    </h3>
-                    <p>Useful alongside your three priorities.</p>
-                    <div className="chip-grid">
-                      {COMPONENTS.filter(
-                        (c) =>
-                          !draft.requirements.some(
-                            (r) => r.skill === c.code && r.major,
-                          ),
-                      ).map((c) => {
-                        const chosen = draft.requirements.some(
-                          (r) => r.skill === c.code,
-                        );
-                        return (
-                          <button
-                            type="button"
-                            className={`skill-chip ${chosen ? "chosen" : ""}`}
-                            key={c.code}
-                            aria-pressed={chosen}
-                            disabled={!chosen && minors >= 2}
-                            onClick={() =>
-                              select(c.code, chosen ? "none" : "minor")
-                            }
-                          >
-                            {chosen ? "✓ " : "+ "}
-                            {c.name}
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <h3>
-                      Job skills <span>{jobs} / 2</span>
-                    </h3>
-                    <p>
-                      Specific know-how. Shown beside the rosace, never as
-                      majors.
-                    </p>
-                    <div className="chip-grid">
-                      {JOB_SKILLS.map((j) => {
-                        const chosen = draft.requirements.some(
-                          (r) => r.skill === j.code,
-                        );
-                        return (
-                          <button
-                            type="button"
-                            className={`skill-chip ${chosen ? "chosen" : ""}`}
-                            key={j.code}
-                            aria-pressed={chosen}
-                            disabled={!chosen && jobs >= 2}
-                            onClick={() =>
-                              select(j.code, chosen ? "none" : "job")
-                            }
-                          >
-                            {chosen ? "✓ " : "+ "}
-                            {j.name}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </details>
-                {attempted && !prioritiesReady && (
-                  <p role="alert" className="inline-error">
-                    Choose exactly three major components to continue.
-                  </p>
-                )}
-              </>
-            )}
-            {step === 2 && focused && (
-              <>
-                <div
-                  className="skill-tabs"
-                  aria-label="Choose a skill to set its level"
-                >
-                  {draft.requirements.map((r, i) => (
-                    <button
-                      type="button"
-                      key={r.skill}
-                      className={
-                        r.skill === focused.skill ? "active-skill" : ""
+                  <label className="field-label">
+                    Company activity, products and team
+                    <textarea
+                      rows={5}
+                      value={draft.companyContext ?? ""}
+                      maxLength={16000}
+                      onChange={(e) =>
+                        update({
+                          companyContext: e.target.value,
+                          sourceUrl: undefined,
+                        })
                       }
-                      aria-pressed={r.skill === focused.skill}
-                      onClick={() => setActiveSkill(r.skill)}
+                    />
+                  </label>
+                  {draft.sourceUrl && (
+                    <p className="quiet-note">
+                      Collected from{" "}
+                      <a
+                        href={draft.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {draft.sourceUrl}
+                      </a>
+                      . Review and remove anything irrelevant before approving.
+                    </p>
+                  )}
+                </div>
+              </details>
+              <DocumentInput
+                label="Import a job description"
+                onText={(text) => {
+                  if (text.length > 16000)
+                    throw new Error(
+                      "This job description is too long. Paste an extract of up to 16,000 characters.",
+                    );
+                  update({ description: text });
+                }}
+              />
+              <label className="field-label">
+                Job title
+                <input
+                  value={draft.title}
+                  placeholder="Junior embedded developer"
+                  maxLength={120}
+                  onChange={(e) => update({ title: e.target.value })}
+                />
+              </label>
+              <label className="field-label">
+                Job description
+                <textarea
+                  rows={5}
+                  value={draft.description}
+                  maxLength={16000}
+                  onChange={(e) => update({ description: e.target.value })}
+                />
+              </label>
+              <div className="context-grid">
+                <label className="field-label">
+                  Working arrangement
+                  <select
+                    value={draft.workMode}
+                    onChange={(e) => update({ workMode: e.target.value })}
+                  >
+                    <option>On site</option>
+                    <option>Hybrid</option>
+                    <option>Remote</option>
+                  </select>
+                </label>
+                <label className="field-label">
+                  Workplace or working environment
+                  <input
+                    value={draft.location ?? ""}
+                    maxLength={120}
+                    placeholder="Espoo office, lab or distributed team"
+                    onChange={(e) => update({ location: e.target.value })}
+                  />
+                </label>
+              </div>
+              <label className="field-label">
+                What support will be available?
+                <select
+                  value={draft.autonomy}
+                  onChange={(e) => update({ autonomy: e.target.value })}
+                >
+                  <option>With guidance at first</option>
+                  <option>A mentor available when needed</option>
+                  <option>Mostly independent work</option>
+                  <option>Helping others with complex situations</option>
+                </select>
+              </label>
+              <div className="context-grid">
+                {JOB_QUESTIONS.map((q) => (
+                  <label key={q.key} className="field-label">
+                    {q.label}
+                    <textarea
+                      rows={2}
+                      maxLength={240}
+                      value={draft.context[q.key]}
+                      placeholder={q.placeholder}
+                      onChange={(e) =>
+                        update({
+                          context: {
+                            ...draft.context,
+                            [q.key]: e.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </label>
+                ))}
+              </div>
+              <label className="consent-line">
+                <input
+                  type="checkbox"
+                  checked={reviewed}
+                  onChange={(e) => {
+                    setReviewed(e.target.checked);
+                    setPending(null);
+                    setAccepted({});
+                    ticket.current++;
+                    setBusy(false);
+                  }}
+                />{" "}
+                I have reviewed the job and company context. It may be used to
+                suggest examples.
+              </label>
+              <p className="quiet-note">
+                Use synthetic job and candidate data in this demo. Working
+                arrangement informs examples, never candidate scores.
+              </p>
+              <div className="form-actions">
+                <span className="quiet-note">You can continue without AI.</span>
+                <button
+                  className="primary-button"
+                  onClick={() =>
+                    roleReady
+                      ? go(1)
+                      : setError(
+                          "Enter your company, job title and job description first.",
+                        )
+                  }
+                >
+                  Explore the 12 components →
+                </button>
+              </div>
+            </>
+          )}
+          {step === 1 && (
+            <>
+              <p className="eyebrow">
+                COMPONENT {String(index + 1).padStart(2, "0")} / 12 · {c.code}
+              </p>
+              <div className="step-heading">
+                <h1>{c.name}</h1>
+                <p>
+                  Compare situations, choose an expected level, then decide
+                  whether this matters for your role.
+                </p>
+              </div>
+              <p className="role-context">
+                <strong>
+                  {draft.company} · {draft.title}
+                </strong>
+                <br />
+                {draft.workMode} · {draft.location}
+                <br />
+                {draft.context.task || draft.description.slice(0, 220)}
+              </p>
+              {mentions[c.code] && (
+                <div className="context-suggestion">
+                  <strong>A clue in your description — review it</strong>
+                  <p>“{mentions[c.code]}”</p>
+                  <small>
+                    This keyword-based suggestion does not choose a priority or
+                    a level.
+                  </small>
+                </div>
+              )}
+              <LevelCards
+                jobTitle={draft.title}
+                skill={c.code}
+                value={selected?.expected ?? levelChoices[c.code]}
+                examples={accepted[c.code]?.examples}
+                onChange={(level) => {
+                  setLevelChoices({ ...levelChoices, [c.code]: level });
+                  if (!selected) {
+                    setStatus(
+                      "Level noted. Choose Major or Minor to include this component.",
+                    );
+                    setError("");
+                    return;
+                  }
+                  update({
+                    requirements: draft.requirements.map((r) =>
+                      r.skill === c.code ? { ...r, expected: level } : r,
+                    ),
+                  });
+                }}
+              />
+              <div className="priority-controls">
+                <div>
+                  <strong>How important is this for the role?</strong>
+                  <p className="quiet-note">
+                    {majors} / 3 majors · {minors} / 2 minors
+                  </p>
+                </div>
+                <div>
+                  {(
+                    [
+                      ["major", "Major · gold"],
+                      ["minor", "Minor · red"],
+                      ["none", "Not required"],
+                    ] as const
+                  ).map(([role, label]) => (
+                    <button
+                      key={role}
+                      data-priority={role}
+                      type="button"
+                      aria-pressed={
+                        role === "none"
+                          ? !selected
+                          : role === "major"
+                            ? !!selected?.major
+                            : !!selected && !selected.major
+                      }
+                      disabled={
+                        (role === "major" && !selected?.major && majors >= 3) ||
+                        (role === "minor" &&
+                          (!selected || selected.major) &&
+                          minors >= 2)
+                      }
+                      onClick={() => select(c.code, role)}
                     >
-                      <span>{i + 1}</span>
-                      {skillName(r.skill)}
+                      {label}
                     </button>
                   ))}
                 </div>
-                <p className="role-context">
-                  <strong>{draft.title}</strong>
-                  {draft.context.task && <> · {draft.context.task}</>}
-                </p>
-                <fieldset className="level-fieldset">
-                  <legend>{skillName(focused.skill)}</legend>
+              </div>
+              <details className="context-details">
+                <summary>
+                  Context behind these examples{" "}
+                  <span>Sources and optional Gemini assistance</span>
+                </summary>
+                <div className="optional-skills">
                   <p className="quiet-note">
-                    Foundation is the starting selection. Compare the cards
-                    before continuing.
+                    {integrations.gemini
+                      ? "Gemini can propose examples from the passages below. You review them before use."
+                      : "Gemini is not connected yet. Hand-written examples remain fully usable."}
                   </p>
-                  <div className="level-grid">
-                    {([1, 2, 3] as const).map((level) => (
-                      <label
-                        key={level}
-                        className={`level-card ${focused.expected === level ? "selected-level" : ""}`}
-                      >
-                        <div className="level-card-top">
-                          <span className="level-bars" aria-hidden="true">
-                            {[1, 2, 3].map((n) => (
-                              <i key={n} className={n <= level ? "lit" : ""} />
-                            ))}
-                          </span>
-                          <input
-                            type="radio"
-                            name={`level-${focused.skill}`}
-                            checked={focused.expected === level}
-                            onChange={() =>
-                              update({
-                                requirements: draft.requirements.map((r) =>
-                                  r.skill === focused.skill
-                                    ? { ...r, expected: level as ExpectedLevel }
-                                    : r,
-                                ),
-                              })
-                            }
-                          />
-                        </div>
-                        <h3>{LEVELS[level].name}</h3>
-                        <p>{descriptor(focused.skill, level)}</p>
-                        <div className="example-block">
-                          <span>IN THIS ROLE</span>
-                          <p>
-                            {levelExample(focused.skill, level, {
-                              title: "",
-                              context: {
-                                task: "",
-                                audience: "",
-                                outcome: "",
-                                challenge: "",
-                              },
-                            })}
-                          </p>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-                <details className="context-details">
-                  <summary>
-                    Your job context <span>Keep this in mind</span>
-                  </summary>
-                  <p className="context-copy">
-                    {draft.title} — {draft.description}
-                  </p>
-                  {JOB_QUESTIONS.filter((q) => draft.context[q.key]).map(
-                    (q) => (
-                      <p className="context-copy" key={q.key}>
-                        <strong>{q.label}</strong> {draft.context[q.key]}
-                      </p>
-                    ),
+                  {passages.map((p) => (
+                    <blockquote className="source-passage" key={p.id}>
+                      <strong>
+                        {p.title} · {p.id}
+                      </strong>
+                      <p>{p.text}</p>
+                      {p.url && (
+                        <a href={p.url} target="_blank" rel="noreferrer">
+                          Source page →
+                        </a>
+                      )}
+                    </blockquote>
+                  ))}
+                  <button
+                    type="button"
+                    className="secondary-button"
+                    disabled={!integrations.gemini || !reviewed || busy}
+                    onClick={generate}
+                  >
+                    {busy
+                      ? "Preparing suggestions…"
+                      : "Suggest examples from reviewed context"}
+                  </button>
+                  {!reviewed && (
+                    <p className="quiet-note">
+                      Review the context checkbox in the first step to enable
+                      this.
+                    </p>
                   )}
-                </details>
-              </>
-            )}
-            {step === 3 && (
-              <>
-                {result?.ok && (
-                  <div className="success-panel" role="status">
-                    <span aria-hidden="true">✓</span>
-                    <div>
-                      <strong>Need confirmed</strong>
-                      <p>
-                        {saved
-                          ? "Saved in this browser. You can return and edit it anytime."
-                          : "Not yet saved. Retry saving before leaving."}
+                  {pending && (
+                    <div className="ai-review">
+                      <h3>Review Gemini’s proposal</h3>
+                      {([1, 2, 3] as const).map((l) => (
+                        <p key={l}>
+                          <strong>{LEVELS[l].name}:</strong>{" "}
+                          {pending.examples[l]}
+                        </p>
+                      ))}
+                      <p className="quiet-note">
+                        Sources: {pending.sourceIds.join(", ")}
                       </p>
-                    </div>
-                  </div>
-                )}
-                <div className="review-role">
-                  <div>
-                    <p className="eyebrow">YOUR ROLE</p>
-                    <h2>{draft.title}</h2>
-                    <p>{draft.description}</p>
-                  </div>
-                  <button
-                    type="button"
-                    className="text-button"
-                    onClick={() => go(0)}
-                  >
-                    Edit role
-                  </button>
-                </div>
-                <div className="review-label">
-                  <h3>Skills to explore together</h3>
-                  <button
-                    type="button"
-                    className="text-button"
-                    onClick={() => go(1)}
-                  >
-                    Edit skills
-                  </button>
-                </div>
-                <div className="review-list">
-                  {draft.requirements.map((r) => (
-                    <div key={r.skill}>
-                      <span className={r.major ? "gold-dot" : "red-dot"} />
-                      <div>
-                        <strong>{skillName(r.skill)}</strong>
-                        <small>
-                          {r.major
-                            ? "Major component"
-                            : isComponent(r.skill)
-                              ? "Minor component"
-                              : "Job skill"}
-                        </small>
-                      </div>
                       <button
                         type="button"
-                        className="level-edit"
+                        className="primary-button"
                         onClick={() => {
-                          setActiveSkill(r.skill);
-                          go(2);
+                          setAccepted({ ...accepted, [c.code]: pending });
+                          setPending(null);
                         }}
                       >
-                        {LEVELS[r.expected].name}{" "}
-                        <span aria-hidden="true">→</span>
+                        Use these examples
+                      </button>
+                      <button
+                        type="button"
+                        className="secondary-button"
+                        onClick={() => setPending(null)}
+                      >
+                        Keep manual examples
                       </button>
                     </div>
-                  ))}
+                  )}
                 </div>
-                <label className="capacity-field">
-                  <span>
-                    <strong>How many people would you like to meet?</strong>
-                    <small>
-                      You can start with three meaningful conversations.
-                    </small>
-                  </span>
-                  <input
-                    aria-label="People to meet"
-                    type="number"
-                    min={1}
-                    step={1}
-                    required
-                    value={Number.isNaN(draft.capacity) ? "" : draft.capacity}
-                    onChange={(e) =>
-                      update({ capacity: e.target.valueAsNumber })
-                    }
-                  />
-                </label>
-                {!validation.ok && (
-                  <ul role="alert" className="inline-error">
-                    {validation.errors.map((e) => (
-                      <li key={e}>{e}</li>
-                    ))}
-                  </ul>
-                )}
-                <p className="quiet-note">
-                  This need stays in your browser. It is not sent to an
-                  organiser or added to the demo matches yet.
+              </details>
+              <div className="form-actions">
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={() => {
+                    setPending(null);
+                    ticket.current++;
+                    setBusy(false);
+                    if (index === 0) go(0);
+                    else setIndex(index - 1);
+                  }}
+                >
+                  ← Previous
+                </button>
+                <button
+                  type="button"
+                  className="primary-button"
+                  onClick={() => {
+                    setPending(null);
+                    ticket.current++;
+                    setBusy(false);
+                    if (index === 11) go(2);
+                    else setIndex(index + 1);
+                  }}
+                >
+                  {" "}
+                  {index === 11 ? "Add job skills" : "Next component"} →
+                </button>
+              </div>
+            </>
+          )}
+          {step === 2 && (
+            <>
+              <p className="eyebrow">ALONGSIDE THE CENTRALE FRAMEWORK</p>
+              <div className="step-heading">
+                <h1>Add specific know-how.</h1>
+                <p>
+                  Choose up to two job skills from the closed list. They are
+                  never major components.
                 </p>
-              </>
-            )}
-          </div>
-          <div className="form-actions">
-            {step > 0 ? (
-              <button
-                type="button"
-                className="secondary-button"
-                onClick={() => go(step - 1)}
-              >
-                ← Back
-              </button>
-            ) : (
-              <span className="quiet-note">About the work. Not the CV.</span>
-            )}
-            <button type="submit" className="primary-button">
-              {step === 3
-                ? result?.ok
-                  ? "Confirm again"
-                  : "Confirm my need"
-                : [
-                    "Choose priorities",
-                    "Set expected levels",
-                    "Review my need",
-                  ][step]}{" "}
-              <span aria-hidden="true">{step === 3 ? "✓" : "→"}</span>
-            </button>
-          </div>
-        </div>
+              </div>
+              {JOB_SKILLS.map((j) => {
+                const r = draft.requirements.find((r) => r.skill === j.code);
+                return (
+                  <div className="job-skill-block" key={j.code}>
+                    <label className="consent-line">
+                      <input
+                        type="checkbox"
+                        checked={!!r}
+                        disabled={!r && jobs >= 2}
+                        onChange={(e) =>
+                          select(j.code, e.target.checked ? "job" : "none")
+                        }
+                      />
+                      {j.name}
+                    </label>
+                    {r && (
+                      <LevelCards
+                        jobTitle={draft.title}
+                        skill={j.code}
+                        value={r.expected}
+                        onChange={(level) =>
+                          update({
+                            requirements: draft.requirements.map((x) =>
+                              x.skill === j.code
+                                ? { ...x, expected: level }
+                                : x,
+                            ),
+                          })
+                        }
+                      />
+                    )}
+                  </div>
+                );
+              })}
+              <div className="form-actions">
+                <button className="secondary-button" onClick={() => go(1)}>
+                  ← Components
+                </button>
+                <button className="primary-button" onClick={() => go(3)}>
+                  Review my need →
+                </button>
+              </div>
+            </>
+          )}
+          {step === 3 && (
+            <>
+              <p className="eyebrow">YOUR NEED, READY TO REVIEW</p>
+              <div className="step-heading">
+                <h1>{draft.title}</h1>
+                <p>
+                  {draft.company} · {draft.eventName} · {draft.workMode}
+                </p>
+              </div>
+              {confirmed && (
+                <div role="status" className="success-panel">
+                  <div>
+                    <strong>Need confirmed and saved</strong>
+                    <p>Available in the organiser workspace in this browser.</p>
+                    <Link href="/organiser">
+                      Open the organiser workspace →
+                    </Link>
+                  </div>
+                </div>
+              )}
+              <p className="review-description">{draft.description}</p>
+              <div className="review-list">
+                {draft.requirements.map((r) => (
+                  <div key={r.skill}>
+                    <i className={r.major ? "gold-dot" : "red-dot"} />
+                    <div>
+                      <strong>{skillName(r.skill)}</strong>
+                      <small>
+                        {r.major
+                          ? "Major"
+                          : isComponent(r.skill)
+                            ? "Minor"
+                            : "Job skill"}{" "}
+                        · {LEVELS[r.expected].name}
+                      </small>
+                    </div>
+                    <button
+                      type="button"
+                      className="text-button"
+                      onClick={() => {
+                        const i = COMPONENTS.findIndex(
+                          (c) => c.code === r.skill,
+                        );
+                        if (i >= 0) {
+                          setIndex(i);
+                          go(1);
+                        } else go(2);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <label className="capacity-field">
+                <span>People to meet</span>
+                <input
+                  type="number"
+                  min={1}
+                  step={1}
+                  value={Number.isNaN(draft.capacity) ? "" : draft.capacity}
+                  onChange={(e) => update({ capacity: e.target.valueAsNumber })}
+                />
+              </label>
+              <div className="form-actions">
+                <button className="secondary-button" onClick={() => go(0)}>
+                  Edit company & role
+                </button>
+                <button className="primary-button" onClick={confirm}>
+                  Confirm and save need ✓
+                </button>
+              </div>
+            </>
+          )}
+        </section>
         <aside className="live-panel" aria-label="Live need preview">
-          <div className="visual-topline">
-            <span className="eyebrow">YOUR ROLE, TAKING SHAPE</span>
-            <span className="live-label">
-              <span className="status-dot" /> Live
-            </span>
-          </div>
+          <p className="eyebrow">
+            {draft.company || "YOUR COMPANY"} · EXPECTED SKILLS
+          </p>
           <Rosace
-            title={draft.title || "Your next great conversation"}
-            size={310}
+            title={draft.title || "Your role takes shape"}
+            size={300}
             labels="short"
             expected={Object.fromEntries(
               draft.requirements
@@ -648,15 +858,6 @@ export function NeedForm() {
                 .map((r) => [r.skill, { level: r.expected, major: r.major }]),
             )}
           />
-          <div className="preview-legend">
-            <span>
-              <i className="gold-dot" /> Major
-            </span>
-            <span>
-              <i className="red-dot" /> Minor
-            </span>
-            <span>Empty = not selected</span>
-          </div>
           <div className="preview-summary">
             <span>
               {majors}
@@ -664,46 +865,54 @@ export function NeedForm() {
             </span>
             <span>
               {minors}
-              <small>minor components</small>
+              <small>of 2 minors</small>
             </span>
             <span>
               {jobs}
-              <small>job skills</small>
+              <small>of 2 job skills</small>
             </span>
           </div>
-          {jobs > 0 && (
-            <div className="preview-jobs">
-              <p className="eyebrow">JOB SKILLS · ALONGSIDE THE ROSACE</p>
-              {draft.requirements
-                .filter((r) => !isComponent(r.skill))
-                .map((r) => (
-                  <p key={r.skill}>
-                    {skillName(r.skill)}
-                    <small>{LEVELS[r.expected].name}</small>
-                  </p>
-                ))}
-            </div>
-          )}
+          <p className="quiet-note">
+            Gold: majors. Red: minors. An empty branch is not selected. Job
+            skills sit alongside the rosace.
+          </p>
+          {draft.requirements
+            .filter((r) => !isComponent(r.skill))
+            .map((r) => (
+              <p key={r.skill} className="quiet-note">
+                {skillName(r.skill)} · {LEVELS[r.expected].name}
+              </p>
+            ))}
           <details className="chart-help">
-            <summary>How to read your rosace</summary>
+            <summary>Read the levels</summary>
             <p>
               Grey disk: Foundation. Inner ring: Intermediate. Outer circle:
-              Advanced. Your three major components are drawn in gold, on top.
+              Advanced.
             </p>
           </details>
-          <div className="human-note">
-            ✦{" "}
-            <span>
-              We turn claims into questions you can check during the
-              conversation.
-            </span>
-          </div>
         </aside>
-      </form>
+      </div>
       <div className="workspace-bottom">
-        <span>Synthetic demo · Your judgement stays central</span>
-        <button type="button" onClick={clearSavedNeed}>
-          Clear saved need and start again
+        <Link href="/talent/new">Explore the talent journey →</Link>
+        <button
+          type="button"
+          onClick={() => {
+            try {
+              localStorage.removeItem(NEED_STORAGE_KEY);
+              setDraft(initial());
+              setConfirmed(false);
+              setReviewed(false);
+              setAccepted({});
+              setLevelChoices({});
+              setUrl("");
+              setIndex(0);
+              go(0);
+            } catch {
+              setError("Could not clear this draft.");
+            }
+          }}
+        >
+          Clear the draft
         </button>
       </div>
     </div>

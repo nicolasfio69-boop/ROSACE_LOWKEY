@@ -1,47 +1,34 @@
 # Rosace delivery ladder
 
-This is a delivery plan, not a claim that the end-to-end product is finished.
-The fixed Centrale framework and deterministic scoring remain authoritative.
+The local journey is implemented. It is not yet a deployed multi-user service.
 
-| Stage                           | Status                                      | Deliverable                                                                                                                                                                | Credentials needed                                      |
-| ------------------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| 0. Foundation                   | Implemented                                 | Five competencies, twelve components, scoring, suggestion rules, synthetic needs and talents, rosace                                                                       | None                                                    |
-| 1. Recruiter experience         | Implemented; visual redesign pending review | Guided role → priorities → levels → confirmation, live rosace, browser draft storage; synthetic overview at /demo                                                          | None                                                    |
-| 2. Talent experience            | Next                                        | /talent/new, CV text in memory only, quoted skill spotting through manual rules, three factual questions, talent confirmation, own rosace without rank or score            | None for the first version                              |
-| 3. Organiser workflow           | Planned                                     | Connect created needs and talent cards to suggestions; organiser approves/adjusts meetings with reasons and a journal; resolve ties explicitly                             | None for a synthetic local prototype                    |
-| 4. Conversation and observation | Planned                                     | /brief/[need]/[talent], verification questions, expected vs declared rosace, A/C/F/NE observation kept separate                                                            | None for manual examples                                |
-| 5. Shared data and hosting      | Planned                                     | PostgreSQL schema, server-side validation and retention/deletion; deployment and HTTPS smoke checks                                                                        | Database connection and hosting account                 |
-| 6. Gemini assistance            | Planned                                     | Server-only assistance for need questions, level examples, skill spotting and briefs; validate output against the closed framework; human confirmation and manual fallback | Gemini API key, obtained when starting this integration |
+| Stage                              | Current result                                                                                                         | Next validation or work                                                                       |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| 0. Fixed framework and calculation | Five competencies, twelve components, deterministic scores, ties and rosaces                                           | Keep the reference rules stable                                                               |
+| 1. Recruiter                       | Company, job/document import, work setting, four task questions, twelve-component journey, level cards and live rosace | User review of wording and examples for target jobs                                           |
+| 2. Talent                          | Local CV import, quoted clues, factual questions, confirmed levels, live rosace, optional six-month browser card       | Broader synthetic examples and usability review                                               |
+| 3. Organiser                       | New needs/cards feed suggestions, human decisions with reasons and journal                                             | Shared-event accounts and permissions                                                         |
+| 4. Conversation                    | Three to five questions, declared/expected view, separate A/C/F/NE observations                                        | Try the interview flow with fictional participants                                            |
+| 4b. Online practice                | Twelve concrete exercises, review checklists, optional Gemini feedback adapter                                         | Live Gemini check after credentials arrive; no automatic certification                        |
+| 5. Company context and RAG         | Context.dev adapter, editable context, passage retrieval, Gemini examples with human approval                          | Configure keys locally and validate actual provider responses                                 |
+| 6. Shared data and hosting         | Not implemented                                                                                                        | PostgreSQL, authentication, server retention/deletion, production limits; then choose hosting |
 
-## Where we are now
+## Keys: when they are needed
 
-The foundation and recruiter screen work. This is not yet a complete recruitment
-workflow. A created need stays in the browser; it does not feed the fixed demo
-matches. Browser storage is not a shared database. There is no deployed public
-site, talent creation screen, organiser approval screen or interview screen in
-this implementation.
+- **Now:** no keys to run the whole manual flow in Cursor using Node.js.
+- **Context.dev:** set `CONTEXT_DEV_API_KEY` in `.env.local` to try company-page
+  collection. Context can be pasted while waiting.
+- **Gemini:** when the API key arrives, set `GEMINI_API_KEY` and `GEMINI_MODEL`,
+  restart, then explicitly request a proposal. Live provider validation remains
+  outstanding. CVs continue to stay on the device.
+- **Database/hosting:** only for sharing the app with multiple users. Aiven
+  Runtime + PostgreSQL is a candidate from the sponsor docs; Supabase remains
+  the database fallback. Vercel is optional.
 
-## Accounts and keys, at the right time
+Browser-local storage is not a database shared between recruiters and talents.
+The synthetic demo deliberately lets the roles share one browser. The event has
+multiple companies; it is not restricted to the City of Espoo as the employer.
+There are no real accounts, online interview scheduling or automatic hiring decisions.
 
-- Now: Node.js and the existing GitHub connection are enough. No Gemini key is required.
-- Before stage 5: choose hosting and provision PostgreSQL. Aiven Runtime plus
-  Aiven PostgreSQL is a candidate from the Junction materials; verify account
-  availability, pricing, deployment compatibility and the selected EU region.
-  Supabase remains the database fallback. Vercel is optional, not a prerequisite.
-- Before stage 6: create a dedicated Gemini key and set a usage budget. Check the
-  provider's data-handling terms before sending any CV text. Keep CVs out of
-  storage, request logs and AI logs; use synthetic data during development.
-- Local secrets belong in ignored `.env.local`; production secrets belong in
-  the host's secret settings. Never commit keys, use `NEXT_PUBLIC_` for a secret,
-  or put a key in browser code or chat. An account subscription for a coding
-  assistant does not supply Gemini API credits.
-- Modal, Verda and other sponsor APIs are optional. Add one only when a concrete
-  feature requires it; do not introduce services solely to enter more challenges.
-
-## Review gates
-
-Review the guided recruiter screen visually before extending its design to talent
-and organiser flows. For every implementation step, run tests, TypeScript, ESLint
-and the production build, then exercise the relevant user journey. Keep each step
-on a branch with a reviewable PR when publication is authorised. Never publish or
-deploy the environment merely because a local review succeeded.
+The current code is on a local branch. No deployment or environment publication
+is part of this change. Review the local interface before the next delivery stage.

@@ -1,45 +1,98 @@
-# Rosace (working name)
+# Rosace
 
-Matchmaking for City of Espoo recruitment events (Junction 2026, "Rethinking Recruitment").
-We turn claims into questions you can check during the conversation.
+A local recruitment-event demo for Junction 2026 and the City of Espoo.
+“We turn claims into questions you can check during the conversation.”
 
-Built on the Centrale Lyon JE skills framework: 5 competencies, 12 components, 3 levels (Foundation, Intermediate, Advanced), and the rosace.
+The fixed Centrale framework has 5 competencies, 12 components, three skill
+levels plus “Not yet”, and a rosace that grows as selections are confirmed.
+A human chooses the requirements and approves meetings. Repository examples are fictional.
 
-All data in this repository is synthetic.
+## Open in Cursor and run locally
 
-## Run
+Install **Node.js 24 LTS** (22.13 or newer is required), then open this project
+folder in Cursor. In its terminal:
 
 ```bash
-npm install
-npm run dev     # http://localhost:3000
-npm test        # scoring and suggestion rules
+npm ci
+npm run dev -- --hostname 127.0.0.1 --port 3001
 ```
 
-No API key belongs in this repository. Keys go in the hosting environment settings.
+Open **http://localhost:3001** on the same computer. Keep the terminal running.
+On Windows, use `npm.cmd` if PowerShell blocks `npm.ps1`, or double-click
+`start-local.cmd` after extracting the ZIP. No Gemini key or hosting account is
+needed. Cursor and Claude subscriptions do not replace Node.js or API credits.
 
-Coding agents: read [AGENTS.md](AGENTS.md) first (rules, calculation, next steps).
+If port 3001 is occupied, use `--port 3002` and open `http://localhost:3002`.
+If an old server shows an error after updating files, stop it with Ctrl+C,
+remove only the generated `.next` folder, run `npm ci`, and start again.
 
-## Recruiter need preview
+## What to try
 
-Open `/need/new` from the home page to describe a synthetic job, answer up to four
-optional context questions, and choose three major Centrale components, up to two
-minor components and up to two job skills. Each selection has three level cards
-with the fixed descriptor and a hand-written example placed in the job context.
-The live rosace keeps job skills separate. Capacity defaults to three.
+1. **Recruiter — `/need/new`:** enter the company, role, job description, on-site /
+   hybrid / remote setting, workplace and available support. Four questions
+   clarify the task, collaborators, expected outcome and difficulty. Import a
+   text PDF, DOCX, TXT or MD, or paste text. Walk through the 12 components,
+   compare level cards and pick exactly 3 majors, up to 2 minors, then up to 2
+   job skills. Watch the live rosace and confirm the need.
+2. **Talent — `/talent/new`:** import a fictional CV or use the example. Local
+   keyword rules quote possible clues without assigning a level. Answer factual
+   questions, confirm or correct each level and build the other side of the
+   rosace. Optionally save the confirmed card with explicit consent.
+3. **Organiser — `/organiser`:** saved needs and cards join the synthetic examples.
+   Review suggestions, ties and people without suggestions. Approve, add or
+   remove a meeting with a reason; the decision appears in a journal.
+4. **Conversation — open “Prepare conversation”:** explore 3–5 questions, compare
+   declared and expected skills, and record A/C/F/NE observations. Observed
+   values stay separate from declared levels.
+5. **Practice — `/practice`:** try one fictional exercise per component. Review
+   the checklist or explicitly request optional Gemini feedback. It does not
+   certify a skill or modify a talent card.
 
-Confirming validates the need with `checkNeed()` and shows an in-page confirmation.
-The draft and confirmation are saved in browser local storage and restored after
-refreshing or returning. Editing a confirmed need requires confirming it again.
-Use "Clear saved need and start again" to delete it. Storage failures are shown
-with a retry action. Data is not sent to a server or shared across devices.
-No Gemini or other AI service is used.
+The original synthetic overview remains at `/demo`. The organiser handles one
+local event workspace with multiple companies; there are no authenticated roles.
 
-Validation: `npm test`, `npm run typecheck`, `npx eslint src`, `npm run build`.
+## Company context and Gemini
 
-## Guided experience
+Manual context and hand-written examples work immediately. Embedded developer
+roles have dedicated scenarios; other roles use framework examples with the
+entered job context visible alongside. Gemini can propose more specific examples
+from approved job and company passages once configured. Online practice feedback
+is also optional. Neither integration has been validated with live credentials.
 
-The home page introduces the recruiter journey. `/need/new` guides the recruiter
-through four focused steps: role, priorities, expected levels and review.
-The original synthetic needs, suggestions and talent cards remain at `/demo`.
-See [the delivery ladder](docs/ROADMAP.md) for implemented stages, remaining work
-and when database, hosting and Gemini credentials are needed.
+Copy `.env.example` to `.env.local`, fill in only the credentials you have and
+restart the server. Never paste keys into chat or use `NEXT_PUBLIC_` for secrets.
+See [integration details and sponsor sources](docs/INTEGRATIONS.md).
+
+## Storage and privacy in this local demo
+
+- Job drafts, confirmed needs, organiser decisions and observations are stored in
+  this browser. They are not shared across computers or browser profiles.
+- Documents are parsed on the device. **CV files and CV text are never uploaded,
+  persisted or sent to Gemini.** Short quoted clues exist only in page memory.
+- Saving a talent card requires consent; only its pseudonym and confirmed levels
+  are saved. Cards expire after six months and are purged, with related decisions
+  and observations, when the workspace is next opened. A closed browser cannot
+  run a retention job. Talent cards can also be deleted immediately.
+- Practice answers are in page memory only. An explicit request sends the answer
+  to Gemini; the app does not store or log it. Provider retention depends on the
+  API account terms: keep exercises fictional during the demo.
+- Database-backed access control, deletion jobs and shared data are still future
+  work. Do not expose these local API routes publicly before adding authentication,
+  durable rate limits and account-level budget controls.
+
+## Checks
+
+```bash
+npm test
+npm run typecheck
+npx eslint src
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+Browser tests use synthetic PDF/DOCX fixtures and check the recruiter-to-interview
+flow, local CV handling and mobile layouts. In a managed Linux environment with
+Chromium installed, use `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`.
+
+See [the delivery ladder](docs/ROADMAP.md). Coding agents: read [AGENTS.md](AGENTS.md).
