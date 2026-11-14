@@ -16,3 +16,5 @@ npm test        # scoring and suggestion rules
 ```
 
 No API key belongs in this repository. Keys go in the hosting environment settings.
+
+Coding agents: read [AGENTS.md](AGENTS.md) first (rules, calculation, next steps).

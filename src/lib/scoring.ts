@@ -7,14 +7,23 @@
  * Where a statement comes from (CV mention, declared, supported) is displayed
  * but never changes the numbers.
  */
-import type { ExpectedLevel, LevelValue } from "./framework";
+import { isComponent, type ExpectedLevel, type LevelValue } from "./framework";
 
+/**
+ * Shape of a need, as in the Centrale tool: exactly three major components (gold on the rosace),
+ * up to two minor components, and, on top of the Centrale base, up to two job skills.
+ */
+export const MAJOR_COUNT = 3;
+export const MAX_MINORS = 2;
+export const MAX_JOB_SKILLS = 2;
 export const MAJOR_WEIGHT = 2;
 export const MINOR_WEIGHT = 1;
+export const JOB_SKILL_WEIGHT = 2;
 export const COVERAGE_THRESHOLD = 0.7;
 
 export type Requirement = {
   skill: string;
+  /** Only for Centrale components: one of the three majors. Always false for a job skill. */
   major: boolean;
   expected: ExpectedLevel;
   /** The recruiter's own sentence that justifies the requirement. */
@@ -72,13 +81,31 @@ export type Alignment = {
   coveredWeight: number;
   totalWeight: number;
   complete: boolean;
+  /** Major components that are unknown or below the expected level. */
   missingMajors: string[];
+  /** Job skills that are unknown or below the expected level. */
+  missingJobSkills: string[];
   aboveExpected: string[];
   rows: AlignmentRow[];
 };
 
 export function weightOf(requirement: Requirement): number {
+  if (!isComponent(requirement.skill)) return JOB_SKILL_WEIGHT;
   return requirement.major ? MAJOR_WEIGHT : MINOR_WEIGHT;
+}
+
+/** Problems with the shape of a need. Empty when the need follows the rules above. */
+export function checkNeed(need: Need): string[] {
+  const components = need.requirements.filter((r) => isComponent(r.skill));
+  const jobSkills = need.requirements.filter((r) => !isComponent(r.skill));
+  const majors = components.filter((r) => r.major);
+  const problems: string[] = [];
+  if (majors.length !== MAJOR_COUNT) problems.push(`Pick exactly ${MAJOR_COUNT} major components (now ${majors.length}).`);
+  if (components.length - majors.length > MAX_MINORS) problems.push(`At most ${MAX_MINORS} minor components.`);
+  if (jobSkills.length > MAX_JOB_SKILLS) problems.push(`At most ${MAX_JOB_SKILLS} job skills.`);
+  if (jobSkills.some((r) => r.major)) problems.push("A job skill cannot be a major: majors are Centrale components.");
+  if (new Set(need.requirements.map((r) => r.skill)).size !== need.requirements.length) problems.push("Each skill only once.");
+  return problems;
 }
 
 export function align(need: Need, talent: Talent): Alignment {
@@ -114,6 +141,9 @@ export function align(need: Need, talent: Talent): Alignment {
     totalWeight,
     complete: totalWeight > 0 && coveredWeight / totalWeight >= COVERAGE_THRESHOLD,
     missingMajors: rows.filter((row) => row.requirement.major && row.status !== "met").map((row) => row.requirement.skill),
+    missingJobSkills: rows
+      .filter((row) => !isComponent(row.requirement.skill) && row.status !== "met")
+      .map((row) => row.requirement.skill),
     aboveExpected: rows.filter((row) => row.aboveExpected).map((row) => row.requirement.skill),
     rows,
   };
