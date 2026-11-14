@@ -9,7 +9,9 @@
     "lint": "eslint",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "local": "node scripts/start-local.mjs",
+    "test:launcher": "node --test scripts/start-local.test.mjs"
   },
   "dependencies": {
     "mammoth": "^1.13.0",

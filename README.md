@@ -9,18 +9,30 @@ A human chooses the requirements and approves meetings. Repository examples are 
 
 ## Open in Cursor and run locally
 
-Install **Node.js 24 LTS** (22.13 or newer is required), then open this project
-folder in Cursor. In its terminal:
+Install **Node.js 24 LTS** (22.13 or newer is required).
+
+**Windows: extract the ZIP, open the `rosace` folder and double-click
+`start-local.cmd`.** It installs dependencies on first launch or when the lockfile
+or Node major version changes, starts the server and opens the browser when ready.
+Later launches skip installation. Cursor does not need to be open. Keep the
+server window open; Ctrl+C stops it. If Rosace is already running, the launcher
+opens it again without starting a second copy.
+
+If you prefer the Cursor terminal (open the folder containing `package.json`):
 
 ```bash
 npm ci
 npm run dev -- --hostname 127.0.0.1 --port 3001
 ```
 
-Open **http://localhost:3001** on the same computer. Keep the terminal running.
-On Windows, use `npm.cmd` if PowerShell blocks `npm.ps1`, or double-click
-`start-local.cmd` after extracting the ZIP. No Gemini key or hosting account is
-needed. Cursor and Claude subscriptions do not replace Node.js or API credits.
+Use `npm.cmd` on Windows if PowerShell blocks `npm.ps1`. `npm ci` is needed only
+for the first manual installation or after dependency changes. After that,
+`npm run dev -- --port 3001` is enough. On macOS/Linux, `npm run local` provides
+the automatic launcher too.
+
+Open **http://localhost:3001** on the same computer. No Gemini key or hosting
+account is needed. Cursor and Claude subscriptions do not replace Node.js or
+API credits.
 
 If port 3001 is occupied, use `--port 3002` and open `http://localhost:3002`.
 If an old server shows an error after updating files, stop it with Ctrl+C,
@@ -84,6 +96,7 @@ See [integration details and sponsor sources](docs/INTEGRATIONS.md).
 
 ```bash
 npm test
+npm run test:launcher
 npm run typecheck
 npx eslint src
 npm run build

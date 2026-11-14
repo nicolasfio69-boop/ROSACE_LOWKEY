@@ -7,13 +7,10 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-echo Installing the locked dependencies...
-call npm.cmd ci
+node scripts\start-local.mjs
 if errorlevel 1 (
-  echo Installation failed. Read the error above before retrying.
+  echo.
+  echo Rosace could not start. Read the message above.
   pause
   exit /b 1
 )
-echo Open http://localhost:3001 when the server says Ready.
-call npm.cmd run dev -- --hostname 127.0.0.1 --port 3001
-pause

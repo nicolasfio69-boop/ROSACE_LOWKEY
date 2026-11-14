@@ -25,3 +25,16 @@ claimed as a completed live demonstration yet.
 
 Shared accounts, PostgreSQL, production retention jobs and public hosting remain
 outside this local delivery. See ROADMAP.md and INTEGRATIONS.md.
+
+## One-click launcher follow-up
+
+`feat/one-click-local-launch` adds a dependency fingerprint and opens the browser
+only after Rosace responds. Four launcher tests cover missing/changed installs,
+site identification, readiness and startup failure. The launcher was exercised
+on Linux: first installation, running-instance detection, shutdown, then a fresh
+start that skipped installation. The Windows `.cmd` wrapper and browser opening
+are prepared but have not been executed on Windows in this environment.
+
+This follow-up does not adopt the uploaded audit as a new feature specification.
+Its missing-screen inventory predates the current local talent, organiser and
+brief implementation. Product improvements discussed with the user remain proposals.
