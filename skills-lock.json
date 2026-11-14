@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "skills": {
+    "demo-setup": {
+      "source": "AlexAnsart/demo-studio",
+      "sourceType": "github",
+      "skillPath": "skills/demo-setup/SKILL.md",
+      "computedHash": "ac03df52d817fee21ad28779cffe8cb8343183b75a358b895bfcf05af7cf5bfa",
+      "installMode": "copy"
+    },
+    "film-demo": {
+      "source": "AlexAnsart/demo-studio",
+      "sourceType": "github",
+      "skillPath": "skills/film-demo/SKILL.md",
+      "computedHash": "df598ef212a94379cde4df0fe99d77297d6a4ec55cc125eecfbbfacf4f163973",
+      "installMode": "copy"
+    },
+    "narrate": {
+      "source": "AlexAnsart/demo-studio",
+      "sourceType": "github",
+      "skillPath": "skills/narrate/SKILL.md",
+      "computedHash": "b66d1964156659ef0dc456679a3decbcac3c5852f1dbc4f10259655f21315d5e",
+      "installMode": "copy"
+    },
+    "produce-video": {
+      "source": "AlexAnsart/demo-studio",
+      "sourceType": "github",
+      "skillPath": "skills/produce-video/SKILL.md",
+      "computedHash": "b44471beb0da2ef01428861d32338bdfbd0524ba01db7d73b30c8dbd0084d2c2",
+      "installMode": "copy"
+    },
+    "sync-narration": {
+      "source": "AlexAnsart/demo-studio",
+      "sourceType": "github",
+      "skillPath": "skills/sync-narration/SKILL.md",
+      "computedHash": "2226b47cc357dc145041940e806a3f9db6dc2f553e93e993f8c78dc1f7f71b56",
+      "installMode": "copy"
+    }
+  }
+}

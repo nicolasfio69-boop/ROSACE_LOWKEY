@@ -1,0 +1,17 @@
+Junior web developer · Kaarna Health (fictional)
+Job description
+
+Company: Kaarna Health is a fictional start-up building an appointment app for physiotherapy clinics in Espoo and Vantaa.
+Location: Leppävaara, Espoo. Fully on-site for the first three months, then hybrid.
+Team: four developers and one designer; releases every two weeks.
+Working language: English in the team; the support person talks with clinics in Finnish.
+What you will do:
+- Build screens in React and TypeScript from the designer's mock-ups.
+- Write automated tests for the booking flow. Nothing ships until the tests pass and a colleague has reviewed the code.
+- Follow the health-data rules: no patient data in logs or test fixtures.
+- Plan your own tickets for the two-week sprint, and say early when one will slip.
+- Work every day with the designer and the other developers.
+What success looks like: you ship a small feature end to end, with tests, in your second sprint.
+Support: pair programming twice a week, a design system, and a clear definition of done.
+
+Fictional, made for the Rosace demo. No real person or company.

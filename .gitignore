@@ -12,3 +12,8 @@ next-env.d.ts
 
 playwright-report/
 test-results/
+
+# demo-studio renders (large video files)
+demos/*/renders/
+demos/*/*.mp4
+demos/*/*.mp3
