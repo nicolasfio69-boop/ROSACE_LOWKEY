@@ -2,6 +2,8 @@
 
 Read this file fully before changing anything. It is the short version of the project's reference document.
 
+**First read `docs/CADRAGE.md`** (in French): it is the up-to-date framing document with every decision and the open questions. If this file and `docs/CADRAGE.md` disagree, `docs/CADRAGE.md` wins. Never settle an open question yourself: propose options and let the owner decide.
+
 ## The project in five lines
 
 - Junction 2026, challenge "Rethinking Recruitment" by the City of Espoo. Working name: **Rosace**.
@@ -16,7 +18,7 @@ Read this file fully before changing anything. It is the short version of the pr
 2. **Keep it simple.** No allocation algorithm, no waitlist, no ranking shown to talents, no percentages on screen. If a feature is not in "Next steps" below, ask first.
 3. **Synthetic data only.** No real person, no real company. Never search the web for a talent.
 4. **No bias inputs**: never use nationality, language, age, gender or degree name in a calculation.
-5. **No API key in the repository.** Keys go in the hosting environment settings (Vercel). `.env*` is git-ignored.
+5. **No API key in the repository.** Keys go in the hosting environment settings (Aiven, not Vercel; see `docs/CADRAGE.md`). `.env*` is git-ignored.
 6. **The CV is never stored**, not even in AI logs. A talent card is kept 6 months only if the talent asks, and can be deleted anytime.
 7. Product language is **English**. Code, comments and UI in English.
 8. Every change keeps `npm test`, `npx tsc --noEmit`, `npx eslint src` and `npm run build` passing.
