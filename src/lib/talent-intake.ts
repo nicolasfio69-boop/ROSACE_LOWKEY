@@ -9,14 +9,16 @@ import type { Talent } from "./scoring";
 const PATTERNS: Record<string, RegExp> = {
   "C1.1": /listen|interview|stakeholder|customer needs|écout|besoin client/i,
   "C1.2": /present|proposal|pitch|propos|présent/i,
-  "C2.1": /standard|compliance|regulat|conform|norme/i,
+  "C2.1":
+    /standard|compliance|regulat|conform|norme|privacy|data protection|gdpr|coding rules|misra/i,
   "C2.2": /test|quality|review|qualité|revue/i,
   "C3.1": /project|plan|scope|deadline|projet|livrable/i,
   "C3.2":
     /retrospective|lessons|knowledge.shar|rétrospective|retour d.expérience/i,
   "C4.1": /team|collaborat|équipe|coordonn/i,
   "C4.2": /reflect|adjust|assumption|réflex|remise en question/i,
-  "C4.3": /ownership|initiative|volunteer|responsabil/i,
+  "C4.3":
+    /ownership|initiative|volunteer|responsabil|commitment|on time|would slip|flagged/i,
   "C5.1": /analys|problem|debug|diagnos|problème/i,
   "C5.2": /learn|self.taught|appris|autodidact/i,
   "C5.3": /communicat|document|report|rapport/i,
@@ -26,6 +28,19 @@ const PATTERNS: Record<string, RegExp> = {
   "J.TROUBLESHOOT": /troubleshoot|support|reported issue|dépann/i,
   "J.LINUX": /linux|command.line|shell|terminal/i,
   "J.PYTHON": /python/i,
+  "J.RTOS": /\brtos\b|freertos|zephyr/i,
+  "J.HW_DEBUG": /oscilloscope|logic analy[sz]er|debugger|jtag/i,
+  "J.DATASHEET": /datasheet|schematic/i,
+  "J.GIT": /\bgit\b|github|gitlab|pull request/i,
+  "J.WEB_BACKEND": /backend|back-end|\bapi\b|node\.?js|django/i,
+  "J.WEB_FRONTEND": /react|typescript|javascript|frontend|front-end|website/i,
+  "J.TESTING": /automated (regression )?tests?|unit tests?|regression tests?|test automation|testing tools/i,
+  "J.SQL": /\bsql\b|postgres|mysql/i,
+  "J.DATA_ANALYSIS": /pandas|notebook|dataset|cleaned .*data|excel/i,
+  "J.ML": /machine.learning|\bml model/i,
+  "J.DASHBOARD": /power bi|dashboard|grafana|tableau/i,
+  "J.NETWORK": /network|wi-?fi|\bdns\b|\bvpn\b/i,
+  "J.CLOUD": /docker|kubernetes|ci\/cd|\baws\b|azure/i,
 };
 export function spotSkills(text: string): Record<string, string> {
   const sentences = text
