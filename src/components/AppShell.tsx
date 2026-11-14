@@ -6,12 +6,6 @@ import { Logo } from "./Logo";
 import { AuroraBackground } from "./AuroraBackground";
 const destinations = [
   {
-    href: "/",
-    label: "Overview",
-    icon: "overview",
-    subtitle: "A clearer starting point",
-  },
-  {
     href: "/tour",
     label: "3-minute demo",
     icon: "pointer",
@@ -41,6 +35,7 @@ const destinations = [
     icon: "conversation",
     subtitle: "Prepare to meet",
   },
+  { href: "/checks", label: "Checks", icon: "pointer", subtitle: "Review a concrete situation" },
 ];
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -89,11 +84,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Talents never see a rank or a score.
             </p>
           </div>
-          {(pathname === "/organiser" || pathname === "/demo") && (
-            <Link href="/demo">
-              Organiser demo data <WorkspaceIcon name="arrow" />
-            </Link>
-          )}
           <small>Synthetic profiles · Local workspace</small>
         </div>
       </aside>
@@ -105,7 +95,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </span>
             <strong>
               {current?.label ??
-                (pathname === "/practice" ? "Practice studio" : "Demo data")}
+                (pathname === "/" ? "Overview" : "Demo data")}
             </strong>
           </div>
           <div className="topbar-right">

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { SkillBars } from "./SkillBars";
 import { Rosace } from "./Rosace";
 import { WorkspaceIcon } from "./WorkspaceIcon";
 import { NEEDS, TALENTS } from "@/data/demo";
@@ -12,7 +13,6 @@ import {
 } from "@/lib/framework";
 import {
   OBSERVATION_LABELS,
-  observedValue,
   type Observation,
 } from "@/lib/scoring";
 import {
@@ -20,6 +20,7 @@ import {
   suggestForNeed,
   withoutSuggestion,
 } from "@/lib/suggestions";
+import { meanObservedValue } from "@/lib/observations";
 import { prepareConversation } from "@/lib/conversation";
 
 /*
@@ -105,6 +106,7 @@ function NeedStep() {
           expected={expected}
           majors={majors.map((r) => r.skill)}
         />
+        <SkillBars items={jobSkills.map(r => ({code:r.skill, expected:r.expected}))} />
       </figure>
       <div className="tour-cards">
         {majors.map((r, i) => (
@@ -253,6 +255,7 @@ const ANSWERS: Observation[] = ["A", "C", "F", "NE"];
 function ConversationStep() {
   const { questions } = useMemo(() => prepareConversation(NEED, TALENT), []);
   const [seen, setSeen] = useState<Record<string, Observation>>({});
+  const onlineLevel = TALENT.statements["C5.1"]!.level!;
   const components = NEED.requirements.filter((r) => isComponent(r.skill));
   const declared = Object.fromEntries(
     components.map((r) => [r.skill, TALENT.statements[r.skill]?.level ?? null]),
@@ -260,12 +263,16 @@ function ConversationStep() {
   const observedLevels = Object.fromEntries(
     components.map((r) => [
       r.skill,
-      seen[r.skill] ? observedValue(r.expected, seen[r.skill]) : null,
+      meanObservedValue([
+        ...(r.skill === "C5.1" ? [{taskLevel: onlineLevel as 1 | 2 | 3, observation: "A" as const}] : []),
+        ...(seen[r.skill] ? [{taskLevel: r.expected, observation: seen[r.skill]}] : []),
+      ], r.expected),
     ]),
   );
   return (
     <div className="tour-scene convo">
       <div className="tour-cards">
+        <article className="tour-card"><span>Online exercise · Graded by the recruiter · fictional example</span><strong>Break down a problem · {LEVELS[onlineLevel].name}</strong><p>Amira identified the missing facts in a sensor bug report. The recruiter marked A — Seen clearly at her declared task level. The solid branch starts at {onlineLevel}; further observations are averaged.</p><Link href="/checks">Try the answer and review flow →</Link></article>
         {questions
           .filter((q) => isComponent(q.skill))
           .slice(0, 3)
