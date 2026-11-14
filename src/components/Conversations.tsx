@@ -56,12 +56,8 @@ export function Conversations() {
   return (
     <div className="workspace">
       <div className="step-heading">
-        <p className="eyebrow">A CONVERSATION, WITH A PURPOSE</p>
-        <h1>
-          Less guessing.
-          <br />
-          Better questions.
-        </h1>
+        <p className="eyebrow">QUESTIONS THAT CHECK WHAT WAS DECLARED</p>
+        <h1>Prepare each conversation.</h1>
         <p>
           {approved.length
             ? "These conversations were approved by the demo organiser. Prepare the discussion, then record what you observed."

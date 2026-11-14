@@ -1,50 +1,91 @@
 import { WorkspaceIcon } from "@/components/WorkspaceIcon";
 import Link from "next/link";
 import { Rosace } from "@/components/Rosace";
+import { ShaderBackdrop } from "@/components/ShaderBackdrop";
 import { NEEDS } from "@/data/demo";
 import { isComponent } from "@/lib/framework";
+
+const STEPS = [
+  {
+    icon: "need",
+    step: "01",
+    title: "Prepare a recruiter need",
+    text: "Pick the 3 Centrale components that matter most for the role, the other useful ones, and up to 3 technical skills. Set the level you expect for each.",
+    href: "/need/new",
+    link: "Open the recruiter form",
+  },
+  {
+    icon: "talent",
+    step: "02",
+    title: "Build a talent card",
+    text: "Start from a CV or from your own words. Each claim stays declared until a recruiter observes it. The talent never sees a rank or a score.",
+    href: "/talent/new",
+    link: "Open the talent card",
+  },
+  {
+    icon: "event",
+    step: "03",
+    title: "Run the event desk",
+    text: "See who is suggested for each need and why. Ties at the cut and people without a suggestion go to the organiser, who decides.",
+    href: "/organiser",
+    link: "Open the event desk",
+  },
+  {
+    icon: "conversation",
+    step: "04",
+    title: "Prepare a conversation",
+    text: "Get questions that check what was declared. Note what you observe as a separate, solid bar on the rosace.",
+    href: "/conversations",
+    link: "Prepare a conversation",
+  },
+];
+
 export default function Home() {
   const example = NEEDS[0];
   return (
     <main className="site-shell">
-      <div className="dashboard-intro">
-        <div>
-          <p className="eyebrow">YOUR NEXT MEANINGFUL CONVERSATION</p>
-          <h1>
-            Beyond a CV.
-            <br />
-            <em>A clearer picture of potential.</em>
-          </h1>
-        </div>
-        <p>
-          Bring the work into focus. Let people describe their experience. Make
-          room for a conversation that matters.
-        </p>
-      </div>
-      <section className="overview-feature">
-        <div className="overview-copy">
-          <span className="eyebrow">01 / START WITH THE REAL WORK</span>
-          <h2>
-            What does doing
-            <br />
-            this job actually look like?
-          </h2>
+      <section className="home-hero">
+        <ShaderBackdrop />
+        <div className="home-hero-copy">
+          <p className="hero-kicker">
+            <span className="status-dot" /> Espoo Tech Matchmaking · demo
+          </p>
+          <h1>Prepare the right conversations.</h1>
           <p>
-            Turn a role into concrete situations. Choose the skills that matter
-            and watch your need take shape.
+            A company says which skills matter for a role. A talent turns their
+            CV into a skills card. Rosace suggests who should meet and shows the
+            reasons. A person always makes the decision.
           </p>
-          <Link className="primary-button" href="/need/new">
-            Prepare a recruiter need <WorkspaceIcon name="arrow" />
-          </Link>
-          <p className="quiet-note" style={{ marginTop: 18, marginBottom: 0 }}>
-            12 components. 3 priorities. Your judgement.
-          </p>
+          <div className="home-hero-actions">
+            <Link className="hero-button" href="/need/new">
+              Prepare a recruiter need <WorkspaceIcon name="arrow" />
+            </Link>
+            <Link className="hero-link" href="/talent/new">
+              Build a talent card
+            </Link>
+          </div>
+          <dl className="hero-facts">
+            <div>
+              <dt>12</dt>
+              <dd>Centrale components</dd>
+            </div>
+            <div>
+              <dt>3</dt>
+              <dd>majors per role, in gold</dd>
+            </div>
+            <div>
+              <dt>0</dt>
+              <dd>scores shown to talents</dd>
+            </div>
+          </dl>
         </div>
-        <div className="overview-rosace">
-          <span className="eyebrow">A ROLE, MADE VISIBLE</span>
+        <figure className="home-hero-rosace">
+          <figcaption>
+            <span>{example.company}</span>
+            <strong>{example.title}</strong>
+          </figcaption>
           <Rosace
-            title={example.title}
-            size={430}
+            size={380}
             labels="short"
             expected={Object.fromEntries(
               example.requirements
@@ -52,37 +93,21 @@ export default function Home() {
                 .map((r) => [r.skill, { level: r.expected, major: r.major }]),
             )}
           />
-          <small>Gold = major components · Fictional NordChip example</small>
-        </div>
+          <small>
+            <i className="legend-gold" /> The 3 majors{" "}
+            <i className="legend-red" /> Other components · Fictional example
+          </small>
+        </figure>
       </section>
-      <section className="overview-paths" aria-label="Continue the journey">
-        {[
-          {
-            icon: "talent",
-            title: "Make experience visible",
-            text: "Start from a CV or your own words. Build a skills card you can review and confirm.",
-            href: "/talent/new",
-            link: "Explore the talent journey",
-          },
-          {
-            icon: "event",
-            title: "Make space for people",
-            text: "Review suggestions, resolve ties and see who still needs a conversation.",
-            href: "/organiser",
-            link: "Open the event desk",
-          },
-          {
-            icon: "conversation",
-            title: "Meet with a purpose",
-            text: "Prepare useful questions. Keep what is declared separate from what you observe.",
-            href: "/conversations",
-            link: "Prepare a conversation",
-          },
-        ].map((item) => (
+      <section className="overview-paths" aria-label="How the event works">
+        {STEPS.map((item) => (
           <article className="overview-path" key={item.href}>
-            <span className="path-icon">
-              <WorkspaceIcon name={item.icon} />
-            </span>
+            <div className="path-head">
+              <span className="path-icon">
+                <WorkspaceIcon name={item.icon} />
+              </span>
+              <span className="path-step">{item.step}</span>
+            </div>
             <h2>{item.title}</h2>
             <p>{item.text}</p>
             <Link href={item.href}>{item.link} →</Link>
@@ -91,9 +116,10 @@ export default function Home() {
       </section>
       <div className="overview-footnote">
         <span>
-          Built for Espoo recruitment events. Designed around human decisions.
+          Synthetic data only. No nationality, language, age, gender or degree
+          is used to suggest anyone.
         </span>
-        <Link href="/demo">Explore the fictional demo data →</Link>
+        <Link href="/demo">See the fictional demo data →</Link>
       </div>
     </main>
   );

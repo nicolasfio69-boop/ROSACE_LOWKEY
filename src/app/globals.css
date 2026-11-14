@@ -1,10 +1,12 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
 
 @theme {
   --color-ink: #1c1c20;
-  --color-muted: #6e6e78;
-  --color-paper: #faf8f6;
-  --color-line: #e4e2e6;
+  --color-muted: #6d6d79;
+  --color-paper: #f8f8f8;
+  --color-line: #e3e3e5;
   --color-gold: #f0c300;
   --color-gold-ink: #9a7a00;
   --color-brand: #c8102e;
@@ -13,14 +15,17 @@
 body {
   background: var(--color-paper);
   color: var(--color-ink);
-  font-family:
-    "Segoe UI",
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--font-body);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
 }
 
 :root {
+  --font-body: "Inter Variable", "Segoe UI", system-ui, sans-serif;
+  --font-display:
+    "Space Grotesk Variable", "Inter Variable", system-ui, sans-serif;
+  --night: #09090b;
+  --night-2: #131318;
   --soft-red: #fff1f0;
   --soft-gold: #fff8d9;
   --deep-red: #8e1027;
@@ -83,21 +88,21 @@ summary {
   border-radius: 30px;
   padding: 8px 13px;
   font-size: 11px;
-  color: #615c60;
-  background: #fff9;
+  color: #5a5a63;
+  background: #ffffff99;
   white-space: nowrap;
 }
 .eyebrow {
   font-size: 10px;
   letter-spacing: 1.7px;
   font-weight: 750;
-  color: #756d72;
+  color: #6b6b77;
 }
 .status-dot {
   display: inline-block;
   width: 6px;
   height: 6px;
-  background: #59755c;
+  background: #62626c;
   border-radius: 50%;
   margin-right: 5px;
 }
@@ -116,14 +121,14 @@ summary {
   font-weight: 650;
 }
 .hero-copy h1 em {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   color: var(--deep-red);
-  font-weight: 400;
+  font-weight: 550;
 }
 .hero-description {
   font-size: 17px;
   line-height: 1.8;
-  color: #756d72;
+  color: #6b6b77;
   max-width: 445px;
   margin: 0 0 30px;
 }
@@ -153,7 +158,7 @@ summary {
 }
 .hero-note {
   font-size: 12px;
-  color: #756d72;
+  color: #6b6b77;
   margin: 14px 0 32px;
 }
 .hero-facts {
@@ -161,23 +166,23 @@ summary {
   gap: 30px;
   border-top: 1px solid var(--color-line);
   padding-top: 23px;
-  color: #756d72;
+  color: #6b6b77;
   font-size: 12px;
 }
 .hero-facts strong {
   font-size: 23px;
-  font-family: Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 550;
   color: var(--color-ink);
   margin-right: 7px;
 }
 .hero-visual {
   position: relative;
-  background: linear-gradient(145deg, #fff, #fff9ee);
-  border: 1px solid #e9e2d6;
+  background: linear-gradient(145deg, #ffffff, #f6f6f7);
+  border: 1px solid #dedee1;
   border-radius: 28px;
   padding: 25px 24px 15px;
-  box-shadow: 0 30px 70px #32221509;
+  box-shadow: 0 30px 70px #22222509;
   transform: rotate(1deg);
 }
 .visual-topline {
@@ -194,11 +199,11 @@ summary {
   display: flex;
   align-items: center;
   gap: 13px;
-  border-top: 1px solid #e9e2d6;
+  border-top: 1px solid #dedee1;
   padding: 20px 0 5px;
   font-size: 12px;
   line-height: 1.8;
-  color: #756d72;
+  color: #6b6b77;
 }
 .visual-caption strong {
   color: var(--color-ink);
@@ -220,11 +225,11 @@ summary {
   position: absolute;
   right: -15px;
   bottom: -30px;
-  background: #fff;
+  background: #ffffff;
   border: 1px solid var(--color-line);
   border-radius: 12px;
   padding: 16px 22px;
-  box-shadow: 0 8px 22px #20101c0c;
+  box-shadow: 0 8px 22px #1717190c;
   font-size: 13px;
   font-weight: 650;
   transform: rotate(-4deg);
@@ -235,14 +240,15 @@ summary {
 }
 .floating-note small {
   font-weight: 400;
-  color: #756d72;
+  color: #6b6b77;
 }
 .journey-section {
   border-top: 1px solid var(--color-line);
   padding: 40px 0;
 }
 .journey-section h2 {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   font-size: 29px;
   margin-top: 12px;
   letter-spacing: -0.6px;
@@ -256,12 +262,13 @@ summary {
 .journey-card {
   border: 1px solid var(--color-line);
   border-radius: 18px;
-  background: #fff9;
+  background: #ffffff99;
   padding: 25px;
 }
 .journey-number {
   color: #9a7a00;
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   font-size: 24px;
 }
 .journey-card h3 {
@@ -270,7 +277,7 @@ summary {
   margin: 18px 0 10px;
 }
 .journey-card p {
-  color: #756d72;
+  color: #6b6b77;
   font-size: 14px;
   line-height: 1.7;
 }
@@ -282,10 +289,10 @@ summary {
   margin-top: 22px;
 }
 .available-label {
-  color: #4d6d4b;
+  color: #575761;
 }
 .planned-label {
-  color: #8d858a;
+  color: #83838f;
 }
 .site-footer {
   padding: 25px 0;
@@ -295,7 +302,7 @@ summary {
   gap: 16px;
   border-top: 1px solid var(--color-line);
   font-size: 11px;
-  color: #756d72;
+  color: #6b6b77;
 }
 .site-footer a {
   text-decoration: underline;
@@ -308,7 +315,7 @@ summary {
   justify-content: space-between;
   gap: 12px;
   font-size: 12px;
-  color: #756d72;
+  color: #6b6b77;
 }
 .save-note {
   font-size: 11px;
@@ -329,7 +336,7 @@ summary {
   gap: 10px;
   font-size: 12px;
   font-weight: 600;
-  color: #756d72;
+  color: #6b6b77;
   text-align: left;
 }
 .stepper button > span:first-child {
@@ -354,8 +361,8 @@ summary {
   color: white;
 }
 .completed-step button > span:first-child {
-  background: #ebece5;
-  color: #4d6d4b;
+  background: #f2f2f4;
+  color: #575761;
 }
 .workspace-grid {
   display: grid;
@@ -371,7 +378,8 @@ summary {
   min-width: 0;
 }
 .step-heading h1 {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   font-size: 34px;
   line-height: 1.15;
   margin: 12px 0;
@@ -381,7 +389,7 @@ summary {
 .step-heading > p:last-child {
   font-size: 14px;
   line-height: 1.7;
-  color: #756d72;
+  color: #6b6b77;
 }
 .step-content {
   margin-top: 28px;
@@ -403,12 +411,12 @@ summary {
   font-weight: 400;
   border: 1px solid var(--color-line);
   border-radius: 10px;
-  background: #fdfcfb;
+  background: #fcfcfc;
   resize: vertical;
 }
 .field-label input::placeholder,
 .field-label textarea::placeholder {
-  color: #9c9499;
+  color: #93939d;
 }
 .context-details {
   border: 1px solid var(--color-line);
@@ -424,7 +432,7 @@ summary {
 .context-details summary span {
   font-size: 11px;
   font-weight: 400;
-  color: #756d72;
+  color: #6b6b77;
   margin-left: 8px;
 }
 .context-details[open] summary {
@@ -439,13 +447,13 @@ summary {
 .quiet-note {
   font-size: 11px;
   line-height: 1.7;
-  color: #756d72;
+  color: #6b6b77;
 }
 .context-copy {
   margin: 15px 20px;
   font-size: 13px;
   line-height: 1.7;
-  color: #756d72;
+  color: #6b6b77;
 }
 .form-actions {
   display: flex;
@@ -466,7 +474,7 @@ summary {
   justify-content: space-between;
   gap: 18px;
   font-size: 11px;
-  color: #756d72;
+  color: #6b6b77;
   margin-top: 24px;
 }
 .workspace-bottom button {
@@ -476,9 +484,9 @@ summary {
   position: sticky;
   top: 24px;
   padding: 24px 20px;
-  border: 1px solid #e9e2d6;
+  border: 1px solid #dedee1;
   border-radius: 22px;
-  background: linear-gradient(140deg, #fffdf9, #f9f4ea);
+  background: linear-gradient(140deg, #fcfcfc, #f1f1f2);
 }
 .live-panel .eyebrow {
   font-size: 9px;
@@ -486,13 +494,13 @@ summary {
 }
 .live-label {
   font-size: 10px;
-  color: #59755c;
+  color: #62626c;
 }
 .live-panel figure figcaption {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   color: var(--color-ink) !important;
   margin-bottom: 10px;
-  font-weight: 400;
+  font-weight: 550;
 }
 .preview-legend {
   display: flex;
@@ -500,7 +508,7 @@ summary {
   justify-content: center;
   gap: 10px;
   font-size: 9px;
-  color: #756d72;
+  color: #6b6b77;
   margin: 15px 0 20px;
 }
 .preview-legend i {
@@ -511,26 +519,25 @@ summary {
 .preview-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid #e9e2d6;
-  border-bottom: 1px solid #e9e2d6;
+  border-top: 1px solid #dedee1;
+  border-bottom: 1px solid #dedee1;
   padding: 18px 0;
   text-align: center;
 }
 .preview-summary > span {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   font-size: 24px;
 }
 .preview-summary small {
   display: block;
-  font:
-    9px "Segoe UI",
-    sans-serif;
-  color: #756d72;
+  font: 9px var(--font-body);
+  color: #6b6b77;
   margin-top: 4px;
 }
 .chart-help {
   font-size: 11px;
-  color: #756d72;
+  color: #6b6b77;
   margin-top: 20px;
 }
 .chart-help p {
@@ -545,8 +552,9 @@ summary {
   font-size: 18px;
 }
 .human-note span {
-  color: #756d72;
-  font-family: Georgia, serif;
+  color: #6b6b77;
+  font-family: var(--font-display);
+  font-weight: 550;
   font-style: italic;
   font-size: 14px;
   line-height: 1.6;
@@ -560,7 +568,7 @@ summary {
 }
 .preview-jobs small {
   display: block;
-  color: #756d72;
+  color: #6b6b77;
   margin-top: 4px;
 }
 .priority-slots {
@@ -570,11 +578,11 @@ summary {
 }
 .priority-slots > div {
   min-height: 83px;
-  border: 1px dashed #d4c9ae;
+  border: 1px dashed #bebec4;
   border-radius: 10px;
   padding: 12px;
   font-size: 11px;
-  color: #918676;
+  color: #7d7d8a;
 }
 .priority-slots span {
   display: block;
@@ -590,7 +598,7 @@ summary {
 }
 .selection-count {
   font-size: 11px;
-  color: #756d72;
+  color: #6b6b77;
   margin: 12px 0 25px;
 }
 .component-group {
@@ -625,12 +633,12 @@ summary {
     border-color 0.18s;
 }
 .component-card:not(:disabled):hover {
-  border-color: #b39d70;
-  background: #fffdf6;
+  border-color: #8c8c97;
+  background: #fafafb;
 }
 .component-code {
   display: block;
-  color: #938981;
+  color: #848490;
   font-size: 9px;
   letter-spacing: 1px;
   margin-bottom: 6px;
@@ -645,7 +653,7 @@ summary {
   position: absolute;
   right: 13px;
   top: 14px;
-  color: #8a7c68;
+  color: #73737f;
 }
 .component-card.selected-major {
   background: var(--soft-gold);
@@ -668,12 +676,12 @@ summary {
 }
 .optional-skills h3 span {
   float: right;
-  color: #756d72;
+  color: #6b6b77;
   font-size: 11px;
 }
 .optional-skills p {
   font-size: 12px;
-  color: #756d72;
+  color: #6b6b77;
   margin: 8px 0 14px;
 }
 .chip-grid {
@@ -706,7 +714,7 @@ summary {
   gap: 6px;
   font-size: 10px;
   padding: 8px 10px;
-  background: #f8f6f3;
+  background: #f5f5f6;
   border: 1px solid transparent;
   border-radius: 8px;
   text-align: left;
@@ -721,7 +729,8 @@ summary {
 }
 .level-fieldset legend {
   font-size: 20px;
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   margin-bottom: 8px;
 }
 .level-grid {
@@ -740,7 +749,7 @@ summary {
 }
 .level-card.selected-level {
   border-color: var(--deep-red);
-  background: #fffbf9;
+  background: #fcfcfc;
   box-shadow: 0 0 0 1px var(--deep-red);
 }
 .level-card-top {
@@ -760,7 +769,7 @@ summary {
 }
 .level-bars i {
   width: 6px;
-  background: #e8e2db;
+  background: #f2f2f4;
   border-radius: 2px;
   height: 9px;
 }
@@ -781,7 +790,7 @@ summary {
 .level-card > p {
   font-size: 12px;
   line-height: 1.7;
-  color: #756d72;
+  color: #6b6b77;
   flex: 1;
 }
 .example-block {
@@ -809,12 +818,13 @@ summary {
 }
 .review-role h2 {
   font-size: 23px;
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   margin: 9px 0;
 }
 .review-role p:last-child {
   font-size: 13px;
-  color: #756d72;
+  color: #6b6b77;
   line-height: 1.7;
 }
 .text-button {
@@ -839,7 +849,7 @@ summary {
   align-items: center;
   gap: 10px;
   padding: 14px 0;
-  border-bottom: 1px solid #eeeae5;
+  border-bottom: 1px solid #e8e8eb;
 }
 .review-list strong {
   font-size: 12px;
@@ -849,12 +859,12 @@ summary {
 .review-list small {
   display: block;
   font-size: 10px;
-  color: #756d72;
+  color: #6b6b77;
   margin-top: 4px;
 }
 .level-edit {
   font-size: 10px;
-  background: #f7f4ef;
+  background: #f2f2f4;
   padding: 7px 9px;
   border-radius: 6px;
   margin-left: auto;
@@ -874,7 +884,7 @@ summary {
 .capacity-field small {
   display: block;
   font-size: 11px;
-  color: #756d72;
+  color: #6b6b77;
   margin-top: 6px;
 }
 .capacity-field input {
@@ -888,13 +898,13 @@ summary {
   display: flex;
   gap: 14px;
   padding: 20px;
-  background: #f0f5ed;
-  border: 1px solid #d9e4d1;
+  background: #f2f2f4;
+  border: 1px solid #d9d9dc;
   border-radius: 12px;
   margin-bottom: 25px;
 }
 .success-panel > span {
-  color: #4d6d4b;
+  color: #575761;
   font-size: 24px;
 }
 .success-panel strong {
@@ -904,7 +914,7 @@ summary {
   font-size: 12px;
   line-height: 1.6;
   margin-top: 5px;
-  color: #59755c;
+  color: #62626c;
 }
 .error-panel,
 .inline-error {
@@ -1104,8 +1114,8 @@ summary {
 .role-context {
   padding: 12px 15px;
   border-left: 2px solid #d9bd6d;
-  background: #fffaf0;
-  color: #756d72;
+  background: #f7f7f8;
+  color: #6b6b77;
   font-size: 12px;
   line-height: 1.7;
   margin-bottom: 22px;
@@ -1180,7 +1190,7 @@ summary {
   color: var(--deep-red);
 }
 .journey-rail button > span {
-  color: #8c8085;
+  color: #80808c;
   font-size: 9px;
 }
 .journey-rail button i {
@@ -1191,15 +1201,15 @@ summary {
 .rail-group {
   font-size: 10px;
   font-weight: 650;
-  color: #756d72;
+  color: #6b6b77;
   margin: 18px 0 6px;
 }
 .document-input {
   padding: 18px;
-  border: 1px dashed #cbbd9d;
+  border: 1px dashed #b0b0b8;
   border-radius: 12px;
   margin: 18px 0;
-  background: #fffdf7;
+  background: #fbfbfb;
 }
 .document-input label {
   font-size: 13px;
@@ -1223,7 +1233,7 @@ summary {
   display: block;
   width: 100%;
   padding: 13px;
-  background: #fdfcfb;
+  background: #fcfcfc;
   border: 1px solid var(--color-line);
   border-radius: 9px;
   margin-top: 8px;
@@ -1270,7 +1280,7 @@ summary {
   padding-top: 12px;
   margin-top: 15px;
   font-size: 11px;
-  color: #756d72;
+  color: #6b6b77;
   line-height: 1.7;
 }
 .descriptor-details p {
@@ -1284,7 +1294,7 @@ summary {
 .context-suggestion {
   padding: 15px;
   border-left: 2px solid #d5b85b;
-  background: #fffbef;
+  background: #f7f7f7;
   margin: 15px 0;
   font-size: 12px;
   line-height: 1.7;
@@ -1298,7 +1308,7 @@ summary {
   text-decoration: underline;
 }
 .context-suggestion small {
-  color: #756d72;
+  color: #6b6b77;
 }
 .ai-review {
   border: 1px solid #d5b85b;
@@ -1344,7 +1354,8 @@ summary {
   font-size: 13px;
 }
 .talent-levels legend {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   font-size: 22px;
   margin-bottom: 15px;
 }
@@ -1365,7 +1376,7 @@ summary {
 .talent-levels span {
   grid-column: 2;
   font-size: 12px;
-  color: #756d72;
+  color: #6b6b77;
   line-height: 1.7;
 }
 .review-description {
@@ -1383,7 +1394,8 @@ summary {
   margin: 25px 0;
 }
 .organiser-grid h2 {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   font-size: 25px;
   margin: 10px 0 16px;
 }
@@ -1392,7 +1404,8 @@ summary {
 }
 .no-suggestion h2 {
   font-size: 20px;
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
+  font-weight: 550;
   margin-bottom: 15px;
 }
 .no-suggestion p {
@@ -1414,7 +1427,7 @@ summary {
   white-space: normal;
 }
 .decision-note {
-  background: #f1f5ec;
+  background: #f2f2f4;
   padding: 12px;
   border-radius: 9px;
   font-size: 12px;
@@ -1428,7 +1441,7 @@ summary {
 .question-brief {
   margin: 20px 0;
   padding: 20px;
-  background: #faf8f4;
+  background: #f7f7f7;
   border: 1px solid var(--color-line);
   border-radius: 12px;
 }
@@ -1461,7 +1474,7 @@ summary {
 }
 .observation-row small {
   grid-column: 1 / -1;
-  color: #756d72;
+  color: #6b6b77;
 }
 @media (max-width: 1100px) {
   .intake-layout.with-rail {
@@ -1535,8 +1548,8 @@ summary {
   color: var(--deep-red);
 }
 .priority-controls button[data-priority="none"][aria-pressed="true"] {
-  background: #f3f1ee;
-  border-color: #bfb7b9;
+  background: #f2f2f4;
+  border-color: #b8b8be;
 }
 .practice-checks {
   padding-left: 18px;

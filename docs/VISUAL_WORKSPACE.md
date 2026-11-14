@@ -33,6 +33,18 @@ launcher opens the browser on port 3001 and reuses an existing installation.
   generated JSON, citations and answer quotes; humans review proposals. The
   previous Gemini adapter is optional, not a requirement for the app.
 
+## Art direction
+
+- Night chrome (sidebar and home hero) and white working surfaces. Centrale red
+  `#C8102E` and gold `#F0C300` are the only accent colours; the old cream, green
+  and Georgia serif styling is gone.
+- Fonts are self-hosted with `@fontsource-variable`: Space Grotesk for headings,
+  Inter for text. No request to Google Fonts at runtime.
+- `ShaderBackdrop` draws red and gold light ribbons with plain WebGL behind the home
+  hero. It pauses off screen, draws one still frame under reduced motion and falls
+  back to a CSS gradient without WebGL. It has no paid or third-party dependency.
+- Copy says what the tool does. Avoid slogans such as "Beyond a CV".
+
 ## Frontend and backend
 
 Next.js hosts both layers in one repository:

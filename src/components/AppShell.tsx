@@ -53,7 +53,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <aside className="app-sidebar">
         <Link href="/" className="app-brand" aria-label="Rosace home">
           <Logo size={36} />
-          <span>RECRUITMENT, REFRAMED</span>
+          <span>SKILLS-BASED MATCHMAKING</span>
         </Link>
         <div className="sidebar-event">
           <span className="event-avatar">E</span>
@@ -80,16 +80,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
         <div className="sidebar-bottom">
           <div className="sidebar-note">
-            <span className="status-dot" />
-            Human judgement, always.
+            <span className="status-dot" />A person always decides.
             <p>
-              Skills start a conversation.
+              Every suggestion shows its reasons.
               <br />
-              People make the decisions.
+              Talents never see a rank or a score.
             </p>
           </div>
           <Link href="/demo">
-            Explore the demo data <WorkspaceIcon name="arrow" />
+            See the demo data <WorkspaceIcon name="arrow" />
           </Link>
           <small>Synthetic profiles · Local workspace</small>
         </div>
@@ -118,7 +117,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <footer className="app-footer">
           <span>Rosace / Junction 2026</span>
           <span>
-            Declared is a starting point. Observed is a separate story.
+            Dotted bar: declared by the talent · Solid bar: observed by a
+            recruiter
           </span>
         </footer>
       </div>
