@@ -47,3 +47,22 @@ The production build includes the new conversation hub and provider-neutral AI
 routes. Screenshots and exact Cursor startup instructions are in
 [VISUAL_WORKSPACE.md](VISUAL_WORKSPACE.md). Featherless generation is still
 untested with live credentials; the application works without them.
+
+## Dependency security follow-up
+
+The installation audit reported vulnerabilities in Next.js and development-tool
+transitives. Updated Next.js and its ESLint configuration to 15.5.29, and Vitest
+to 4.1.12 (removing the vulnerable Tinypool dependency). The Vite 8 test transform
+now uses Oxc in an ESM `.mts` configuration included in TypeScript validation.
+
+Two targeted overrides are necessary while upstream ranges remain unchanged:
+Next's PostCSS is pinned to 8.5.33; typescript-estree's Minimatch is pinned to
+11.0.8. Revisit these overrides when upstream dependencies include patched ranges.
+No blanket override affects the older, unaffected Minimatch 3 consumers.
+
+After a clean `npm ci`, `npm audit` reports zero vulnerabilities as of this check.
+All 120 application tests, four launcher tests, TypeScript, ESLint, production
+build and five Chromium journeys pass. This is an audit result, not a guarantee
+against undisclosed vulnerabilities. ESLint 9's deprecation notice may remain:
+it is retained within the supported peer range of eslint-config-next 15 rather
+than forcing an unrelated Next.js major-version migration.
