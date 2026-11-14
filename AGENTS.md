@@ -47,7 +47,7 @@ Suggestions (`src/lib/suggestions.ts`):
 - **a tie at the cut is never broken**: tied talents go to the organiser;
 - talents with no suggestion are listed with the reason, so the organiser sees them before approving.
 
-Observation after the meeting (Centrale grid): A "Seen clearly" = 1, C "Seen in part" = 0.6, F "Not seen" = 0, NE "Not covered" = nothing. Observed value = level × performance, stored apart from the declared value, never added to it.
+Observation after the meeting (Centrale grid): A "Seen clearly" = 1, C "Seen in part" = 0.6, F "Not seen" = 0, NE "Not covered" = nothing. Observed value = task level × performance, stored apart from the declared value, never added to it. Multiple situations use the mean of their observed values (NE excluded, F included as zero), as approved by the owner. Regrading a situation replaces its grade.
 
 ## The rosace (`src/components/Rosace.tsx`)
 
@@ -58,12 +58,12 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 - `src/lib/framework.ts`: the 12 components in English with descriptors per level, 20 technical skills in 4 families.
 - `src/lib/scoring.ts`, `src/lib/suggestions.ts`: the rules above. Tests in `src/lib/scoring.test.ts`.
 - `src/data/demo.ts`: event "Espoo Tech Matchmaking", 2 needs (NordChip embedded developer, Lumora support engineer), 6 talents.
-- `/`: workspace home; `/demo`: the original synthetic overview.
+- `/`: workspace home; `/tour`: four-step guided demo; `/demo`: original synthetic overview, outside the menu.
 - `/need/new`: progressive company/role context, interactive 12-component rosace, level cards, browser draft and confirmation.
 - `/talent/new`: on-device document parsing, quoted clues, factual questions and confirmed declarations. CVs remain transient.
 - `/organiser`: company selection, suggestions, human decisions and journal. `/conversations` opens approved or clearly labelled fictional conversations.
 - `/brief?need=...&talent=...`: tailored discussion gaps, role examples and separate A/C/F/NE observations. The query-based URL replaces the originally planned dynamic path.
-- `/practice`: fictional exercises, manual checklists and optional AI feedback. Never an automatic certification.
+- `/checks` (`/practice` redirects): three fictional online exercises, three levels each, talent submission and human-only A/C/F/NE grading. Answers stay in the browser; re-submission clears the previous grade. C4.3 is discussed, never marked observed.
 - Optional server-only Context.dev and Featherless (optional legacy Gemini) adapters are implemented but live calls await credentials. Company-site collection was explicitly requested by the owner; never search for a talent.
 - `start-local.cmd` / `npm run local`: install dependencies when necessary, start the app and open the browser. Cursor is optional.
 - See `docs/ROADMAP.md` for current delivery status. Storage remains local to one browser; no deployed service or authenticated accounts.

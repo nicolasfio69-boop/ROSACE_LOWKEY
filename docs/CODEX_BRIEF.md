@@ -43,7 +43,7 @@ Ensuite, vérifie que `/tour` suit bien ton thème clair, sans couleurs sombres 
 
 - L'échelle est fixe partout (déclaré, attendu, observé). La branche part du petit cercle blanc. Le bord du disque gris vaut Foundation, l'anneau intermédiaire Intermediate et le cercle extérieur Advanced.
 - Une observation se place sur la même échelle : niveau de la situation × performance (A = 1, C = 0,6, F = 0, NE = rien).
-- S'il y a plusieurs observations pour une même composante, prends la plus haute. C'est la recommandation par défaut, encore à valider par Nicolas, donc garde-la facile à changer (une seule fonction).
+- Décision de Nicolas du 2026-11-14 : s'il y a plusieurs observations pour une même composante, prends la moyenne des valeurs niveau × performance, hors NE. Garde cette règle dans une seule fonction.
 - Pointillé = déclaré, plein = observé, trait noir = attendu. Les majeures sont en or et dessinées en dernier.
 
 ## Étape 4. « Attester un niveau » (section 7 bis de `CADRAGE.md`)

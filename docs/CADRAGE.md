@@ -10,7 +10,7 @@ Ce fichier est la source de vérité du projet. Il est tenu à jour à chaque d�
 
 **Pour mettre à jour :** quand Nicolas tranche un point, déplace-le de « À trancher » vers « Journal des décisions », avec la date. Si une règle change, modifie aussi la partie concernée plus haut.
 
-Dernière mise à jour : 2026-11-14, 16 h 45.
+Dernière mise à jour : 2026-11-14 — intégration des décisions validées par Nicolas dans ce chat.
 
 ---
 
@@ -86,11 +86,11 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
 
 ## 6. Direction artistique
 
-- Barre latérale et bandeau d'accueil noirs, surfaces de travail blanches.
+- Thème clair perle partagé par la barre latérale, le bandeau, les formulaires et les panneaux. Fond Aurora plein écran ; pas de juxtaposition de panneaux blancs et noirs.
 - Seules couleurs fortes : rouge Centrale `#C8102E` et or `#F0C300`. Plus de crème, de vert ni de police à empattements.
 - Titres en Space Grotesk, texte en Inter, hébergés dans le projet (aucun appel à Google Fonts).
-- Effets inspirés des composants gratuits d'Aceternity : fond « Wavy Background » sur l'accueil, bordure « Glowing Effect » sur les cartes. Tout s'arrête si l'utilisateur demande moins d'animations.
-- Motion design : des animations qui expliquent (la rosace qui se construit, le pointillé qui devient plein, l'arrivée des suggestions, les transitions), plus des effets décoratifs. On le fera après la refonte UX de Codex.
+- Adaptations des composants gratuits Aceternity : Aurora Background, Glowing Effect sur les cartes d’accueil, Text Generate Effect sur le titre et Background Beams discrets dans les en-têtes. Attributions dans `docs/ACETERNITY_ATTRIBUTION.md`. Tout devient statique si l’utilisateur demande moins d’animations.
+- Motion design : des animations qui expliquent (la rosace qui se construit, le pointillé qui devient plein, l'arrivée des suggestions, les transitions), plus des effets décoratifs. Implémenté sur `feat/coherent-ux`, y compris les compteurs animés.
 - Les textes disent ce que fait l'outil. Pas de slogans.
 
 ## 7. Technique
@@ -102,7 +102,7 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
 - **Hébergement : Aiven** (tech challenge retenu), pas Vercel. [Aiven Runtime](https://aiven.io/runtime) fait tourner une application en conteneur, ce qui demande d'ajouter un `Dockerfile` (Next.js en mode `standalone`). La base de données serait Aiven PostgreSQL. Restent à vérifier : les crédits, la région européenne et la gestion des clés.
 - **Données** : on héberge d'abord sur Aiven avec le stockage dans le navigateur, sans base de données. Aiven PostgreSQL ne vient que s'il reste du temps.
 
-## 7 bis. Attester un niveau (proposition à valider)
+## 7 bis. Attester un niveau (plan validé par Nicolas le 2026-11-14)
 
 Déclarer un niveau ne suffit pas. Pour chaque composante, on prévoit comment le vérifier, et c'est toujours **une personne qui note** (A, C, F ou NE). L'IA peut proposer un premier retour, jamais la note.
 
@@ -160,26 +160,27 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
   - on attend que Codex finisse de refaire l'UX avant de toucher aux écrans ;
   - rappel de Nicolas : les composantes sont toujours des verbes d'action, comme dans le système Centrale (voir 2 bis).
 
+### Décisions confirmées et livraison du 14 novembre 2026
+
+- **Validé par Nicolas** : tableau 7 bis et trois exercices de démo C5.1, C2.2, J.EMBEDDED_C ; seul un recruteur donne A/C/F/NE.
+- **Validé par Nicolas** : moyenne des valeurs observées, et non maximum. Chaque valeur vaut niveau de la situation × performance ; NE est exclu, F vaut zéro. Une correction remplace la note de la même situation ; une autre situation apporte une observation distincte. La déclaration reste intacte.
+- **Validé par Nicolas** : menu « 3-minute demo », quatre étapes métier et « Checks ». `/demo` reste accessible par URL, hors menu.
+- **Validé par Nicolas** : la vingtième compétence est « Build data pipelines », famille Data. La branche importée n’en contenait que dix-neuf.
+- **Implémenté** : intégration des branches de cadrage, catalogue et démo dans `feat/coherent-ux` ; aucune PR fusionnée sur GitHub. Noms exacts, trois majeures, mineures sans plafond ajouté, trois compétences techniques, échelles fixes et moyenne testée.
+- **Implémenté** : `/checks` (redirection depuis `/practice`), neuf variantes écrites à la main, 6 + 6 + 8 minutes au total. Statuts To check / Done / Graded. Réponses fictives sauvegardées dans le navigateur, note humaine séparée, remplacement d’une réponse nécessitant une nouvelle relecture. Les autres exercices en ligne sont explicitement indiqués comme à préparer.
+- **Implémenté** : consignes sur place dans le brief (budget commun de dix minutes), C4.3 « Discussed, not observed », sans note d’observation. Retour Featherless facultatif sur action explicite, sans notation automatique.
+- **Implémenté** : démo NordChip/Amira en quatre étapes avec exemple en ligne déjà noté ; fond perle Aurora et animations accessibles.
+- **Préparé, pas déployé** : image Node 22 / Next.js standalone et procédure Aiven Runtime. Pas de PostgreSQL. Les crédits, la région européenne, les paramètres du compte Aiven et les appels réels Featherless/Context.dev restent à vérifier.
+- La revue finale Playwright et les captures de livraison sont consignées dans `docs/VALIDATION.md`. Les validations de rendu et les informations événementielles ci-dessous restent ouvertes.
+
 ## 10. À trancher ensemble
 
 Pour chaque point : les options, et ma recommandation en gras.
 
-**a. Le plan « Attester un niveau » (7 bis)**
-- **Valider le tableau tel quel, puis coder d'abord la ligne « comment c'est vérifié » sur l'écran du besoin, ainsi que 3 exercices en ligne (C5.1, C2.2 et une compétence technique) pour la démo.**
-- Modifier certaines lignes du tableau avant de coder.
-
-**b. Plusieurs observations pour une même composante**
-- **On garde la plus haute, pour que la branche reste lisible en niveau.**
-- On fait la moyenne.
-
-**c. Ce qu'on montre au jury**
-- **Le menu montre le parcours guidé, les 4 étapes et la partie « Attester ». La page `/demo` sort du menu, sans supprimer le code.**
-- Tout garder dans le menu.
-
-**d. Le rendu**
+**a. Le rendu**
 - **Une vidéo de 2 à 3 minutes qui suit le parcours guidé, 3 ou 4 slides, et le texte du formulaire Junction.**
 
-**e. Infos manquantes (Nicolas)**
+**b. Infos manquantes (Nicolas)**
 - Heure exacte du rendu.
 - Durée du pitch.
 - Qui est dans l'équipe.

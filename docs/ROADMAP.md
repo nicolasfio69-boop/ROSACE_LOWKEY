@@ -1,36 +1,25 @@
-# Rosace delivery ladder
+# Rosace delivery ladder — 14 November 2026
 
-The local journey is implemented. It is not yet a deployed multi-user service.
+Current delivery: `feat/coherent-ux`, PR #11. The local flow is implemented; this is not a deployed multi-user service.
 
-| Stage                              | Current result                                                                                                         | Next validation or work                                                                       |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| 0. Fixed framework and calculation | Five competencies, twelve components, deterministic scores, ties and rosaces                                           | Keep the reference rules stable                                                               |
-| 1. Recruiter                       | Company, job/document import, work setting, four task questions, twelve-component journey, level cards and live rosace | User review of wording and examples for target jobs                                           |
-| 2. Talent                          | Local CV import, quoted clues, factual questions, confirmed levels, live rosace, optional six-month browser card       | Broader synthetic examples and usability review                                               |
-| 3. Organiser                       | New needs/cards feed suggestions, human decisions with reasons and journal                                             | Shared-event accounts and permissions                                                         |
-| 4. Conversation                    | Three to five questions, declared/expected view, separate A/C/F/NE observations                                        | Try the interview flow with fictional participants                                            |
-| 4b. Online practice                | Twelve concrete exercises, review checklists, optional Featherless / optional Gemini feedback adapter                  | Live Featherless / optional Gemini check after credentials arrive; no automatic certification |
-| 5. Company context and RAG         | Context.dev adapter, editable context, passage retrieval, Featherless / optional Gemini examples with human approval   | Configure keys locally and validate actual provider responses                                 |
-| 6. Shared data and hosting         | Not implemented                                                                                                        | PostgreSQL, authentication, server retention/deletion, production limits; then choose hosting |
+| Stage | Implemented | Still to validate |
+| --- | --- | --- |
+| 0. Framework | Exact twelve approved action names; twenty technical actions in four families; deterministic calculation | Keep rules stable |
+| 1. Recruiter | Company, role/import, setting, four task questions, live rosace, three majors, any minors, up to three technical skills and verification guidance | Espoo feedback on questions and examples |
+| 2. Talent | On-device CV parsing, confirmed levels, optional six-month local card, restoration/deletion | Broader synthetic usability scenarios |
+| 3. Organiser | Suggestions, ties, people without suggestions, reasoned human decisions and journal | Actual event capacities and process |
+| 4. Conversation | Questions, on-site situations, human observations averaged on the task-level scale; C4.3 discussed only | Recruiter usability in a ten-minute meeting |
+| 5. Checks | Three exercises × three levels, twenty-minute total; submission, human review, grade, separate observed rosace; optional explicit Featherless feedback | Remaining online exercises are described but not implemented; live provider validation |
+| 6. Guided demo and visual UX | Four NordChip/Amira stages, simplified menu, light pearl Aurora, construction/review motion and reduced-motion fallback | Owner visual review and jury narrative |
+| 7. Hosting | Next.js standalone, Node 22 Dockerfile, documented Aiven Runtime deployment from GitHub | Account credits, European region, live deployment and provider secrets |
+| 8. Shared event service | Deferred | Authentication, shared storage, server retention/deletion; no PostgreSQL in this delivery |
 
-## Keys: when they are needed
+## Credentials and local use
 
-- **Now:** no keys to run the whole manual flow in Cursor using Node.js.
-- **Context.dev:** set `CONTEXT_DEV_API_KEY` in `.env.local` to try company-page
-  collection. Context can be pasted while waiting.
-- **Featherless:** set `AI_PROVIDER=featherless`, `FEATHERLESS_API_KEY` and `FEATHERLESS_MODEL`,
-  restart, then explicitly request a proposal. Live provider validation remains
-  outstanding. CVs continue to stay on the device.
-- **Database/hosting:** only for sharing the app with multiple users. Aiven
-  Runtime + PostgreSQL is a candidate from the sponsor docs; Supabase remains
-  the database fallback. Vercel is optional.
+No credentials are needed for the manual flow. In Cursor, fetch and switch to `feat/coherent-ux`, run `npm ci` once (and after lockfile changes), then `npm run dev`. Open http://localhost:3000.
 
-Browser-local storage is not a database shared between recruiters and talents.
-The synthetic demo deliberately lets the roles share one browser. The event has
-multiple companies; it is not restricted to the City of Espoo as the employer.
-There are no real accounts, online interview scheduling or automatic hiring decisions.
+For optional AI, configure `AI_PROVIDER=featherless`, `FEATHERLESS_API_KEY` and `FEATHERLESS_MODEL` in ignored `.env.local`, then restart. `CONTEXT_DEV_API_KEY` is optional for company context. On Aiven use runtime secret settings, never Git. No live paid call or deployment is part of this change. See [DEPLOY_AIVEN.md](DEPLOY_AIVEN.md).
 
-The application delivery is on `feat/visual-workspace`, separate from the audit-only
-branch. Fetch that branch in Cursor to review the interface and use its local
-launcher. A pull request does not update `main` until merged. No deployment or
-environment publication is part of this change.
+Browser storage is not shared across devices. The demo uses fictional companies and talents and a role switch without authentication. CVs remain transient; local card deletion/expiry removes linked checks and observations. The talent never sees a ranking or alignment score.
+
+Open owner decisions: delivery format (video/slides/submission text), deadline, pitch duration, team and Espoo feedback. The verification plan, mean aggregation, simplified menu and twentieth technical skill are now approved in [CADRAGE.md](CADRAGE.md).

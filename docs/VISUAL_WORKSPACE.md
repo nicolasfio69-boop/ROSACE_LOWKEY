@@ -98,3 +98,15 @@ Next.js hosts both layers in one repository:
 ![Interactive skills workspace](images/coherent-need.png)
 
 ![Mobile rosace](images/coherent-mobile.png)
+
+## Framing delivery: steps 0–9
+
+- Three integrated branches: `framing-doc`, `workspace-concrete-skills`, `guided-demo`. No GitHub PR is merged by this delivery.
+- The menu now shows **3-minute demo**, Recruiter need, Talent card, Event desk, Conversations and Checks. The logo returns home; `/demo` remains available by URL.
+- The twenty technical skills include the owner's approved **Build data pipelines**. Three are allowed per need, beside the fixed twelve-component rosace. There is no extra cap on minor components.
+- Observed branches use the mean of task-level performance values, with NE ignored and F counted as zero. Expected, declared and observed values all use the same scale from the hub. Regrading a situation replaces it; another situation is kept separately.
+- `/checks` replaces `/practice`: C5.1, C2.2 and embedded C each have three written variants. The talent's declared level selects the variant. The demo has an explicit Talent/Recruiter switch: submit, review the checklist, then grade A/C/F/NE. Replacing an answer removes its old grade. Fictional answers and grades persist in this browser; CV text does not.
+- The brief shows on-site situations within a shared ten-minute allowance. C4.3 is **Discussed, not observed**. Other online exercises are described as requiring recruiter preparation; the three demo exercises do not claim to implement every verification task.
+- `/tour` follows NordChip and Amira through four stages; its final stage includes a clearly labelled fictional online grade.
+- Free Aceternity adaptations add a word reveal, pointer glow and discreet beams to the Aurora background. Rosace branches, observed fills, suggestions, transitions and counters explain progress. Reduced-motion preferences make them static.
+- Aiven Runtime packaging is ready for account validation, without PostgreSQL or a deployment. See [DEPLOY_AIVEN.md](DEPLOY_AIVEN.md) and [VALIDATION.md](VALIDATION.md).
