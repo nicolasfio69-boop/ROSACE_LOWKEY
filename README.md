@@ -18,3 +18,20 @@ npm test        # scoring and suggestion rules
 No API key belongs in this repository. Keys go in the hosting environment settings.
 
 Coding agents: read [AGENTS.md](AGENTS.md) first (rules, calculation, next steps).
+
+## Recruiter need preview
+
+Open `/need/new` from the overview to describe a synthetic job, answer up to four
+optional context questions, and choose three major Centrale components, up to two
+minor components and up to two job skills. Each selection has three level cards
+with the fixed descriptor and a hand-written example placed in the job context.
+The live rosace keeps job skills separate. Capacity defaults to three.
+
+Confirming validates the need with `checkNeed()` and shows an in-page confirmation.
+The draft and confirmation are saved in browser local storage and restored after
+refreshing or returning. Editing a confirmed need requires confirming it again.
+Use "Clear saved need and start again" to delete it. Storage failures are shown
+with a retry action. Data is not sent to a server or shared across devices.
+No Gemini or other AI service is used.
+
+Validation: `npm test`, `npm run typecheck`, `npx eslint src`, `npm run build`.

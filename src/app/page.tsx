@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { Rosace } from "@/components/Rosace";
 import { EVENT, NEEDS, TALENTS } from "@/data/demo";
@@ -22,6 +23,7 @@ export default function Overview() {
           We turn claims into questions you can check during the conversation. Overview of the demo data and of the
           suggestions the organiser approves.
         </p>
+        <Link href="/need/new" className="mt-4 inline-block rounded bg-brand px-4 py-2 font-semibold text-white">Prepare a recruiter need</Link>
         <Legend />
       </header>
 
