@@ -16,7 +16,7 @@ export const LEVELS: Record<LevelValue, { name: string; definition: string }> = 
   2: { name: "Intermediate", definition: "Does it alone, in real situations, on well-defined tasks." },
   3: {
     name: "Advanced",
-    definition: "Does it alone in new or complex situations, and others rely on them for it.",
+    definition: "Does it alone when the situation is new, unclear or changing, and other people's work depends on the result.",
   },
 };
 
@@ -41,6 +41,12 @@ export type Component = {
   descriptors: Record<ExpectedLevel, string>;
 };
 
+/**
+ * Descriptors are written so a recruiter can ask "tell me about a time when..." and check the details.
+ * One ladder for all components: 1 = with help, simple case; 2 = alone, real case; 3 = alone, new or
+ * changing situation, with other people depending on the result. No reputation ("others rely on them"),
+ * no personality trait, and communication is judged on being understood, never on accent or grammar.
+ */
 export const COMPONENTS: Component[] = [
   {
     code: "C1.1",
@@ -49,9 +55,9 @@ export const COMPONENTS: Component[] = [
     short: "Listen",
     activity: "brought out what someone really needed by listening and asking questions",
     descriptors: {
-      1: "Listens without interrupting, asks open questions and restates what they understood.",
-      2: "In a conversation with a client or another team, brings out the real need, restates it to confirm it, and notices what is left unsaid.",
-      3: "Surfaces needs the client had not put into words, in new or tense situations, and others rely on them to clarify what is really asked.",
+      1: "With help, talks with someone about a need: asks open questions and restates what they understood before acting.",
+      2: "Alone, runs a conversation with a client or another team and comes out with the real need written down and confirmed by that person.",
+      3: "Clarifies a need that is vague, changing or disputed between several people, and gets them to agree on it in writing.",
     },
   },
   {
@@ -61,9 +67,9 @@ export const COMPONENTS: Component[] = [
     short: "Present",
     activity: "presented a proposal and answered objections to it",
     descriptors: {
-      1: "Presents an idea in a structured way and backs it with understandable arguments.",
-      2: "Presents a proposal to a client or a team on their own, argues for it and answers objections.",
-      3: "Defends a proposal in front of demanding or divided stakeholders, adapts it on the spot, and gets a decision.",
+      1: "Presents an idea or a solution to their team in a structured way, with the reasons behind it.",
+      2: "Presents a proposal to a client or a team on their own, answers their objections, and gets it accepted or adjusted.",
+      3: "Defends a proposal in front of decision-makers or people with conflicting interests, adapts it on the spot, and gets a decision.",
     },
   },
   {
@@ -73,9 +79,9 @@ export const COMPONENTS: Component[] = [
     short: "Rules",
     activity: "worked out which rules or standards applied to your work",
     descriptors: {
-      1: "Knows the main rules of their field and answers simple questions about them correctly, with help.",
-      2: "Identifies on their own the rules and standards that apply to a task, and refuses a request that does not comply.",
-      3: "Works out which rules apply in new or ambiguous situations, and others come to them when in doubt.",
+      1: "Knows the main rules of their work (for example coding standards, data protection, safety rules, a style guide) and follows them once pointed out.",
+      2: "Finds on their own which rules apply to a task before starting, and flags or refuses a request that would break them.",
+      3: "Works out which rules apply when none is obvious (new product, new market, new regulation) and writes them down for the team.",
     },
   },
   {
@@ -85,9 +91,9 @@ export const COMPONENTS: Component[] = [
     short: "Quality",
     activity: "delivered work that had to meet precise requirements",
     descriptors: {
-      1: "Produces work without obvious errors, and spots visible errors in someone else's work.",
-      2: "Delivers compliant work on their own with few corrections, and finds substantive issues in someone else's work.",
-      3: "Sets up the checks that make a team's work reliable, and catches problems others missed.",
+      1: "Delivers work without obvious errors, checks it against a given checklist, and spots visible errors in someone else's work.",
+      2: "Delivers work that passes review or acceptance with few corrections, and finds real problems when reviewing someone else's work.",
+      3: "Sets up the checks (tests, reviews, checklists) that make a team's work reliable, and catches problems others missed.",
     },
   },
   {
@@ -97,9 +103,9 @@ export const COMPONENTS: Component[] = [
     short: "Scope",
     activity: "planned and ran a piece of work from start to finish",
     descriptors: {
-      1: "Says what should be done for a simple need and proposes steps.",
-      2: "Writes the scope, deliverables and phases of a piece of work, then follows it and raises alerts in time.",
-      3: "Scopes and runs work whose goal or constraints change along the way, and coordinates several people on it.",
+      1: "For a simple need, lists the steps to take and follows a plan someone else made.",
+      2: "Writes the scope, deliverables and steps of a project, follows it, and warns early when it slips.",
+      3: "Runs a project whose goal or constraints change along the way, re-plans it, and coordinates several people on it.",
     },
   },
   {
@@ -109,9 +115,9 @@ export const COMPONENTS: Component[] = [
     short: "Lessons",
     activity: "drawn lessons from a piece of work and passed them on to others",
     descriptors: {
-      1: "Says what worked and what did not after a task, and draws a lesson from it.",
-      2: "Closes a piece of work with lessons learned that others can use, and shares them.",
-      3: "Turns lessons from several projects into practices that the team adopts.",
+      1: "After a task, says what worked, what did not, and one thing they would do differently.",
+      2: "Closes a project with written lessons or documentation that the next person actually used.",
+      3: "Turns lessons from several projects into a practice or a tool that the team adopted.",
     },
   },
   {
@@ -121,9 +127,9 @@ export const COMPONENTS: Component[] = [
     short: "Team",
     activity: "worked in a team towards a shared result",
     descriptors: {
-      1: "Finds their place in a group, listens and contributes.",
-      2: "Moves a team forward and takes the lead when needed, without crushing others.",
-      3: "Keeps a team working together through disagreement or pressure, and others count on them for it.",
+      1: "Does their share in a group, asks for help when blocked, and keeps the others informed.",
+      2: "Moves a team forward: splits the work, unblocks others, and takes the lead when needed without taking over.",
+      3: "Keeps a team delivering through disagreement, pressure, or people joining and leaving.",
     },
   },
   {
@@ -133,9 +139,9 @@ export const COMPONENTS: Component[] = [
     short: "Reflect",
     activity: "looked back critically at your own choices and changed your approach",
     descriptors: {
-      1: "Explains a choice afterwards and recognises what they could have done differently.",
-      2: "Steps back on their decisions and attitude during a real piece of work, and makes concrete adjustments.",
-      3: "Questions their own approach in new situations before things go wrong, and helps others do the same.",
+      1: "Explains a choice they made, afterwards, and says what they could have done differently.",
+      2: "Gives a concrete case where feedback or a mistake made them change the way they work, and what changed.",
+      3: "Notices when their own approach is not working before it fails, changes course, and helps others review theirs.",
     },
   },
   {
@@ -145,9 +151,9 @@ export const COMPONENTS: Component[] = [
     short: "Initiative",
     activity: "taken on a task or problem without being asked, and seen it through",
     descriptors: {
-      1: "Is present, delivers on time, and volunteers for tasks without being asked.",
-      2: "Keeps their commitments for the whole length of a piece of work, and takes initiatives that help the team.",
-      3: "Takes ownership of problems nobody owns, in uncertain situations, and sees them through.",
+      1: "Delivers what they promised on time, and volunteers for tasks without being asked.",
+      2: "Keeps their commitments for the whole length of a project, and starts useful actions nobody asked for.",
+      3: "Takes charge of a problem nobody owns, in an uncertain situation, and sees it through to the end.",
     },
   },
   {
@@ -157,9 +163,9 @@ export const COMPONENTS: Component[] = [
     short: "Frame",
     activity: "turned a vague problem into a clearly stated one",
     descriptors: {
-      1: "Restates an open problem in a structured way and states explicit assumptions, with help.",
-      2: "Turns a vague need into a clearly stated problem on their own, that others can work from.",
-      3: "Frames the problem when the situation is new or confused, or when people disagree on it, and others rely on their framing.",
+      1: "With help, restates an open problem in a structured way and states their assumptions.",
+      2: "Alone, turns a vague request or bug report into a clearly stated problem that others can work from.",
+      3: "Frames a problem that is new, confused or disputed, and the team works from their framing.",
     },
   },
   {
@@ -169,9 +175,9 @@ export const COMPONENTS: Component[] = [
     short: "Learn",
     activity: "learned a new subject on your own for a real task",
     descriptors: {
-      1: "Takes on an unfamiliar topic or document and gets something useful out of it.",
-      2: "Gets up to speed alone on a new domain for a real piece of work, without prior training.",
-      3: "Masters a new field quickly enough to become the person others turn to.",
+      1: "With guidance, takes on an unfamiliar tool, topic or document and gets something useful out of it.",
+      2: "Learns a new tool or domain alone for a real task, without training, and delivers with it.",
+      3: "Learns a new field fast enough to set it up or teach it for others.",
     },
   },
   {
@@ -181,8 +187,8 @@ export const COMPONENTS: Component[] = [
     short: "Communicate",
     activity: "explained something to people who needed to understand it",
     descriptors: {
-      1: "Writes clearly and correctly, and holds attention when speaking.",
-      2: "Writes documents adapted to who reads them, runs a meeting, and answers an objection.",
+      1: "Explains their own work so that their team can follow it, in writing and out loud.",
+      2: "Writes for a specific reader (client, user, manager) so they can act without coming back with questions, and runs a meeting.",
       3: "Explains complex topics to very different audiences, including in tense or high-stakes situations.",
     },
   },

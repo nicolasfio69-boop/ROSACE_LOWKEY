@@ -15,7 +15,8 @@ Read this file fully before changing anything. It is the short version of the pr
 1. **The Centrale system is fixed**: 5 competencies, 12 components, 3 levels (Foundation, Intermediate, Advanced, plus "Not yet"), and the rosace. Do not add, remove or rename components without the owner's approval. See `src/lib/framework.ts`.
 2. **Keep it simple.** No allocation algorithm, no waitlist, no ranking shown to talents, no percentages on screen. If a feature is not in "Next steps" below, ask first.
 3. **Synthetic data only.** No real person, no real company. Never search the web for a talent.
-4. **No bias inputs**: never use nationality, language, age, gender or degree name in a calculation.
+4. **No bias inputs**: never use nationality, language, age, gender or degree name in a calculation. Communication is judged on being understood, never on accent or grammar.
+9. **Descriptors stay concrete**: each one must be checkable by asking "tell me about a time when...". No reputation ("others rely on them"), no personality trait. Same ladder everywhere: 1 with help on a simple case, 2 alone on a real case, 3 alone when the situation is new or changing and others depend on the result.
 5. **No API key in the repository.** Keys go in the hosting environment settings (Vercel). `.env*` is git-ignored.
 6. **The CV is never stored**, not even in AI logs. A talent card is kept 6 months only if the talent asks, and can be deleted anytime.
 7. Product language is **English**. Code, comments and UI in English.
