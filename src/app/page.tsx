@@ -2,7 +2,7 @@ import { Logo } from "@/components/Logo";
 import { Rosace } from "@/components/Rosace";
 import { EVENT, NEEDS, TALENTS } from "@/data/demo";
 import { isComponent, JOB_SKILLS, LEVELS, skillName } from "@/lib/framework";
-import type { Alignment, Need, Talent } from "@/lib/scoring";
+import { weightOf, type Alignment, type Need, type Requirement, type Talent } from "@/lib/scoring";
 import { NO_SUGGESTION_LABELS, suggestForNeed, withoutSuggestion } from "@/lib/suggestions";
 
 export default function Overview() {
@@ -112,16 +112,33 @@ function NeedHeader({ need }: { need: Need }) {
 }
 
 function Requirements({ need }: { need: Need }) {
+  const majors = need.requirements.filter((r) => isComponent(r.skill) && r.major);
+  const minors = need.requirements.filter((r) => isComponent(r.skill) && !r.major);
+  const jobSkills = need.requirements.filter((r) => !isComponent(r.skill));
   return (
-    <ul className="mt-2 space-y-2 text-sm">
-      {need.requirements.map((r) => (
-        <li key={r.skill}>
-          <span className={r.major ? "font-semibold" : ""}>{skillName(r.skill)}</span>
-          <span className="text-muted"> · {r.major ? "major" : "minor"} · expects {LEVELS[r.expected].name}</span>
-          {r.reason ? <p className="text-muted italic">“{r.reason}”</p> : null}
-        </li>
-      ))}
-    </ul>
+    <div className="mt-2 space-y-3 text-sm">
+      <RequirementGroup title="Three majors (gold)" items={majors} />
+      <RequirementGroup title="Other components" items={minors} />
+      <RequirementGroup title="Job skills, on top of the Centrale base" items={jobSkills} />
+    </div>
+  );
+}
+
+function RequirementGroup({ title, items }: { title: string; items: Requirement[] }) {
+  if (items.length === 0) return null;
+  return (
+    <div>
+      <h4 className="text-xs font-semibold uppercase tracking-wide text-muted">{title}</h4>
+      <ul className="mt-1 space-y-2">
+        {items.map((r) => (
+          <li key={r.skill}>
+            <span className={r.major ? "font-semibold" : ""}>{skillName(r.skill)}</span>
+            <span className="text-muted"> · weight {weightOf(r)} · expects {LEVELS[r.expected].name}</span>
+            {r.reason ? <p className="text-muted italic">“{r.reason}”</p> : null}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -134,8 +151,10 @@ function AlignmentList({ items, name }: { items: Alignment[]; name: (id: string)
           <span className="font-medium">{name(a.talentId)}</span>
           <span> · {a.points} out of {a.max}</span>
           <span className="text-muted"> · {a.coveredWeight} of {a.totalWeight} weights filled in</span>
-          {a.missingMajors.length > 0 ? (
-            <span className="text-brand"> · major to check: {a.missingMajors.map(skillName).join(", ")}</span>
+          {a.missingMajors.length + a.missingJobSkills.length > 0 ? (
+            <span className="text-brand">
+              {" "}· to check: {[...a.missingMajors, ...a.missingJobSkills].map(skillName).join(", ")}
+            </span>
           ) : null}
         </li>
       ))}

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { NEEDS, TALENTS } from "@/data/demo";
 import { COMPONENTS, JOB_SKILLS, SKILL_CODES } from "./framework";
-import { align, observedValue } from "./scoring";
+import { align, checkNeed, observedValue } from "./scoring";
 import { suggestForNeed, withoutSuggestion } from "./suggestions";
 
 const need = (id: string) => NEEDS.find((n) => n.id === id)!;
@@ -20,22 +20,35 @@ describe("framework", () => {
     for (const t of TALENTS) for (const code of Object.keys(t.statements)) expect(SKILL_CODES.has(code)).toBe(true);
     expect(JOB_SKILLS.length).toBeGreaterThan(0);
   });
+
+  it("every demo need has exactly three major Centrale components, as in the Centrale tool", () => {
+    for (const n of NEEDS) expect(checkNeed(n)).toEqual([]);
+  });
+
+  it("refuses a job skill as a major, and a need without three majors", () => {
+    const n = need("nordchip-embedded");
+    const jobMajor = { ...n, requirements: n.requirements.map((r) => (r.skill === "J.EMBEDDED_C" ? { ...r, major: true } : r)) };
+    expect(checkNeed(jobMajor)).toContain("A job skill cannot be a major: majors are Centrale components.");
+    const twoMajors = { ...n, requirements: n.requirements.filter((r) => r.skill !== "C5.2") };
+    expect(checkNeed(twoMajors)).toContain("Pick exactly 3 major components (now 2).");
+  });
 });
 
-describe("declared alignment (worked example of the reference document)", () => {
-  it("talent A: 11 out of 15, 7 of 8 weights covered, complete", () => {
+describe("declared alignment (worked example)", () => {
+  // NordChip: 3 majors (weight 2) + 1 minor component (weight 1) + 2 job skills (weight 2). Max 19, total weight 11.
+  it("talent A: 13 out of 19, 9 of 11 weights covered, complete", () => {
     const a = align(need("nordchip-embedded"), talent("amira"));
-    expect([a.points, a.max]).toEqual([11, 15]);
-    expect([a.coveredWeight, a.totalWeight]).toEqual([7, 8]);
+    expect([a.points, a.max]).toEqual([13, 19]);
+    expect([a.coveredWeight, a.totalWeight]).toEqual([9, 11]);
     expect(a.complete).toBe(true);
   });
 
-  it("talent B: 10 out of 15, 5 of 8 weights covered, incomplete", () => {
+  it("talent B: 12 out of 19, 6 of 11 weights covered, incomplete", () => {
     const b = align(need("nordchip-embedded"), talent("jonas"));
-    expect([b.points, b.max]).toEqual([10, 15]);
-    expect([b.coveredWeight, b.totalWeight]).toEqual([5, 8]);
+    expect([b.points, b.max]).toEqual([12, 19]);
+    expect([b.coveredWeight, b.totalWeight]).toEqual([6, 11]);
     expect(b.complete).toBe(false);
-    expect(b.missingMajors).toContain("J.EMBEDDED_C");
+    expect(b.missingJobSkills).toContain("J.EMBEDDED_C");
   });
 
   it("caps the level at the expected level, and shows what is above", () => {
@@ -43,7 +56,7 @@ describe("declared alignment (worked example of the reference document)", () => 
     const embedded = a.rows.find((r) => r.requirement.skill === "J.EMBEDDED_C")!;
     expect(embedded.level).toBe(3);
     expect(embedded.points).toBe(4);
-    expect(a.aboveExpected).toEqual(["J.EMBEDDED_C"]);
+    expect(a.aboveExpected).toContain("J.EMBEDDED_C");
   });
 
   it("a CV mention without detail counts as unknown, not as a level", () => {
@@ -62,10 +75,11 @@ describe("declared alignment (worked example of the reference document)", () => 
     expect(align(need("nordchip-embedded"), withoutLink).points).toBe(align(need("nordchip-embedded"), withLink).points);
   });
 
-  it("lists major requirements that are unknown or below expectations, even with a good total", () => {
+  it("lists majors and job skills that are unknown or below expectations, even with a complete card", () => {
     const m = align(need("nordchip-embedded"), talent("mateo"));
     expect(m.complete).toBe(true);
-    expect(m.missingMajors).toEqual(["J.EMBEDDED_C", "C5.1"]);
+    expect(m.missingMajors).toEqual(["C5.1"]);
+    expect(m.missingJobSkills).toEqual(["J.EMBEDDED_C", "J.PROTOCOLS"]);
   });
 });
 
