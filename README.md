@@ -21,7 +21,7 @@ Coding agents: read [AGENTS.md](AGENTS.md) first (rules, calculation, next steps
 
 ## Recruiter need preview
 
-Open `/need/new` from the overview to describe a synthetic job, answer up to four
+Open `/need/new` from the home page to describe a synthetic job, answer up to four
 optional context questions, and choose three major Centrale components, up to two
 minor components and up to two job skills. Each selection has three level cards
 with the fixed descriptor and a hand-written example placed in the job context.
@@ -35,3 +35,11 @@ with a retry action. Data is not sent to a server or shared across devices.
 No Gemini or other AI service is used.
 
 Validation: `npm test`, `npm run typecheck`, `npx eslint src`, `npm run build`.
+
+## Guided experience
+
+The home page introduces the recruiter journey. `/need/new` guides the recruiter
+through four focused steps: role, priorities, expected levels and review.
+The original synthetic needs, suggestions and talent cards remain at `/demo`.
+See [the delivery ladder](docs/ROADMAP.md) for implemented stages, remaining work
+and when database, hosting and Gemini credentials are needed.
