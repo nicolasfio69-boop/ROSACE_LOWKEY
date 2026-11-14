@@ -68,7 +68,8 @@ export function TalentForm() {
   }, []);
   const [pinned, setPinned] = useState<string[]>([]);
   const jobInPath = JOB_SKILLS.filter(
-    (j) => quotes[j.code] || levels[j.code] !== undefined || pinned.includes(j.code),
+    (j) =>
+      quotes[j.code] || levels[j.code] !== undefined || pinned.includes(j.code),
   );
   const skills = [...COMPONENTS, ...jobInPath],
     skill = skills[Math.min(index, skills.length - 1)],
@@ -157,28 +158,32 @@ export function TalentForm() {
               {JOB_FAMILIES.map((family) => (
                 <div key={family.code}>
                   <p className="quiet-note">{family.name}</p>
-                  {JOB_SKILLS.filter((j) => j.family === family.code).map((j) => (
-                    <button
-                      type="button"
-                      key={j.code}
-                      onClick={() => {
-                        const path = [
-                          ...COMPONENTS,
-                          ...JOB_SKILLS.filter(
-                            (x) =>
-                              x.code === j.code ||
-                              quotes[x.code] ||
-                              levels[x.code] !== undefined ||
-                              pinned.includes(x.code),
-                          ),
-                        ];
-                        setPinned((p) => (p.includes(j.code) ? p : [...p, j.code]));
-                        setIndex(path.findIndex((s) => s.code === j.code));
-                      }}
-                    >
-                      {j.name}
-                    </button>
-                  ))}
+                  {JOB_SKILLS.filter((j) => j.family === family.code).map(
+                    (j) => (
+                      <button
+                        type="button"
+                        key={j.code}
+                        onClick={() => {
+                          const path = [
+                            ...COMPONENTS,
+                            ...JOB_SKILLS.filter(
+                              (x) =>
+                                x.code === j.code ||
+                                quotes[x.code] ||
+                                levels[x.code] !== undefined ||
+                                pinned.includes(x.code),
+                            ),
+                          ];
+                          setPinned((p) =>
+                            p.includes(j.code) ? p : [...p, j.code],
+                          );
+                          setIndex(path.findIndex((s) => s.code === j.code));
+                        }}
+                      >
+                        {j.name}
+                      </button>
+                    ),
+                  )}
                 </div>
               ))}
             </div>
@@ -188,7 +193,8 @@ export function TalentForm() {
           {step === 0 && (
             <>
               <p className="eyebrow">A CV IS A STARTING POINT</p>
-              <div className="step-heading"><BackgroundBeams />
+              <div className="step-heading">
+                <BackgroundBeams />
                 <h1>Build your skills card.</h1>
                 <p>
                   Use a fictional CV for this demo, or start without one. A
@@ -244,7 +250,8 @@ export function TalentForm() {
                   : `TECHNICAL SKILL ${index - 11} / ${jobInPath.length}`}{" "}
                 · {skill.code}
               </p>
-              <div className="step-heading"><BackgroundBeams />
+              <div className="step-heading">
+                <BackgroundBeams />
                 <h1>{skill.name}</h1>
                 <p>Have you ever {skill.activity}?</p>
               </div>
@@ -391,7 +398,8 @@ export function TalentForm() {
           {step === 2 && (
             <>
               <p className="eyebrow">YOUR CONFIRMED DECLARATIONS</p>
-              <div className="step-heading"><BackgroundBeams />
+              <div className="step-heading">
+                <BackgroundBeams />
                 <h1>
                   {saved
                     ? "Your saved skills card."

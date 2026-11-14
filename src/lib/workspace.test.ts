@@ -148,14 +148,36 @@ it("keeps separate situations but replaces a revised grade for the same one", ()
 
 it("requires a current submission, resets its grade on replacement and deletes answers with the card", () => {
   const s = storage();
-  const submission = {needId: "n", talentId: "local-talent", skill: "C5.1", taskLevel: 1 as const, answer: "Ask which sensor fails and reproduce the startup."};
+  const submission = {
+    needId: "n",
+    talentId: "local-talent",
+    skill: "C5.1",
+    taskLevel: 1 as const,
+    answer: "Ask which sensor fails and reproduce the startup.",
+  };
   expect(() => gradeCheck(s, submission, "A")).toThrow();
   submitCheck(s, submission);
   gradeCheck(s, submission, "A");
-  expect(loadWorkspace(s).observations[0]).toMatchObject({taskLevel:1, observation:"A", source:"online:C5.1"});
-  submitCheck(s, {...submission, answer:"A revised fictional answer."});
+  expect(loadWorkspace(s).observations[0]).toMatchObject({
+    taskLevel: 1,
+    observation: "A",
+    source: "online:C5.1",
+  });
+  submitCheck(s, { ...submission, answer: "A revised fictional answer." });
   expect(loadWorkspace(s).observations).toHaveLength(0);
   expect(() => gradeCheck(s, submission, "A")).toThrow();
   removeTalent(s, "local-talent");
   expect(loadWorkspace(s).checks).toHaveLength(0);
+});
+
+it("never records a ten-minute observation for long-term commitments", () => {
+  expect(() =>
+    recordObservation(storage(), {
+      needId: "n",
+      talentId: "t",
+      skill: "C4.3",
+      taskLevel: 2,
+      observation: "A",
+    }),
+  ).toThrow("Invalid observation");
 });

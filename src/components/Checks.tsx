@@ -165,7 +165,8 @@ export function Checks() {
   }
   return (
     <div className="workspace checks-workspace">
-      <header className="step-heading"><BackgroundBeams />
+      <header className="step-heading">
+        <BackgroundBeams />
         <p className="eyebrow">CHECK A CONCRETE SITUATION</p>
         <h1>Checks</h1>
         <p>
@@ -177,6 +178,7 @@ export function Checks() {
         <label className="field-label">
           Company need
           <select
+            aria-label="Company need"
             value={needId}
             onChange={(e) => {
               reset();
@@ -193,6 +195,7 @@ export function Checks() {
         <label className="field-label">
           Talent card
           <select
+            aria-label="Talent card"
             value={talentId}
             onChange={(e) => {
               reset();
@@ -209,6 +212,7 @@ export function Checks() {
         <label className="field-label">
           Demo role
           <select
+            aria-label="Demo role"
             value={role}
             onChange={(e) => {
               reset();
@@ -235,6 +239,7 @@ export function Checks() {
           <label className="field-label">
             Exercise
             <select
+              aria-label="Exercise"
               value={skill}
               onChange={(e) => {
                 reset();

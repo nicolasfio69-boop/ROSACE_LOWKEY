@@ -168,6 +168,7 @@ export function loadWorkspace(
       typeof s.talentId === "string" &&
       typeof s.skill === "string" &&
       SKILL_CODES.has(s.skill) &&
+      s.skill !== "C4.3" &&
       ["A", "C", "F", "NE"].includes(s.observation as string) &&
       (s.taskLevel === undefined ||
         [1, 2, 3].includes(s.taskLevel as number)) &&
@@ -251,6 +252,7 @@ export function recordObservation(storage: Storage, seen: Seen) {
   if (
     !["A", "C", "F", "NE"].includes(seen.observation) ||
     !SKILL_CODES.has(seen.skill) ||
+    seen.skill === "C4.3" ||
     (seen.taskLevel !== undefined && ![1, 2, 3].includes(seen.taskLevel))
   )
     throw new Error("Invalid observation.");

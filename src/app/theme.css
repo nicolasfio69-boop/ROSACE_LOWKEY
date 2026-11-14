@@ -1137,3 +1137,5 @@ input::file-selector-button {
   .text-generate-word, .rosace-branch, .rosace-branch[data-evidence="observed"], .meeting-card, .background-beams path, .form-panel > div:not([hidden]), .form-panel > section:not([hidden]) { animation: none; transition: none; filter: none; transform: none; }
   .glowing-effect { display: none; }
 }
+.text-generate-word { margin-inline-end: .2em; }
+.checks-context { min-height: 0; }

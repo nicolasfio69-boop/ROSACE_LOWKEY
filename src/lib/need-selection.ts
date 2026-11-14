@@ -1,9 +1,5 @@
 import { isComponent, SKILL_CODES } from "./framework";
-import {
-  MAJOR_COUNT,
-  MAX_JOB_SKILLS,
-  type Requirement,
-} from "./scoring";
+import { MAJOR_COUNT, MAX_JOB_SKILLS, type Requirement } from "./scoring";
 
 export type SelectionRole = "none" | "major" | "minor" | "job";
 

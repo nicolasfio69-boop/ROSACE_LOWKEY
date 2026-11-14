@@ -87,7 +87,8 @@ export function ConversationBrief() {
       <Link href="/organiser" className="back-link">
         ← Organiser
       </Link>
-      <div className="step-heading"><BackgroundBeams />
+      <div className="step-heading">
+        <BackgroundBeams />
         <p className="eyebrow">A CONVERSATION, NOT A VERDICT</p>
         <h1>
           {talent.pseudonym} × {need.company}

@@ -338,7 +338,8 @@ export function NeedForm() {
           {step === 0 && (
             <>
               <p className="eyebrow">FIRST, THE REAL WORK</p>
-              <div className="step-heading"><BackgroundBeams />
+              <div className="step-heading">
+                <BackgroundBeams />
                 <h1>Your company. Your role.</h1>
                 <p>
                   Start with a job document or your own words. Context helps
@@ -636,7 +637,8 @@ export function NeedForm() {
               <p className="eyebrow">
                 COMPONENT {String(index + 1).padStart(2, "0")} / 12 · {c.code}
               </p>
-              <div className="step-heading"><BackgroundBeams />
+              <div className="step-heading">
+                <BackgroundBeams />
                 <h1>{c.name}</h1>
                 <p>
                   Compare situations, choose an expected level, then decide
@@ -837,7 +839,8 @@ export function NeedForm() {
           {step === 2 && (
             <>
               <p className="eyebrow">ALONGSIDE THE CENTRALE FRAMEWORK</p>
-              <div className="step-heading"><BackgroundBeams />
+              <div className="step-heading">
+                <BackgroundBeams />
                 <h1>Add specific know-how.</h1>
                 <p>
                   Choose up to {MAX_JOB_SKILLS} technical skills from the closed
@@ -847,41 +850,48 @@ export function NeedForm() {
               </div>
               {JOB_FAMILIES.map((family) => (
                 <div key={family.code} className="job-family">
-                <p className="eyebrow">{family.name.toUpperCase()}</p>
-              {JOB_SKILLS.filter((j) => j.family === family.code).map((j) => {
-                const r = draft.requirements.find((r) => r.skill === j.code);
-                return (
-                  <div className="job-skill-block" key={j.code}>
-                    <label className="consent-line">
-                      <input
-                        type="checkbox"
-                        checked={!!r}
-                        disabled={!r && jobs >= MAX_JOB_SKILLS}
-                        onChange={(e) =>
-                          select(j.code, e.target.checked ? "job" : "none")
-                        }
-                      />
-                      {j.name}
-                    </label>
-                    {r && (
-                      <LevelCards
-                        jobTitle={draft.title}
-                        skill={j.code}
-                        value={r.expected}
-                        onChange={(level) =>
-                          update({
-                            requirements: draft.requirements.map((x) =>
-                              x.skill === j.code
-                                ? { ...x, expected: level }
-                                : x,
-                            ),
-                          })
-                        }
-                      />
-                    )}
-                  </div>
-                );
-              })}
+                  <p className="eyebrow">{family.name.toUpperCase()}</p>
+                  {JOB_SKILLS.filter((j) => j.family === family.code).map(
+                    (j) => {
+                      const r = draft.requirements.find(
+                        (r) => r.skill === j.code,
+                      );
+                      return (
+                        <div className="job-skill-block" key={j.code}>
+                          <label className="consent-line">
+                            <input
+                              type="checkbox"
+                              checked={!!r}
+                              disabled={!r && jobs >= MAX_JOB_SKILLS}
+                              onChange={(e) =>
+                                select(
+                                  j.code,
+                                  e.target.checked ? "job" : "none",
+                                )
+                              }
+                            />
+                            {j.name}
+                          </label>
+                          {r && (
+                            <LevelCards
+                              jobTitle={draft.title}
+                              skill={j.code}
+                              value={r.expected}
+                              onChange={(level) =>
+                                update({
+                                  requirements: draft.requirements.map((x) =>
+                                    x.skill === j.code
+                                      ? { ...x, expected: level }
+                                      : x,
+                                  ),
+                                })
+                              }
+                            />
+                          )}
+                        </div>
+                      );
+                    },
+                  )}
                 </div>
               ))}
               <div className="form-actions">
@@ -897,7 +907,8 @@ export function NeedForm() {
           {step === 3 && (
             <>
               <p className="eyebrow">YOUR NEED, READY TO REVIEW</p>
-              <div className="step-heading"><BackgroundBeams />
+              <div className="step-heading">
+                <BackgroundBeams />
                 <h1>{draft.title}</h1>
                 <p>
                   {draft.company} · {draft.eventName} · {draft.workMode}
@@ -929,8 +940,13 @@ export function NeedForm() {
                             : "Job skill"}{" "}
                         · {LEVELS[r.expected].name}
                       </small>
-                      <small>How it’s checked: {verificationLabel(r.skill)} · To check</small>
-                      <p className="quiet-note">{verificationFor(r.skill).situation}</p>
+                      <small>
+                        How it’s checked: {verificationLabel(r.skill)} · To
+                        check
+                      </small>
+                      <p className="quiet-note">
+                        {verificationFor(r.skill).situation}
+                      </p>
                     </div>
                     <button
                       type="button"

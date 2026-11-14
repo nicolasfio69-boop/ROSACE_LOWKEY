@@ -201,31 +201,21 @@ test("recruiter, document import, consented talent and observed conversation", a
     "PASS: real PDF + DOCX parsing, 12-step recruiter flow, limits, restore, talent questions and consent, no CV in storage/POST, organiser decision, saved observation, mobile routes, no client errors.",
   );
 });
-test("practice keeps answers in memory and requires consent for a provider call", async ({
+test("practice redirects to Checks and an unsubmitted draft stays in memory", async ({
   page,
 }) => {
   await page.goto("/practice");
+  await expect(page).toHaveURL(/\/checks$/);
   await page
-    .getByRole("textbox", { name: "Your practice answer", exact: true })
-    .fill("A fictional answer about clarifying needs.");
+    .getByLabel("Your exercise answer", { exact: true })
+    .fill("An unsubmitted fictional answer.");
   expect(await page.evaluate(() => JSON.stringify(localStorage))).not.toContain(
-    "A fictional answer",
+    "An unsubmitted fictional answer",
   );
+  await page.reload();
   await expect(
-    page.getByRole("button", { name: "Request AI feedback" }),
-  ).toBeDisabled();
-  await page
-    .getByRole("combobox", { name: "Component to practise" })
-    .selectOption("C2.2");
-  await expect(
-    page.getByRole("textbox", { name: "Your practice answer", exact: true }),
+    page.getByLabel("Your exercise answer", { exact: true }),
   ).toHaveValue("");
-  await page.setViewportSize({ width: 390, height: 844 });
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth > innerWidth,
-    ),
-  ).toBe(false);
 });
 test("interactive rosace supports keyboard, preserves levels and shows the active component", async ({
   page,
@@ -320,7 +310,7 @@ test("conversation guide distinguishes unknown experience and expected work", as
   await expect(
     page.getByRole("heading", { name: "Amira × NordChip", exact: true }),
   ).toBeVisible();
-  const first = page.locator(".question-brief").first();
+  const first = page.locator(".question-brief").filter({has: page.locator(".level-comparison")}).first();
   await expect(first).toContainText("Not filled in");
   await expect(first).toContainText("No level has been declared");
   await first.locator("summary").click();
