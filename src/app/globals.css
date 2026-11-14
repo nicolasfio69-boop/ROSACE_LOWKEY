@@ -5,8 +5,9 @@
   --color-muted: #6e6e78;
   --color-paper: #faf8f6;
   --color-line: #e4e2e6;
-  --color-gold: #d4a000;
-  --color-brand: #8b1e2d;
+  --color-gold: #f0c300;
+  --color-gold-ink: #9a7a00;
+  --color-brand: #c8102e;
 }
 
 body {

@@ -1,3 +1,4 @@
+import { Logo } from "@/components/Logo";
 import { Rosace } from "@/components/Rosace";
 import { EVENT, NEEDS, TALENTS } from "@/data/demo";
 import { isComponent, JOB_SKILLS, LEVELS, skillName } from "@/lib/framework";
@@ -12,8 +13,11 @@ export default function Overview() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
       <header className="mb-8">
-        <p className="text-sm text-muted">{EVENT.name} · {EVENT.format}</p>
-        <h1 className="mt-1 text-3xl font-semibold">Prepare the right conversations</h1>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <Logo size={44} />
+          <p className="text-sm text-muted">{EVENT.name} · {EVENT.format}</p>
+        </div>
+        <h1 className="mt-4 text-3xl font-semibold">Prepare the right conversations</h1>
         <p className="mt-2 max-w-2xl text-muted">
           We turn claims into questions you can check during the conversation. Overview of the demo data and of the
           suggestions the organiser approves.
@@ -27,13 +31,13 @@ export default function Overview() {
           {results.map((result) => (
             <article key={result.need.id} className="rounded-lg border border-line bg-white p-4">
               <NeedHeader need={result.need} />
-              <Rosace expected={expectedOf(result.need)} size={240} />
+              <Rosace expected={expectedOf(result.need)} size={300} labels="short" />
               <Requirements need={result.need} />
               <h4 className="mt-4 text-sm font-semibold">Suggested to meet</h4>
               <AlignmentList items={result.suggested} name={pseudonym} />
               {result.tied.length > 0 ? (
                 <>
-                  <h4 className="mt-3 text-sm font-semibold text-gold">Tied for the last place: the organiser chooses</h4>
+                  <h4 className="mt-3 text-sm font-semibold text-brand">Tied for the last place: the organiser chooses</h4>
                   <AlignmentList items={result.tied} name={pseudonym} />
                 </>
               ) : null}
@@ -81,11 +85,12 @@ export default function Overview() {
 function Legend() {
   return (
     <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-muted">
-      <li>Dashed branch: declared by the talent</li>
-      <li>Solid branch: observed by a recruiter</li>
-      <li>Gold mark: level the company expects</li>
+      <li><span className="font-semibold text-gold-ink">Gold</span>: the three majors, drawn on top</li>
+      <li><span className="font-semibold text-brand">Red</span>: the other components</li>
+      <li>Dotted bar: declared by the talent</li>
+      <li>Solid bar: observed by a recruiter, or expected by the company</li>
+      <li>Grey disk: Foundation · inner ring: Intermediate · outer ring: Advanced</li>
       <li>Empty branch: not filled in</li>
-      <li>Rings: Foundation, Intermediate, Advanced</li>
     </ul>
   );
 }
@@ -147,7 +152,7 @@ function TalentCard({ talent }: { talent: Talent }) {
   const jobSkills = JOB_SKILLS.filter((j) => talent.statements[j.code]);
   return (
     <article className="rounded-lg border border-line bg-white p-4">
-      <Rosace declared={declared} size={220} title={talent.pseudonym} />
+      <Rosace declared={declared} size={260} title={talent.pseudonym} />
       {jobSkills.length > 0 ? (
         <ul className="mt-2 space-y-1 text-sm">
           {jobSkills.map((j) => {
