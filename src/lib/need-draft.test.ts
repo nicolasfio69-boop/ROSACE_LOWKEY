@@ -40,11 +40,13 @@ describe("recruiter need submission", () => {
     draft.requirements = COMPONENTS.slice(0, count).map((c) => ({ skill: c.code, major: true, expected: 1 }));
     expect(errors(draft)).toContain("Pick exactly 3");
   });
-  it("rejects excessive minors and job skills", () => {
+  it("accepts every other component as a minor, and rejects a fourth technical skill", () => {
     const draft = valid();
-    draft.requirements.push(...COMPONENTS.slice(3, 6).map((c) => ({ skill: c.code, major: false, expected: 1 as const })), ...JOB_SKILLS.slice(0, 3).map((j) => ({ skill: j.code, major: false, expected: 1 as const })));
-    expect(errors(draft)).toContain("At most 2 minor");
-    expect(errors(draft)).toContain("At most 2 job");
+    const chosen = new Set(draft.requirements.map((r) => r.skill));
+    draft.requirements.push(...COMPONENTS.filter((c) => !chosen.has(c.code)).map((c) => ({ skill: c.code, major: false, expected: 1 as const })));
+    expect(prepareNeed(draft).ok).toBe(true);
+    draft.requirements.push(...JOB_SKILLS.filter((j) => !chosen.has(j.code)).slice(0, 4).map((j) => ({ skill: j.code, major: false, expected: 1 as const })));
+    expect(errors(draft)).toContain("At most 3 job");
   });
   it("rejects job majors, duplicate skills and unknown codes", () => {
     const draft = valid();

@@ -44,9 +44,9 @@ export function Rosace({
   labels = size >= 360 ? "full" : "short",
 }: RosaceProps) {
   const font = Math.max(10, Math.round(size / (labels === "full" ? 40 : 26)));
-  const margin = Math.round(font * (labels === "full" ? 9 : 4));
+  const margin = Math.round(font * (labels === "full" ? 9 : 6.5));
   const center = size / 2;
-  const radius = round(center - font * (labels === "full" ? 4.2 : 2.4));
+  const radius = round(center - font * (labels === "full" ? 4.2 : 3.6));
   const hub = round(radius * CENTER_PART);
   const at = (level: number) => round(hub + (level / 3) * (radius - hub));
   const thickness = round(Math.max(radius * 0.045, 3));

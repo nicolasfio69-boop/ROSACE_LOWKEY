@@ -22,8 +22,8 @@ Coding agents: read [AGENTS.md](AGENTS.md) first (rules, calculation, next steps
 ## Recruiter need preview
 
 Open `/need/new` from the overview to describe a synthetic job, answer up to four
-optional context questions, and choose three major Centrale components, up to two
-minor components and up to two job skills. Each selection has three level cards
+optional context questions, and choose three major Centrale components, any number of
+minor components and up to three technical skills. Each selection has three level cards
 with the fixed descriptor and a hand-written example placed in the job context.
 The live rosace keeps job skills separate. Capacity defaults to three.
 

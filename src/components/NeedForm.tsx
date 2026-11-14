@@ -2,7 +2,8 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { Rosace } from "./Rosace";
-import { COMPONENTS, JOB_SKILLS, LEVELS, descriptor, isComponent, skillName, type ExpectedLevel } from "@/lib/framework";
+import { SkillBars } from "./SkillBars";
+import { COMPONENTS, JOB_FAMILIES, JOB_SKILLS, LEVELS, descriptor, isComponent, skillName, type ExpectedLevel } from "@/lib/framework";
 import { JOB_QUESTIONS, levelExample, prepareNeed, type NeedDraft, type DraftResult } from "@/lib/need-draft";
 import { MAJOR_COUNT, MAX_MINORS, MAX_JOB_SKILLS, type Requirement } from "@/lib/scoring";
 
@@ -120,8 +121,8 @@ export function NeedForm() {
         </section>
         <section aria-labelledby="components-heading">
           <h2 id="components-heading" className="text-xl font-semibold">2. Choose Centrale components</h2>
-          <p className="my-2 text-muted">Choose exactly three majors and up to two minors. Select a level card for each. Foundation is selected initially.</p>
-          <p className="mb-4 text-sm" aria-live="polite">Majors: {majors} of {MAJOR_COUNT} · Minors: {minors} of {MAX_MINORS}</p>
+          <p className="my-2 text-muted">Choose exactly three majors, then as many minors as the job needs. Select a level card for each. Foundation is selected initially.</p>
+          <p className="mb-4 text-sm" aria-live="polite">Majors: {majors} of {MAJOR_COUNT} · Minors: {minors}</p>
           <div className="space-y-4">
             {COMPONENTS.map((component) => {
               const selected = draft.requirements.find((r) => r.skill === component.code);
@@ -140,15 +141,20 @@ export function NeedForm() {
           </div>
         </section>
         <section aria-labelledby="skills-heading">
-          <h2 id="skills-heading" className="text-xl font-semibold">3. Add up to two job skills</h2>
-          <p className="my-2 text-muted">These sit alongside the Centrale base and are never majors.</p>
-          <div className="space-y-4">{JOB_SKILLS.map((skill) => {
-            const selected = draft.requirements.find((r) => r.skill === skill.code);
-            return <article key={skill.code} className={panelClass}>
-              <label className="flex items-center gap-2 font-semibold"><input type="checkbox" checked={!!selected} disabled={!selected && jobs >= MAX_JOB_SKILLS} onChange={(e) => select(skill.code, e.target.checked ? "job" : "none")} />{skill.name}</label>
-              {selected && levels(selected)}
-            </article>;
-          })}</div>
+          <h2 id="skills-heading" className="text-xl font-semibold">3. Add up to three technical skills</h2>
+          <p className="my-2 text-muted">They sit next to the rosace, as bars on the same three levels, and are never majors.</p>
+          {JOB_FAMILIES.map((family) => (
+            <div key={family.code} className="mt-4">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted">{family.name}</h3>
+              <div className="mt-2 space-y-3">{JOB_SKILLS.filter((skill) => skill.family === family.code).map((skill) => {
+                const selected = draft.requirements.find((r) => r.skill === skill.code);
+                return <article key={skill.code} className={panelClass}>
+                  <label className="flex items-center gap-2 font-semibold"><input type="checkbox" checked={!!selected} disabled={!selected && jobs >= MAX_JOB_SKILLS} onChange={(e) => select(skill.code, e.target.checked ? "job" : "none")} />{skill.name}</label>
+                  {selected && levels(selected)}
+                </article>;
+              })}</div>
+            </div>
+          ))}
         </section>
         <section className={panelClass} aria-labelledby="review-heading">
           <h2 id="review-heading" className="text-xl font-semibold">4. Review your need</h2>
@@ -170,8 +176,7 @@ export function NeedForm() {
         <p className="text-sm text-muted">Gold: majors · Red: minors. Empty branches are not filled in.</p>
         <p className="mt-2 text-sm text-muted">Grey disk: Foundation · Inner ring: Intermediate · Outer circle: Advanced.</p>
         <ul className="mt-4 space-y-2 text-sm">{draft.requirements.filter((r) => isComponent(r.skill)).map((r) => <li key={r.skill}>{r.major ? "Major" : "Minor"}: {skillName(r.skill)} · {LEVELS[r.expected].name}</li>)}</ul>
-        <h3 className="mt-4 font-semibold">Job skills alongside the rosace</h3>
-        {jobs === 0 ? <p className="text-sm text-muted">None selected (optional).</p> : <ul className="mt-2 space-y-2 text-sm">{draft.requirements.filter((r) => !isComponent(r.skill)).map((r) => <li key={r.skill}>{skillName(r.skill)} · {LEVELS[r.expected].name}</li>)}</ul>}
+        {jobs === 0 ? <p className="mt-4 text-sm text-muted">No technical skill selected yet (up to {MAX_JOB_SKILLS}).</p> : <SkillBars items={draft.requirements.filter((r) => !isComponent(r.skill)).map((r) => ({ code: r.skill, expected: r.expected }))} />}
       </aside>
     </form>
   );

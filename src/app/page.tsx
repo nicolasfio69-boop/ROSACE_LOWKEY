@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { Rosace } from "@/components/Rosace";
+import { SkillBars } from "@/components/SkillBars";
 import { EVENT, NEEDS, TALENTS } from "@/data/demo";
 import { isComponent, JOB_SKILLS, LEVELS, skillName } from "@/lib/framework";
 import { weightOf, type Alignment, type Need, type Requirement, type Talent } from "@/lib/scoring";
@@ -34,6 +35,9 @@ export default function Overview() {
             <article key={result.need.id} className="rounded-lg border border-line bg-white p-4">
               <NeedHeader need={result.need} />
               <Rosace expected={expectedOf(result.need)} size={300} labels="short" />
+              <SkillBars
+                items={result.need.requirements.filter((r) => !isComponent(r.skill)).map((r) => ({ code: r.skill, expected: r.expected }))}
+              />
               <Requirements need={result.need} />
               <h4 className="mt-4 text-sm font-semibold">Suggested to meet</h4>
               <AlignmentList items={result.suggested} name={pseudonym} />
@@ -121,7 +125,7 @@ function Requirements({ need }: { need: Need }) {
     <div className="mt-2 space-y-3 text-sm">
       <RequirementGroup title="Three majors (gold)" items={majors} />
       <RequirementGroup title="Other components" items={minors} />
-      <RequirementGroup title="Job skills, on top of the Centrale base" items={jobSkills} />
+      <RequirementGroup title="Technical skills, on top of the Centrale base" items={jobSkills} />
     </div>
   );
 }
@@ -174,18 +178,12 @@ function TalentCard({ talent }: { talent: Talent }) {
   return (
     <article className="rounded-lg border border-line bg-white p-4">
       <Rosace declared={declared} size={260} title={talent.pseudonym} />
-      {jobSkills.length > 0 ? (
-        <ul className="mt-2 space-y-1 text-sm">
-          {jobSkills.map((j) => {
-            const s = talent.statements[j.code];
-            return (
-              <li key={j.code}>
-                {j.name}: <span className="font-medium">{s.level === null ? "mentioned in CV, not detailed" : LEVELS[s.level].name}</span>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
+      <SkillBars
+        items={jobSkills.map((j) => {
+          const s = talent.statements[j.code];
+          return { code: j.code, level: s.level, mentioned: s.level === null };
+        })}
+      />
     </article>
   );
 }
