@@ -246,7 +246,7 @@ test("interactive rosace supports keyboard, preserves levels and shows the activ
     .click();
   await page.getByRole("button", { name: "Explore the 12 components" }).click();
   const listen = page.getByRole("button", {
-    name: "Explore Listen and surface the real need",
+    name: "Explore Reach out to people",
     exact: true,
   });
   await expect(listen).toHaveAttribute("aria-pressed", "true");
@@ -255,7 +255,7 @@ test("interactive rosace supports keyboard, preserves levels and shows the activ
   await page.keyboard.press("Enter");
   await expect(
     page.getByRole("heading", {
-      name: "Present and defend a proposal",
+      name: "Understand and convince",
       exact: true,
     }),
   ).toBeVisible();
@@ -267,7 +267,7 @@ test("interactive rosace supports keyboard, preserves levels and shows the activ
   await listen.click();
   await page
     .getByRole("button", {
-      name: "Explore Present and defend a proposal",
+      name: "Explore Understand and convince",
       exact: true,
     })
     .click();
@@ -284,7 +284,7 @@ test("interactive rosace supports keyboard, preserves levels and shows the activ
     .click();
   await page
     .getByRole("button", {
-      name: "Explore Present and defend a proposal",
+      name: "Explore Understand and convince",
       exact: true,
     })
     .click();
@@ -297,13 +297,13 @@ test("interactive rosace supports keyboard, preserves levels and shows the activ
     .click();
   await page
     .getByRole("button", {
-      name: "Explore Deliver work that meets the requirements",
+      name: "Explore Get it right and spot the error",
       exact: true,
     })
     .click();
   await expect(
     page.getByRole("heading", {
-      name: "Deliver work that meets the requirements",
+      name: "Get it right and spot the error",
       exact: true,
     }),
   ).toBeVisible();

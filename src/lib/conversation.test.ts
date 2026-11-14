@@ -34,7 +34,7 @@ describe("conversation preparation", () => {
       status: "below",
     });
     expect(brief.connections).toEqual([]);
-    expect(brief.unknown).not.toContain("Frame a problem");
+    expect(brief.unknown).not.toContain("Break down a problem");
   });
   it("does not mutate the need or talent", () => {
     const before = JSON.stringify([NEEDS, TALENTS]);

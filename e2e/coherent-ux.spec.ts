@@ -237,7 +237,7 @@ test("mobile roles and rosace remain accessible in the coherent, reduced-motion 
   await preview.click();
   await expect(
     page.getByRole("button", {
-      name: "Explore Listen and surface the real need",
+      name: "Explore Reach out to people",
       exact: true,
     }),
   ).toBeVisible();
