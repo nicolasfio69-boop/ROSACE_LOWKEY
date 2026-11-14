@@ -5,7 +5,8 @@
 **Sources :** brief City of Espoo, Signal V3, Version simple, AGENTS.md, état du dépôt  
 **Destinataire :** Codex (et l’équipe) — document d’avis et de pistes, pas une spec de features nouvelles
 
-Quand ce document contredit Signal V3, **suivre Version simple + AGENTS.md**.  
+**Statut :** archive de stratégie du 14 nov. 2026 matin. Pour coder, suivre **`docs/CADRAGE.md`** puis `AGENTS.md` (mineures sans plafond, ≤3 job skills, Claude/Anthropic, pas Gemini).  
+Quand ce document contredit Signal V3, **suivre CADRAGE / AGENTS**.  
 Quand Version simple contredit le code sur l’exemple chiffré (11/15), **suivre le code** (job skills hors majeures).
 
 ---
@@ -42,7 +43,7 @@ La thèse produit est **forte et alignée** sur le challenge Espoo. Le passage V
 Avis : **geler** ces choix. Codex ne doit pas les « améliorer » spontanément.
 
 1. Système Centrale : 5 compétences, 12 composantes, 3 niveaux + Not yet, rosace.
-2. Exactement 3 majeures (poids 2), jusqu’à 2 mineures (poids 1), jusqu’à 2 job skills (poids 2) **à côté** de la rosace, jamais en majeures.
+2. Exactement 3 majeures (poids 2), mineures sans plafond (poids 1), jusqu’à 3 job skills (poids 2) **à côté** de la rosace, jamais en majeures.
 3. Points = poids × min(déclaré, attendu) ; affichage en **fractions** ; jamais de % ni de rang côté talent.
 4. Couverture complète à 70 % (seuil Centrale).
 5. Égalité à la coupe : **jamais** départagée par le code → organisateur.

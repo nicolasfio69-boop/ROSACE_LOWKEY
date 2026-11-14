@@ -389,19 +389,28 @@
 .welcome-help {
   margin-top: 40px;
   border-top: 1px solid var(--stroke);
-  padding-top: 20px;
+  padding-top: 16px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 24px;
-  font-size: 14px;
+  gap: 8px 20px;
+  font-size: 13px;
 }
 .welcome-help p {
   color: var(--muted);
+  margin: 0;
 }
-.welcome-help a {
+.welcome-help a,
+.welcome-help a.welcome-help-quiet {
   min-height: 44px;
-  color: var(--accent);
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+.welcome-help a:hover,
+.welcome-help a:focus-visible {
+  color: var(--ink);
 }
 @media (max-width: 1000px) {
   .welcome-grid {

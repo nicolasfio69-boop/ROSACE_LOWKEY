@@ -10,7 +10,7 @@ Ce fichier est la source de vérité du projet. Il est tenu à jour à chaque d�
 
 **Pour mettre à jour :** quand Nicolas tranche un point, déplace-le de « À trancher » vers « Journal des décisions », avec la date. Si une règle change, modifie aussi la partie concernée plus haut.
 
-Dernière mise à jour : 2026-11-14 — nettoyage GitHub : livraison unique sur `feat/coherent-ux` (PR #11 → `main`).
+Dernière mise à jour : 2026-11-14 — décisions UX : démo hors sidebar, palette gris/rouge/or, wording organisateur, rendu = vidéo `/tour` + slides.
 
 ---
 
@@ -54,7 +54,7 @@ Comme dans le système Centrale (grille CLC), chaque composante est une action q
 
 Les compétences techniques suivent la même règle, par exemple « Program embedded systems in C ».
 
-Attention : ces noms sont dans la PR #7. Tant qu'elle n'est pas fusionnée, `feat/visual-workspace` affiche encore les anciens noms (Listen, Present, Rules, Quality, Frame, Team…). Il faut donc fusionner la PR #7 en premier.
+Ces noms sont livrés dans `feat/coherent-ux`. Ne pas les remplacer par d’anciens libellés (Listen, Present, Quality…).
 
 ## 3. Besoin d'une entreprise et calcul
 
@@ -87,7 +87,7 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
 ## 6. Direction artistique
 
 - Thème clair perle partagé par la barre latérale, le bandeau, les formulaires et les panneaux. Fond Aurora plein écran ; pas de juxtaposition de panneaux blancs et noirs.
-- Seules couleurs fortes : rouge Centrale `#C8102E` et or `#F0C300`. Plus de crème, de vert ni de police à empattements.
+- Seules couleurs fortes : rouge Centrale `#C8102E` et or `#F0C300`, plus des gris. Plus de crème, de bleu, de vert, de violet ni de police à empattements. Les cinq compétences parentes n’utilisent que cette palette.
 - Titres en Space Grotesk, texte en Inter, hébergés dans le projet (aucun appel à Google Fonts).
 - Adaptations des composants gratuits Aceternity : Aurora Background, Glowing Effect sur les cartes d’accueil, Text Generate Effect sur le titre et Background Beams discrets dans les en-têtes. Attributions dans `docs/ACETERNITY_ATTRIBUTION.md`. Tout devient statique si l’utilisateur demande moins d’animations.
 - Motion design : des animations qui expliquent (la rosace qui se construit, le pointillé qui devient plein, l'arrivée des suggestions, les transitions), plus des effets décoratifs. Implémenté sur `feat/coherent-ux`, y compris les compteurs animés.
@@ -155,7 +155,7 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
   - ce fichier de cadrage devient la référence commune pour tous les agents ;
   - la longueur des branches a toujours un sens en niveau : échelle fixe pour le déclaré, l'attendu et l'observé ;
   - les écrans restent simples, mais chaque composante doit pouvoir être attestée : exercices en ligne relus par une personne, mises en situation sur place, questions d'entretien (voir 7 bis) ;
-  - tech challenges retenus : Aiven et Featherless ;
+  - tech challenges retenus : Aiven (Featherless a été remplacé plus tard par Anthropic) ;
   - données : Aiven avec stockage dans le navigateur d'abord, PostgreSQL seulement s'il reste du temps (Nicolas a laissé Claude choisir) ;
   - motion design : des effets qui expliquent, plus des effets décoratifs ;
   - on attend que Codex finisse de refaire l'UX avant de toucher aux écrans ;
@@ -165,13 +165,13 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 
 - **Validé par Nicolas** : tableau 7 bis et trois exercices de démo C5.1, C2.2, J.EMBEDDED_C ; seul un recruteur donne A/C/F/NE.
 - **Validé par Nicolas** : moyenne des valeurs observées, et non maximum. Chaque valeur vaut niveau de la situation × performance ; NE est exclu, F vaut zéro. Une correction remplace la note de la même situation ; une autre situation apporte une observation distincte. La déclaration reste intacte.
-- **Validé par Nicolas** : menu « 3-minute demo », quatre étapes métier et « Checks ». `/demo` reste accessible par URL, hors menu.
+- **Validé par Nicolas** (puis ajusté le soir) : la démo 3 minutes n’est **plus** dans la sidebar métier. Elle reste sur le sas (`Explore the demo`), dans le menu **Demo profile**, et en lien discret en bas des accueils rôle. Quatre étapes métier + Checks dans la nav. `/demo` reste accessible par URL, hors menu.
 - **Validé par Nicolas** : la vingtième compétence est « Build data pipelines », famille Data. La branche importée n’en contenait que dix-neuf.
 - **Implémenté** : intégration des branches de cadrage, catalogue et démo dans `feat/coherent-ux` ; aucune PR fusionnée sur GitHub. Noms exacts, trois majeures, mineures sans plafond ajouté, trois compétences techniques, échelles fixes et moyenne testée.
 - **Implémenté** : `/checks` (redirection depuis `/practice`), neuf variantes écrites à la main, 6 + 6 + 8 minutes au total. Statuts To check / Done / Graded. Réponses fictives sauvegardées dans le navigateur, note humaine séparée, remplacement d’une réponse nécessitant une nouvelle relecture. Les autres exercices en ligne sont explicitement indiqués comme à préparer.
-- **Implémenté** : consignes sur place dans le brief (budget commun de dix minutes), C4.3 « Discussed, not observed », sans note d’observation. Retour Featherless facultatif sur action explicite, sans notation automatique.
+- **Implémenté** : consignes sur place dans le brief (budget commun de dix minutes), C4.3 « Discussed, not observed », sans note d’observation. Retour Claude (Anthropic) facultatif sur action explicite ; recommandation A/C/F/NE possible, note finale humaine seulement.
 - **Implémenté** : démo NordChip/Amira en quatre étapes avec exemple en ligne déjà noté ; fond perle Aurora et animations accessibles.
-- **Préparé, pas déployé** : image Node 22 / Next.js standalone et procédure Aiven Runtime. Pas de PostgreSQL. Les crédits, la région européenne, les paramètres du compte Aiven et les appels réels Featherless/Context.dev restent à vérifier.
+- **Préparé, pas déployé** : image Node 22 / Next.js standalone et procédure Aiven Runtime. Pas de PostgreSQL. Les crédits, la région européenne, les paramètres du compte Aiven et les appels réels Claude/Context.dev restent à vérifier.
 - La revue finale Playwright et les captures de livraison sont consignées dans `docs/VALIDATION.md`. Les validations de rendu et les informations événementielles ci-dessous restent ouvertes.
 
 ### Changement demandé après le cadrage initial
@@ -205,11 +205,18 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 
 Pour chaque point : les options, et ma recommandation en gras.
 
-**a. Le rendu**
-- **Une vidéo de 2 à 3 minutes qui suit le parcours guidé, 3 ou 4 slides, et le texte du formulaire Junction.**
+**a. Le rendu** — **tranché** : vidéo 2–3 min sur `/tour`, 3 ou 4 slides, texte du formulaire Junction.
 
 **b. Infos manquantes (Nicolas)**
 - Heure exacte du rendu.
 - Durée du pitch.
 - Qui est dans l'équipe.
 - Retours de l'équipe Espoo sur place.
+
+### Décisions UX du 14 novembre 2026 (soir)
+
+- Démo 3 min hors nav latérale des rôles ; sas + menu profil + lien discret en bas des homes.
+- Accueils rôle : CTA métier d’abord ; lien démo secondaire discret conservé.
+- Palette forte limitée au gris, rouge Centrale et or.
+- Motif organisateur « outranked » → « Eligible, but capacity is filled by closer fits ».
+- Pas de fusion `main` tant que le pitch/vidéo ne sont pas prêts (`feat/coherent-ux` / PR #11).

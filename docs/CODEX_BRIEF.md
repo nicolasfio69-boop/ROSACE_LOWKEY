@@ -41,7 +41,7 @@ Ensuite, vérifie que `/tour` suit bien ton thème clair, sans couleurs sombres 
 - **Mineures sans limite** (poids 1).
 - **Jusqu'à 3 compétences techniques**, prises dans le catalogue de 20 compétences en 4 familles (`JOB_FAMILIES`, `JOB_SKILLS`), affichées avec `SkillBars` à côté de la rosace.
 - Corrige tous les textes qui disent encore « up to 2 minors », « of 2 minors » ou « 2 job skills ». Exemples : `src/app/page.tsx`, ainsi que le compteur et le résumé de `src/components/NeedForm.tsx`. Pour les mineures, affiche « N minors » sans maximum.
-- Mets `AGENTS.md` en cohérence : mineures sans limite, 3 compétences techniques, hébergement sur Aiven et pas Vercel, Featherless pour l'IA.
+- Mets `AGENTS.md` en cohérence : mineures sans limite, 3 compétences techniques, hébergement sur Aiven et pas Vercel, Claude (Anthropic) pour l'IA.
 
 ## Étape 3. La rosace : une longueur = un niveau
 
@@ -64,7 +64,7 @@ Les écrans restent simples, mais chaque composante doit pouvoir être vérifié
    - 3 exercices en ligne fictifs pour la démo : C5.1 Break down a problem, C2.2 Get it right and spot the error, et J.EMBEDDED_C ;
    - chaque exercice existe en 3 versions (Foundation, Intermediate, Advanced), et le talent fait celle du niveau qu'il déclare ;
    - le talent répond, puis un recruteur relit avec une grille courte et note A, C, F ou NE ;
-   - Featherless peut proposer un premier retour au recruteur, seulement si la clé est configurée et après une action explicite. Jamais une note ;
+   - Claude peut proposer un premier retour / une recommandation A/C/F/NE au recruteur, seulement si la clé est configurée et après une action explicite. La note finale reste humaine ;
    - la note devient une observation : la branche de la rosace devient pleine, à la longueur niveau × performance.
 4. **Brief de conversation** (`/brief`) :
    - pour les composantes `onsite`, une carte « On-site situation » avec la consigne de 10 minutes, puis la grille A, C, F, NE ;
@@ -75,7 +75,7 @@ Les écrans restent simples, mais chaque composante doit pouvoir être vérifié
 
 - Garde les 4 étapes, sur les données NordChip et Amira.
 - À l'étape 4, ajoute une ligne qui montre une vérification en ligne déjà notée par le recruteur, en plus des questions d'entretien.
-- Le bouton principal de l'accueil reste « Start the 3-minute demo ». Le menu contient « 3-minute demo », les 4 étapes et « Checks ».
+- La démo 3 minutes n’est plus dans la sidebar métier : sas « Explore the demo », menu Demo profile, lien discret en bas des accueils rôle. La nav rôle garde les étapes métier et Checks.
 
 ## Étape 6. Motion design : qui explique, plus décoratif
 

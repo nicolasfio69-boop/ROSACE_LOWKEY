@@ -11,8 +11,8 @@ first. Do not change code during the audit: report first, the team decides.
 
 ## What the product must do in a 3-minute demo
 
-1. A recruiter prepares a need: 3 major Centrale components (gold), other components
-   (red), up to 2 technical skills, an expected level for each.
+1. A recruiter prepares a need: 3 major Centrale components (gold), any minors
+   (red), up to 3 technical skills, an expected level for each.
 2. A talent builds a skills card from a CV. Declared levels are dotted on the rosace.
 3. The organiser sees suggestions with their reasons, ties at the cut and people
    without a suggestion, and decides.
@@ -38,8 +38,10 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. Screens: `/`, `/need/new`, `/talent/new`, `/organiser`,
-`/conversations`, `/brief?need=nordchip-embedded&talent=amira`, `/practice`, `/demo`.
+Open http://localhost:3000. Screens: `/`, `/candidate` or `/recruiter`, `/need/new`,
+`/talent/new`, `/organiser`, `/checks`, `/conversations`,
+`/brief?need=nordchip-embedded&talent=amira`, `/tour`, `/demo`.
+The 3-minute demo is not in the role sidebar; open it from welcome or Demo profile.
 If you can drive a browser, take screenshots at 1440 x 900 and 390 x 844.
 
 ## Audit grid, for every screen

@@ -16,12 +16,6 @@ import { Logo } from "./Logo";
 import { AuroraBackground } from "./AuroraBackground";
 const allDestinations = [
   {
-    href: "/tour",
-    label: "3-minute demo",
-    icon: "pointer",
-    subtitle: "The whole event, step by step",
-  },
-  {
     href: "/need/new",
     label: "Recruiter need",
     icon: "need",
@@ -113,10 +107,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [pathname]);
   const allowed =
     role === "candidate"
-      ? ["/tour", "/talent/new", "/talent/checks"]
+      ? ["/talent/new", "/talent/checks"]
       : role === "organiser"
-        ? ["/tour", "/organiser", "/conversations"]
-        : ["/tour", "/need/new", "/checks", "/conversations"];
+        ? ["/organiser", "/conversations"]
+        : ["/need/new", "/checks", "/conversations"];
   const destinations = [
     {
       href: WORKSPACE_HOMES[role],
@@ -208,7 +202,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </span>
             <strong>
               {current?.label ??
-                (pathname === "/overview" ? "Overview" : "Demo data")}
+                (pathname === "/tour"
+                  ? "3-minute demo"
+                  : pathname === "/overview"
+                    ? "Overview"
+                    : "Demo data")}
             </strong>
           </div>
           <div className="topbar-right">
@@ -249,6 +247,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     </button>
                   ),
                 )}
+                <Link href="/tour">Watch the 3-minute demo</Link>
                 <Link href="/?choose=1">Back to welcome</Link>
                 <small>
                   Fictional profiles. No authenticated accounts or access

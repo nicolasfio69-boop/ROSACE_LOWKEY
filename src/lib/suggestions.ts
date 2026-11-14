@@ -65,7 +65,7 @@ export type NoSuggestionReason = "card_too_sparse" | "no_major_reached" | "outra
 export const NO_SUGGESTION_LABELS: Record<NoSuggestionReason, string> = {
   card_too_sparse: "Card not filled in enough for any need",
   no_major_reached: "No major requirement reached for any need",
-  outranked: "Eligible, but other talents are better aligned",
+  outranked: "Eligible, but capacity is filled by closer fits",
 };
 
 /** Talents with no suggestion at all, with the reason shown to the organiser. */

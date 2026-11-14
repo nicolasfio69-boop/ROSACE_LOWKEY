@@ -174,7 +174,12 @@ test("guided tour has four stages and an explicitly human-graded online example"
     page
       .getByRole("navigation", { name: "Workspace navigation" })
       .getByRole("link"),
-  ).toHaveCount(5);
+  ).toHaveCount(4);
+  await expect(
+    page
+      .getByRole("navigation", { name: "Workspace navigation" })
+      .getByRole("link", { name: "3-minute demo" }),
+  ).toHaveCount(0);
 });
 
 for (const [width, height] of [

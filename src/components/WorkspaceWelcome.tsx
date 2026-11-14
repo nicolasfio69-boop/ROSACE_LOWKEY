@@ -231,11 +231,13 @@ export function WorkspaceWelcome({ role }: { role: WorkspaceRole }) {
         </aside>
       </div>
       <div className="welcome-help">
-        <p>Want to see the whole event first?</p>
-        <Link href="/tour">
-          Explore the 3-minute demo <WorkspaceIcon name="arrow" />
+        <p>Optional preview</p>
+        <Link href="/tour" className="welcome-help-quiet">
+          3-minute event walkthrough
         </Link>
-        <Link href="/overview">How Rosace works</Link>
+        <Link href="/overview" className="welcome-help-quiet">
+          How Rosace works
+        </Link>
       </div>
     </main>
   );

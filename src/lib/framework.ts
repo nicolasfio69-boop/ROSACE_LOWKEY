@@ -22,12 +22,13 @@ export const LEVELS: Record<LevelValue, { name: string; definition: string }> = 
 
 export type Competency = { code: string; name: string; color: string };
 
+/** Palette kept to Centrale red, gold and greys only (no blue/green/purple accents). */
 export const COMPETENCIES: Competency[] = [
-  { code: "C1", name: "Working with clients and stakeholders", color: "#8B1E2D" },
-  { code: "C2", name: "Rigour and compliance", color: "#2E4A6B" },
-  { code: "C3", name: "Running a project", color: "#2F6B4F" },
-  { code: "C4", name: "Commitment and self-management", color: "#B5701F" },
-  { code: "C5", name: "Analysis, learning and communication", color: "#6B3A7A" },
+  { code: "C1", name: "Working with clients and stakeholders", color: "#C8102E" },
+  { code: "C2", name: "Rigour and compliance", color: "#5C5C5C" },
+  { code: "C3", name: "Running a project", color: "#7A7A7A" },
+  { code: "C4", name: "Commitment and self-management", color: "#F0C300" },
+  { code: "C5", name: "Analysis, learning and communication", color: "#3D3D3D" },
 ];
 
 export type Component = {
