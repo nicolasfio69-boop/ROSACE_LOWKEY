@@ -1,129 +1,100 @@
+import { WorkspaceIcon } from "@/components/WorkspaceIcon";
 import Link from "next/link";
-import { Logo } from "@/components/Logo";
 import { Rosace } from "@/components/Rosace";
 import { NEEDS } from "@/data/demo";
 import { isComponent } from "@/lib/framework";
-
 export default function Home() {
   const example = NEEDS[0];
   return (
     <main className="site-shell">
-      <nav className="site-nav" aria-label="Main navigation">
-        <Logo size={40} />
-        <div className="nav-links">
-          <Link href="/organiser">Organiser workspace</Link>
-          <Link href="/demo">Demo data</Link>
-          <span className="event-pill">Junction · Espoo 2026</span>
-        </div>
-      </nav>
-      <section className="hero-grid">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span className="status-dot" /> BETTER CONVERSATIONS START HERE
-          </p>
+      <div className="dashboard-intro">
+        <div>
+          <p className="eyebrow">YOUR NEXT MEANINGFUL CONVERSATION</p>
           <h1>
-            See the person.
+            Beyond a CV.
             <br />
-            <em>Start a conversation.</em>
+            <em>A clearer picture of potential.</em>
           </h1>
-          <p className="hero-description">
-            A CV starts the story. A conversation brings it to life. Define what
-            matters for your role, then prepare to explore it together.
-          </p>
-          <Link href="/need/new" className="primary-button">
-            Prepare a recruiter need <span aria-hidden="true">→</span>
-          </Link>
-          <div className="role-links">
-            <Link href="/talent/new" className="secondary-button">
-              I am a talent →
-            </Link>
-            <Link href="/organiser" className="text-button">
-              I organise the event →
-            </Link>
-          </div>
-          <p className="hero-note">Your judgement. A clearer starting point.</p>
-          <div className="hero-facts">
-            <span>
-              <strong>3</strong> priorities that matter
-            </span>
-            <span>
-              <strong>1</strong> shared skills framework
-            </span>
-          </div>
         </div>
-        <div className="hero-visual">
-          <div className="visual-topline">
-            <span className="eyebrow">A ROLE, MADE VISIBLE</span>
-            <span className="small-badge">Synthetic example</span>
-          </div>
+        <p>
+          Bring the work into focus. Let people describe their experience. Make
+          room for a conversation that matters.
+        </p>
+      </div>
+      <section className="overview-feature">
+        <div className="overview-copy">
+          <span className="eyebrow">01 / START WITH THE REAL WORK</span>
+          <h2>
+            What does doing
+            <br />
+            this job actually look like?
+          </h2>
+          <p>
+            Turn a role into concrete situations. Choose the skills that matter
+            and watch your need take shape.
+          </p>
+          <Link className="primary-button" href="/need/new">
+            Prepare a recruiter need <WorkspaceIcon name="arrow" />
+          </Link>
+          <p className="quiet-note" style={{ marginTop: 18, marginBottom: 0 }}>
+            12 components. 3 priorities. Your judgement.
+          </p>
+        </div>
+        <div className="overview-rosace">
+          <span className="eyebrow">A ROLE, MADE VISIBLE</span>
           <Rosace
             title={example.title}
+            size={430}
+            labels="short"
             expected={Object.fromEntries(
               example.requirements
                 .filter((r) => isComponent(r.skill))
                 .map((r) => [r.skill, { level: r.expected, major: r.major }]),
             )}
-            size={390}
-            labels="short"
           />
-          <div className="visual-caption">
-            <span className="gold-dot" />
-            <p>
-              <strong>Three priorities. One clear picture.</strong>
-              <br />
-              Gold branches show what matters most.
-            </p>
-          </div>
-          <div className="floating-note">
-            <span aria-hidden="true">✦</span> A reason to talk.
-            <br />
-            <small>Not a verdict on a person.</small>
-          </div>
+          <small>Gold = major components · Fictional NordChip example</small>
         </div>
       </section>
-      <section className="journey-section" aria-labelledby="journey-title">
-        <div>
-          <p className="eyebrow">FROM A ROLE TO A REAL CONVERSATION</p>
-          <h2 id="journey-title">Make space for what a CV cannot show.</h2>
-        </div>
-        <div className="journey-grid">
-          {[
-            [
-              "01",
-              "Define what matters",
-              "Choose the skills and level your role actually needs.",
-              "Available now",
-            ],
-            [
-              "02",
-              "Let talent tell their story",
-              "Turn experience into a skills card they can review and confirm.",
-              "Available locally",
-            ],
-            [
-              "03",
-              "Meet with a purpose",
-              "Explore the open questions together. A human makes the decision.",
-              "Available locally",
-            ],
-          ].map(([n, title, body, status]) => (
-            <article key={n} className="journey-card">
-              <span className="journey-number">{n}</span>
-              <h3>{title}</h3>
-              <p>{body}</p>
-              <span
-                className={n === "01" ? "available-label" : "planned-label"}
-              >
-                {status}
-              </span>
-            </article>
-          ))}
-        </div>
+      <section className="overview-paths" aria-label="Continue the journey">
+        {[
+          {
+            icon: "talent",
+            title: "Make experience visible",
+            text: "Start from a CV or your own words. Build a skills card you can review and confirm.",
+            href: "/talent/new",
+            link: "Explore the talent journey",
+          },
+          {
+            icon: "event",
+            title: "Make space for people",
+            text: "Review suggestions, resolve ties and see who still needs a conversation.",
+            href: "/organiser",
+            link: "Open the event desk",
+          },
+          {
+            icon: "conversation",
+            title: "Meet with a purpose",
+            text: "Prepare useful questions. Keep what is declared separate from what you observe.",
+            href: "/conversations",
+            link: "Prepare a conversation",
+          },
+        ].map((item) => (
+          <article className="overview-path" key={item.href}>
+            <span className="path-icon">
+              <WorkspaceIcon name={item.icon} />
+            </span>
+            <h2>{item.title}</h2>
+            <p>{item.text}</p>
+            <Link href={item.href}>{item.link} →</Link>
+          </article>
+        ))}
       </section>
-      <footer className="site-footer">
-        <p>Built for meaningful encounters. Powered by human judgement.</p>
-        <Link href="/demo">View synthetic needs & talent cards →</Link>
-      </footer>
+      <div className="overview-footnote">
+        <span>
+          Built for Espoo recruitment events. Designed around human decisions.
+        </span>
+        <Link href="/demo">Explore the fictional demo data →</Link>
+      </div>
     </main>
   );
 }

@@ -1,3 +1,4 @@
+"use client";
 import {
   COMPONENTS,
   type ExpectedLevel,
@@ -31,6 +32,8 @@ export type RosaceProps = {
   title?: string;
   /** Full component names (as in the Centrale tool) or short ones for small cards. */
   labels?: "full" | "short";
+  activeSkill?: string;
+  onSelect?: (skill: string) => void;
 };
 
 export const RED = "#C8102E";
@@ -49,6 +52,8 @@ export function Rosace({
   size = 420,
   title,
   labels = size >= 360 ? "full" : "short",
+  activeSkill,
+  onSelect,
 }: RosaceProps) {
   const font = Math.max(10, Math.round(size / (labels === "full" ? 40 : 26)));
   const margin = Math.round(font * (labels === "full" ? 9 : 4));
@@ -97,6 +102,9 @@ export function Rosace({
       return (
         <line
           key={component.code}
+          className="rosace-branch"
+          data-skill={component.code}
+          data-level={level}
           x1={start.x}
           y1={start.y}
           x2={end.x}
@@ -128,9 +136,25 @@ export function Rosace({
         width={size + 2 * margin}
         height={size}
         className="h-auto max-w-full"
-        role="img"
+        role={onSelect ? "group" : "img"}
         aria-label={title ? `Rosace: ${title}` : "Rosace"}
       >
+        {activeSkill &&
+          COMPONENTS.map((c, i) =>
+            c.code === activeSkill ? (
+              <line
+                key={c.code}
+                x1={center}
+                y1={center}
+                x2={point(center, radius, angleOf(i)).x}
+                y2={point(center, radius, angleOf(i)).y}
+                stroke="#d5b35d"
+                strokeOpacity={0.15}
+                strokeWidth={30}
+                strokeLinecap="round"
+              />
+            ) : null,
+          )}
         <circle cx={center} cy={center} r={at(1)} fill={DISK} />
         {COMPONENTS.map((component, index) => {
           const angle = angleOf(index);
@@ -199,6 +223,66 @@ export function Rosace({
             strong={golden.has(component.code)}
           />
         ))}
+        {onSelect &&
+          COMPONENTS.map((component, index) => {
+            const start = point(center, at(1) - 8, angleOf(index)),
+              end = point(center, radius + font, angleOf(index));
+            const want = expected[component.code],
+              level =
+                observedLevels?.[component.code] ??
+                declared?.[component.code] ??
+                want?.level;
+            return (
+              <g
+                key={component.code}
+                className="rosace-control"
+                role="button"
+                tabIndex={0}
+                aria-label={`Explore ${component.name}`}
+                aria-pressed={activeSkill === component.code}
+                onClick={() => onSelect(component.code)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onSelect(component.code);
+                  }
+                  const direction =
+                    event.key === "ArrowRight" || event.key === "ArrowDown"
+                      ? 1
+                      : event.key === "ArrowLeft" || event.key === "ArrowUp"
+                        ? -1
+                        : 0;
+                  if (direction) {
+                    event.preventDefault();
+                    const controls =
+                      event.currentTarget.ownerSVGElement?.querySelectorAll<SVGGElement>(
+                        ".rosace-control",
+                      );
+                    controls?.[
+                      (index + direction + COMPONENTS.length) %
+                        COMPONENTS.length
+                    ]?.focus();
+                  }
+                }}
+              >
+                <title>{`${component.name}: ${typeof level === "number" ? `level ${level}` : "not filled in"}${want?.major ? ", major" : ""}`}</title>
+                <line
+                  x1={start.x}
+                  y1={start.y}
+                  x2={end.x}
+                  y2={end.y}
+                  stroke="transparent"
+                  strokeWidth={28}
+                />
+                <circle
+                  cx={end.x}
+                  cy={end.y}
+                  r={5}
+                  className="rosace-focus-dot"
+                />
+              </g>
+            );
+          })}
       </svg>
     </figure>
   );

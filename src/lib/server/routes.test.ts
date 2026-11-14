@@ -1,7 +1,8 @@
-import { afterEach, describe, it, expect, vi } from "vitest";
+import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
 import { POST as company } from "@/app/api/company-context/route";
 import { POST as examples } from "@/app/api/level-examples/route";
 import { POST as exercise } from "@/app/api/exercise-feedback/route";
+beforeEach(() => vi.stubEnv("AI_PROVIDER", "gemini"));
 afterEach(() => vi.unstubAllEnvs());
 const request = (data: unknown) =>
   new Request("http://localhost/api", {

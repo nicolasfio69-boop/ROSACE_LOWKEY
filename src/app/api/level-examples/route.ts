@@ -1,4 +1,4 @@
-import { generateExamples } from "@/lib/server/gemini";
+import { generateExamples } from "@/lib/server/ai-examples";
 import {
   failure,
   field,
@@ -13,7 +13,9 @@ export async function POST(request: Request) {
   try {
     const data = await readRequest(request);
     if (data.reviewed !== true)
-      throw new ServiceError("Review the context before using it with Gemini.");
+      throw new ServiceError(
+        "Review the context before using it with the configured AI provider.",
+      );
     const skill = field(data, "skill", 30),
       title = field(data, "title", 120),
       task = field(data, "task", 1000, true);
@@ -28,7 +30,7 @@ export async function POST(request: Request) {
         title: "Recruiter-reviewed company context",
         text: company,
       });
-    limitCalls("gemini");
+    limitCalls("ai");
     return noStore(await generateExamples(skill, title, task, sources));
   } catch (error) {
     return failure(error);

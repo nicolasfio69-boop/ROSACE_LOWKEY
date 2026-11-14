@@ -1,7 +1,9 @@
+import { beforeEach } from "vitest";
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { COMPONENTS } from "./framework";
 import { exerciseFor, validateFeedback } from "./exercises";
 import { generateFeedback } from "./server/exercise-feedback";
+beforeEach(() => vi.stubEnv("AI_PROVIDER", "gemini"));
 afterEach(() => vi.unstubAllEnvs());
 describe("practice without automatic assessment", () => {
   it("covers exactly the twelve components with concrete review criteria", () => {
@@ -48,20 +50,18 @@ describe("practice without automatic assessment", () => {
       questions: ["What would you clarify?"],
       limitations: "Not enough evidence to verify a skill.",
     };
-    const f = vi
-      .fn()
-      .mockResolvedValue(
-        new Response(
-          JSON.stringify({
-            candidates: [
-              {
-                finishReason: "STOP",
-                content: { parts: [{ text: JSON.stringify(feedback) }] },
-              },
-            ],
-          }),
-        ),
-      );
+    const f = vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              finishReason: "STOP",
+              content: { parts: [{ text: JSON.stringify(feedback) }] },
+            },
+          ],
+        }),
+      ),
+    );
     expect(
       await generateFeedback("C1.1", "I would ask about the task.", f),
     ).toEqual(feedback);

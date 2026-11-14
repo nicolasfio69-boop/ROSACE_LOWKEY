@@ -80,7 +80,7 @@ export function TalentForm() {
     }
   }
   return (
-    <div className="workspace">
+    <div className="workspace talent-workspace">
       <div className="workspace-top">
         <Link href="/">← Home</Link>
         <span>Your skills · Your words · Your choice</span>
@@ -102,7 +102,11 @@ export function TalentForm() {
       )}
       <div className={`intake-layout ${step === 1 ? "with-rail" : ""}`}>
         {step === 1 && (
-          <div>
+          <details className="component-navigator">
+            <summary>
+              Browse your skills{" "}
+              <span>Twelve components + optional job skills</span>
+            </summary>
             <JourneyRail
               index={index}
               onSelect={setIndex}
@@ -120,7 +124,7 @@ export function TalentForm() {
                 </button>
               ))}
             </div>
-          </div>
+          </details>
         )}
         <section className="form-panel">
           {step === 0 && (
@@ -152,8 +156,9 @@ export function TalentForm() {
               </button>
               <p className="quiet-note">
                 Your document is read on this device. It is not uploaded, saved
-                or sent to Gemini. The full text is cleared when you continue;
-                short quotes remain only in this page’s memory while you review.
+                or sent to any AI provider. The full text is cleared when you
+                continue; short quotes remain only in this page’s memory while
+                you review.
               </p>
               <div className="form-actions">
                 <span className="quiet-note">
@@ -419,8 +424,14 @@ export function TalentForm() {
           <p className="eyebrow">YOUR DECLARED SKILLS</p>
           <Rosace
             title={name || "Your skills"}
-            size={300}
+            size={480}
             labels="short"
+            activeSkill={step === 1 ? skill.code : undefined}
+            onSelect={(code) => {
+              setIndex(COMPONENTS.findIndex((c) => c.code === code));
+              setStep(1);
+              setError("");
+            }}
             declared={Object.fromEntries(
               Object.entries(levels).filter(([code]) => isComponent(code)),
             )}

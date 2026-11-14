@@ -38,3 +38,12 @@ are prepared but have not been executed on Windows in this environment.
 This follow-up does not adopt the uploaded audit as a new feature specification.
 Its missing-screen inventory predates the current local talent, organiser and
 brief implementation. Product improvements discussed with the user remain proposals.
+
+## Visual workspace and Featherless follow-up
+
+The current delivery supersedes the earlier screen and test inventory: 120
+application tests, four launcher tests and five browser journeys now pass.
+The production build includes the new conversation hub and provider-neutral AI
+routes. Screenshots and exact Cursor startup instructions are in
+[VISUAL_WORKSPACE.md](VISUAL_WORKSPACE.md). Featherless generation is still
+untested with live credentials; the application works without them.

@@ -54,11 +54,19 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 - `src/lib/framework.ts`: the 12 components in English with descriptors per level, 5 job skills.
 - `src/lib/scoring.ts`, `src/lib/suggestions.ts`: the rules above. Tests in `src/lib/scoring.test.ts`.
 - `src/data/demo.ts`: event "Espoo Tech Matchmaking", 2 needs (NordChip embedded developer, Lumora support engineer), 6 talents.
-- `src/app/page.tsx`: overview page (needs, suggestions, talents without suggestion, talent rosaces).
+- `/`: workspace home; `/demo`: the original synthetic overview.
+- `/need/new`: progressive company/role context, interactive 12-component rosace, level cards, browser draft and confirmation.
+- `/talent/new`: on-device document parsing, quoted clues, factual questions and confirmed declarations. CVs remain transient.
+- `/organiser`: company selection, suggestions, human decisions and journal. `/conversations` opens approved or clearly labelled fictional conversations.
+- `/brief?need=...&talent=...`: tailored discussion gaps, role examples and separate A/C/F/NE observations. The query-based URL replaces the originally planned dynamic path.
+- `/practice`: fictional exercises, manual checklists and optional AI feedback. Never an automatic certification.
+- Optional server-only Context.dev and Featherless (optional legacy Gemini) adapters are implemented but live calls await credentials. Company-site collection was explicitly requested by the owner; never search for a talent.
+- `start-local.cmd` / `npm run local`: install dependencies when necessary, start the app and open the browser. Cursor is optional.
+- See `docs/ROADMAP.md` for current delivery status. Storage remains local to one browser; no deployed service or authenticated accounts.
 
 ## Next steps, in this order
 
-Build each step on its own branch with a pull request. Keep the demo data working at every step.
+The following is the original implementation sequence; screens 1–4 now exist, as listed above. Build further changes on their own branch with a pull request. Keep the demo data working at every step.
 
 1. **Screen 1, recruiter need** (`/need/new`): the recruiter types the job title and a short description; at most 4 questions to understand the job; then picks 3 majors and up to 2 minors from the 12 components (cards), up to 2 job skills from a closed list, and an expected level for each. Each level shows a **level card**: the fixed Centrale descriptor plus an example adapted to the job (hand-written for now, Gemini later). A live rosace shows the gold majors as they are picked. Capacity defaults to 3. Use `checkNeed()` to block an invalid need.
 2. **Screen 2, talent card from CV** (`/talent/new`): the talent pastes a CV (not stored). Skills are spotted with the CV sentence quoted (hand-written rules or demo stub now, Gemini later). For each skill, three closed questions: done it? alone or with help? simple or new situation? A written rule suggests the level; the talent confirms or changes it. The talent sees only their rosace and grids, never a rank or a fraction.

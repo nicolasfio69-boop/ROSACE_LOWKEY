@@ -24,6 +24,7 @@ import {
   type LevelExamples,
 } from "@/lib/context";
 import { jobScenario } from "@/data/job-scenarios";
+import { WorkspaceIcon } from "./WorkspaceIcon";
 import { DocumentInput } from "./DocumentInput";
 import { LevelCards } from "./LevelCards";
 import { JourneyRail } from "./JourneyRail";
@@ -43,6 +44,7 @@ export function NeedForm() {
   const [draft, setDraft] = useState<NeedDraft>(initial);
   const [loaded, setLoaded] = useState(false);
   const [step, setStep] = useState(0);
+  const [contextStage, setContextStage] = useState(0);
   const [index, setIndex] = useState(0);
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
@@ -52,7 +54,8 @@ export function NeedForm() {
   const [busy, setBusy] = useState(false);
   const [integrations, setIntegrations] = useState({
     context: false,
-    gemini: false,
+    ai: false,
+    provider: "Featherless",
   });
   const [pending, setPending] = useState<Generated | null>(null);
   const [accepted, setAccepted] = useState<Record<string, Generated>>({});
@@ -150,6 +153,16 @@ export function NeedForm() {
         "Could not save your latest changes. Keep this page open and try again.",
       );
     }
+  }
+  function exploreSkill(code: string) {
+    const i = COMPONENTS.findIndex((item) => item.code === code);
+    if (i < 0) return;
+    setIndex(i);
+    setStep(1);
+    setPending(null);
+    ticket.current++;
+    setBusy(false);
+    setError("");
   }
   function go(next: number) {
     ticket.current++;
@@ -267,7 +280,7 @@ export function NeedForm() {
   if (!loaded)
     return <p className="loading-state">Opening your recruiter workspace…</p>;
   return (
-    <div className="workspace">
+    <div className="workspace recruiter-workspace">
       <div className="workspace-top">
         <Link href="/">← Home</Link>
         <span role="status">
@@ -297,18 +310,23 @@ export function NeedForm() {
       )}
       <div className={`intake-layout ${step === 1 ? "with-rail" : ""}`}>
         {step === 1 && (
-          <JourneyRail
-            index={index}
-            onSelect={(i) => {
-              setIndex(i);
-              setPending(null);
-              ticket.current++;
-              setBusy(false);
-            }}
-            selected={draft.requirements
-              .filter((r) => r.major)
-              .map((r) => r.skill)}
-          />
+          <details className="component-navigator">
+            <summary>
+              Browse the 12 components <span>Five shared competencies</span>
+            </summary>
+            <JourneyRail
+              index={index}
+              onSelect={(i) => {
+                setIndex(i);
+                setPending(null);
+                ticket.current++;
+                setBusy(false);
+              }}
+              selected={draft.requirements
+                .filter((r) => r.major)
+                .map((r) => r.skill)}
+            />
+          </details>
         )}
         <section className="form-panel">
           {step === 0 && (
@@ -321,202 +339,289 @@ export function NeedForm() {
                   explain skills; you decide the requirements.
                 </p>
               </div>
-              <div className="context-grid">
-                <label className="field-label">
-                  Event
-                  <input
-                    value={draft.eventName ?? ""}
-                    maxLength={120}
-                    onChange={(e) => update({ eventName: e.target.value })}
-                  />
-                </label>
-                <label className="field-label">
-                  Company name
-                  <input
-                    placeholder="e.g. NordChip (fictional demo)"
-                    value={draft.company ?? ""}
-                    maxLength={120}
-                    onChange={(e) => update({ company: e.target.value })}
-                  />
-                </label>
+              {!draft.company && !draft.title && (
+                <button
+                  type="button"
+                  className="example-start"
+                  onClick={() => {
+                    update({
+                      company: "NordChip",
+                      title: "Junior embedded developer",
+                      description:
+                        "Help a fictional team build reliable firmware for sensor boards. Investigate a vague bug report, run checks and share findings with hardware colleagues.",
+                      context: {
+                        task: "Investigate a sensor that stops reporting after a restart",
+                        audience:
+                          "A team of five, including hardware engineers",
+                        outcome: "A reproducible fix with clear checks",
+                        challenge:
+                          "Incomplete reports and unfamiliar internal tools",
+                      },
+                      workMode: "Hybrid",
+                      location: "Espoo office and hardware lab",
+                      autonomy: "A mentor available when needed",
+                    });
+                    setContextStage(1);
+                  }}
+                >
+                  <span aria-hidden="true">↗</span> Try a fictional role{" "}
+                  <small>Embedded developer · NordChip</small>
+                </button>
+              )}
+              <div className="context-stages" aria-label="Job context steps">
+                {["Company", "The role", "Ways of working"].map((label, i) => (
+                  <button
+                    type="button"
+                    key={label}
+                    aria-current={contextStage === i ? "step" : undefined}
+                    onClick={() => setContextStage(i)}
+                  >
+                    <span>{i + 1}</span>
+                    {label}
+                  </button>
+                ))}
               </div>
-              <details className="context-details">
-                <summary>
-                  Company context{" "}
-                  <span>Public website or a description you provide</span>
-                </summary>
-                <div className="optional-skills">
+              <div hidden={contextStage !== 0} className="context-stage">
+                <div className="context-grid">
                   <label className="field-label">
-                    Company website
+                    Event
                     <input
-                      type="url"
-                      placeholder="https://company.example/about"
-                      value={url}
-                      onChange={(e) => {
-                        ticket.current++;
-                        setBusy(false);
-                        setUrl(e.target.value);
-                      }}
+                      value={draft.eventName ?? ""}
+                      maxLength={120}
+                      onChange={(e) => update({ eventName: e.target.value })}
                     />
                   </label>
+                  <label className="field-label">
+                    Company name
+                    <input
+                      placeholder="e.g. NordChip (fictional demo)"
+                      value={draft.company ?? ""}
+                      maxLength={120}
+                      onChange={(e) => update({ company: e.target.value })}
+                    />
+                  </label>
+                </div>
+                <details className="context-details">
+                  <summary>
+                    Company context{" "}
+                    <span>Public website or a description you provide</span>
+                  </summary>
+                  <div className="optional-skills">
+                    <label className="field-label">
+                      Company website
+                      <input
+                        type="url"
+                        placeholder="https://company.example/about"
+                        value={url}
+                        onChange={(e) => {
+                          ticket.current++;
+                          setBusy(false);
+                          setUrl(e.target.value);
+                        }}
+                      />
+                    </label>
+                    <button
+                      type="button"
+                      className="secondary-button"
+                      disabled={!integrations.context || busy || !url}
+                      onClick={collect}
+                    >
+                      {busy ? "Collecting…" : "Read this company page"}
+                    </button>
+                    <p className="quiet-note">
+                      {integrations.context
+                        ? "Context.dev reads only the public company page you choose. No people searches."
+                        : "Website collection is not configured yet. You can paste company context below."}
+                    </p>
+                    <label className="field-label">
+                      Company activity, products and team
+                      <textarea
+                        rows={5}
+                        value={draft.companyContext ?? ""}
+                        maxLength={16000}
+                        onChange={(e) =>
+                          update({
+                            companyContext: e.target.value,
+                            sourceUrl: undefined,
+                          })
+                        }
+                      />
+                    </label>
+                    {draft.sourceUrl && (
+                      <p className="quiet-note">
+                        Collected from{" "}
+                        <a
+                          href={draft.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {draft.sourceUrl}
+                        </a>
+                        . Review and remove anything irrelevant before
+                        approving.
+                      </p>
+                    )}
+                  </div>
+                </details>
+                <div className="form-actions">
+                  <p className="quiet-note">
+                    One event. Different companies. Their own needs.
+                  </p>
+                  <button
+                    type="button"
+                    className="primary-button"
+                    onClick={() =>
+                      draft.company?.trim()
+                        ? setContextStage(1)
+                        : setError("Enter your company name first.")
+                    }
+                  >
+                    Continue to the role →
+                  </button>
+                </div>
+              </div>
+              <div hidden={contextStage !== 1} className="context-stage">
+                <DocumentInput
+                  label="Import a job description"
+                  onText={(text) => {
+                    if (text.length > 16000)
+                      throw new Error(
+                        "This job description is too long. Paste an extract of up to 16,000 characters.",
+                      );
+                    update({ description: text });
+                  }}
+                />
+                <label className="field-label">
+                  Job title
+                  <input
+                    value={draft.title}
+                    placeholder="Junior embedded developer"
+                    maxLength={120}
+                    onChange={(e) => update({ title: e.target.value })}
+                  />
+                </label>
+                <label className="field-label">
+                  Job description
+                  <textarea
+                    rows={5}
+                    value={draft.description}
+                    maxLength={16000}
+                    onChange={(e) => update({ description: e.target.value })}
+                  />
+                </label>
+                <div className="form-actions">
                   <button
                     type="button"
                     className="secondary-button"
-                    disabled={!integrations.context || busy || !url}
-                    onClick={collect}
+                    onClick={() => setContextStage(0)}
                   >
-                    {busy ? "Collecting…" : "Read this company page"}
+                    ← Company
                   </button>
-                  <p className="quiet-note">
-                    {integrations.context
-                      ? "Context.dev reads only the public company page you choose. No people searches."
-                      : "Website collection is not configured yet. You can paste company context below."}
-                  </p>
+                  <button
+                    type="button"
+                    className="primary-button"
+                    onClick={() =>
+                      draft.title.trim() && draft.description.trim()
+                        ? setContextStage(2)
+                        : setError("Add the job title and description first.")
+                    }
+                  >
+                    Continue to working context →
+                  </button>
+                </div>
+              </div>
+              <div hidden={contextStage !== 2} className="context-stage">
+                <div className="context-grid">
                   <label className="field-label">
-                    Company activity, products and team
-                    <textarea
-                      rows={5}
-                      value={draft.companyContext ?? ""}
-                      maxLength={16000}
-                      onChange={(e) =>
-                        update({
-                          companyContext: e.target.value,
-                          sourceUrl: undefined,
-                        })
-                      }
+                    Working arrangement
+                    <select
+                      value={draft.workMode}
+                      onChange={(e) => update({ workMode: e.target.value })}
+                    >
+                      <option>On site</option>
+                      <option>Hybrid</option>
+                      <option>Remote</option>
+                    </select>
+                  </label>
+                  <label className="field-label">
+                    Workplace or working environment
+                    <input
+                      value={draft.location ?? ""}
+                      maxLength={120}
+                      placeholder="Espoo office, lab or distributed team"
+                      onChange={(e) => update({ location: e.target.value })}
                     />
                   </label>
-                  {draft.sourceUrl && (
-                    <p className="quiet-note">
-                      Collected from{" "}
-                      <a
-                        href={draft.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {draft.sourceUrl}
-                      </a>
-                      . Review and remove anything irrelevant before approving.
-                    </p>
-                  )}
                 </div>
-              </details>
-              <DocumentInput
-                label="Import a job description"
-                onText={(text) => {
-                  if (text.length > 16000)
-                    throw new Error(
-                      "This job description is too long. Paste an extract of up to 16,000 characters.",
-                    );
-                  update({ description: text });
-                }}
-              />
-              <label className="field-label">
-                Job title
-                <input
-                  value={draft.title}
-                  placeholder="Junior embedded developer"
-                  maxLength={120}
-                  onChange={(e) => update({ title: e.target.value })}
-                />
-              </label>
-              <label className="field-label">
-                Job description
-                <textarea
-                  rows={5}
-                  value={draft.description}
-                  maxLength={16000}
-                  onChange={(e) => update({ description: e.target.value })}
-                />
-              </label>
-              <div className="context-grid">
                 <label className="field-label">
-                  Working arrangement
+                  What support will be available?
                   <select
-                    value={draft.workMode}
-                    onChange={(e) => update({ workMode: e.target.value })}
+                    value={draft.autonomy}
+                    onChange={(e) => update({ autonomy: e.target.value })}
                   >
-                    <option>On site</option>
-                    <option>Hybrid</option>
-                    <option>Remote</option>
+                    <option>With guidance at first</option>
+                    <option>A mentor available when needed</option>
+                    <option>Mostly independent work</option>
+                    <option>Helping others with complex situations</option>
                   </select>
                 </label>
-                <label className="field-label">
-                  Workplace or working environment
+                <div className="context-grid">
+                  {JOB_QUESTIONS.map((q) => (
+                    <label key={q.key} className="field-label">
+                      {q.label}
+                      <textarea
+                        rows={2}
+                        maxLength={240}
+                        value={draft.context[q.key]}
+                        placeholder={q.placeholder}
+                        onChange={(e) =>
+                          update({
+                            context: {
+                              ...draft.context,
+                              [q.key]: e.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </label>
+                  ))}
+                </div>
+                <label className="consent-line">
                   <input
-                    value={draft.location ?? ""}
-                    maxLength={120}
-                    placeholder="Espoo office, lab or distributed team"
-                    onChange={(e) => update({ location: e.target.value })}
-                  />
+                    type="checkbox"
+                    checked={reviewed}
+                    onChange={(e) => {
+                      setReviewed(e.target.checked);
+                      setPending(null);
+                      setAccepted({});
+                      ticket.current++;
+                      setBusy(false);
+                    }}
+                  />{" "}
+                  I have reviewed the job and company context. It may be used to
+                  suggest examples.
                 </label>
-              </div>
-              <label className="field-label">
-                What support will be available?
-                <select
-                  value={draft.autonomy}
-                  onChange={(e) => update({ autonomy: e.target.value })}
-                >
-                  <option>With guidance at first</option>
-                  <option>A mentor available when needed</option>
-                  <option>Mostly independent work</option>
-                  <option>Helping others with complex situations</option>
-                </select>
-              </label>
-              <div className="context-grid">
-                {JOB_QUESTIONS.map((q) => (
-                  <label key={q.key} className="field-label">
-                    {q.label}
-                    <textarea
-                      rows={2}
-                      maxLength={240}
-                      value={draft.context[q.key]}
-                      placeholder={q.placeholder}
-                      onChange={(e) =>
-                        update({
-                          context: {
-                            ...draft.context,
-                            [q.key]: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                  </label>
-                ))}
-              </div>
-              <label className="consent-line">
-                <input
-                  type="checkbox"
-                  checked={reviewed}
-                  onChange={(e) => {
-                    setReviewed(e.target.checked);
-                    setPending(null);
-                    setAccepted({});
-                    ticket.current++;
-                    setBusy(false);
-                  }}
-                />{" "}
-                I have reviewed the job and company context. It may be used to
-                suggest examples.
-              </label>
-              <p className="quiet-note">
-                Use synthetic job and candidate data in this demo. Working
-                arrangement informs examples, never candidate scores.
-              </p>
-              <div className="form-actions">
-                <span className="quiet-note">You can continue without AI.</span>
-                <button
-                  className="primary-button"
-                  onClick={() =>
-                    roleReady
-                      ? go(1)
-                      : setError(
-                          "Enter your company, job title and job description first.",
-                        )
-                  }
-                >
-                  Explore the 12 components →
-                </button>
+                <p className="quiet-note">
+                  Use synthetic job and candidate data in this demo. Working
+                  arrangement informs examples, never candidate scores.
+                </p>
+                <div className="form-actions">
+                  <span className="quiet-note">
+                    You can continue without AI.
+                  </span>
+                  <button
+                    className="primary-button"
+                    onClick={() =>
+                      roleReady
+                        ? go(1)
+                        : setError(
+                            "Enter your company, job title and job description first.",
+                          )
+                    }
+                  >
+                    Explore the 12 components →
+                  </button>
+                </div>
               </div>
             </>
           )}
@@ -542,14 +647,14 @@ export function NeedForm() {
                 {draft.context.task || draft.description.slice(0, 220)}
               </p>
               {mentions[c.code] && (
-                <div className="context-suggestion">
-                  <strong>A clue in your description — review it</strong>
+                <details className="context-suggestion">
+                  <summary>A clue from your job description</summary>
                   <p>“{mentions[c.code]}”</p>
                   <small>
                     This keyword-based suggestion does not choose a priority or
                     a level.
                   </small>
-                </div>
+                </details>
               )}
               <LevelCards
                 jobTitle={draft.title}
@@ -614,13 +719,13 @@ export function NeedForm() {
               <details className="context-details">
                 <summary>
                   Context behind these examples{" "}
-                  <span>Sources and optional Gemini assistance</span>
+                  <span>Sources and optional AI assistance</span>
                 </summary>
                 <div className="optional-skills">
                   <p className="quiet-note">
-                    {integrations.gemini
-                      ? "Gemini can propose examples from the passages below. You review them before use."
-                      : "Gemini is not connected yet. Hand-written examples remain fully usable."}
+                    {integrations.ai
+                      ? `${integrations.provider} can propose examples from the passages below. You review them before use.`
+                      : "AI assistance is not connected yet. Hand-written examples remain fully usable."}
                   </p>
                   {passages.map((p) => (
                     <blockquote className="source-passage" key={p.id}>
@@ -638,7 +743,7 @@ export function NeedForm() {
                   <button
                     type="button"
                     className="secondary-button"
-                    disabled={!integrations.gemini || !reviewed || busy}
+                    disabled={!integrations.ai || !reviewed || busy}
                     onClick={generate}
                   >
                     {busy
@@ -653,7 +758,7 @@ export function NeedForm() {
                   )}
                   {pending && (
                     <div className="ai-review">
-                      <h3>Review Gemini’s proposal</h3>
+                      <h3>Review the proposed examples</h3>
                       {([1, 2, 3] as const).map((l) => (
                         <p key={l}>
                           <strong>{LEVELS[l].name}:</strong>{" "}
@@ -850,14 +955,22 @@ export function NeedForm() {
           </p>
           <Rosace
             title={draft.title || "Your role takes shape"}
-            size={300}
+            size={480}
             labels="short"
+            activeSkill={step === 1 ? c.code : undefined}
+            onSelect={roleReady ? exploreSkill : undefined}
             expected={Object.fromEntries(
               draft.requirements
                 .filter((r) => isComponent(r.skill))
                 .map((r) => [r.skill, { level: r.expected, major: r.major }]),
             )}
           />
+          <div className="chart-instruction">
+            <WorkspaceIcon name="pointer" />
+            {roleReady
+              ? "Select a branch to explore its levels"
+              : "Your role will take shape here"}
+          </div>
           <div className="preview-summary">
             <span>
               {majors}
@@ -904,6 +1017,7 @@ export function NeedForm() {
               setReviewed(false);
               setAccepted({});
               setLevelChoices({});
+              setContextStage(0);
               setUrl("");
               setIndex(0);
               go(0);

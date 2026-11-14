@@ -8,6 +8,7 @@ export function Practice() {
     [answer, setAnswer] = useState(""),
     [consent, setConsent] = useState(false),
     [connected, setConnected] = useState(false),
+    [provider, setProvider] = useState("Featherless"),
     [busy, setBusy] = useState(false),
     [feedback, setFeedback] = useState<ExerciseFeedback | null>(null),
     [error, setError] = useState("");
@@ -15,7 +16,10 @@ export function Practice() {
   useEffect(() => {
     fetch("/api/integrations")
       .then((r) => r.json())
-      .then((r) => setConnected(r.gemini === true))
+      .then((r) => {
+        setConnected(r.ai === true);
+        setProvider(r.provider ?? "Featherless");
+      })
       .catch(() => {});
     return () => {
       version.current = -1;
@@ -100,7 +104,7 @@ export function Practice() {
           </label>
           <p className="quiet-note">
             Use fictional details. Your answer stays in this page’s memory and
-            is cleared when you leave. It is sent to Gemini only if you
+            is cleared when you leave. It is sent to {provider} only if you
             explicitly request feedback.
           </p>
           <label className="consent-line">
@@ -112,19 +116,19 @@ export function Practice() {
                 setConsent(e.target.checked);
               }}
             />{" "}
-            Send this fictional practice answer to Gemini for feedback.
+            Send this fictional practice answer to {provider} for feedback.
           </label>
           <button
             className="primary-button"
             disabled={!connected || !consent || !answer.trim() || busy}
             onClick={review}
           >
-            {busy ? "Reviewing…" : "Request Gemini feedback"}
+            {busy ? "Reviewing…" : "Request AI feedback"}
           </button>
           {!connected && (
             <p className="quiet-note">
-              Gemini is not connected yet. The checklist works now; you can
-              discuss your answer in an interview.
+              AI is not connected yet. The checklist works now; you can discuss
+              your answer in an interview.
             </p>
           )}
           {error && (

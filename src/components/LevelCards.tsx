@@ -1,3 +1,4 @@
+import { LevelScene } from "./LevelScene";
 import { descriptor, LEVELS, type ExpectedLevel } from "@/lib/framework";
 import { levelExample, type NeedDraft } from "@/lib/need-draft";
 import { jobScenario } from "@/data/job-scenarios";
@@ -25,6 +26,7 @@ export function LevelCards({
           key={level}
           className={`level-card ${value === level ? "selected-level" : ""}`}
         >
+          <LevelScene level={level} />
           <div className="level-card-top">
             <span className="level-bars" aria-hidden="true">
               {[1, 2, 3].map((n) => (
@@ -41,23 +43,20 @@ export function LevelCards({
             />
           </div>
           <h3>
+            <span className="level-number">0{level}</span>
             <label htmlFor={`level-${skill}-${level}`}>
               {LEVELS[level].name}
             </label>
           </h3>
           <p className="autonomy-label">
             {
-              [
-                "With support · Simple tasks",
-                "Independently · Defined tasks",
-                "New complexity · Others rely on them",
-              ][level - 1]
+              ["With a colleague", "Independently", "Through new complexity"][
+                level - 1
+              ]
             }
           </p>
           <div className="example-block">
-            <span>
-              {examples ? "REVIEWED GEMINI EXAMPLE" : "HAND-WRITTEN SCENARIO"}
-            </span>
+            <span>{examples ? "REVIEWED SUGGESTION" : "IN PRACTICE"}</span>
             <p>
               {examples?.[level] ??
                 jobScenario(skill, level, jobTitle) ??

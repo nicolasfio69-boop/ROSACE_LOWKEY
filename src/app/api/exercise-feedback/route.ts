@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     const data = await readRequest(request);
     if (data.consent !== true)
       throw new ServiceError(
-        "Confirm before sending your practice answer to Gemini.",
+        "Confirm before sending your practice answer to the configured AI provider.",
       );
     const skill = field(data, "skill", 30),
       answer = field(data, "answer", 6000);
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     } catch {
       throw new ServiceError("Unknown component.");
     }
-    limitCalls("gemini");
+    limitCalls("ai");
     return noStore(await generateFeedback(skill, answer));
   } catch (e) {
     return failure(e);

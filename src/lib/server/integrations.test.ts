@@ -1,7 +1,8 @@
-import { afterEach, describe, it, expect, vi } from "vitest";
+import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
 import { companyUrl, parseCompanyResponse, collectCompany } from "./company";
-import { generateExamples } from "./gemini";
+import { generateExamples } from "./ai-examples";
 import { readRequest } from "./http";
+beforeEach(() => vi.stubEnv("AI_PROVIDER", "gemini"));
 afterEach(() => vi.unstubAllEnvs());
 describe("company context integration", () => {
   it.each([
@@ -44,16 +45,14 @@ describe("company context integration", () => {
   });
   it("calls the documented endpoint and returns source provenance", async () => {
     vi.stubEnv("CONTEXT_DEV_API_KEY", "test-key");
-    const f = vi
-      .fn()
-      .mockResolvedValue(
-        new Response(
-          JSON.stringify({
-            markdown: { success: true, data: "Fictional sensor company" },
-            metadata: { title: "Demo" },
-          }),
-        ),
-      );
+    const f = vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          markdown: { success: true, data: "Fictional sensor company" },
+          metadata: { title: "Demo" },
+        }),
+      ),
+    );
     const r = await collectCompany("https://example.org/about", f);
     expect(r.source.url).toBe("https://example.org/about");
     expect(r.source.fetchedAt).toBeTruthy();
@@ -68,41 +67,45 @@ describe("Gemini boundary", () => {
   it("keeps manual operation available when unconfigured", async () => {
     vi.stubEnv("GEMINI_API_KEY", "");
     const f = vi.fn();
-    await expect(generateExamples("C1.1", "Demo", "", [], f)).rejects.toThrow(
-      "not configured",
-    );
+    await expect(
+      generateExamples(
+        "C1.1",
+        "Demo",
+        "",
+        [{ id: "job", title: "Demo", text: "Synthetic task" }],
+        f,
+      ),
+    ).rejects.toThrow("not configured");
     expect(f).not.toHaveBeenCalled();
   });
   it("validates model output against the retrieved sources", async () => {
     vi.stubEnv("GEMINI_API_KEY", "test-key");
     vi.stubEnv("GEMINI_MODEL", "test-model");
-    const f = vi
-      .fn()
-      .mockResolvedValue(
-        new Response(
-          JSON.stringify({
-            candidates: [
-              {
-                finishReason: "STOP",
-                content: {
-                  parts: [
-                    {
-                      text: JSON.stringify({
-                        examples: {
-                          1: "With help",
-                          2: "Alone",
-                          3: "New situations",
-                        },
-                        sourceIds: ["job:1"],
-                      }),
-                    },
-                  ],
-                },
+    const f = vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              finishReason: "STOP",
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      examples: {
+                        1: "With help",
+                        2: "Alone",
+                        3: "New situations",
+                      },
+                      sourceIds: ["job:1"],
+                    }),
+                  },
+                ],
               },
-            ],
-          }),
-        ),
-      );
+            },
+          ],
+        }),
+      ),
+    );
     const r = await generateExamples(
       "C2.2",
       "Demo",

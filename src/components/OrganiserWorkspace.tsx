@@ -17,6 +17,7 @@ import {
 import { skillName } from "@/lib/framework";
 
 export function OrganiserWorkspace() {
+  const [activeNeed, setActiveNeed] = useState("");
   const [workspace, setWorkspace] = useState<Workspace>(emptyWorkspace),
     [ready, setReady] = useState(false),
     [error, setError] = useState(""),
@@ -98,9 +99,32 @@ export function OrganiserWorkspace() {
           <p>Every talent has a suggestion or a tie to review.</p>
         )}
       </section>
+      <div className="need-switcher" aria-label="Choose a company need">
+        {results.map((result) => (
+          <button
+            type="button"
+            key={result.need.id}
+            aria-pressed={
+              (activeNeed || results[0]?.need.id) === result.need.id
+            }
+            onClick={() => setActiveNeed(result.need.id)}
+          >
+            <span>{result.need.company}</span>
+            <strong>{result.need.title}</strong>
+            <small>
+              {result.suggested.length} suggestions · {result.tied.length} tied
+              for review
+            </small>
+          </button>
+        ))}
+      </div>
       <div className="organiser-grid">
         {results.map((result) => (
-          <section className="form-panel" key={result.need.id}>
+          <section
+            className="form-panel"
+            key={result.need.id}
+            hidden={(activeNeed || results[0]?.need.id) !== result.need.id}
+          >
             <p className="eyebrow">{result.need.company}</p>
             <h2>{result.need.title}</h2>
             <p className="quiet-note">
@@ -145,13 +169,25 @@ export function OrganiserWorkspace() {
                       ? "Not eligible under the current rule"
                       : "No suggestion for this need";
                 return (
-                  <article className="meeting-card" key={talent.id}>
-                    <div>
-                      <strong>{talent.pseudonym}</strong>
-                      <span className="small-badge">{label}</span>
-                    </div>
+                  <details className="meeting-card" key={talent.id}>
+                    <summary className="candidate-summary">
+                      <span className="candidate-avatar" aria-hidden="true">
+                        {talent.pseudonym.slice(0, 1)}
+                      </span>
+                      <div>
+                        <strong>{talent.pseudonym}</strong>
+                        <span className="small-badge">{label}</span>
+                      </div>
+                      <span className="candidate-open">Review →</span>
+                    </summary>
                     <p className="quiet-note">
-                      Alignment: {a.points} out of {a.max}. To check:{" "}
+                      {a.complete
+                        ? "Enough of this need is filled in"
+                        : "More information is needed"}{" "}
+                      · {a.rows.filter((row) => row.level !== null).length} of{" "}
+                      {a.rows.length} requirements described.
+                      <br />
+                      Declared alignment: {a.points} out of {a.max}. To check:{" "}
                       {[...a.missingMajors, ...a.missingJobSkills]
                         .map(skillName)
                         .join(", ") || "No missing major or job requirement"}
@@ -194,7 +230,7 @@ export function OrganiserWorkspace() {
                         {decision.reason}
                       </p>
                     )}
-                  </article>
+                  </details>
                 );
               })}
             </details>
