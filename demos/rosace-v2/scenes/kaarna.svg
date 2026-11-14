@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Fictional company "Kaarna Health". -->
+  <rect width="120" height="120" rx="30" fill="#14363A"/>
+  <path d="M22 66 H44 L52 46 L64 84 L74 58 H98" stroke="#7FE0C9" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

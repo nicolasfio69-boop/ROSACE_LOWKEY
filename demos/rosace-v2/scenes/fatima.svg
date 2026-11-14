@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <!-- Fictional talent "Fatima", drawn for the demo. Not a real person. -->
+  <defs><clipPath id="c"><circle cx="150" cy="150" r="150"/></clipPath></defs>
+  <g clip-path="url(#c)">
+    <rect width="300" height="300" fill="#F7E6AE"/>
+    <circle cx="232" cy="70" r="70" fill="#FBEFC8"/>
+    <path d="M30 300 C40 228 95 206 150 206 C205 206 260 228 270 300 Z" fill="#C8102E"/>
+    <path d="M122 208 L150 246 L178 208 Z" fill="#F4F1EC"/>
+    <rect x="128" y="168" width="44" height="52" rx="18" fill="#A86D4C"/>
+    <ellipse cx="150" cy="134" rx="52" ry="61" fill="#B97A56"/>
+    <circle cx="150" cy="58" r="27" fill="#2B1D17"/>
+    <path d="M96 140 C88 72 212 72 204 140 C200 108 178 92 150 95 C122 92 100 108 96 140 Z" fill="#2B1D17"/>
+    <path d="M120 125 Q131 119 142 124" stroke="#2B1D17" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M158 124 Q169 119 180 125" stroke="#2B1D17" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="131" cy="139" r="5" fill="#2B1D17"/>
+    <circle cx="169" cy="139" r="5" fill="#2B1D17"/>
+    <path d="M150 145 Q147 157 152 159" stroke="#8E5539" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M135 168 Q150 179 165 168" stroke="#7A3E2A" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="98" cy="150" r="6" fill="#F0C300"/>
+    <circle cx="202" cy="150" r="6" fill="#F0C300"/>
+  </g>
+</svg>

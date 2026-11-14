@@ -19,3 +19,4 @@ demos/*/*.mp4
 demos/*/*.mp3
 demos/*/spot-check/
 demos/*/plan.json
+demos/rosace-v2/out/

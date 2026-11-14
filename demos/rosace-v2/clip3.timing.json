@@ -1,0 +1,337 @@
+{
+ "clip": 3,
+ "total": 28.959,
+ "lines": [
+  {
+   "id": "s07",
+   "clip": 3,
+   "text": "Everyone uses the same twelve skills, in five families. That is the rosace.",
+   "start": 0.4,
+   "dur": 5.329,
+   "words": [
+    {
+     "w": "Everyone",
+     "start": 0.446,
+     "end": 0.864
+    },
+    {
+     "w": "uses",
+     "start": 0.911,
+     "end": 1.213
+    },
+    {
+     "w": "the",
+     "start": 1.271,
+     "end": 1.34
+    },
+    {
+     "w": "same",
+     "start": 1.387,
+     "end": 1.642
+    },
+    {
+     "w": "twelve",
+     "start": 1.689,
+     "end": 2.002
+    },
+    {
+     "w": "skills,",
+     "start": 2.037,
+     "end": 2.571
+    },
+    {
+     "w": "in",
+     "start": 2.606,
+     "end": 2.734
+    },
+    {
+     "w": "five",
+     "start": 2.826,
+     "end": 3.105
+    },
+    {
+     "w": "families.",
+     "start": 3.14,
+     "end": 3.802
+    },
+    {
+     "w": "That",
+     "start": 4.208,
+     "end": 4.463
+    },
+    {
+     "w": "is",
+     "start": 4.522,
+     "end": 4.591
+    },
+    {
+     "w": "the",
+     "start": 4.649,
+     "end": 4.719
+    },
+    {
+     "w": "rosace.",
+     "start": 4.777,
+     "end": 5.462
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "clip": 3,
+   "text": "Each level describes a real situation. Get it right, Intermediate: your work passes review with few corrections.",
+   "start": 6.729,
+   "dur": 7.419,
+   "words": [
+    {
+     "w": "Each",
+     "start": 6.787,
+     "end": 7.031
+    },
+    {
+     "w": "level",
+     "start": 7.089,
+     "end": 7.321
+    },
+    {
+     "w": "describes",
+     "start": 7.379,
+     "end": 7.902
+    },
+    {
+     "w": "a",
+     "start": 7.936,
+     "end": 7.971
+    },
+    {
+     "w": "real",
+     "start": 8.041,
+     "end": 8.262
+    },
+    {
+     "w": "situation.",
+     "start": 8.32,
+     "end": 9.155
+    },
+    {
+     "w": "Get",
+     "start": 9.701,
+     "end": 9.887
+    },
+    {
+     "w": "it",
+     "start": 9.933,
+     "end": 10.003
+    },
+    {
+     "w": "right,",
+     "start": 10.061,
+     "end": 10.375
+    },
+    {
+     "w": "Intermediate:",
+     "start": 10.398,
+     "end": 11.176
+    },
+    {
+     "w": "your",
+     "start": 11.396,
+     "end": 11.547
+    },
+    {
+     "w": "work",
+     "start": 11.605,
+     "end": 11.826
+    },
+    {
+     "w": "passes",
+     "start": 11.895,
+     "end": 12.279
+    },
+    {
+     "w": "review",
+     "start": 12.348,
+     "end": 12.65
+    },
+    {
+     "w": "with",
+     "start": 12.708,
+     "end": 12.847
+    },
+    {
+     "w": "few",
+     "start": 12.894,
+     "end": 13.068
+    },
+    {
+     "w": "corrections.",
+     "start": 13.126,
+     "end": 13.892
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "clip": 3,
+   "text": "The company picks its three most important skills, in gold.",
+   "start": 15.148,
+   "dur": 3.788,
+   "words": [
+    {
+     "w": "The",
+     "start": 15.206,
+     "end": 15.299
+    },
+    {
+     "w": "company",
+     "start": 15.357,
+     "end": 15.67
+    },
+    {
+     "w": "picks",
+     "start": 15.728,
+     "end": 15.961
+    },
+    {
+     "w": "its",
+     "start": 15.996,
+     "end": 16.112
+    },
+    {
+     "w": "three",
+     "start": 16.158,
+     "end": 16.379
+    },
+    {
+     "w": "most",
+     "start": 16.437,
+     "end": 16.634
+    },
+    {
+     "w": "important",
+     "start": 16.681,
+     "end": 17.098
+    },
+    {
+     "w": "skills,",
+     "start": 17.145,
+     "end": 17.76
+    },
+    {
+     "w": "in",
+     "start": 17.888,
+     "end": 18.027
+    },
+    {
+     "w": "gold.",
+     "start": 18.12,
+     "end": 18.631
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "clip": 3,
+   "text": "After the talk, the recruiter notes what they saw: A, seen clearly. C, seen in part. F, not seen.",
+   "start": 19.936,
+   "dur": 7.523,
+   "words": [
+    {
+     "w": "After",
+     "start": 19.971,
+     "end": 20.215
+    },
+    {
+     "w": "the",
+     "start": 20.261,
+     "end": 20.342
+    },
+    {
+     "w": "talk,",
+     "start": 20.389,
+     "end": 20.679
+    },
+    {
+     "w": "the",
+     "start": 20.702,
+     "end": 20.772
+    },
+    {
+     "w": "recruiter",
+     "start": 20.83,
+     "end": 21.225
+    },
+    {
+     "w": "notes",
+     "start": 21.294,
+     "end": 21.492
+    },
+    {
+     "w": "what",
+     "start": 21.527,
+     "end": 21.643
+    },
+    {
+     "w": "they",
+     "start": 21.677,
+     "end": 21.805
+    },
+    {
+     "w": "saw:",
+     "start": 21.863,
+     "end": 22.374
+    },
+    {
+     "w": "A,",
+     "start": 22.641,
+     "end": 22.92
+    },
+    {
+     "w": "seen",
+     "start": 22.955,
+     "end": 23.233
+    },
+    {
+     "w": "clearly.",
+     "start": 23.326,
+     "end": 23.86
+    },
+    {
+     "w": "C,",
+     "start": 24.162,
+     "end": 24.534
+    },
+    {
+     "w": "seen",
+     "start": 24.592,
+     "end": 24.801
+    },
+    {
+     "w": "in",
+     "start": 24.859,
+     "end": 24.917
+    },
+    {
+     "w": "part.",
+     "start": 25.01,
+     "end": 25.52
+    },
+    {
+     "w": "F,",
+     "start": 26.066,
+     "end": 26.345
+    },
+    {
+     "w": "not",
+     "start": 26.391,
+     "end": 26.589
+    },
+    {
+     "w": "seen.",
+     "start": 26.647,
+     "end": 27.134
+    }
+   ]
+  }
+ ]
+}
