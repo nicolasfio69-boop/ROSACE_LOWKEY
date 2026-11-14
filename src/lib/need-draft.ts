@@ -1,4 +1,4 @@
-import { SKILL_CODES, type ExpectedLevel } from "./framework";
+import { SKILL_CODES, descriptor, type ExpectedLevel } from "./framework";
 import { checkNeed, type Need, type Requirement } from "./scoring";
 
 export const JOB_QUESTIONS = [
@@ -135,7 +135,7 @@ export function levelExample(
   level: ExpectedLevel,
   draft: Pick<NeedDraft, "title" | "context">,
 ): string {
-  const example = EXAMPLES[skill]?.[level - 1];
+  const example = EXAMPLES[skill]?.[level - 1] ?? (SKILL_CODES.has(skill) ? descriptor(skill, level) : undefined);
   if (!example) throw new Error("Choose a known skill and expected level.");
   const context = [
     draft.title.trim() && `Role: ${draft.title.trim()}.`,

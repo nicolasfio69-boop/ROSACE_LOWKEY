@@ -1,0 +1,186 @@
+# Cadrage Rosace : le document de référence
+
+Ce fichier est la source de vérité du projet. Il est tenu à jour à chaque décision.
+
+**Pour tout agent (ChatGPT, Codex, Cursor, Claude) :**
+- lis ce fichier en entier avant de coder ou de proposer quoi que ce soit, puis `AGENTS.md` ;
+- si une demande contredit ce fichier, signale-le au lieu de coder ;
+- si ce fichier et `AGENTS.md` ne disent pas la même chose, ce fichier gagne ;
+- ne tranche jamais seul un point de la partie « À trancher » : propose, Nicolas décide.
+
+**Pour mettre à jour :** quand Nicolas tranche un point, déplace-le de « À trancher » vers « Journal des décisions », avec la date. Si une règle change, modifie aussi la partie concernée plus haut.
+
+Dernière mise à jour : 2026-11-14, 16 h 45.
+
+---
+
+## 1. Le projet en bref
+
+- Junction 2026, défi « Rethinking Recruitment » de la Ville d'Espoo. Nom de travail : **Rosace**. Nom sur la plateforme Junction : `Rosace_lowkey`.
+- Le contexte : des événements de recrutement à Espoo, en présence, en ligne ou hybrides. Les entreprises ont du mal à dire ce dont elles ont vraiment besoin. Les talents ont du mal à montrer ce qu'ils savent faire, et les CV écrits par IA se ressemblent tous.
+- La promesse : **« We turn claims into questions you can check during the conversation. »** On ne prétend jamais détecter un CV gonflé ni prouver une compétence.
+- Le recruteur est le héros de la démo. Une personne décide toujours : l'outil ne fait que suggérer.
+- La notation du jury : impact 45 %, innovation et UX 35 %, exécution responsable et faisable 20 %.
+
+## 2. Règles fixes (non négociables)
+
+1. **Le système Centrale ne bouge pas** : 5 compétences, 12 composantes, les niveaux (Not yet, Foundation, Intermediate, Advanced) et la rosace. Aucun ajout, retrait ou renommage sans l'accord de Nicolas.
+2. **Simple avant tout.** Pas d'algorithme d'affectation, pas de liste d'attente, pas de classement ni de score montrés aux talents, pas de pourcentage à l'écran.
+3. **Données fictives uniquement.** Aucune vraie personne, aucune vraie entreprise. On ne cherche jamais un talent sur le web.
+4. **Aucun critère de biais** : nationalité, langue, âge, genre ou diplôme ne servent jamais dans un calcul.
+5. **Aucune clé d'API dans le dépôt.** Les clés vont dans les réglages de l'hébergeur. Les fichiers `.env*` sont ignorés par Git.
+6. **Le CV n'est jamais stocké**, même pas dans les journaux d'IA.
+7. **Le produit est en anglais** (interface, code, commentaires). Les échanges avec Nicolas sont en français.
+8. Chaque changement garde au vert les tests, TypeScript, ESLint et le build.
+
+## 2 bis. Les 12 composantes : toujours des verbes d'action
+
+Comme dans le système Centrale (grille CLC), chaque composante est une action qu'on peut observer, jamais un nom abstrait comme « Quality » ou « Team ». Les noms complets et les libellés courts de la rosace commencent tous par un verbe. Un agent ne doit jamais les remplacer par des noms.
+
+| Code | Nom (interface) | Libellé court (rosace) |
+|---|---|---|
+| C1.1 | Reach out to people | Reach out |
+| C1.2 | Understand and convince | Convince |
+| C2.1 | Know the rules and stick to them | Follow the rules |
+| C2.2 | Get it right and spot the error | Get it right |
+| C3.1 | Scope a job | Scope the work |
+| C3.2 | See it through and hand it over | See it through |
+| C4.1 | Work with others | Work with others |
+| C4.2 | Own your decisions | Own decisions |
+| C4.3 | Keep commitments and manage your time | Keep commitments |
+| C5.1 | Break down a problem | Break down problems |
+| C5.2 | Learn fast on your own | Learn fast |
+| C5.3 | Communicate clearly | Communicate clearly |
+
+Les compétences techniques suivent la même règle, par exemple « Program embedded systems in C ».
+
+Attention : ces noms sont dans la PR #7. Tant qu'elle n'est pas fusionnée, `feat/visual-workspace` affiche encore les anciens noms (Listen, Present, Rules, Quality, Frame, Team…). Il faut donc fusionner la PR #7 en premier.
+
+## 3. Besoin d'une entreprise et calcul
+
+- **Exactement 3 composantes majeures** (poids 2), dessinées en or, par-dessus la rosace. Ce sont toujours des composantes Centrale.
+- **Composantes mineures sans limite** (poids 1), dessinées en rouge.
+- **Jusqu'à 3 compétences techniques** (poids 2), prises dans un catalogue de 20 compétences réparties en 4 familles (embarqué, logiciel, data, support IT). Elles ne sont jamais majeures et s'affichent en barres à côté de la rosace.
+- **Points** = poids × min(niveau, niveau attendu). On les affiche en fraction (par exemple 13/19), jamais en pourcentage.
+- **Couverture** : un profil est incomplet sous 70 % du poids demandé. Les majeures et compétences techniques manquantes sont listées « à vérifier ».
+- **Égalité à la limite** : l'outil ne départage jamais. Les talents à égalité vont à l'organisateur.
+- **Observation** après l'entretien, grille Centrale : vu clairement (A = 1), vu en partie (C = 0,6), pas vu (F = 0), pas abordé (NE, ignoré). La valeur observée est le niveau multiplié par la performance. Elle ne s'ajoute jamais au déclaré.
+- **Descripteurs** : une seule échelle. 1 = avec aide, cas simple. 2 = seul, cas réel. 3 = seul, situation nouvelle ou changeante, et d'autres dépendent du résultat. Chaque descripteur doit pouvoir se vérifier avec « Racontez-moi une fois où… ». Pas de réputation, pas de trait de personnalité. La communication est jugée sur le fait d'être compris, jamais sur l'accent ou la grammaire.
+
+## 4. La rosace
+
+- Disque gris, axes rouges en pointillés, les 3 majeures en or dessinées en dernier.
+- Une barre pointillée = déclaré par le talent. Une barre pleine = observé par un recruteur. Un trait noir = niveau attendu par l'entreprise. Une branche vide = non renseigné, jamais zéro.
+- Les libellés au bout des branches commencent par un verbe d'action.
+- Le logo est une petite rosace avec 3 branches or en haut.
+- **La longueur d'une branche a toujours un sens en niveau** (décidé le 2026-11-14). L'échelle est fixe : la branche part du petit cercle blanc, le bord du disque gris vaut Foundation, l'anneau intermédiaire vaut Intermediate et le cercle extérieur vaut Advanced. Ça vaut pour le déclaré, l'attendu et l'observé.
+- Une observation se place sur la même échelle : niveau de la situation × performance (A = 1, C = 0,6, F = 0). Par exemple, « vu clairement » sur un exercice Intermediate atteint l'anneau Intermediate, et « vu en partie » s'arrête à 60 % de cette longueur.
+
+## 5. Le parcours de démo
+
+En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChip et Amira) :
+1. **Recruteur** : NordChip dit ce qui compte (3 majeures, niveaux attendus, compétences techniques).
+2. **Talent** : Amira transforme son CV en carte de compétences, en pointillés.
+3. **Organisateur** : il voit les suggestions avec leurs raisons, les égalités et les personnes sans suggestion, puis il approuve.
+4. **Conversation** : des questions là où la carte est la plus faible, puis l'observation sur la grille Centrale (barres pleines).
+
+## 6. Direction artistique
+
+- Barre latérale et bandeau d'accueil noirs, surfaces de travail blanches.
+- Seules couleurs fortes : rouge Centrale `#C8102E` et or `#F0C300`. Plus de crème, de vert ni de police à empattements.
+- Titres en Space Grotesk, texte en Inter, hébergés dans le projet (aucun appel à Google Fonts).
+- Effets inspirés des composants gratuits d'Aceternity : fond « Wavy Background » sur l'accueil, bordure « Glowing Effect » sur les cartes. Tout s'arrête si l'utilisateur demande moins d'animations.
+- Motion design : des animations qui expliquent (la rosace qui se construit, le pointillé qui devient plein, l'arrivée des suggestions, les transitions), plus des effets décoratifs. On le fera après la refonte UX de Codex.
+- Les textes disent ce que fait l'outil. Pas de slogans.
+
+## 7. Technique
+
+- Next.js 15, React 19, TypeScript, Tailwind 4, Vitest et Playwright.
+- **Stockage** : dans le navigateur pour la démo. Tous les rôles partagent le même navigateur.
+- **IA : Featherless** (tech challenge retenu), côté serveur. Elle propose, par exemple des exemples de niveau ou un premier retour sur un exercice, et une personne relit toujours. Gemini n'est plus visé.
+- **Contexte entreprise** (facultatif) : Context.dev, côté serveur. Ce n'est pas un tech challenge visé.
+- **Hébergement : Aiven** (tech challenge retenu), pas Vercel. [Aiven Runtime](https://aiven.io/runtime) fait tourner une application en conteneur, ce qui demande d'ajouter un `Dockerfile` (Next.js en mode `standalone`). La base de données serait Aiven PostgreSQL. Restent à vérifier : les crédits, la région européenne et la gestion des clés.
+- **Données** : on héberge d'abord sur Aiven avec le stockage dans le navigateur, sans base de données. Aiven PostgreSQL ne vient que s'il reste du temps.
+
+## 7 bis. Attester un niveau (proposition à valider)
+
+Déclarer un niveau ne suffit pas. Pour chaque composante, on prévoit comment le vérifier, et c'est toujours **une personne qui note** (A, C, F ou NE). L'IA peut proposer un premier retour, jamais la note.
+
+Il y a trois façons de vérifier :
+- **En ligne, avant l'événement** : un court exercice écrit ou technique, fait par le talent puis relu par un recruteur avec une grille. Au maximum 20 minutes au total par talent.
+- **Sur place, à l'événement** : une courte mise en situation (jeu de rôle, tâche à plusieurs) observée par le recruteur. Au maximum 10 minutes.
+- **Pendant l'entretien** : la question « Racontez-moi une fois où… » avec sa relance. C'est la preuve la plus faible, et elle compte comme telle.
+
+Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. Le talent fait la version du niveau qu'il déclare.
+
+| Composante | Comment on vérifie | Exemple de situation |
+|---|---|---|
+| C1.1 Reach out to people | Sur place | Il manque une information pour avancer : aller la chercher auprès d'un « collègue » joué par un recruteur. |
+| C1.2 Understand and convince | Sur place | Jeu de rôle : un client décrit mal son problème. Reformuler, puis proposer une solution et la faire accepter. |
+| C2.1 Know the rules and stick to them | En ligne | Un extrait de règle (protection des données, règles de code) et 5 cas : dire ce qui est permis et pourquoi. |
+| C2.2 Get it right and spot the error | En ligne | Relire un petit livrable (code ou tableau) et trouver les erreurs, avec une grille de relecture. |
+| C3.1 Scope a job | En ligne | Découper une demande floue en étapes, avec une durée et un risque pour chacune. |
+| C3.2 See it through and hand it over | En ligne et entretien | Écrire la note de passation d'un mini-projet fictif, puis en parler. |
+| C4.1 Work with others | Sur place | Une mini-tâche à 2 ou 3, observée : partage du travail, écoute, résultat commun. |
+| C4.2 Own your decisions | Entretien et sur place | Un choix à faire entre deux options avec des informations incomplètes : décider et justifier. |
+| C4.3 Keep commitments and manage your time | Entretien seulement | On ne peut pas l'observer en 10 minutes. On demande un exemple concret sur plusieurs semaines, marqué « parlé, pas observé ». |
+| C5.1 Break down a problem | En ligne | Un rapport de bug vague : écrire l'analyse et les questions à poser. |
+| C5.2 Learn fast on your own | En ligne | 20 minutes pour prendre en main un petit outil fictif non documenté, puis répondre à 3 questions. |
+| C5.3 Communicate clearly | Sur place | Expliquer en 2 minutes un sujet technique à un non-spécialiste. On juge si c'est compris, jamais l'accent ni la grammaire. |
+| Compétences techniques | En ligne | Un petit test pratique (corriger une fonction C, écrire une requête SQL…). Des tests automatiques peuvent aider le relecteur, mais c'est lui qui note. |
+
+À l'écran, ça reste simple : pour chaque composante demandée, une ligne qui dit comment elle sera vérifiée et où en est la vérification (à faire, faite, notée). L'actuel « Practice studio » devient cette partie.
+
+## 8. Branches et pull requests
+
+- On travaille à partir de `feat/visual-workspace`, pas de `main`. Chaque changement passe par sa propre branche et une PR vers `feat/visual-workspace`.
+- PR ouvertes au 2026-11-14 : #7 (composantes concrètes et catalogue technique), #8 (direction artistique et effets Aceternity), #9 (parcours guidé, construit sur #8). Ordre de fusion : #7, puis #8, puis #9.
+- Codex a ouvert la PR #11 (`feat/coherent-ux`, construite sur #8) : thème clair perle avec fond Aurora d'Aceternity, et corrections UX. La suite du travail se fait sur cette branche, en suivant `docs/CODEX_BRIEF.md`, qui commence par fusionner #10, #7 et #9.
+
+## 9. Journal des décisions
+
+- 2026-11-13 : on garde le système Centrale à tout prix.
+- 2026-11-14 :
+  - produit en anglais, 3 niveaux plus « Not yet » ;
+  - le talent ne voit jamais de rang ni de score ;
+  - le recruteur est le héros de la démo ;
+  - les 3 majeures sont toujours des composantes Centrale, en or ;
+  - noms des composantes repris de la grille CLC, avec des descripteurs ancrés dans un poste tech ;
+  - catalogue technique : 20 compétences, au plus 3 par besoin ;
+  - les mineures n'ont pas de limite, et les libellés de la rosace commencent par un verbe d'action ;
+  - le front faisait « bullshit » : nouvelle direction artistique, avec les effets gratuits d'Aceternity ;
+  - on fait d'abord le parcours guidé, ensuite le motion design ;
+  - hébergement par un tech challenge, pas par Vercel ;
+  - ce fichier de cadrage devient la référence commune pour tous les agents ;
+  - la longueur des branches a toujours un sens en niveau : échelle fixe pour le déclaré, l'attendu et l'observé ;
+  - les écrans restent simples, mais chaque composante doit pouvoir être attestée : exercices en ligne relus par une personne, mises en situation sur place, questions d'entretien (voir 7 bis) ;
+  - tech challenges retenus : Aiven et Featherless ;
+  - données : Aiven avec stockage dans le navigateur d'abord, PostgreSQL seulement s'il reste du temps (Nicolas a laissé Claude choisir) ;
+  - motion design : des effets qui expliquent, plus des effets décoratifs ;
+  - on attend que Codex finisse de refaire l'UX avant de toucher aux écrans ;
+  - rappel de Nicolas : les composantes sont toujours des verbes d'action, comme dans le système Centrale (voir 2 bis).
+
+## 10. À trancher ensemble
+
+Pour chaque point : les options, et ma recommandation en gras.
+
+**a. Le plan « Attester un niveau » (7 bis)**
+- **Valider le tableau tel quel, puis coder d'abord la ligne « comment c'est vérifié » sur l'écran du besoin, ainsi que 3 exercices en ligne (C5.1, C2.2 et une compétence technique) pour la démo.**
+- Modifier certaines lignes du tableau avant de coder.
+
+**b. Plusieurs observations pour une même composante**
+- **On garde la plus haute, pour que la branche reste lisible en niveau.**
+- On fait la moyenne.
+
+**c. Ce qu'on montre au jury**
+- **Le menu montre le parcours guidé, les 4 étapes et la partie « Attester ». La page `/demo` sort du menu, sans supprimer le code.**
+- Tout garder dans le menu.
+
+**d. Le rendu**
+- **Une vidéo de 2 à 3 minutes qui suit le parcours guidé, 3 ou 4 slides, et le texte du formulaire Junction.**
+
+**e. Infos manquantes (Nicolas)**
+- Heure exacte du rendu.
+- Durée du pitch.
+- Qui est dans l'équipe.
+- Retours de l'équipe Espoo sur place.

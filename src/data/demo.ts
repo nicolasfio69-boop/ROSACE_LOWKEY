@@ -68,7 +68,7 @@ export const NEEDS: Need[] = [
     capacity: 3,
     requirements: [
       {
-        skill: "C1.1",
+        skill: "C1.2",
         major: true,
         expected: 2,
         reason: "Customers often can't describe what is wrong.",
@@ -128,7 +128,7 @@ export const TALENTS: Talent[] = [
       "C4.1": { level: 2, evidence: "declared", cvQuote: "President of the Otaniemi student robotics club (2 years)." },
       "J.PROTOCOLS": { level: null, cvQuote: "Connected sensors to the robot's main board." },
       "C5.2": { level: 1, evidence: "declared" },
-      "C1.1": { level: 1, evidence: "declared" },
+      "C1.2": { level: 1, evidence: "declared" },
       "C5.3": { level: 2, evidence: "situation", cvQuote: "Organised workshops for 30 new members." },
       "C4.3": { level: 3, evidence: "declared" },
       "C3.1": { level: 2, evidence: "declared" },
@@ -149,7 +149,7 @@ export const TALENTS: Talent[] = [
       "C5.1": { level: 3, evidence: "situation", cvQuote: "Wrote the analysis plan for a noisy measurement campaign." },
       "C4.1": { level: 2, evidence: "declared" },
       "C5.2": { level: 2, evidence: "supported", cvQuote: "Taught myself Rust to rewrite the lab's data pipeline.", link: "https://example.org/lab-pipeline" },
-      "C1.1": { level: 2, evidence: "declared" },
+      "C1.2": { level: 2, evidence: "declared" },
       "C5.3": { level: 1, evidence: "declared" },
     },
   },
@@ -170,7 +170,7 @@ export const TALENTS: Talent[] = [
       "C5.2": { level: 2, evidence: "declared" },
       "J.LINUX": { level: 3, evidence: "declared", cvQuote: "Automated test benches with Python on Linux." },
       "J.PYTHON": { level: 2, evidence: "declared" },
-      "C1.1": { level: 1, evidence: "declared" },
+      "C1.2": { level: 1, evidence: "declared" },
       "C5.3": { level: 1, evidence: "declared" },
       "C2.2": { level: 2, evidence: "declared" },
       "C4.3": { level: 2, evidence: "declared" },
@@ -186,7 +186,7 @@ export const TALENTS: Talent[] = [
       "Wrote the internal FAQ used by the whole support team.",
     ].join("\n"),
     statements: {
-      "C1.1": { level: 3, evidence: "situation", cvQuote: "First point of contact for 400 employees, phone and chat." },
+      "C1.2": { level: 3, evidence: "situation", cvQuote: "First point of contact for 400 employees, phone and chat." },
       "C5.3": { level: 2, evidence: "supported", cvQuote: "Wrote the internal FAQ used by the whole support team.", link: "https://example.org/faq" },
       "J.TROUBLESHOOT": { level: 2, evidence: "declared" },
       "C2.2": { level: 1, evidence: "declared" },
@@ -209,7 +209,7 @@ export const TALENTS: Talent[] = [
     ].join("\n"),
     statements: {
       "C5.3": { level: 3, evidence: "declared" },
-      "C1.1": { level: 2, evidence: "declared" },
+      "C1.2": { level: 2, evidence: "declared" },
       "C4.1": { level: 3, evidence: "situation", cvQuote: "Coordinated a team of 8 teachers for a new curriculum." },
       "C5.2": { level: 3, evidence: "situation", cvQuote: "Learned Python online and built grading scripts for colleagues." },
       "J.TROUBLESHOOT": { level: 1, evidence: "declared" },

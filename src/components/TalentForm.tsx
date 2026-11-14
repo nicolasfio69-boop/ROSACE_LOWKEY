@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   COMPONENTS,
+  JOB_FAMILIES,
   JOB_SKILLS,
   LEVELS,
   descriptor,
@@ -64,8 +65,12 @@ export function TalentForm() {
       setReady(true);
     }
   }, []);
-  const skills = [...COMPONENTS, ...JOB_SKILLS],
-    skill = skills[index],
+  const [pinned, setPinned] = useState<string[]>([]);
+  const jobInPath = JOB_SKILLS.filter(
+    (j) => quotes[j.code] || levels[j.code] !== undefined || pinned.includes(j.code),
+  );
+  const skills = [...COMPONENTS, ...jobInPath],
+    skill = skills[Math.min(index, skills.length - 1)],
     response = answers[skill.code] ?? emptyAnswers,
     suggested = suggestLevel(response),
     selected = overrides[skill.code] ?? suggested;
@@ -139,7 +144,7 @@ export function TalentForm() {
           <details className="component-navigator">
             <summary>
               Browse your skills{" "}
-              <span>Twelve components + optional job skills</span>
+              <span>Twelve components + optional technical skills</span>
             </summary>
             <JourneyRail
               index={index}
@@ -147,15 +152,33 @@ export function TalentForm() {
               selected={Object.keys(levels)}
             />
             <div className="journey-rail">
-              <p className="eyebrow">OPTIONAL JOB SKILLS</p>
-              {JOB_SKILLS.map((j, i) => (
-                <button
-                  type="button"
-                  key={j.code}
-                  onClick={() => setIndex(COMPONENTS.length + i)}
-                >
-                  {j.name}
-                </button>
+              <p className="eyebrow">OPTIONAL TECHNICAL SKILLS</p>
+              {JOB_FAMILIES.map((family) => (
+                <div key={family.code}>
+                  <p className="quiet-note">{family.name}</p>
+                  {JOB_SKILLS.filter((j) => j.family === family.code).map((j) => (
+                    <button
+                      type="button"
+                      key={j.code}
+                      onClick={() => {
+                        const path = [
+                          ...COMPONENTS,
+                          ...JOB_SKILLS.filter(
+                            (x) =>
+                              x.code === j.code ||
+                              quotes[x.code] ||
+                              levels[x.code] !== undefined ||
+                              pinned.includes(x.code),
+                          ),
+                        ];
+                        setPinned((p) => (p.includes(j.code) ? p : [...p, j.code]));
+                        setIndex(path.findIndex((s) => s.code === j.code));
+                      }}
+                    >
+                      {j.name}
+                    </button>
+                  ))}
+                </div>
               ))}
             </div>
           </details>
@@ -217,7 +240,7 @@ export function TalentForm() {
               <p className="eyebrow">
                 {isComponent(skill.code)
                   ? `COMPONENT ${index + 1} / 12`
-                  : `JOB SKILL ${index - 11} / 5`}{" "}
+                  : `TECHNICAL SKILL ${index - 11} / ${jobInPath.length}`}{" "}
                 · {skill.code}
               </p>
               <div className="step-heading">

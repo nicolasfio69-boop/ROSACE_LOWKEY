@@ -2,6 +2,8 @@
 
 Read this file fully before changing anything. It is the short version of the project's reference document.
 
+**First read `docs/CADRAGE.md`** (in French): it is the up-to-date framing document with every decision and the open questions. If this file and `docs/CADRAGE.md` disagree, `docs/CADRAGE.md` wins. Never settle an open question yourself: propose options and let the owner decide.
+
 ## The project in five lines
 
 - Junction 2026, challenge "Rethinking Recruitment" by the City of Espoo. Working name: **Rosace**.
@@ -15,7 +17,9 @@ Read this file fully before changing anything. It is the short version of the pr
 1. **The Centrale system is fixed**: 5 competencies, 12 components, 3 levels (Foundation, Intermediate, Advanced, plus "Not yet"), and the rosace. Do not add, remove or rename components without the owner's approval. See `src/lib/framework.ts`.
 2. **Keep it simple.** No allocation algorithm, no waitlist, no ranking shown to talents, no percentages on screen. If a feature is not in "Next steps" below, ask first.
 3. **Synthetic data only.** No real person, no real company. Never search the web for a talent.
-4. **No bias inputs**: never use nationality, language, age, gender or degree name in a calculation.
+4. **No bias inputs**: never use nationality, language, age, gender or degree name in a calculation. Communication is judged on being understood, never on accent or grammar.
+9. **Rosace labels start with an action verb** (Reach out, Convince, Follow the rules...).
+10. **Descriptors stay concrete**: each one must be checkable by asking "tell me about a time when...". No reputation ("others rely on them"), no personality trait. Same ladder everywhere: 1 with help on a simple case, 2 alone on a real case, 3 alone when the situation is new or changing and others depend on the result.
 5. **No API key in the repository.** Keys go in the hosting environment settings (Vercel). `.env*` is git-ignored.
 6. **The CV is never stored**, not even in AI logs. A talent card is kept 6 months only if the talent asks, and can be deleted anytime.
 7. Product language is **English**. Code, comments and UI in English.
@@ -25,8 +29,8 @@ Read this file fully before changing anything. It is the short version of the pr
 
 A company need has, like in the Centrale tool:
 - **exactly 3 major components** (weight 2), drawn **in gold, on top** of the rosace;
-- **up to 2 minor components** (weight 1), drawn in red;
-- **up to 2 job skills** (weight 2) on top of the Centrale base, shown next to the rosace, never as majors.
+- **as many minor components as the job needs** (weight 1), drawn in red, as in the Centrale grid;
+- **up to 3 technical skills** (weight 2) on top of the Centrale base, from a catalog grouped by job family (`JOB_FAMILIES`, `JOB_SKILLS` in `src/lib/framework.ts`), shown as bars next to the rosace (`SkillBars`), never as majors.
 `checkNeed()` in `src/lib/scoring.ts` enforces this.
 
 Alignment of a talent with a need:
@@ -68,7 +72,7 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 
 The following is the original implementation sequence; screens 1–4 now exist, as listed above. Build further changes on their own branch with a pull request. Keep the demo data working at every step.
 
-1. **Screen 1, recruiter need** (`/need/new`): the recruiter types the job title and a short description; at most 4 questions to understand the job; then picks 3 majors and up to 2 minors from the 12 components (cards), up to 2 job skills from a closed list, and an expected level for each. Each level shows a **level card**: the fixed Centrale descriptor plus an example adapted to the job (hand-written for now, Gemini later). A live rosace shows the gold majors as they are picked. Capacity defaults to 3. Use `checkNeed()` to block an invalid need.
+1. **Screen 1, recruiter need** (`/need/new`): the recruiter types the job title and a short description; at most 4 questions to understand the job; then picks 3 majors and any number of minors from the 12 components (cards), up to 3 technical skills from a closed list grouped by job family, and an expected level for each. Each level shows a **level card**: the fixed Centrale descriptor plus an example adapted to the job (hand-written for now, Gemini later). A live rosace shows the gold majors as they are picked. Capacity defaults to 3. Use `checkNeed()` to block an invalid need.
 2. **Screen 2, talent card from CV** (`/talent/new`): the talent pastes a CV (not stored). Skills are spotted with the CV sentence quoted (hand-written rules or demo stub now, Gemini later). For each skill, three closed questions: done it? alone or with help? simple or new situation? A written rule suggests the level; the talent confirms or changes it. The talent sees only their rosace and grids, never a rank or a fraction.
 3. **Organiser gesture** (`/organiser`): sees suggestions per need, ties, talents without suggestion and why; approves, adds or removes a talent with a one-line reason; every action goes to a journal.
 4. **Screen 3, brief and observation** (`/brief/[need]/[talent]`): why talk, 3 to 5 questions to verify the claims, what a good answer contains, talent rosace over the need. After the meeting the recruiter fills the A / C / F / NE grid; observed bars become solid.

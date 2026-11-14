@@ -1100,3 +1100,15 @@ input::file-selector-button {
 :root {
   --color-gold-ink: #81680b;
 }
+
+/* The guided tour shares the pearl workspace surfaces. */
+.tour-steps, .tour-look, .tour-avatar { background: #dce0e9; color: #343947 !important; }
+.tour-steps button, .tour-steps button.past { color: #535b6b; }
+.tour-steps button span { border-color: #aeb5c3; }
+.tour-steps button[aria-current="step"] { background: #f0f1f5; color: #262936; }
+.tour-steps button[aria-current="step"] span { color: #262936; }
+.tour-rosace, .tour-card, .tour-card.muted, .tour-answers button { background: #e9ecf3ed; border-color: #cbd0db; }
+.tour-approve { border-color: #9da5b5; }
+.tour-approve.done, .tour-answers button[aria-pressed="true"] { background: #c8102e; border-color: #c8102e; color: white; }
+.tour-card > span, .tour-label, .tour-nav small, .tour-rosace > figcaption { color: #535b6b; }
+@media (prefers-reduced-motion: reduce) { .tour-steps > i, .tour-steps button, .tour-approve, .tour-answers button { transition: none; } }

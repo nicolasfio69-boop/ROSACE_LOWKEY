@@ -12,6 +12,12 @@ const destinations = [
     subtitle: "A clearer starting point",
   },
   {
+    href: "/tour",
+    label: "3-minute demo",
+    icon: "pointer",
+    subtitle: "The whole event, step by step",
+  },
+  {
     href: "/need/new",
     label: "Recruiter need",
     icon: "need",

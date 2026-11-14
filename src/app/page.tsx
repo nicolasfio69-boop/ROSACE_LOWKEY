@@ -59,11 +59,11 @@ export default function Home() {
             reasons. A person always makes the decision.
           </p>
           <div className="home-hero-actions">
-            <Link className="hero-button" href="/need/new">
-              Prepare a recruiter need <WorkspaceIcon name="arrow" />
+            <Link className="hero-button" href="/tour">
+              Start the 3-minute demo <WorkspaceIcon name="arrow" />
             </Link>
-            <Link className="hero-link" href="/talent/new">
-              Build a talent card
+            <Link className="hero-link" href="/need/new">
+              Prepare a recruiter need
             </Link>
           </div>
           <dl className="hero-facts">

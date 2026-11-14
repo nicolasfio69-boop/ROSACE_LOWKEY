@@ -11,11 +11,13 @@ import { isComponent, type ExpectedLevel, type LevelValue } from "./framework";
 
 /**
  * Shape of a need, as in the Centrale tool: exactly three major components (gold on the rosace),
- * up to two minor components, and, on top of the Centrale base, up to two job skills.
+ * any number of the other components as minors (as in the Centrale grid), and, on top of the
+ * Centrale base, up to three technical skills.
  */
 export const MAJOR_COUNT = 3;
-export const MAX_MINORS = 2;
-export const MAX_JOB_SKILLS = 2;
+/** No real limit: every component that is not a major can be a minor, as in the Centrale grid. */
+export const MAX_MINORS = 12 - MAJOR_COUNT;
+export const MAX_JOB_SKILLS = 3;
 export const MAJOR_WEIGHT = 2;
 export const MINOR_WEIGHT = 1;
 export const JOB_SKILL_WEIGHT = 2;

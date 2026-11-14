@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   COMPONENTS,
+  JOB_FAMILIES,
   JOB_SKILLS,
   LEVELS,
   isComponent,
@@ -17,6 +18,8 @@ import {
 } from "@/lib/need-storage";
 import { JOB_QUESTIONS, prepareNeed, type NeedDraft } from "@/lib/need-draft";
 import { changeSelection, type SelectionRole } from "@/lib/need-selection";
+import { MAX_JOB_SKILLS, MAX_MINORS } from "@/lib/scoring";
+import { SkillBars } from "./SkillBars";
 import { spotSkills } from "@/lib/talent-intake";
 import { addNeed } from "@/lib/workspace";
 import {
@@ -661,7 +664,7 @@ export function NeedForm() {
                 <div>
                   <strong>How important is this for the role?</strong>
                   <p className="quiet-note">
-                    {majors} / 3 majors · {minors} / 2 minors
+                    {majors} / 3 majors · {minors} minors
                   </p>
                 </div>
                 <div>
@@ -687,7 +690,7 @@ export function NeedForm() {
                         (role === "major" && !selected?.major && majors >= 3) ||
                         (role === "minor" &&
                           (!selected || selected.major) &&
-                          minors >= 2)
+                          minors >= MAX_MINORS)
                       }
                       onClick={() => select(c.code, role)}
                     >
@@ -816,7 +819,7 @@ export function NeedForm() {
                   }}
                 >
                   {" "}
-                  {index === 11 ? "Add job skills" : "Next component"} →
+                  {index === 11 ? "Add technical skills" : "Next component"} →
                 </button>
               </div>
             </>
@@ -838,11 +841,15 @@ export function NeedForm() {
               <div className="step-heading">
                 <h1>Add specific know-how.</h1>
                 <p>
-                  Choose up to two job skills from the closed list. They are
-                  never major components.
+                  Choose up to {MAX_JOB_SKILLS} technical skills from the closed
+                  list, grouped by job family. They are drawn as bars next to
+                  the rosace and are never major components.
                 </p>
               </div>
-              {JOB_SKILLS.map((j) => {
+              {JOB_FAMILIES.map((family) => (
+                <div key={family.code} className="job-family">
+                <p className="eyebrow">{family.name.toUpperCase()}</p>
+              {JOB_SKILLS.filter((j) => j.family === family.code).map((j) => {
                 const r = draft.requirements.find((r) => r.skill === j.code);
                 return (
                   <div className="job-skill-block" key={j.code}>
@@ -850,7 +857,7 @@ export function NeedForm() {
                       <input
                         type="checkbox"
                         checked={!!r}
-                        disabled={!r && jobs >= 2}
+                        disabled={!r && jobs >= MAX_JOB_SKILLS}
                         onChange={(e) =>
                           select(j.code, e.target.checked ? "job" : "none")
                         }
@@ -876,6 +883,8 @@ export function NeedForm() {
                   </div>
                 );
               })}
+                </div>
+              ))}
               <div className="form-actions">
                 <button className="secondary-button" onClick={() => go(1)}>
                   ← Components
@@ -1000,24 +1009,22 @@ export function NeedForm() {
             </span>
             <span>
               {minors}
-              <small>of 2 minors</small>
+              <small>minors</small>
             </span>
             <span>
               {jobs}
-              <small>of 2 job skills</small>
+              <small>of {MAX_JOB_SKILLS} technical skills</small>
             </span>
           </div>
           <p className="quiet-note">
-            Gold: majors. Red: minors. An empty branch is not selected. Job
-            skills sit alongside the rosace.
+            Gold: majors. Red: minors. An empty branch is not selected.
+            Technical skills are the bars below the rosace.
           </p>
-          {draft.requirements
-            .filter((r) => !isComponent(r.skill))
-            .map((r) => (
-              <p key={r.skill} className="quiet-note">
-                {skillName(r.skill)} · {LEVELS[r.expected].name}
-              </p>
-            ))}
+          <SkillBars
+            items={draft.requirements
+              .filter((r) => !isComponent(r.skill))
+              .map((r) => ({ code: r.skill, expected: r.expected }))}
+          />
           <details className="chart-help">
             <summary>Read the levels</summary>
             <p>

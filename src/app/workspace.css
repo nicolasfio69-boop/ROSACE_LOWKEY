@@ -1916,3 +1916,325 @@ h3 {
 .need-switcher button {
   position: relative;
 }
+
+/* Guided 3-minute demo */
+.tour {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.tour-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: var(--night);
+  border-radius: 14px;
+  padding: 6px;
+  overflow: hidden;
+}
+.tour-steps > i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-gold));
+  transition: width 0.5s ease;
+}
+.tour-steps button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #9d9da8;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.tour-steps button span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #ffffff2a;
+  font-size: 11px;
+}
+.tour-steps button.past {
+  color: #d9d9df;
+}
+.tour-steps button.past span {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+.tour-steps button[aria-current="step"] {
+  background: #ffffff14;
+  color: #fff;
+}
+.tour-steps button[aria-current="step"] span {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--night);
+}
+.tour-body {
+  animation: tour-in 0.45s ease both;
+}
+.tour-head {
+  max-width: 760px;
+  margin-bottom: 22px;
+}
+.tour-head h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 10px 0 12px;
+}
+.tour-head > p:not(.eyebrow) {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #55555f;
+}
+.tour-look {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: var(--night);
+  color: #f0f0f3 !important;
+  font-size: 13px !important;
+}
+.tour-look .status-dot {
+  background: var(--color-gold);
+  box-shadow: 0 0 8px var(--color-gold);
+}
+.tour-scene {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.tour-scene.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+.tour-rosace {
+  background:
+    radial-gradient(#09090b12 1px, transparent 1px) 0 0 / 16px 16px,
+    #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  padding: 18px;
+  margin: 0;
+}
+.tour-rosace > figcaption {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b6b76;
+  margin-bottom: 4px;
+}
+.tour-rosace svg {
+  width: 100%;
+  height: auto;
+}
+.tour-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.tour-cards {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.tour-label {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #74747f;
+}
+.tour-card {
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+  animation: tour-card-in 0.5s ease both;
+}
+.tour-card > span {
+  font-size: 11px;
+  color: #74747f;
+}
+.tour-card strong {
+  font-size: 15px;
+}
+.tour-card p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #55555f;
+}
+.tour-card.major {
+  border-left: 3px solid var(--color-gold);
+}
+.tour-card.quote {
+  border-left: 3px solid var(--color-brand);
+}
+.tour-card.quote p {
+  font-style: italic;
+  color: var(--ink);
+}
+.tour-card.row {
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+}
+.tour-card.muted {
+  background: #fafafb;
+}
+.tour-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--night);
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 650;
+}
+.tour-approve {
+  border: 1px solid var(--night);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.tour-approve.done {
+  background: var(--night);
+  color: #fff;
+}
+.tour-answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.tour-answers button {
+  border: 1px solid var(--stroke);
+  border-radius: 99px;
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #fff;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.tour-answers button[aria-pressed="true"] {
+  background: var(--night);
+  border-color: var(--night);
+  color: #fff;
+}
+.tour-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--stroke);
+}
+.tour-nav small {
+  font-size: 12px;
+  color: #82828d;
+  text-align: center;
+}
+.home-hero .tour-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+.tour-start .play {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--night);
+  font-size: 11px;
+  box-shadow: 0 0 18px #f0c30080;
+}
+@keyframes tour-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tour-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tour-body,
+  .tour-card {
+    animation: none;
+  }
+}
+@media (max-width: 900px) {
+  .tour-scene,
+  .tour-pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tour-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .tour-steps button {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    padding: 8px 4px;
+  }
+  .tour-nav small {
+    display: none;
+  }
+  .tour-card.row {
+    grid-template-columns: auto 1fr;
+  }
+  .tour-card.row .tour-approve {
+    grid-column: 1 / -1;
+  }
+}
+.tour-scene.convo {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+.tour-card > span strong {
+  font-size: 13px;
+  color: var(--ink);
+}
+@media (max-width: 900px) {
+  .tour-scene.convo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
