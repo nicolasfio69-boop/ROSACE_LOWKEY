@@ -9,7 +9,13 @@ import { startRecording, stopRecording } from './screencast.mjs'
  * `createFilmContext` if your app needs a different capture size — keep
  * `compose()`'s `canvasW/canvasH` in sync if you do.
  */
-export const FILM_VIEWPORT = { width: 1920, height: 1080 }
+// FILM_VIEWPORT=1600x900 records smaller on a slow machine (the cloud container
+// only reaches ~20 fps at 1920x1080, below the 25 fps capture gate). Set it for
+// record AND compose/inspect/verify so the zoom maths use the same source size.
+const VIEWPORT_ENV = /^(\d+)x(\d+)$/.exec(process.env.FILM_VIEWPORT ?? '')
+export const FILM_VIEWPORT = VIEWPORT_ENV
+  ? { width: Number(VIEWPORT_ENV[1]), height: Number(VIEWPORT_ENV[2]) }
+  : { width: 1920, height: 1080 }
 
 /**
  * NOTE: no `recordVideo` here — capture is done by screencast.mjs (CDP
@@ -26,7 +32,7 @@ export async function createFilmContext(browser, renderDir, { storageState, view
 
 export async function prepareFilmPage(page, cursorOpts) {
   await installFilmCursor(page, cursorOpts)
-  page.__filmCursorPos = { x: 960, y: 540 }
+  page.__filmCursorPos = { x: FILM_VIEWPORT.width / 2, y: FILM_VIEWPORT.height / 2 }
   // A navigation creates a fresh document whose cursor mounts at the default
   // center position — restore the last known position so the pointer never
   // visibly teleports after a reload / route change.
@@ -47,7 +53,7 @@ export async function prepareFilmPage(page, cursorOpts) {
  * the timeline — it re-anchors the timeline epoch so video time == event time.
  */
 export async function startFilmRecording(page, renderDir, timeline, opts) {
-  return startRecording(page, renderDir, timeline, opts)
+  return startRecording(page, renderDir, timeline, { width: FILM_VIEWPORT.width, height: FILM_VIEWPORT.height, ...opts })
 }
 
 /**

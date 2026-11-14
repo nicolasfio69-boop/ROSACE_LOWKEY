@@ -17,3 +17,5 @@ test-results/
 demos/*/renders/
 demos/*/*.mp4
 demos/*/*.mp3
+demos/*/spot-check/
+demos/*/plan.json

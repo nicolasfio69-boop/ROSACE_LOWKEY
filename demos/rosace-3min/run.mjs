@@ -3,32 +3,33 @@
  *
  * Record (from the repo root):   node demos/rosace-3min/run.mjs
  * Quick silent check, no holds:  HOLDS=0 node demos/rosace-3min/run.mjs
- * Slow machine (capture < 25 fps): REDUCED_MOTION=1 node demos/rosace-3min/run.mjs
+ * Slow machine (capture < 25 fps): FILM_VIEWPORT=1600x900 REDUCED_MOTION=1 node demos/rosace-3min/run.mjs
+ *   (keep FILM_VIEWPORT set for compose, inspect and verify too)
  * Narrated compose (after record):
  *   node demos/_engine/compose.mjs <renderDir> --preset macos-light --speedup idleGapMin=9999,toolWaitMax=2.5,preToolWaitMax=2,tailHold=4
  *
- * BEAT PLAN — estimated at ~2.6 words/s + 1.2 s. produce-video must replace
- * HOLDS with the real sentence durations from aligned.json (+ ~1.2 s).
- * #   sentence (first words…)                         est. min hold
- * 1   "At Espoo's matchmaking events…"                 9.5s
- * 2   "Rosace turns each claim…"                       6.0s
- * 3   "Before the event, Kaarna Health…"               8.0s
- * 4   "Claude reads it and proposes…"                  9.5s
- * 5   "The skills come from one shared framework…"     8.5s
- * 6   "The recruiter stays in charge…"                 9.0s
- * 7   "Claude then writes level examples…"             6.5s
- * 8   "Technical skills sit beside the rosace…"        8.5s
- * 9   "Now the talent. Fatima was…"                   11.0s
- * 10  "It only points to clues…"                       7.5s
- * 11  "Where she has no real example…"                 5.0s
- * 12  "She keeps her card for six months…"             8.0s
- * 13  "The organiser sees the whole event…"            8.5s
- * 14  "For Kaarna, Fatima is suggested…"               7.5s
- * 15  "Every meeting is a human click…"                4.5s
- * 16  "At the event, the recruiter walks in…"          6.5s
- * 17  "After the talk, they note…"                     9.0s
- * 18  "Synthetic data only…"                          13.5s
- * 19  "Stronger signal, less noise…"                   5.0s
+ * BEAT PLAN (from aligned.json: ElevenLabs voice Sarah, 140.1 s). Min hold =
+ * sentence duration + 1.2 s, counted from the start of the beat.
+ * #   sentence (first words…)                         dur     min hold
+ * 1   "At Espoo's matchmaking events, companies…"   8.62s  10.0s
+ * 2   "Rosace turns each claim into…"               3.56s   5.0s
+ * 3   "Before the event, Kaarna Health,…"           7.06s   8.5s
+ * 4   "Claude reads it and proposes…"               7.66s   9.0s
+ * 5   "The skills come from one…"                   7.78s   9.0s
+ * 6   "The recruiter stays in charge.…"             7.50s   9.0s
+ * 7   "Claude then writes level examples…"          5.50s   7.0s
+ * 8   "Technical skills sit beside the…"            7.36s   9.0s
+ * 9   "Now the talent. Fatima was…"                10.12s  11.5s
+ * 10  "It only points to clues.…"                   6.30s   7.5s
+ * 11  "Where she has no real…"                      3.98s   5.5s
+ * 12  "She keeps her card for…"                     5.96s   7.5s
+ * 13  "The organiser sees the whole…"               7.28s   8.5s
+ * 14  "For Kaarna, Fatima is suggested,…"           6.36s   8.0s
+ * 15  "Every meeting is a human…"                   2.68s   4.0s
+ * 16  "At the event, the recruiter…"                5.10s   6.5s
+ * 17  "After the talk, they note…"                  8.34s  10.0s
+ * 18  "Synthetic data only. Nationality, language,…"13.54s  15.0s
+ * 19  "Stronger signal, less noise, for…"           4.12s   5.5s
  */
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -44,8 +45,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const config = loadConfig(process.cwd())
 const ASSETS = join(__dirname, 'assets')
 
-// Seconds each beat must stay on screen (index = beat number). Replace from aligned.json.
-const HOLDS = [0, 9.5, 6.0, 8.0, 9.5, 8.5, 9.0, 6.5, 8.5, 11.0, 7.5, 5.0, 8.0, 8.5, 7.5, 4.5, 6.5, 9.0, 13.5, 5.0]
+// Seconds each beat must stay on screen (index = beat number), from aligned.json.
+const HOLDS = [0, 10, 5, 8.5, 9, 9, 9, 7, 9, 11.5, 7.5, 5.5, 7.5, 8.5, 8, 4, 6.5, 10, 15, 5.5]
 const NO_HOLDS = process.env.HOLDS === '0'
 
 async function main() {
@@ -64,6 +65,21 @@ async function main() {
   page.setDefaultTimeout(30000)
   // REDUCED_MOTION=1 freezes the site's background animations: smoother capture on a slow machine.
   if (process.env.REDUCED_MOTION === '1') await page.emulateMedia({ reducedMotion: 'reduce' })
+  // Capture heartbeat: an invisible 1px element repaints every frame, so the CDP
+  // screencast keeps sending frames during narration holds (a still page sends none,
+  // which drags the capture-fps average under the 25 fps gate on long holds).
+  await page.addInitScript(() => {
+    const beat = () => {
+      const el = document.createElement('div')
+      el.style.cssText = 'position:fixed;left:0;bottom:0;width:1px;height:1px;pointer-events:none;z-index:2147483647;opacity:0.01'
+      document.documentElement.appendChild(el)
+      let on = false
+      const tick = () => { on = !on; el.style.background = on ? '#000' : '#fff'; requestAnimationFrame(tick) }
+      requestAnimationFrame(tick)
+    }
+    if (document.documentElement) beat()
+    else document.addEventListener('DOMContentLoaded', beat)
+  })
   await prepareFilmPage(page, config.cursor)
 
   // Preload off-camera: the first filmed event is beat 1.
@@ -87,7 +103,18 @@ async function main() {
     if (left > 0) await pause(left)
   }
   const btn = (name, exact = true) => page.getByRole('button', { name, exact })
-  const tap = (locator, label, expect) => click(page, timeline, locator, label, expect ? { expect } : {})
+  const BRISK = { hoverMs: 300, afterMs: 420 }
+  const QUICK = { hoverMs: 90, afterMs: 160 }
+  let quick = false
+  const tap = (locator, label, expect) => click(page, timeline, locator, label, { ...(quick ? QUICK : BRISK), ...(expect ? { expect } : {}) })
+  // Fast-forward: routine clicks run quickly between appear/done, and compose
+  // compresses the whole bracket to toolWaitMax (2.5 s), like a time-lapse.
+  const fastForward = async (label, fn) => {
+    await appear(page, timeline, label, null)
+    quick = true
+    try { await fn() } finally { quick = false }
+    await done(page, timeline, label, null)
+  }
   const upload = async (labelText, file, label) => {
     const [chooser] = await Promise.all([page.waitForEvent('filechooser'), tap(page.getByText(labelText, { exact: true }), label)])
     await chooser.setFiles(join(ASSETS, file))
@@ -103,9 +130,20 @@ async function main() {
     await locator.pressSequentially(text, { delay })
   }
   const railTo = async (short, label) => {
-    const nav = page.locator('details.component-navigator')
-    if (!(await nav.evaluate((d) => d.open))) await tap(nav.locator('summary'), 'open component list')
-    await tap(nav.locator('nav.journey-rail button').filter({ hasText: short }).first(), label)
+    // Click the branch on the rosace itself (the component list below it is
+    // hidden under the sticky rosace card on a 900 px tall viewport).
+    await tap(page.locator('figure.rosace-figure').first().locator(`g[aria-label^="Explore ${short}"]`).first(), label)
+    // Fail fast if the rail did not open the right component.
+    const heading = page.locator('.form-panel h1, .form-panel h2').first()
+    await heading.filter({ hasText: short }).waitFor({ timeout: 5000 }).catch(async () => {
+      throw new Error(`rail "${short}": panel shows "${await heading.innerText().catch(() => '?')}" — restart the take`)
+    })
+  }
+  const setImportance = async (name, label) => {
+    await tap(btn(name), label)
+    await page.locator(`button[aria-pressed="true"]`).filter({ hasText: name }).waitFor({ timeout: 4000 }).catch(() => {
+      throw new Error(`${label}: "${name}" is not selected — restart the take`)
+    })
   }
   const switchRole = async (role, url) => {
     await tap(page.getByRole('button', { name: /Demo profile$/ }), 'profile menu')
@@ -126,28 +164,34 @@ async function main() {
 
   // 3 — recruiter imports the job post
   await beat(3)
-  await tap(page.locator('button.entry-choice').filter({ hasText: 'Choose recruiter' }), 'choose recruiter', btn('Preview email-code sign-in', false))
-  await tap(btn('Preview email-code sign-in', false), 'email step', page.getByLabel('Demo verification code'))
-  await type(page, timeline, page.getByLabel('Demo verification code'), '123456', 'code')
-  await tap(btn('Open recruiter workspace', false), 'open workspace')
-  await page.waitForURL('**/recruiter'); await settle(page)
-  await tap(page.getByRole('link', { name: 'Define a recruiter need' }).first(), 'define need')
-  await page.waitForURL('**/need/new'); await settle(page)
+  await fastForward('sign-in', async () => {
+    await tap(page.locator('button.entry-choice').filter({ hasText: 'Choose recruiter' }), 'choose recruiter', btn('Preview email-code sign-in', false))
+    await tap(btn('Preview email-code sign-in', false), 'email step', page.getByLabel('Demo verification code'))
+    await type(page, timeline, page.getByLabel('Demo verification code'), '123456', 'code', { delay: 30, hoverMs: 90, afterMs: 120 })
+    await tap(btn('Open recruiter workspace', false), 'open workspace')
+    await page.waitForURL('**/recruiter'); await settle(page)
+    await tap(page.getByRole('link', { name: 'Define a recruiter need' }).first(), 'define need')
+    await page.waitForURL('**/need/new'); await settle(page)
+  })
   await type(page, timeline, page.getByLabel('Company name', { exact: true }), 'Kaarna Health', 'company')
   await tap(btn('Continue to the role', false), 'to role')
   await upload('Import a job description', 'job-04-kaarna-web-developer.txt', 'import job')
-  await type(page, timeline, page.getByLabel('Job title', { exact: true }), 'Junior web developer', 'title')
-  await tap(btn('Continue to working context', false), 'to context')
-  await choose(page.getByRole('combobox', { name: 'Working arrangement' }), 'Hybrid', 'hybrid')
-  await tap(page.getByRole('checkbox', { name: 'I have reviewed the job and company context.', exact: false }), 'reviewed')
-  await tap(btn('Explore the 12 components', false), 'explore components')
+  await pause(1200)
+  await fastForward('role-details', async () => {
+    await type(page, timeline, page.getByLabel('Job title', { exact: true }), 'Junior web developer', 'title', { delay: 25, hoverMs: 90, afterMs: 120 })
+    await tap(btn('Continue to working context', false), 'to context')
+    await choose(page.getByRole('combobox', { name: 'Working arrangement' }), 'Hybrid', 'hybrid')
+    await tap(page.getByRole('checkbox', { name: 'I have reviewed the job and company context.', exact: false }), 'reviewed')
+    await tap(btn('Explore the 12 components', false), 'explore components')
+  })
 
   // 4 — Claude proposes, with sources
   await beat(4)
   await tap(page.getByText('Suggest requirements with Claude', { exact: true }), 'open claude panel')
+  const askBox = await btn('Suggest components for this role').boundingBox()
   loadingStart(timeline, 'claude-requirements')
   await tap(btn('Suggest components for this role'), 'ask claude')
-  await appear(page, timeline, 'claude-requirements', await btn('Suggest components for this role').boundingBox())
+  await appear(page, timeline, 'claude-requirements', askBox)
   const proposal = page.locator('details:has-text("Proposal · not applied")').first()
   await page.getByText('Proposal · not applied', { exact: true }).waitFor({ timeout: 90000 })
   await done(page, timeline, 'claude-requirements', await page.getByText('Proposal · not applied', { exact: true }).boundingBox())
@@ -166,11 +210,12 @@ async function main() {
   // 6 — the recruiter decides: swap one major
   await beat(6)
   await railTo('See it through', 'see it through')
-  await tap(btn('Minor · red'), 'make minor')
+  await setImportance('Minor · red', 'make minor')
   await tap(page.getByRole('radio', { name: 'Foundation', exact: true }), 'foundation')
   await railTo('Keep commitments', 'keep commitments')
   await tap(page.getByRole('radio', { name: 'Intermediate', exact: true }), 'intermediate')
-  await tap(btn('Major · gold'), 'make major')
+  await setImportance('Major · gold', 'make major')
+  logRun(`Importance after swap: ${await page.getByText(/majors ·/).first().innerText()}`, renderDir)
 
   // 7 — level examples for this job
   await beat(7)
@@ -183,7 +228,7 @@ async function main() {
   await done(page, timeline, 'claude-examples', null)
   loadingEnd(timeline, 'claude-examples')
   await focus(page, timeline, page.locator('.ai-review'), 'examples')
-  await pause(4000)
+  await pause(3000)
   await wide(page, timeline, 'examples-out')
   await tap(btn('Use these examples'), 'use examples')
 
@@ -222,27 +267,36 @@ async function main() {
     'Build a web interface (frontend)': 'On my own',
     'Write automated tests': 'On my own',
   }
-  await beat(10)
-  let leftBeat11 = false
-  for (let i = 0; i < 20; i++) {
-    if (await page.getByLabel('Fictional display name').count()) break
-    const title = (await page.locator('.form-panel h1').first().innerText()).trim()
-    const autonomy = plan[title]
-    if (autonomy) {
-      await tap(page.getByLabel('Yes, in a real task', { exact: true }), `${title}: yes`)
-      await tap(page.getByLabel(autonomy, { exact: true }), `${title}: autonomy`)
-      await tap(page.getByLabel('Simple or well-defined work', { exact: true }), `${title}: situation`)
-      if (title === 'Get it right and spot the error') {
-        await focus(page, timeline, page.locator('.form-panel'), 'clue and suggested level')
-        await pause(3000)
-        await wide(page, timeline, 'clue-out')
-      }
-      await tap(btn('Confirm this level', false), `${title}: confirm`)
-    } else {
-      if (!leftBeat11 && beatNo === 10 && i > 3) { await beat(11); leftBeat11 = true }
-      await tap(btn('Leave unanswered', false), `${title}: leave`)
+  const answer = async (title) => {
+    await tap(page.getByLabel('Yes, in a real task', { exact: true }), `${title}: yes`)
+    await tap(page.getByLabel(plan[title], { exact: true }), `${title}: autonomy`)
+    await tap(page.getByLabel('Simple or well-defined work', { exact: true }), `${title}: situation`)
+    if (title === 'Get it right and spot the error') {
+      await focus(page, timeline, page.locator('.form-panel'), 'clue and suggested level')
+      await pause(3000)
+      await wide(page, timeline, 'clue-out')
+    }
+    await tap(btn('Confirm this level', false), `${title}: confirm`)
+  }
+  const currentTitle = async () => (await page.locator('.form-panel h1').first().innerText()).trim()
+  // Answers until `stopAt` is the current skill (or the card form is reached).
+  const answerUntil = async (stopAt) => {
+    for (let i = 0; i < 20; i++) {
+      if (await page.getByLabel('Fictional display name').count()) return
+      const title = await currentTitle()
+      if (stopAt && title === stopAt) return
+      if (plan[title]) await answer(title)
+      else await tap(btn('Leave unanswered', false), `${title}: leave`)
     }
   }
+  await fastForward('first-skills', () => answerUntil('Get it right and spot the error'))
+  await beat(10)
+  await answer(await currentTitle())
+  await fastForward('scope-job', () => answerUntil('See it through and hand it over'))
+  await beat(11)
+  await tap(btn('Leave unanswered', false), 'See it through: leave')
+  await endBeat()
+  await fastForward('other-skills', () => answerUntil(null))
 
   // 12 — consent, her own rosace
   await beat(12)

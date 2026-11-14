@@ -21,7 +21,8 @@
 
   "narration": {
     "provider": "elevenlabs",
-    "voiceName": "Rachel",
+    "voiceName": "Sarah",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL",
     "modelId": "eleven_v3",
     "stability": 1.0,
     "apiKeyEnv": "ELEVENLABS_API_KEY"

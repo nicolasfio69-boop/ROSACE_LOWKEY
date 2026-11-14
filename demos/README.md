@@ -31,4 +31,6 @@ Dans Claude Code, à la racine du dépôt :
 - Chaque prise repart d'un navigateur neuf : le site garde ses données dans le navigateur, une seule carte talent par navigateur.
 - Claude met environ 15 secondes pour proposer les exigences et 4 secondes pour les exemples. La limite est de 6 appels Claude par minute et par visiteur : attendre une minute entre deux prises.
 - L'enregistrement doit tenir 25 images par seconde. Si la machine est trop lente, lancer avec `REDUCED_MOTION=1` (fond animé figé).
+- Vidéo produite le 14 novembre 2026 dans le conteneur cloud : voix ElevenLabs « Sarah » (voix par défaut ; une clé gratuite ne peut pas utiliser « Rachel » ni lister les voix, d'où `voiceId` dans `demo.config.json`), prise filmée en 1600x900 avec `FILM_VIEWPORT=1600x900 REDUCED_MOTION=1` (garder `FILM_VIEWPORT` pour compose, inspect et verify).
+- Whisper entend « Rosacia », « Carna », « Espos » : après `align-narration.py`, lancer `python demos/_lib/realign-to-script.py demos/rosace-3min/aligned.json say.txt` pour recaler les mots sur le texte exact (sinon les sous-titres ne se construisent pas). Si faster-whisper plante sur `metadata_errors`, installer `av<15`.
 - `demos/_engine/actions.mjs` contient une petite correction : la composante "Get it right and spot the error" déclenchait la détection d'erreur à l'écran.
