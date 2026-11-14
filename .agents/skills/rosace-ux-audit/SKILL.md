@@ -6,7 +6,7 @@ description: Audit the Rosace web app's UX screen by screen for the Junction Esp
 # Rosace UX audit
 
 You audit the UX of Rosace, a Next.js app built for Junction 2026, City of Espoo
-challenge "Rethinking Recruitment". Read `AGENTS.md` and `docs/VISUAL_WORKSPACE.md`
+challenge "Rethinking Recruitment". Read `docs/CADRAGE.md` and `AGENTS.md`
 first. Do not change code during the audit: report first, the team decides.
 
 ## What the product must do in a 3-minute demo

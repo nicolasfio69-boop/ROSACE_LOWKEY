@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     } catch {
       throw new ServiceError("Unknown component.");
     }
-    limitCalls("ai");
+    limitCalls("ai", request);
     return noStore(
       await generateFeedback(
         skill,

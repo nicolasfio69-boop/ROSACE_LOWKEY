@@ -46,6 +46,6 @@ Exercise duration and level are fixed by application code, not the model. The ca
 
 - Add the API key locally, run the connection test, and try the three proposals with actual Claude responses. Mock tests cannot establish live model quality or account access.
 - Review the proposed questions and examples with Espoo/recruiters. All six online Centrale components and twenty technical skills now have three written variants each. Validate their relevance and difficulty with recruiters; the 20-minute plan is a selection, not all available exercises.
-- Confirm Aiven Runtime credits, European region and runtime secret settings before deployment. Set `ANTHROPIC_API_KEY` there as a secret and `ANTHROPIC_MODEL` as a runtime variable, not a build argument.
+- Confirm Aiven Runtime credits, European region and runtime secret settings before deployment. Set `ANTHROPIC_API_KEY` there as a secret (`ANTHROPIC_MODEL` is optional), never as a build argument.
 - Shared accounts, authenticated permissions and data shared across devices remain a later phase. Role separation here is an interface distinction, not access control.
 - Confirm submission deadline, pitch duration, team and video/slides/submission format.

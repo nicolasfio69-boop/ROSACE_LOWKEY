@@ -2228,3 +2228,70 @@ h3 {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.brief-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 16px;
+}
+.brief-actions small {
+  color: var(--muted);
+}
+.not-found .role-links {
+  align-items: center;
+}
+@media print {
+  .aurora-background,
+  .app-sidebar,
+  .app-topbar,
+  .app-footer,
+  .skip-link,
+  .back-link,
+  .brief-actions,
+  .brief-tabs,
+  .background-beams,
+  button {
+    display: none !important;
+  }
+  .app-main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .app-content {
+    padding: 0 !important;
+  }
+  .workspace-grid {
+    display: block !important;
+  }
+  .form-panel,
+  .live-panel {
+    border: none !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    padding: 0 !important;
+    break-inside: auto;
+  }
+  body {
+    background: #fff !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+.no-suggestion-item {
+  padding: 8px 0;
+}
+.no-suggestion-item + .no-suggestion-item {
+  border-top: 1px solid #00000010;
+}
+.no-suggestion-item small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}

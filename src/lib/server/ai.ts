@@ -1,7 +1,12 @@
 import { ServiceError } from "./http";
+/** Used when ANTHROPIC_MODEL is not set, so hosting only needs the API key. */
+export const DEFAULT_MODEL = "claude-sonnet-5-5";
+function configuredModel() {
+  return process.env.ANTHROPIC_MODEL?.trim() || DEFAULT_MODEL;
+}
 export function aiStatus() {
   const key = process.env.ANTHROPIC_API_KEY?.trim();
-  const model = process.env.ANTHROPIC_MODEL?.trim();
+  const model = configuredModel();
   return {
     provider: "Claude",
     configured:
@@ -17,10 +22,10 @@ export async function generateJSON(
   const status = aiStatus();
   if (!status.configured)
     throw new ServiceError(
-      "Claude is not configured yet. Set ANTHROPIC_API_KEY and ANTHROPIC_MODEL in .env.local, then restart. The manual version remains available.",
+      "Claude is not configured yet. Set ANTHROPIC_API_KEY (and optionally ANTHROPIC_MODEL), then restart. The manual version remains available.",
       503,
     );
-  const model = process.env.ANTHROPIC_MODEL!.trim();
+  const model = configuredModel();
   const response = await fetcher("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {

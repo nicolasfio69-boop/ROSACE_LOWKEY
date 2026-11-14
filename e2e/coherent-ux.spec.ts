@@ -34,6 +34,7 @@ test("a consented talent card survives navigation, can be edited, and deletes cl
     page.locator('.rosace-branch[data-evidence="observed"]'),
   ).toHaveCount(0);
   await page.getByRole("link", { name: "Continue my skills card" }).click();
+  await page.waitForURL("**/talent/new");
   await page.reload();
   await expect(
     page.getByRole("heading", { name: "Your saved skills card." }),
@@ -156,7 +157,7 @@ test("decision errors stay with the reason and observations announce their saved
   await page.goto("/organiser");
   const card = page
     .locator(".organiser-grid > section:not([hidden]) .meeting-card")
-    .first();
+    .filter({ hasText: "Amira" });
   await card.locator("summary").click();
   await card
     .getByRole("button", { name: "Approve / add", exact: true })

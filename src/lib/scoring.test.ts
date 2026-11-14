@@ -100,9 +100,15 @@ describe("suggestions", () => {
   });
 
   it("never breaks a tie at the cut: tied talents go to the organiser", () => {
+    const result = suggestForNeed(need("vireo-data"), TALENTS);
+    expect(result.suggested.map((a) => a.talentId)).toEqual(["omar"]);
+    expect(result.tied.map((a) => a.talentId).sort()).toEqual(["priya", "tuomas"]);
+  });
+
+  it("a tie above the cut is not a tie for the organiser", () => {
     const result = suggestForNeed(need("lumora-support"), TALENTS);
-    expect(result.suggested.map((a) => a.talentId)).toEqual(["mateo", "sofia"]);
-    expect(result.tied.map((a) => a.talentId).sort()).toEqual(["amira", "lin"]);
+    expect(result.suggested.map((a) => a.talentId)).toEqual(["elina", "mateo", "sofia"]);
+    expect(result.tied).toEqual([]);
   });
 
   it("shows the organiser who has no suggestion, and why", () => {

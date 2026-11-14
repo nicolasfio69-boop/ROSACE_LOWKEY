@@ -60,19 +60,48 @@ export function field(
     throw new ServiceError(`Invalid ${name}.`);
   return value.trim();
 }
+const WINDOW_MS = 60000;
+const DAY_MS = 24 * 60 * 60000;
+/** Per visitor and per minute; the whole site per minute and per day protects the API credits. */
+export const LIMITS = { visitorPerMinute: 6, sitePerMinute: 40, sitePerDay: 600 };
 const calls = new Map<string, { since: number; count: number }>();
-export function limitCalls(bucket: string) {
+function visitor(request?: Request): string {
+  const forwarded = request?.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return (forwarded || request?.headers.get("x-real-ip") || "local").slice(0, 64);
+}
+function count(key: string, windowMs: number, max: number, message: string) {
   const now = Date.now();
-  let item = calls.get(bucket);
-  if (!item || now - item.since > 60000) {
+  let item = calls.get(key);
+  if (!item || now - item.since > windowMs) {
     item = { since: now, count: 0 };
-    calls.set(bucket, item);
+    calls.set(key, item);
   }
-  if (++item.count > 8)
-    throw new ServiceError(
-      "Too many requests. Wait one minute before trying again.",
-      429,
-    );
+  if (item.count >= max) throw new ServiceError(message, 429);
+  item.count++;
+}
+export function limitCalls(bucket: string, request?: Request) {
+  if (calls.size > 5000) calls.clear();
+  count(
+    `${bucket}:visitor:${visitor(request)}`,
+    WINDOW_MS,
+    LIMITS.visitorPerMinute,
+    "Too many requests. Wait one minute before trying again.",
+  );
+  count(
+    `${bucket}:site`,
+    WINDOW_MS,
+    LIMITS.sitePerMinute,
+    "The demo is busy. Wait one minute before trying again.",
+  );
+  count(
+    `${bucket}:day`,
+    DAY_MS,
+    LIMITS.sitePerDay,
+    "Today's demo allowance is used up. The manual version remains available.",
+  );
+}
+export function resetCallLimits() {
+  calls.clear();
 }
 export function failure(error: unknown) {
   const known = error instanceof ServiceError;

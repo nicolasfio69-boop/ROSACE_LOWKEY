@@ -28,10 +28,10 @@ The official [Runtime overview](https://aiven.io/docs/products/runtime), [deploy
 | Variable | Kind | Purpose |
 | --- | --- | --- |
 | `ANTHROPIC_API_KEY` | Secret | Server-only Claude credential |
-| `ANTHROPIC_MODEL` | Variable | Model identifier available in your Claude account |
+| `ANTHROPIC_MODEL` | Variable, optional | Defaults to `claude-sonnet-5-5`; set only to use another model |
 | `CONTEXT_DEV_API_KEY` | Secret, optional | Server-only company-context collection |
 
-No credential value belongs in this document. Without AI credentials, human review and all manual flows work. Never use a `NEXT_PUBLIC_` name for a secret. For local development only, use ignored `.env.local` and restart `npm run dev` after configuration changes.
+No credential value belongs in this document. Without AI credentials, human review and all manual flows work. After a change, restart the service (or deploy the latest commit) and open `/api/integrations`: it must answer `"ai":true` and, with Context.dev, `"context":true`. Never use a `NEXT_PUBLIC_` name for a secret. For local development only, use ignored `.env.local` and restart `npm run dev` after configuration changes.
 
 ## Before the first real deployment
 

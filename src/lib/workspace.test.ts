@@ -41,7 +41,7 @@ describe("local event workspace", () => {
         companyContext: "",
         eventName: "Espoo",
       });
-    expect(loadWorkspace(s).needs).toHaveLength(2);
+    expect(loadWorkspace(s).needs).toHaveLength(NEEDS.length);
   });
   it("requires consent and never persists CVs or quotes", () => {
     const s = storage();

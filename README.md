@@ -10,8 +10,8 @@ A human chooses the requirements and approves meetings. Repository examples are 
 ## Get the current application from GitHub
 
 **Current app branch:** `feat/coherent-ux` (delivery PR [#11](https://github.com/nicolasfio69-boop/JUNCTION_RECRUITMENT_COMPETENCIES/pull/11) → `main`).
-Older feature PRs were folded into this branch and closed. Strategy notes live in
-`docs/CADRAGE.md`, `AGENTS.md` and `docs/AUDIT_STRATEGIE_HACKATHON.md`.
+Older feature PRs were folded into this branch and closed. The source of truth is
+`docs/CADRAGE.md`, then `AGENTS.md`.
 
 ```bash
 git fetch origin

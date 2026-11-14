@@ -13,6 +13,7 @@ import {
   WORKSPACE_HOMES,
 } from "@/lib/entry-preference";
 import { Logo } from "./Logo";
+import { TOUR_ROLE_EVENT } from "@/lib/demo-playback";
 import { AuroraBackground } from "./AuroraBackground";
 const allDestinations = [
   {
@@ -59,7 +60,26 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [rememberedRole, setRememberedRole] =
     useState<WorkspaceRole>("recruiter");
-  const role = roleForPath(pathname) ?? rememberedRole;
+  const [tourRole, setTourRole] = useState<WorkspaceRole | null>(null);
+  const role =
+    (pathname === "/tour" ? tourRole : null) ??
+    roleForPath(pathname) ??
+    rememberedRole;
+  useEffect(() => {
+    if (pathname !== "/tour") return;
+    const follow = (event: Event) => {
+      const chapter = (event as CustomEvent<string>).detail;
+      setTourRole(
+        chapter === "Talent"
+          ? "candidate"
+          : chapter === "Organiser"
+            ? "organiser"
+            : "recruiter",
+      );
+    };
+    window.addEventListener(TOUR_ROLE_EVENT, follow);
+    return () => window.removeEventListener(TOUR_ROLE_EVENT, follow);
+  }, [pathname]);
   useEffect(() => {
     function closeOutside(event: PointerEvent) {
       if (
@@ -206,7 +226,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   ? "3-minute demo"
                   : pathname === "/overview"
                     ? "Overview"
-                    : "Demo data")}
+                    : "Rosace")}
             </strong>
           </div>
           <div className="topbar-right">

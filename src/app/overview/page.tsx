@@ -42,6 +42,29 @@ const STEPS = [
   },
 ];
 
+const SAFEGUARDS = [
+  {
+    title: "A person decides",
+    text: "Recruitment is a high-risk use of AI under the EU AI Act. Rosace only suggests: every meeting, tie and grade is a human click with a reason.",
+  },
+  {
+    title: "Reasons you can read",
+    text: "Each suggestion lists the requirements behind it. Claude proposals cite the reviewed job passage they come from, and the recruiter accepts or discards them.",
+  },
+  {
+    title: "No bias criteria",
+    text: "Nationality, language, age, gender and degree never enter a calculation. Communication is judged on being understood, never on accent or grammar.",
+  },
+  {
+    title: "Talents keep their dignity",
+    text: "A talent sees their own rosace and checks, never a rank or a score. An empty branch means not filled in, not zero.",
+  },
+  {
+    title: "Minimal data",
+    text: "A CV is read on the device and never stored or sent to an AI provider. A card is kept only with consent, for six months, and can be deleted at any time.",
+  },
+];
+
 export default function Home() {
   const example = NEEDS[0];
   return (
@@ -122,6 +145,20 @@ export default function Home() {
             <Link href={item.href}>{item.link} →</Link>
           </article>
         ))}
+      </section>
+      <section
+        className="responsible-panel"
+        aria-labelledby="responsible-heading"
+      >
+        <h2 id="responsible-heading">Responsible by design</h2>
+        <ul>
+          {SAFEGUARDS.map((item) => (
+            <li key={item.title}>
+              <strong>{item.title}</strong>
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ul>
       </section>
       <div className="overview-footnote">
         <span>

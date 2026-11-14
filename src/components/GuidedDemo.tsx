@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Rosace } from "./Rosace";
 import { SkillBars } from "./SkillBars";
 import { WorkspaceIcon } from "./WorkspaceIcon";
@@ -18,6 +18,7 @@ import {
   DEMO_DURATION_MS,
   CHAPTER_DURATION_MS,
   BEAT_DURATION_MS,
+  TOUR_ROLE_EVENT,
 } from "@/lib/demo-playback";
 
 const NEED = NEEDS[0];
@@ -394,6 +395,19 @@ export function GuidedDemo() {
   useEffect(() => {
     if (position.complete) setPlaying(false);
   }, [position.complete]);
+  const shownChapter = useRef<number | null>(null);
+  useEffect(() => {
+    // The sidebar follows the role of the chapter on screen.
+    window.dispatchEvent(
+      new CustomEvent(TOUR_ROLE_EVENT, { detail: CHAPTERS[position.chapter].role }),
+    );
+    // A new chapter starts at the top, so its title is never hidden.
+    if (shownChapter.current !== null && shownChapter.current !== position.chapter) {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    }
+    shownChapter.current = position.chapter;
+  }, [position.chapter]);
   function jump(chapter: number, beat = 0) {
     setPlaying(false);
     setElapsed(chapter * CHAPTER_DURATION_MS + beat * BEAT_DURATION_MS);

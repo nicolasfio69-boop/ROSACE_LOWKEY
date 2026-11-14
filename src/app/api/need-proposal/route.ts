@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const { title, task, sources } = reviewedContext(
       await readRequest(request),
     );
-    limitCalls("ai");
+    limitCalls("ai", request);
     return noStore(await proposeRequirements(title, task, sources));
   } catch (e) {
     return failure(e);

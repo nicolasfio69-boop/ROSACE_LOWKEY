@@ -4,7 +4,7 @@ See [CLAUDE_SETUP.md](CLAUDE_SETUP.md) for the local setup and interactive test 
 
 ## Anthropic only
 
-All AI runs on the Next.js server through `https://api.anthropic.com/v1/messages`, with `x-api-key` and `anthropic-version: 2023-06-01`. Configure `ANTHROPIC_API_KEY` and `ANTHROPIC_MODEL` in ignored `.env.local`, or as runtime settings on Aiven. No key reaches the browser. Previous Featherless/Gemini credentials and `AI_PROVIDER` are not used. Calls are explicit, bounded and never retried against another provider.
+All AI runs on the Next.js server through `https://api.anthropic.com/v1/messages`, with `x-api-key` and `anthropic-version: 2023-06-01`. Configure `ANTHROPIC_API_KEY` in ignored `.env.local`, or as a runtime secret on Aiven. `ANTHROPIC_MODEL` is optional and defaults to `claude-sonnet-5-5`. No key reaches the browser. Previous Featherless/Gemini credentials and `AI_PROVIDER` are not used. Calls are explicit, bounded and never retried against another provider.
 
 Official [Messages documentation](https://platform.claude.com/docs/en/api/messages) and [model overview](https://platform.claude.com/docs/en/about-claude/models/overview) were consulted on 14 November 2026. `claude-sonnet-5-5` is the suggested configurable starting model. Account access, billing and live output quality still need the owner's real API test; unit and browser tests use controlled responses.
 
@@ -22,7 +22,7 @@ Prompts treat documents and answers as untrusted data. Outputs are schema-checke
 
 ## Data and limits
 
-Requests are limited to 64 KB, cross-origin browser requests rejected, responses marked `no-store`, and provider errors sanitized. The process-local AI bucket permits eight calls per minute and calls time out after 45 seconds. These are demo limits, not authenticated multi-user rate controls.
+Requests are limited to 64 KB, cross-origin browser requests rejected, responses marked `no-store`, and provider errors sanitized. AI calls are limited per visitor (6 per minute, by forwarded IP), for the whole site (40 per minute) and per day (600), in process memory; calls time out after 45 seconds. These protect the demo credits; they are not authenticated multi-user rate controls.
 
 Documents are parsed on-device. CV text/quotes are transient. Submitted **fictional exercise answers**, approved exercises and human observations are saved in browser storage; submission snapshots keep the question/checklist stable. Talent deletion or expiry removes linked answers/observations. Provider retention is governed by the API account terms.
 
