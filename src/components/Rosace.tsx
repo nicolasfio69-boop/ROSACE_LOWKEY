@@ -59,7 +59,8 @@ export function Rosace({
   preview,
 }: RosaceProps) {
   const font = Math.max(12, Math.round(size / (labels === "full" ? 40 : 18)));
-  const margin = Math.round(font * (labels === "full" ? 9 : 6.5));
+  // Short labels need less outer whitespace; keep the level geometry unchanged.
+  const margin = Math.round(font * (labels === "full" ? 9 : 4.5));
   const center = size / 2;
   const radius = round(center - font * (labels === "full" ? 4.2 : 3.6));
   const hub = round(radius * CENTER_PART);

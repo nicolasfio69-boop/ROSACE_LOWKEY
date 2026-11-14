@@ -1,7 +1,8 @@
 /** Lightweight CSS adaptation of Aceternity UI's free word-by-word reveal. */
 export function TextGenerateEffect({ words }: { words: string }) {
   return (
-    <span aria-label={words}>
+    <span>
+      <span className="sr-only">{words}</span>
       {words.split(" ").map((word, i) => (
         <span
           key={i}

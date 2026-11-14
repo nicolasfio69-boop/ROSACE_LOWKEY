@@ -207,7 +207,6 @@ export function Checks({
     <div className="workspace checks-workspace">
       <header className="step-heading">
         <BackgroundBeams />
-        <p className="eyebrow">CHECK A CONCRETE SITUATION</p>
         <h1>{role === "talent" ? "My checks" : "Prepare and review checks"}</h1>
         <p>
           Three fictional exercises · 6 + 6 + 8 minutes, at most 20 minutes in
@@ -260,8 +259,8 @@ export function Checks({
           </select>
         </label>
         <p className="quiet-note">
-          Use fictional details only. Choose your workspace in the header.
-          Exercise answers are saved in this browser; CVs are never stored.
+          Fictional data only. Exercise answers stay in this browser; CVs are
+          never stored.
         </p>
       </div>
       {error && (
@@ -293,7 +292,7 @@ export function Checks({
               ))}
             </select>
           </label>
-          <p className="check-status" role="status">
+          <p className="check-status" data-state={status} role="status">
             {notice || status}
           </p>
           <h2>{skillName(skill)}</h2>
@@ -458,8 +457,8 @@ export function Checks({
               </>
             ) : (
               <p className="quiet-note">
-                To check · waiting for the talent’s answer. Choose Candidate in the header to
-                complete the exercise first.
+                To check · waiting for the talent’s answer. Choose Candidate in
+                the header to complete the exercise first.
               </p>
             ))}
           <details className="context-details">

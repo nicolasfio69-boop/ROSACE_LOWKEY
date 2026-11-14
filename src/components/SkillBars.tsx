@@ -32,18 +32,14 @@ export function SkillBars({
 }) {
   if (items.length === 0) return null;
   return (
-    <div className="mt-3">
-      <h4 className="text-xs font-semibold uppercase tracking-wide text-muted">
-        {title}
-      </h4>
-      <ul className="mt-2 space-y-2">
+    <div className="skill-bars">
+      <p className="skill-bars-title">{title}</p>
+      <ul aria-label={title}>
         {items.map((item) => (
           <li key={item.code}>
-            <div className="flex items-baseline justify-between gap-2 text-sm">
+            <div className="skill-bar-label">
               <span>{skillName(item.code)}</span>
-              <span className="shrink-0 text-xs text-muted">
-                {status(item)}
-              </span>
+              <span className="skill-bar-status">{status(item)}</span>
             </div>
             <Track item={item} />
           </li>

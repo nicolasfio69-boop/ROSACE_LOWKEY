@@ -338,7 +338,6 @@ export function NeedForm() {
         <section className="form-panel">
           {step === 0 && (
             <>
-              <p className="eyebrow">FIRST, THE REAL WORK</p>
               <div className="step-heading">
                 <BackgroundBeams />
                 <h1>Your company. Your role.</h1>
@@ -372,7 +371,7 @@ export function NeedForm() {
                     setContextStage(1);
                   }}
                 >
-                  <span aria-hidden="true">↗</span> Try a fictional role{" "}
+                  <WorkspaceIcon name="arrow" /> Try a fictional role{" "}
                   <small>Embedded developer · NordChip</small>
                 </button>
               )}
@@ -850,7 +849,6 @@ export function NeedForm() {
           )}
           {step === 2 && (
             <>
-              <p className="eyebrow">ALONGSIDE THE CENTRALE FRAMEWORK</p>
               <div className="step-heading">
                 <BackgroundBeams />
                 <h1>Add specific know-how.</h1>
@@ -918,7 +916,6 @@ export function NeedForm() {
           )}
           {step === 3 && (
             <>
-              <p className="eyebrow">YOUR NEED, READY TO REVIEW</p>
               <div className="step-heading">
                 <BackgroundBeams />
                 <h1>{draft.title}</h1>

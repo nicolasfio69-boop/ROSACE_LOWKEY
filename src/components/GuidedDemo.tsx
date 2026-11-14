@@ -398,10 +398,10 @@ export function GuidedDemo() {
       <section className="tour-body" key={step} aria-live="polite">
         <header className="tour-head">
           <BackgroundBeams />
-          <p className="eyebrow">
+          <h1>{current.title}</h1>
+          <p className="tour-progress-label">
             STEP {step + 1} OF {STEPS.length} · {current.who.toUpperCase()}
           </p>
-          <h1>{current.title}</h1>
           <p>{current.text}</p>
           <p className="tour-look">
             <span className="status-dot" /> {current.look}

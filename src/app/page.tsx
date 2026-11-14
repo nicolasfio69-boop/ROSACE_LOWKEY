@@ -48,12 +48,13 @@ export default function Home() {
     <main className="site-shell">
       <section className="home-hero">
         <div className="home-hero-copy">
-          <p className="hero-kicker">
-            <span className="status-dot" /> Espoo Tech Matchmaking · demo
-          </p>
           <h1>
             <TextGenerateEffect words="Prepare your recruitment event." />
           </h1>
+          <p className="hero-kicker">
+            <span className="status-dot" /> Espoo Tech Matchmaking · demo
+          </p>
+
           <p>
             A company says which skills matter for a role. A talent turns their
             CV into a skills card. Rosace suggests who should meet and shows the

@@ -1,4 +1,3 @@
-import { LevelScene } from "./LevelScene";
 import { descriptor, LEVELS, type ExpectedLevel } from "@/lib/framework";
 import { levelExample, type NeedDraft } from "@/lib/need-draft";
 import { jobScenario } from "@/data/job-scenarios";
@@ -26,7 +25,6 @@ export function LevelCards({
           key={level}
           className={`level-card ${value === level ? "selected-level" : ""}`}
         >
-          <LevelScene level={level} />
           <div className="level-card-top">
             <span className="level-bars" aria-hidden="true">
               {[1, 2, 3].map((n) => (

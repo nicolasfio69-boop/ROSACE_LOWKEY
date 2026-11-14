@@ -116,7 +116,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <aside className="app-sidebar">
         <Link href="/" className="app-brand" aria-label="Rosace home">
           <Logo size={36} />
-          <span>SKILLS-BASED MATCHMAKING</span>
+          <span aria-hidden="true">SKILLS-BASED MATCHMAKING</span>
         </Link>
         <div className="sidebar-event">
           <span className="event-avatar">E</span>

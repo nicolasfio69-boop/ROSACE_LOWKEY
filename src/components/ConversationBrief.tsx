@@ -89,7 +89,6 @@ export function ConversationBrief() {
       </Link>
       <div className="step-heading">
         <BackgroundBeams />
-        <p className="eyebrow">A CONVERSATION, NOT A VERDICT</p>
         <h1>
           {talent.pseudonym} × {need.company}
         </h1>
@@ -247,7 +246,7 @@ export function ConversationBrief() {
               return (
                 <label className="observation-row" key={r.skill}>
                   <span>
-                    {skillName(r.skill)}
+                    <strong>{skillName(r.skill)}</strong>
                     <small>
                       How it’s checked: {verificationLabel(r.skill)}
                     </small>
@@ -283,7 +282,6 @@ export function ConversationBrief() {
           }
         >
           <div hidden={mode !== "prepare"}>
-            <p className="eyebrow">EXPECTATIONS MEET EXPERIENCE</p>
             <Rosace
               title="Declared vs expected"
               size={440}
@@ -297,7 +295,6 @@ export function ConversationBrief() {
             </p>
           </div>
           <div hidden={mode !== "observe"}>
-            <p className="eyebrow">WHAT YOU ACTUALLY OBSERVED</p>
             <Rosace
               title="Observed separately"
               size={440}

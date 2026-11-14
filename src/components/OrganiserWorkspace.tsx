@@ -68,7 +68,6 @@ export function OrganiserWorkspace() {
     return <p className="loading-state">Opening the event workspace…</p>;
   return (
     <div className="workspace">
-      <p className="eyebrow">ESPOO TECH MATCHMAKING · ORGANISER</p>
       <div className="step-heading">
         <h1>Review the proposed meetings.</h1>
         <p>
@@ -177,7 +176,11 @@ export function OrganiserWorkspace() {
                       ? "More information needed"
                       : "No suggestion for this need";
                 return (
-                  <details className="meeting-card" key={talent.id} style={{animationDelay:`${candidateIndex * 70}ms`}}>
+                  <details
+                    className="meeting-card"
+                    key={talent.id}
+                    style={{ animationDelay: `${candidateIndex * 70}ms` }}
+                  >
                     <summary className="candidate-summary">
                       <span className="candidate-avatar" aria-hidden="true">
                         {talent.pseudonym.slice(0, 1)}

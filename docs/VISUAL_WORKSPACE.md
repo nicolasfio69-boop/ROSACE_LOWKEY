@@ -1,5 +1,6 @@
 # Interactive workspace — current delivery
 
+Latest frontend audit, corrections and screenshots: [UI_REVIEW.md](UI_REVIEW.md).
 Use `feat/coherent-ux` (PR #11), which integrates `framing-doc`, `workspace-concrete-skills` and `guided-demo`. The audit-only branch does not contain this implementation. No PR has been merged on GitHub.
 
 ```bash

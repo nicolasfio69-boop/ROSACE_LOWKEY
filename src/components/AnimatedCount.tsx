@@ -24,7 +24,8 @@ export function AnimatedCount({ value }: { value: number }) {
     };
   }, [value]);
   return (
-    <span aria-label={String(value)}>
+    <span>
+      <span className="sr-only">{value}</span>
       <span aria-hidden="true">{shown}</span>
     </span>
   );

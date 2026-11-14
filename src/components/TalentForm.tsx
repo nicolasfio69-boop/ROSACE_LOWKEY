@@ -192,7 +192,6 @@ export function TalentForm() {
         <section className="form-panel">
           {step === 0 && (
             <>
-              <p className="eyebrow">A CV IS A STARTING POINT</p>
               <div className="step-heading">
                 <BackgroundBeams />
                 <h1>Build your skills card.</h1>
@@ -397,7 +396,6 @@ export function TalentForm() {
           )}
           {step === 2 && (
             <>
-              <p className="eyebrow">YOUR CONFIRMED DECLARATIONS</p>
               <div className="step-heading">
                 <BackgroundBeams />
                 <h1>
@@ -475,7 +473,7 @@ export function TalentForm() {
                 </p>
               )}
               <button
-                className="secondary-button"
+                className="secondary-button delete-card-action"
                 onClick={() => {
                   try {
                     removeTalent(localStorage, "local-talent");

@@ -17,6 +17,7 @@ export function LivePreview({
     <aside
       className={`live-panel live-preview ${open ? "preview-open" : ""}`}
       aria-label={label}
+      tabIndex={0}
     >
       <button
         className="preview-toggle"

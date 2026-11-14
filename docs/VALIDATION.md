@@ -20,3 +20,12 @@ After this framing validation, the owner requested Anthropic instead of Featherl
 - Eight routes, including the separate candidate check screen, captured at 1440 × 900 and 390 × 844 with no horizontal overflow. Latest screenshots: [images/claude-workspaces](images/claude-workspaces). The earlier screenshot set is the framing milestone.
 - `npm run test:claude` correctly reports missing local configuration and sends no request. **No real Anthropic call has been validated**: the key is not configured in this workspace. All provider-response tests use fixtures/mocks.
 - Setup and remaining work: [CLAUDE_SETUP.md](CLAUDE_SETUP.md). No deployment, authenticated accounts or shared database is claimed.
+
+## Impeccable frontend refinement
+
+- Two independent visual and technical audits covered every visible route and principal workflow states. Baseline design assessment: **25/40**, with eight prioritized corrections; [full critique](UX_AUDIT_IMPECCABLE.md).
+- **151 unit tests**, TypeScript, ESLint and production build pass. The launcher remains unchanged from its four passing tests above.
+- **22 Playwright tests** pass against the production build. Three new regressions check unobscured focused mobile inputs, all three technical-level choices within their panel, accessible counters, chart-label bounds and complete technical metadata at 1440, 1024, 768, 390 and 320px.
+- Existing tests still verify document privacy, persistence/deletion, the fixed framework, keyboard rosace selection, mean observations, human grading, explicit AI proposal acceptance and reduced motion.
+- Desktop/mobile captures and local launch instructions: [UI_REVIEW.md](UI_REVIEW.md). Visual checks include level selection, observation rows and review controls, not only initial pages.
+- UI-only changes are isolated after `8742471`: no edits to API routes, business libraries, schemas, scoring, authentication or database code. No actual Anthropic request, deployment or PR merge was performed.

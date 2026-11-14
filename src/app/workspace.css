@@ -626,13 +626,6 @@ body {
   background: #f2f2f4;
   box-shadow: 0 0 0 1px #82828d;
 }
-.level-scene {
-  width: 94px;
-  height: auto;
-  grid-column: 1;
-  grid-row: 1 / span 3;
-  align-self: center;
-}
 .level-card .level-card-top,
 .intake-layout.with-rail .level-card-top {
   grid-column: 3;
@@ -669,8 +662,8 @@ body {
 .intake-layout.with-rail .autonomy-label {
   grid-column: 2 / -1;
   grid-row: 2;
-  color: #757582 !important;
-  font-size: 10px !important;
+  color: var(--muted);
+  font-size: 13px;
   margin: 6px 0 0;
 }
 .level-card .example-block,
@@ -1118,9 +1111,6 @@ body {
     grid-template-columns: 65px 1fr 18px;
     gap: 8px;
     padding: 13px;
-  }
-  .level-scene {
-    width: 65px;
   }
   .overview-copy {
     padding: 30px;

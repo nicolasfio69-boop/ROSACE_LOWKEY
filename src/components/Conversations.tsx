@@ -1,4 +1,5 @@
 "use client";
+import { WorkspaceIcon } from "./WorkspaceIcon";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NEEDS, TALENTS } from "@/data/demo";
@@ -56,7 +57,6 @@ export function Conversations() {
   return (
     <div className="workspace">
       <div className="step-heading">
-        <p className="eyebrow">QUESTIONS THAT CHECK WHAT WAS DECLARED</p>
         <h1>Prepare each conversation.</h1>
         <p>
           {approved.length
@@ -88,7 +88,7 @@ export function Conversations() {
               className="primary-button"
               href={`/brief?need=${encodeURIComponent(need.id)}&talent=${encodeURIComponent(talent.id)}`}
             >
-              Prepare conversation ↗
+              Prepare conversation <WorkspaceIcon name="arrow" />
             </Link>
           </article>
         ))}
