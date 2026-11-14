@@ -3,7 +3,7 @@
  * One Espoo matchmaking event, three company needs and ten talent cards.
  * Every declared level is backed by a CV line or left as a plain declaration,
  * so the conversation guide has something concrete to check.
- * Pseudonyms vary on purpose: names, languages and degrees never enter a calculation.
+ * Pseudonyms vary on purpose: names, languages, degrees and career paths never enter a calculation.
  */
 import type { Need, Talent } from "@/lib/scoring";
 

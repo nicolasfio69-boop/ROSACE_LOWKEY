@@ -8,11 +8,30 @@ export class ServiceError extends Error {
     super(message);
   }
 }
+/**
+ * Behind a hosting proxy (Aiven), request.url carries the internal address,
+ * so the browser's Origin is compared with the public host the proxy forwards.
+ */
+export function sameOrigin(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  let host: string;
+  try {
+    host = new URL(origin).host;
+  } catch {
+    return false;
+  }
+  const allowed = [
+    new URL(request.url).host,
+    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim(),
+    request.headers.get("host"),
+  ];
+  return allowed.some((candidate) => candidate && candidate === host);
+}
 export async function readRequest(
   request: Request,
 ): Promise<Record<string, unknown>> {
-  const origin = request.headers.get("origin");
-  if (origin && origin !== new URL(request.url).origin)
+  if (!sameOrigin(request))
     throw new ServiceError("Cross-origin requests are not allowed.", 403);
   const reader = request.body?.getReader();
   if (!reader) throw new ServiceError("Missing request.");

@@ -10,7 +10,7 @@ import { isComponent } from "@/lib/framework";
 const STEPS = [
   {
     icon: "need",
-    step: "01",
+    step: "01 · Before the event",
     title: "Prepare a recruiter need",
     text: "Choose 3 major components, any number of minors and up to 3 technical skills. Compare concrete examples to set the expected levels.",
     href: "/need/new",
@@ -18,7 +18,7 @@ const STEPS = [
   },
   {
     icon: "talent",
-    step: "02",
+    step: "02 · Before the event",
     title: "Build a talent card",
     text: "Start from a CV or from your own words. Each claim stays declared until a recruiter observes it. The talent never sees a rank or a score.",
     href: "/talent/new",
@@ -26,7 +26,7 @@ const STEPS = [
   },
   {
     icon: "event",
-    step: "03",
+    step: "03 · Before the event",
     title: "Run the event desk",
     text: "See who is suggested for each need and why. Ties at the cut and people without a suggestion go to the organiser, who decides.",
     href: "/organiser",
@@ -34,7 +34,7 @@ const STEPS = [
   },
   {
     icon: "conversation",
-    step: "04",
+    step: "04 · During and after",
     title: "Prepare a conversation",
     text: "Get questions that check what was declared. Note what you observe as a separate, solid bar on the rosace.",
     href: "/conversations",
@@ -53,7 +53,7 @@ const SAFEGUARDS = [
   },
   {
     title: "No bias criteria",
-    text: "Nationality, language, age, gender and degree never enter a calculation. Communication is judged on being understood, never on accent or grammar.",
+    text: "Nationality, language, age, gender, degree and career path never enter a calculation. Transferable experience counts like any other. Communication is judged on being understood, never on accent or grammar.",
   },
   {
     title: "Talents keep their dignity",
@@ -162,8 +162,8 @@ export default function Home() {
       </section>
       <div className="overview-footnote">
         <span>
-          Synthetic data only. No nationality, language, age, gender or degree
-          is used to suggest anyone.
+          Synthetic data only. No nationality, language, age, gender, degree or
+          career path is used to suggest anyone.
         </span>
         <Link href="/organiser">Review the event’s suggestions →</Link>
       </div>
