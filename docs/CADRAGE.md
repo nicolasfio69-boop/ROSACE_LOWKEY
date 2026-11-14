@@ -10,7 +10,7 @@ Ce fichier est la source de vérité du projet. Il est tenu à jour à chaque d�
 
 **Pour mettre à jour :** quand Nicolas tranche un point, déplace-le de « À trancher » vers « Journal des décisions », avec la date. Si une règle change, modifie aussi la partie concernée plus haut.
 
-Dernière mise à jour : 2026-11-14 — intégration des décisions validées par Nicolas dans ce chat.
+Dernière mise à jour : 2026-11-14 — nettoyage GitHub : livraison unique sur `feat/coherent-ux` (PR #11 → `main`).
 
 ---
 
@@ -133,9 +133,10 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 
 ## 8. Branches et pull requests
 
-- On travaille à partir de `feat/visual-workspace`, pas de `main`. Chaque changement passe par sa propre branche et une PR vers `feat/visual-workspace`.
-- PR ouvertes au 2026-11-14 : #7 (composantes concrètes et catalogue technique), #8 (direction artistique et effets Aceternity), #9 (parcours guidé, construit sur #8). Ordre de fusion : #7, puis #8, puis #9.
-- Codex a ouvert la PR #11 (`feat/coherent-ux`, construite sur #8) : thème clair perle avec fond Aurora d'Aceternity, et corrections UX. La suite du travail se fait sur cette branche, en suivant `docs/CODEX_BRIEF.md`, qui commence par fusionner #10, #7 et #9.
+- **Version actuelle de l’application :** branche `feat/coherent-ux` (PR #11 vers `main`). Elle contient le cadrage, le catalogue, la démo guidée, l’UX cohérente, les checks chronométrés et l’audit stratégie (`docs/AUDIT_STRATEGIE_HACKATHON.md`).
+- Les anciennes branches / PR #3 à #10 (descripteurs, catalogue, visual-workspace, shader, guided-demo, framing, etc.) sont **intégrées** dans `feat/coherent-ux` puis fermées / supprimées pour éviter la confusion. Ne pas les rouvrir.
+- Nouveau travail : brancher depuis `feat/coherent-ux` (ou depuis `main` après fusion de la PR #11). Une PR = un sujet. Ne pas réintroduire Featherless / Gemini.
+- `main` ne reçoit l’application qu’après fusion explicite de la PR #11.
 
 ## 9. Journal des décisions
 

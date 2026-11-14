@@ -9,19 +9,18 @@ A human chooses the requirements and approves meetings. Repository examples are 
 
 ## Get the current application from GitHub
 
-The audit PR contains only a document. For this application delivery, fetch and
-switch to the application branch in your existing clone (commit or stash your own
-local changes first if Git reports a conflict):
+**Current app branch:** `feat/coherent-ux` (delivery PR [#11](https://github.com/nicolasfio69-boop/JUNCTION_RECRUITMENT_COMPETENCIES/pull/11) → `main`).
+Older feature PRs were folded into this branch and closed. Strategy notes live in
+`docs/CADRAGE.md`, `AGENTS.md` and `docs/AUDIT_STRATEGIE_HACKATHON.md`.
 
 ```bash
 git fetch origin
 git switch feat/coherent-ux
+git pull --ff-only
 ```
 
-`git switch` creates a tracking branch from `origin/feat/coherent-ux` when
-needed. Stay on that branch until its PR is merged; `main` does not receive the
-new application just because the PR is open. For subsequent updates on the branch,
-use `git pull --ff-only`. No ZIP download is needed.
+Stay on that branch until PR #11 is merged; `main` does not receive the new
+application just because the PR is open. No ZIP download is needed.
 
 ## Open in Cursor and run locally
 
