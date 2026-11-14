@@ -1,25 +1,71 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Rosace } from "./Rosace";
 import { COMPONENTS, JOB_SKILLS, LEVELS, descriptor, isComponent, skillName, type ExpectedLevel } from "@/lib/framework";
 import { JOB_QUESTIONS, levelExample, prepareNeed, type NeedDraft, type DraftResult } from "@/lib/need-draft";
 import { MAJOR_COUNT, MAX_MINORS, MAX_JOB_SKILLS, type Requirement } from "@/lib/scoring";
 
+import { decodeStoredNeed, emptyNeedDraft, NEED_STORAGE_KEY, saveNeed } from "@/lib/need-storage";
+
 const inputClass = "mt-1 w-full rounded border border-line bg-white p-2 focus:outline-2 focus:outline-brand";
 const panelClass = "rounded-lg border border-line bg-white p-4";
 
 export function NeedForm() {
-  const [draft, setDraft] = useState<NeedDraft>({ title: "", description: "", context: { task: "", audience: "", outcome: "", challenge: "" }, capacity: 3, requirements: [] });
+  const [draft, setDraft] = useState<NeedDraft>(emptyNeedDraft);
   const [result, setResult] = useState<DraftResult | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [storageError, setStorageError] = useState("");
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(NEED_STORAGE_KEY);
+      if (raw) {
+        const stored = decodeStoredNeed(raw);
+        setDraft(stored.draft);
+        if (stored.confirmed) setResult(prepareNeed(stored.draft));
+        setSaved(true);
+      }
+    } catch {
+      setStorageError("Your saved need could not be restored. You can continue editing; saving will replace the unreadable copy.");
+    }
+    setLoaded(true);
+  }, []);
+
+  function persist(next: NeedDraft, confirmed: boolean) {
+    try {
+      saveNeed(window.localStorage, next, confirmed);
+      setSaved(true);
+      setStorageError("");
+    } catch {
+      setSaved(false);
+      setStorageError("Your latest changes could not be saved in this browser. Keep this page open and retry saving.");
+    }
+  }
+
+  function clearSavedNeed() {
+    try {
+      window.localStorage.removeItem(NEED_STORAGE_KEY);
+      setDraft(emptyNeedDraft());
+      setResult(null);
+      setSaved(false);
+      setStorageError("");
+    } catch {
+      setStorageError("The saved need could not be deleted. Please allow browser storage and try again.");
+    }
+  }
+
   const majors = draft.requirements.filter((r) => r.major).length;
   const minors = draft.requirements.filter((r) => isComponent(r.skill) && !r.major).length;
   const jobs = draft.requirements.filter((r) => !isComponent(r.skill)).length;
   const validation = prepareNeed(draft);
 
   function update(patch: Partial<NeedDraft>) {
-    setDraft((current) => ({ ...current, ...patch }));
+    const next = { ...draft, ...patch };
+    setDraft(next);
     setResult(null);
+    persist(next, false);
   }
 
   function select(skill: string, role: "none" | "major" | "minor" | "job") {
@@ -31,7 +77,9 @@ export function NeedForm() {
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setResult(prepareNeed(draft));
+    const checked = prepareNeed(draft);
+    setResult(checked);
+    if (checked.ok) persist(draft, true);
   }
 
   function levels(requirement: Requirement) {
@@ -52,9 +100,17 @@ export function NeedForm() {
     );
   }
 
+  if (!loaded) return <p role="status">Loading your saved need…</p>;
+
   return (
     <form onSubmit={submit} className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
       <div className="space-y-6">
+        <div className={panelClass}>
+          <p role="status">{saved ? "Saved in this browser. Your work will be restored when you return." : "Your edits are saved automatically in this browser."}</p>
+          {storageError && <p role="alert" className="mt-2 text-brand">{storageError}</p>}
+          {storageError && <button type="button" className="mt-2 mr-4 underline" onClick={() => persist(draft, result?.ok === true)}>Retry saving</button>}
+          <button type="button" className="mt-2 underline" onClick={clearSavedNeed}>Clear saved need and start again</button>
+        </div>
         <section className={panelClass} aria-labelledby="job-heading">
           <h2 id="job-heading" className="text-xl font-semibold">1. Describe the job</h2>
           <label className="mt-4 block">Job title<input className={inputClass} required maxLength={120} value={draft.title} onChange={(e) => update({ title: e.target.value })} /></label>
@@ -102,9 +158,9 @@ export function NeedForm() {
           <button type="submit" aria-describedby={!validation.ok ? "need-errors" : undefined} className="mt-4 rounded bg-brand px-4 py-2 font-semibold text-white">Confirm need</button>
           {result && !result.ok && <p role="alert" className="mt-3 text-brand">Need not confirmed. Resolve the issues listed above.</p>}
           {result?.ok && <div role="status" className="mt-4 rounded border border-line p-4">
-            <h3 className="font-semibold">Need confirmed for this preview</h3>
+            <h3 className="font-semibold">Need confirmed</h3>
             <p>{result.need.title} · {result.need.capacity} people to meet</p><p>{result.description}</p>
-            <p className="mt-2 text-sm text-muted">Not saved or sent. Leaving or refreshing this page clears it. Edit any field to revise your need.</p>
+            <p className="mt-2 text-sm text-muted">{saved ? "Confirmation saved in this browser. Edit any field to revise your need and confirm again." : "Confirmed on this page, but not saved. Retry saving before leaving."}</p>
           </div>}
         </section>
       </div>

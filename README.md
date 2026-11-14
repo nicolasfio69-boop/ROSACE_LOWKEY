@@ -28,7 +28,10 @@ with the fixed descriptor and a hand-written example placed in the job context.
 The live rosace keeps job skills separate. Capacity defaults to three.
 
 Confirming validates the need with `checkNeed()` and shows an in-page confirmation.
-This step does not save or send data: refreshing or leaving clears the form.
+The draft and confirmation are saved in browser local storage and restored after
+refreshing or returning. Editing a confirmed need requires confirming it again.
+Use "Clear saved need and start again" to delete it. Storage failures are shown
+with a retry action. Data is not sent to a server or shared across devices.
 No Gemini or other AI service is used.
 
 Validation: `npm test`, `npm run typecheck`, `npx eslint src`, `npm run build`.
