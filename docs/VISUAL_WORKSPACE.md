@@ -40,9 +40,11 @@ launcher opens the browser on port 3001 and reuses an existing installation.
   and Georgia serif styling is gone.
 - Fonts are self-hosted with `@fontsource-variable`: Space Grotesk for headings,
   Inter for text. No request to Google Fonts at runtime.
-- `ShaderBackdrop` draws red and gold light ribbons with plain WebGL behind the home
-  hero. It pauses off screen, draws one still frame under reduced motion and falls
-  back to a CSS gradient without WebGL. It has no paid or third-party dependency.
+- Effects come from free Aceternity UI components, recoloured in Centrale red and
+  gold: `WavyBackground` (canvas and `simplex-noise`) behind the home hero, and
+  `GlowingEffect`, a border glow that follows the pointer, on the home steps and the
+  event desk need cards. Both pause or stay still under reduced motion. The paid
+  Aceternity shader blocks are not used.
 - Copy says what the tool does. Avoid slogans such as "Beyond a CV".
 
 ## Frontend and backend

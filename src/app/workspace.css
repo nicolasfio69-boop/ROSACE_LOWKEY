@@ -1878,3 +1878,41 @@ h3 {
     #fff;
   border-color: var(--stroke);
 }
+
+/* Glowing border (after Aceternity "Glowing Effect"), Centrale colours */
+.glowing-effect {
+  --start: 0;
+  --active: 0;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+}
+.glowing-effect::after {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--glow-border));
+  border-radius: inherit;
+  border: var(--glow-border) solid transparent;
+  background: conic-gradient(
+      from calc((var(--start) - var(--spread)) * 1deg),
+      #0000 0deg,
+      #c8102e calc(var(--spread) * 0.6deg),
+      #f0c300 calc(var(--spread) * 1deg),
+      #c8102e calc(var(--spread) * 1.4deg),
+      #0000 calc(var(--spread) * 2deg)
+    )
+    border-box;
+  opacity: var(--active);
+  transition: opacity 0.3s;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0) border-box;
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+.overview-path,
+.need-switcher button {
+  position: relative;
+}

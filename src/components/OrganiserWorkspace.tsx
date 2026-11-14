@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { GlowingEffect } from "./GlowingEffect";
 import { useEffect, useState } from "react";
 import { NEEDS, TALENTS } from "@/data/demo";
 import {
@@ -109,6 +110,7 @@ export function OrganiserWorkspace() {
             }
             onClick={() => setActiveNeed(result.need.id)}
           >
+            <GlowingEffect />
             <span>{result.need.company}</span>
             <strong>{result.need.title}</strong>
             <small>

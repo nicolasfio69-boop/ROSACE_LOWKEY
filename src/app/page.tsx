@@ -1,7 +1,8 @@
 import { WorkspaceIcon } from "@/components/WorkspaceIcon";
 import Link from "next/link";
 import { Rosace } from "@/components/Rosace";
-import { ShaderBackdrop } from "@/components/ShaderBackdrop";
+import { GlowingEffect } from "@/components/GlowingEffect";
+import { WavyBackground } from "@/components/WavyBackground";
 import { NEEDS } from "@/data/demo";
 import { isComponent } from "@/lib/framework";
 
@@ -45,7 +46,7 @@ export default function Home() {
   return (
     <main className="site-shell">
       <section className="home-hero">
-        <ShaderBackdrop />
+        <WavyBackground />
         <div className="home-hero-copy">
           <p className="hero-kicker">
             <span className="status-dot" /> Espoo Tech Matchmaking · demo
@@ -102,6 +103,7 @@ export default function Home() {
       <section className="overview-paths" aria-label="How the event works">
         {STEPS.map((item) => (
           <article className="overview-path" key={item.href}>
+            <GlowingEffect />
             <div className="path-head">
               <span className="path-icon">
                 <WorkspaceIcon name={item.icon} />
