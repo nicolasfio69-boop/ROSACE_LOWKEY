@@ -1,5 +1,5 @@
 import type { JobContext } from "./need-draft";
-import { SKILL_CODES } from "./framework";
+import { SKILL_CODES, type ExpectedLevel } from "./framework";
 import { checkNeed, type Need, type Talent, type Observation } from "./scoring";
 
 export const WORKSPACE_KEY = "rosace.event-workspace.v1";
@@ -26,6 +26,9 @@ export type Seen = {
   talentId: string;
   skill: string;
   observation: Observation;
+  taskLevel?: ExpectedLevel;
+  /** Regrading the same situation replaces it; separate situations are averaged. */
+  source?: string;
 };
 export type Workspace = {
   version: 1;
@@ -149,7 +152,9 @@ export function loadWorkspace(
       typeof s.talentId === "string" &&
       typeof s.skill === "string" &&
       SKILL_CODES.has(s.skill) &&
-      ["A", "C", "F", "NE"].includes(s.observation as string),
+      ["A", "C", "F", "NE"].includes(s.observation as string) &&
+      (s.taskLevel === undefined || [1, 2, 3].includes(s.taskLevel as number)) &&
+      (s.source === undefined || typeof s.source === "string"),
   );
   const cleaned: Workspace = {
     version: 1,
@@ -212,7 +217,8 @@ export function recordMeeting(storage: Storage, meeting: Omit<Meeting, "at">) {
 export function recordObservation(storage: Storage, seen: Seen) {
   if (
     !["A", "C", "F", "NE"].includes(seen.observation) ||
-    !SKILL_CODES.has(seen.skill)
+    !SKILL_CODES.has(seen.skill) ||
+    (seen.taskLevel !== undefined && ![1, 2, 3].includes(seen.taskLevel))
   )
     throw new Error("Invalid observation.");
   const w = loadWorkspace(storage);
@@ -221,7 +227,8 @@ export function recordObservation(storage: Storage, seen: Seen) {
       !(
         s.needId === seen.needId &&
         s.talentId === seen.talentId &&
-        s.skill === seen.skill
+        s.skill === seen.skill &&
+        (s.source ?? "interview") === (seen.source ?? "interview")
       ),
   );
   w.observations.push(seen);

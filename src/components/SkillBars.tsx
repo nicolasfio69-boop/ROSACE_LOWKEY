@@ -13,6 +13,7 @@ export type SkillBarItem = {
   expected?: ExpectedLevel;
   level?: LevelValue | null;
   observed?: boolean;
+  observedValue?: number | null;
   /** Mentioned in the CV but not detailed yet. */
   mentioned?: boolean;
 };
@@ -38,10 +39,10 @@ export function SkillBars({ items, title = "Technical skills" }: { items: SkillB
 }
 
 function Track({ item }: { item: SkillBarItem }) {
-  const talentShown = item.level !== undefined || item.mentioned;
-  const value = talentShown ? item.level : item.expected;
+  const talentShown = item.level !== undefined || item.mentioned || item.observedValue !== undefined;
+  const value = item.observedValue !== undefined ? item.observedValue : talentShown ? item.level : item.expected;
   const width = typeof value === "number" ? `${(value / 3) * 100}%` : "0%";
-  const dotted = talentShown && !item.observed;
+  const dotted = talentShown && !item.observed && item.observedValue === undefined;
   return (
     <div className="relative mt-1 h-3 rounded-sm bg-[#E8E8E8]" aria-hidden="true">
       {[1, 2].map((step) => (
@@ -64,8 +65,9 @@ function Track({ item }: { item: SkillBarItem }) {
 }
 
 function status(item: SkillBarItem): string {
-  const talentShown = item.level !== undefined || item.mentioned;
+  const talentShown = item.level !== undefined || item.mentioned || item.observedValue !== undefined;
   if (!talentShown) return item.expected ? `expects ${LEVELS[item.expected].name}` : "";
+  if (item.observedValue !== undefined) return item.observedValue === null ? "Not observed" : `Observed ${Number(item.observedValue.toFixed(2))} / 3`;
   const declared = item.level === null || item.level === undefined ? "mentioned in CV, not detailed" : LEVELS[item.level].name;
   return item.expected ? `${declared} · expects ${LEVELS[item.expected].name}` : declared;
 }

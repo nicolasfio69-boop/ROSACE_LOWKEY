@@ -5,7 +5,6 @@ import { NEEDS, TALENTS } from "@/data/demo";
 import { COMPONENTS, isComponent, skillName } from "@/lib/framework";
 import {
   OBSERVATION_LABELS,
-  observedValue,
   type Observation,
 } from "@/lib/scoring";
 import {
@@ -15,6 +14,8 @@ import {
   type Workspace,
 } from "@/lib/workspace";
 import { prepareConversation } from "@/lib/conversation";
+import { meanObservedValue } from "@/lib/observations";
+import { SkillBars } from "./SkillBars";
 import { Rosace } from "./Rosace";
 import { LivePreview } from "./LivePreview";
 export function ConversationBrief() {
@@ -68,6 +69,8 @@ export function ConversationBrief() {
         talentId: ids!.talent,
         skill,
         observation,
+        taskLevel: need!.requirements.find(r => r.skill === skill)!.expected,
+        source: "interview",
       });
       setWorkspace(loadWorkspace(localStorage));
       setError("");
@@ -188,7 +191,7 @@ export function ConversationBrief() {
             </p>
             {need.requirements.map((r) => {
               const observation =
-                seen.find((s) => s.skill === r.skill)?.observation ?? "NE";
+                seen.find((s) => s.skill === r.skill && (!s.source || s.source === "interview"))?.observation ?? "NE";
               return (
                 <label className="observation-row" key={r.skill}>
                   <span>{skillName(r.skill)}</span>
@@ -246,10 +249,7 @@ export function ConversationBrief() {
                 need.requirements
                   .filter((r) => isComponent(r.skill))
                   .map((r) => {
-                    const observation =
-                      seen.find((s) => s.skill === r.skill)?.observation ??
-                      "NE";
-                    return [r.skill, observedValue(r.expected, observation)];
+                    return [r.skill, meanObservedValue(seen.filter(s => s.skill === r.skill), r.expected)];
                   }),
               )}
               observed={Object.fromEntries(
@@ -258,7 +258,7 @@ export function ConversationBrief() {
               expected={expected}
             />
             <p className="quiet-note">
-              Solid bars: observation at the expected task level. “Not covered”
+              Solid bars: mean of observed task-level values. “Not covered”
               stays empty. These values never change the declared card.
             </p>
             <details className="chart-help">
@@ -276,6 +276,7 @@ export function ConversationBrief() {
               </p>
             </details>
           </div>
+          <SkillBars items={need.requirements.filter(r => !isComponent(r.skill)).map(r => ({ code: r.skill, expected: r.expected, level: talent.statements[r.skill]?.level ?? null, ...(mode === "observe" ? { observedValue: meanObservedValue(seen.filter(s => s.skill === r.skill), r.expected) } : {}) }))} />
         </LivePreview>
       </div>
     </div>

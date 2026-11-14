@@ -1,4 +1,5 @@
 "use client";
+import { radialLevel } from "@/lib/observations";
 import {
   COMPONENTS,
   type ExpectedLevel,
@@ -62,7 +63,7 @@ export function Rosace({
   const center = size / 2;
   const radius = round(center - font * (labels === "full" ? 4.2 : 3.6));
   const hub = round(radius * CENTER_PART);
-  const at = (level: number) => round(hub + (level / 3) * (radius - hub));
+  const at = (level: number) => round(radialLevel(level, hub, radius));
   const thickness = round(Math.max(radius * 0.045, 3));
   const golden = new Set(
     majors ??
@@ -90,6 +91,10 @@ export function Rosace({
         return (
           <circle
             key={component.code}
+            className="rosace-branch"
+            data-skill={component.code}
+            data-level={0}
+            data-evidence={observedLevels !== undefined ? "observed" : "declared"}
             cx={dot.x}
             cy={dot.y}
             r={thickness / 2}
@@ -107,6 +112,7 @@ export function Rosace({
           className="rosace-branch"
           data-skill={component.code}
           data-level={level}
+          data-evidence={showTalent ? (observedLevels !== undefined ? "observed" : "declared") : "expected"}
           x1={start.x}
           y1={start.y}
           x2={end.x}

@@ -125,3 +125,13 @@ describe("local event workspace", () => {
     ).toThrow("quota");
   });
 });
+
+it("keeps separate situations but replaces a revised grade for the same one", () => {
+  const s = storage();
+  const base = { needId: "n", talentId: "t", skill: "C5.1", taskLevel: 2 as const };
+  recordObservation(s, {...base, observation: "A", source: "online"});
+  recordObservation(s, {...base, observation: "F", source: "interview"});
+  recordObservation(s, {...base, observation: "C", source: "online"});
+  expect(loadWorkspace(s).observations).toHaveLength(2);
+  expect(loadWorkspace(s).observations.find(o => o.source === "online")?.observation).toBe("C");
+});
