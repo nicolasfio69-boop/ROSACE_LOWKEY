@@ -9,6 +9,15 @@ describe("talent declarations", () => {
     expect(mentions["C2.2"]).toContain("tested");
     expect(mentions["C4.1"]).toContain("team");
   });
+  it("finds clues for technical skills in a bootcamp CV, still without levels", () => {
+    const mentions = spotSkills(
+      "Final project in a team of four: a booking app in React and TypeScript, with automated tests for the payment flow.\nBefore the bootcamp: pharmacy assistant, handling patient data under strict privacy rules.\nLearned Git and testing on my own.",
+    );
+    expect(mentions["J.WEB_FRONTEND"]).toContain("React");
+    expect(mentions["J.TESTING"]).toContain("automated tests");
+    expect(mentions["J.GIT"]).toContain("Git");
+    expect(mentions["C2.1"]).toContain("privacy");
+  });
   it("ignores personal and demographic attributes", () => {
     expect(
       spotSkills(
