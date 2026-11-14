@@ -27,7 +27,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000 on the computer running that command. Choose Candidate, Recruiter or Organiser in the header. An API key is unnecessary for the fictional demo; optional Claude setup is in [CLAUDE_SETUP.md](CLAUDE_SETUP.md).
+Open http://localhost:3000 on the computer running that command. The later [welcome follow-up](WELCOME_REVIEW.md) now provides the initial choice and a Demo profile menu; the captures below document the preceding UI milestone. An API key is unnecessary for the fictional demo; optional Claude setup is in [CLAUDE_SETUP.md](CLAUDE_SETUP.md).
 
 ## Before / after
 

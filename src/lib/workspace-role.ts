@@ -1,8 +1,9 @@
 export type WorkspaceRole = "candidate" | "recruiter" | "organiser";
 export function roleForPath(path: string): WorkspaceRole | null {
-  if (path.startsWith("/talent/")) return "candidate";
-  if (path === "/organiser") return "organiser";
+  if (path === "/candidate" || path.startsWith("/talent/")) return "candidate";
+  if (path === "/organiser" || path === "/event") return "organiser";
   if (
+    path === "/recruiter" ||
     path.startsWith("/need/") ||
     ["/checks", "/brief", "/conversations"].includes(path)
   )
@@ -19,8 +20,8 @@ export function roleDestination(
   )
     return role === "candidate" ? "/talent/checks" : "/checks";
   return {
-    candidate: "/talent/new",
-    recruiter: "/need/new",
-    organiser: "/organiser",
+    candidate: "/candidate",
+    recruiter: "/recruiter",
+    organiser: "/event",
   }[role];
 }

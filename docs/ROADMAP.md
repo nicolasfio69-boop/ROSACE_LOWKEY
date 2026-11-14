@@ -10,7 +10,7 @@ Current delivery: `feat/coherent-ux`, PR #11. The local flow is implemented; thi
 | 3. Organiser | Suggestions, ties, people without suggestions, reasoned human decisions and journal | Actual event capacities and process |
 | 4. Conversation | Questions, on-site situations, human observations averaged on the task-level scale; C4.3 discussed only | Recruiter usability in a ten-minute meeting |
 | 5. Checks | Three exercises × three levels, twenty-minute total; submission, human review, grade, separate observed rosace; optional explicit Claude feedback | Remaining online exercises are described but not implemented; live provider validation |
-| 6. Guided demo and visual UX | Four NordChip/Amira stages, simplified menu, light pearl Aurora, construction/review motion and reduced-motion fallback | Owner visual review and jury narrative |
+| 6. Welcome and visual UX | Candidate/recruiter choice, discreet organiser access, skippable fictional sign-in, remembered local mode, separate role homes, four-stage demo, light pearl Aurora and reduced motion | Owner flow review; real email/code authentication remains deferred |
 | 7. Hosting | Next.js standalone, Node 22 Dockerfile, documented Aiven Runtime deployment from GitHub | Account credits, European region, live deployment and provider secrets |
 | 8. Shared event service | Deferred | Authentication, shared storage, server retention/deletion; no PostgreSQL in this delivery |
 
@@ -25,3 +25,5 @@ Browser storage is not shared across devices. The demo uses fictional companies 
 Open owner decisions: delivery format (video/slides/submission text), deadline, pitch duration, team and Espoo feedback. The verification plan, mean aggregation, simplified menu and twentieth technical skill are now approved in [CADRAGE.md](CADRAGE.md).
 
 Latest follow-up: separate candidate/recruiter workspaces and Claude RAG proposals are implemented. Configure and validate the API locally with [CLAUDE_SETUP.md](CLAUDE_SETUP.md). The original simplified menu has been replaced by role-specific navigation.
+
+Challenge alignment review: [CHALLENGE_ALIGNMENT.md](CHALLENGE_ALIGNMENT.md). Strong alignment with concrete needs, human decisions and synthetic demonstrations; event usability, live AI quality, concurrent access and real deployment remain unproven.

@@ -26,7 +26,7 @@ npm run dev
 
 The connection test makes **one bounded API request**, containing only a fictional connection check. It prints success or a sanitized error, never the key or upstream response body. Do not run it until API billing/access is configured. Restart the dev server whenever `.env.local` changes.
 
-Open http://localhost:3000. The top **View as** selector chooses Candidate, Recruiter or Organiser. These are separate demo workspaces, not authenticated accounts.
+Open http://localhost:3000. Choose **Candidate** or **Recruiter** on the welcome screen (the organiser link is below). You can skip the explicitly fictional sign-in preview. The header’s **Demo profile** menu switches spaces; **Back to welcome** returns to the choice. These are separate demo workspaces, not authenticated accounts.
 
 ## Try the actual flows
 

@@ -207,8 +207,11 @@ test("practice redirects to Checks and an unsubmitted draft stays in memory", as
   await page.goto("/practice");
   await expect(page).toHaveURL(/\/checks(?:\?|$)/);
   await page
-    .getByRole("combobox", { name: "Workspace role", exact: true })
-    .selectOption("candidate");
+    .getByRole("button", { name: /Demo profile$/, exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: /^Candidate(?: Current)?$/, exact: true })
+    .click();
   await page
     .getByLabel("Your exercise answer", { exact: true })
     .fill("An unsubmitted fictional answer.");
@@ -285,8 +288,12 @@ test("interactive rosace supports keyboard, preserves levels and shows the activ
     page.getByRole("radio", { name: "Advanced", exact: true }),
   ).toBeChecked();
   await page
-    .getByRole("combobox", { name: "Workspace role", exact: true })
-    .selectOption("candidate");
+    .getByRole("button", { name: /Demo profile$/, exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: /^Candidate(?: Current)?$/, exact: true })
+    .click();
+  await page.getByRole("link", { name: "Build my skills card" }).click();
   await page
     .getByRole("button", {
       name: "Explore Get it right and spot the error",

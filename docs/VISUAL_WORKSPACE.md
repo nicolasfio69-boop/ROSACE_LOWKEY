@@ -36,3 +36,5 @@ On mobile, navigation and role selection stay in the header; the live rosace is 
 ## Validation and limits
 
 See [VALIDATION.md](VALIDATION.md) for checks and screenshot sets. Browser-local storage does not sync across computers. API responses are tested with mocks until the owner's key is configured; no live AI result, deployed Aiven URL or authenticated service is claimed. Aiven Runtime packaging is prepared in [DEPLOY_AIVEN.md](DEPLOY_AIVEN.md), without PostgreSQL.
+
+Latest owner-approved entrance flow: [WELCOME_REVIEW.md](WELCOME_REVIEW.md). Framing and Espoo challenge review: [CHALLENGE_ALIGNMENT.md](CHALLENGE_ALIGNMENT.md).

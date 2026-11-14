@@ -6,6 +6,10 @@ test.beforeEach(async ({ page }) => {
 
 const routes = [
   ["home", "/"],
+  ["overview", "/overview"],
+  ["candidate-home", "/candidate"],
+  ["recruiter-home", "/recruiter"],
+  ["event-home", "/event"],
   ["tour", "/tour"],
   ["need", "/need/new"],
   ["talent", "/talent/new"],
@@ -86,8 +90,11 @@ test("human grade A makes the correct task-level branch solid and survives reloa
     .click();
   await expect(page.getByRole("status")).toContainText("Done");
   await page
-    .getByRole("combobox", { name: "Workspace role", exact: true })
-    .selectOption("recruiter");
+    .getByRole("button", { name: /Demo profile$/, exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: /^Recruiter(?: Current)?$/, exact: true })
+    .click();
   await page
     .getByRole("button", { name: "A — Seen clearly", exact: true })
     .click();
@@ -105,8 +112,11 @@ test("human grade A makes the correct task-level branch solid and survives reloa
   await page.reload();
   await expect(bar).toHaveAttribute("data-level", "1");
   await page
-    .getByRole("combobox", { name: "Workspace role", exact: true })
-    .selectOption("recruiter");
+    .getByRole("button", { name: /Demo profile$/, exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: /^Recruiter(?: Current)?$/, exact: true })
+    .click();
   await expect(
     page.getByRole("button", { name: "A — Seen clearly", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
@@ -140,7 +150,7 @@ test("guided tour has four stages and an explicitly human-graded online example"
 }) => {
   await page.goto("/");
   await page
-    .getByRole("link", { name: "Start the 3-minute demo", exact: true })
+    .getByRole("link", { name: "Explore the demo", exact: true })
     .click();
   await expect(page.locator(".tour-steps button")).toHaveCount(4);
   for (let i = 0; i < 3; i++)
@@ -158,7 +168,7 @@ test("guided tour has four stages and an explicitly human-graded online example"
     page
       .getByRole("navigation", { name: "Workspace navigation" })
       .getByRole("link"),
-  ).toHaveCount(4);
+  ).toHaveCount(5);
 });
 
 for (const [width, height] of [
@@ -243,8 +253,11 @@ test("Claude feedback is explicit and cannot grade a submitted exercise", async 
     .getByRole("button", { name: "Submit for recruiter review", exact: true })
     .click();
   await page
-    .getByRole("combobox", { name: "Workspace role", exact: true })
-    .selectOption("recruiter");
+    .getByRole("button", { name: /Demo profile$/, exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: /^Recruiter(?: Current)?$/, exact: true })
+    .click();
   await page.getByText("Optional Claude feedback", { exact: true }).click();
   const request = page.getByRole("button", {
     name: "Request AI feedback",
@@ -335,8 +348,11 @@ test("candidate and recruiter workspaces are separate and approved Claude exerci
     .getByRole("button", { name: "Approve this exercise", exact: true })
     .click();
   await page
-    .getByRole("combobox", { name: "Workspace role", exact: true })
-    .selectOption("candidate");
+    .getByRole("button", { name: /Demo profile$/, exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: /^Candidate(?: Current)?$/, exact: true })
+    .click();
   await expect(page).toHaveURL(/\/talent\/checks/);
   await expect(page.getByText(prompt, { exact: true })).toBeVisible();
   await expect(
@@ -354,8 +370,11 @@ test("candidate and recruiter workspaces are separate and approved Claude exerci
     .getByRole("button", { name: "Submit for recruiter review", exact: true })
     .click();
   await page
-    .getByRole("combobox", { name: "Workspace role", exact: true })
-    .selectOption("recruiter");
+    .getByRole("button", { name: /Demo profile$/, exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: /^Recruiter(?: Current)?$/, exact: true })
+    .click();
   await expect(page).toHaveURL(/\/checks\?/);
   await expect(page.getByText(prompt, { exact: true })).toBeVisible();
   await page

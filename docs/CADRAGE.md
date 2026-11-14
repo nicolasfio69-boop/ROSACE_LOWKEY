@@ -177,9 +177,18 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 
 - Nicolas remplace Featherless par **Anthropic** pour tous les usages IA : propositions de compétences, exemples de niveaux, exercices et retour au recruteur. Les anciennes mentions Featherless dans le journal décrivent le choix précédent.
 - RAG sur les passages de fiche de poste et de contexte entreprise relus, avec références visibles et validation du catalogue fermé. Aucun CV dans ce corpus ; aucune note donnée par Claude.
-- **Espaces séparés**, choisis en haut : Candidat (fiche, `/talent/checks`), Recruteur (besoin, préparation/relecture dans `/checks`, conversations), Organisateur (événement). Ce sélecteur remplace le menu unique validé plus tôt. Il ne constitue pas une authentification.
+- **Espaces séparés** : Candidat (fiche, `/talent/checks`), Recruteur (besoin, préparation/relecture dans `/checks`, conversations), Organisateur (événement). Le sas et le menu de profil décrits ci-dessous remplacent le sélecteur initial. Ils ne constituent pas une authentification.
 - Un exercice généré reste une proposition jusqu’à acceptation explicite du recruteur. La réponse conserve la version de l’exercice effectivement présentée.
 - Clé uniquement dans `.env.local` en local, ou les secrets runtime Aiven. Procédure : `docs/CLAUDE_SETUP.md`. Les tests simulés sont distincts du test API réel, encore dépendant de la configuration de la clé.
+
+### Sas d’accueil validé par Nicolas le 14 novembre 2026
+
+- Première visite sur `/` : deux entrées principales **Candidate / Recruiter**, accès organisateur discret, **Explore the demo** sans connexion vers `/tour`.
+- Choix du rôle avant la connexion. Pour cette livraison : **maquette explicite** du parcours e-mail puis code, avec adresse fictive en lecture seule, code de démonstration visible et possibilité de passer la maquette. Aucun envoi d’e-mail, compte, session ou contrôle d’accès réel.
+- Accueils propres à chaque rôle : `/candidate`, `/recruiter`, `/event`. Une action principale et la rosace locale lorsqu’une carte/un besoin a été sauvegardé. L’ancien aperçu reste sur `/overview`.
+- Le navigateur mémorise uniquement le mode choisi : le retour sur `/` ouvre son accueil. Le menu **Demo profile** permet de changer d’espace ou de revenir au sas. Les données de démo restent partagées dans ce navigateur.
+- Cible ultérieure : véritable connexion par e-mail/code et organisateurs sur invitation. **À brancher après validation du parcours**, avec permissions côté serveur et stockage partagé. La maquette ne réserve pas réellement l’espace organisateur aux invités.
+- Vérification face au challenge : voir `CHALLENGE_ALIGNMENT.md`. Le cadre Centrale reste le choix de ce projet, pas une exigence formulée par Espoo. Aucun calcul, catalogue ou seuil n’est modifié par cet audit.
 
 ## 10. À trancher ensemble
 

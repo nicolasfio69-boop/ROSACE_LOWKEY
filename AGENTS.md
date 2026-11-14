@@ -58,7 +58,7 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 - `src/lib/framework.ts`: the 12 components in English with descriptors per level, 20 technical skills in 4 families.
 - `src/lib/scoring.ts`, `src/lib/suggestions.ts`: the rules above. Tests in `src/lib/scoring.test.ts`.
 - `src/data/demo.ts`: event "Espoo Tech Matchmaking", 2 needs (NordChip embedded developer, Lumora support engineer), 6 talents.
-- `/`: workspace home; `/tour`: four-step guided demo; `/demo`: original synthetic overview, outside the menu.
+- `/`: role choice and explicitly fictional sign-in preview, with direct demo access. `/candidate`, `/recruiter`, `/event`: role homes; `/overview`: previous workspace overview; `/tour`: four-step guided demo; `/demo`: original synthetic overview, outside the menu.
 - `/need/new`: progressive company/role context, interactive 12-component rosace, level cards, browser draft and confirmation.
 - `/talent/new`: on-device document parsing, quoted clues, factual questions and confirmed declarations. CVs remain transient.
 - `/organiser`: company selection, suggestions, human decisions and journal. `/conversations` opens approved or clearly labelled fictional conversations.
@@ -94,4 +94,4 @@ Note: the planning document "Version simple" still shows the older example "11 o
 
 ## Latest owner decision: Anthropic and separate workspaces
 
-All AI calls now use the Anthropic Messages API (`ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`), never Featherless or Gemini. RAG retrieves only reviewed company/job passages; CVs stay out. Requirements, level details and exercises are proposals for human review, never grades. The header selects Candidate (`/talent/new`, `/talent/checks`), Recruiter (`/need/new`, `/checks`, conversations) or Organiser. These are separate demo interfaces, not authenticated accounts. A submitted answer snapshots the approved exercise; later drafts do not change it. See `docs/CLAUDE_SETUP.md`.
+All AI calls now use the Anthropic Messages API (`ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`), never Featherless or Gemini. RAG retrieves only reviewed company/job passages; CVs stay out. Requirements, level details and exercises are proposals for human review, never grades. The first-visit welcome selects Candidate (`/candidate`, `/talent/new`, `/talent/checks`), Recruiter (`/recruiter`, `/need/new`, `/checks`, conversations) or Organiser (`/event`, `/organiser`). The header’s Demo profile menu switches spaces. Returning visits remember a local navigation preference. Email/code sign-in is a skippable, explicitly fictional preview; no emails, accounts or permissions are implemented. Real sign-in and organiser invitations come after flow validation. These are separate demo interfaces, not authenticated accounts. A submitted answer snapshots the approved exercise; later drafts do not change it. See `docs/CLAUDE_SETUP.md`.

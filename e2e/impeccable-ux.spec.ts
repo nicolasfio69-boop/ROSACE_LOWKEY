@@ -76,7 +76,7 @@ test("all technical level choices stay inside their panel at working widths", as
 test("accessible counters and narrow review metadata retain their content", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/overview");
   const snapshot = await page.locator(".hero-facts").ariaSnapshot();
   expect(snapshot).toContain('term: "12"');
   expect(snapshot).toContain('term: "3"');

@@ -23,6 +23,17 @@ test("a consented talent card survives navigation, can be edited, and deletes cl
   await page
     .getByRole("button", { name: "Save my confirmed card", exact: true })
     .click();
+  await page.goto("/candidate");
+  await expect(
+    page.getByRole("heading", { name: "Your confirmed declarations" }),
+  ).toBeVisible();
+  await expect(
+    page.locator('.rosace-branch[data-skill="C1.1"][data-evidence="declared"]'),
+  ).toHaveAttribute("data-level", "2");
+  await expect(
+    page.locator('.rosace-branch[data-evidence="observed"]'),
+  ).toHaveCount(0);
+  await page.getByRole("link", { name: "Continue my skills card" }).click();
   await page.reload();
   await expect(
     page.getByRole("heading", { name: "Your saved skills card." }),

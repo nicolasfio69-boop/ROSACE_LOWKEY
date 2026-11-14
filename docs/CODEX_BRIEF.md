@@ -1,6 +1,6 @@
 # Brief pour Codex : tout ce qui a été décidé, à appliquer sur `feat/coherent-ux`
 
-> Suite demandée après les étapes 0–9 : Anthropic remplace Featherless et le sélecteur en haut sépare les espaces candidat/recruteur/organisateur. Voir les dernières décisions de `CADRAGE.md` et `CLAUDE_SETUP.md`.
+> Suite demandée après les étapes 0–9 : Anthropic remplace Featherless. Un sas d’accueil et le menu Demo profile séparent les espaces candidat/recruteur/organisateur ; la connexion e-mail/code reste une maquette fictive, sans authentification. Voir les dernières décisions de `CADRAGE.md` et `CLAUDE_SETUP.md`.
 
 Ce brief rassemble toutes les décisions de Nicolas du 14 novembre 2026. La source de vérité reste `docs/CADRAGE.md` : lis-le en entier avant de commencer, puis `AGENTS.md`. Si ce brief et `CADRAGE.md` divergent, `CADRAGE.md` gagne. Si quelque chose n'est pas clair, propose des options au lieu de trancher seul.
 

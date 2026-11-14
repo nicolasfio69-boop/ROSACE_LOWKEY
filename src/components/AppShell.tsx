@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   roleForPath,
   roleDestination,
@@ -8,6 +8,10 @@ import {
 } from "@/lib/workspace-role";
 import { usePathname, useRouter } from "next/navigation";
 import { WorkspaceIcon } from "./WorkspaceIcon";
+import {
+  rememberEntryPreference,
+  WORKSPACE_HOMES,
+} from "@/lib/entry-preference";
 import { Logo } from "./Logo";
 import { AuroraBackground } from "./AuroraBackground";
 const allDestinations = [
@@ -56,11 +60,35 @@ const allDestinations = [
 ];
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const profileMenu = useRef<HTMLDetailsElement>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   const router = useRouter();
   const [rememberedRole, setRememberedRole] =
     useState<WorkspaceRole>("recruiter");
   const role = roleForPath(pathname) ?? rememberedRole;
   useEffect(() => {
+    function closeOutside(event: PointerEvent) {
+      if (
+        profileMenu.current &&
+        !profileMenu.current.contains(event.target as Node)
+      )
+        profileMenu.current.open = false;
+    }
+    function closeWithEscape(event: KeyboardEvent) {
+      if (event.key === "Escape" && profileMenu.current?.open) {
+        profileMenu.current.open = false;
+        profileMenu.current.querySelector("summary")?.focus();
+      }
+    }
+    document.addEventListener("pointerdown", closeOutside);
+    document.addEventListener("keydown", closeWithEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      document.removeEventListener("keydown", closeWithEscape);
+    };
+  }, []);
+  useEffect(() => {
+    if (profileMenu.current) profileMenu.current.open = false;
     const inferred = roleForPath(pathname);
     if (inferred) {
       setRememberedRole(inferred);
@@ -89,11 +117,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       : role === "organiser"
         ? ["/tour", "/organiser", "/conversations"]
         : ["/tour", "/need/new", "/checks", "/conversations"];
-  const destinations = allDestinations.filter((d) => allowed.includes(d.href));
+  const destinations = [
+    {
+      href: WORKSPACE_HOMES[role],
+      label: "My workspace",
+      icon: "overview",
+      subtitle: "Your next step",
+    },
+    ...allDestinations.filter((d) => allowed.includes(d.href)),
+  ];
   function switchRole(next: WorkspaceRole) {
     setRememberedRole(next);
+    if (profileMenu.current) profileMenu.current.open = false;
     try {
-      localStorage.setItem("rosace.workspace-role", next);
+      rememberEntryPreference(localStorage, next);
     } catch {
       /* Navigation remains available. */
     }
@@ -107,6 +144,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
   const active = pathname === "/brief" ? "/conversations" : pathname;
   const current = destinations.find((d) => d.href === active);
+  if (pathname === "/")
+    return (
+      <div className="app-shell entry-root">
+        <AuroraBackground />
+        <a href="#entry-content" className="skip-link">
+          Skip to welcome
+        </a>
+        {children}
+      </div>
+    );
   return (
     <div className="app-shell">
       <AuroraBackground />
@@ -114,9 +161,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         Skip to workspace
       </a>
       <aside className="app-sidebar">
-        <Link href="/" className="app-brand" aria-label="Rosace home">
+        <Link href={WORKSPACE_HOMES[role]} className="app-brand">
           <Logo size={36} />
-          <span aria-hidden="true">SKILLS-BASED MATCHMAKING</span>
+          <span>SKILLS-BASED MATCHMAKING</span>
         </Link>
         <div className="sidebar-event">
           <span className="event-avatar">E</span>
@@ -160,22 +207,55 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Workspace <span>/</span>
             </span>
             <strong>
-              {current?.label ?? (pathname === "/" ? "Overview" : "Demo data")}
+              {current?.label ??
+                (pathname === "/overview" ? "Overview" : "Demo data")}
             </strong>
           </div>
           <div className="topbar-right">
-            <label className="role-switch">
-              <span>View as</span>
-              <select
-                aria-label="Workspace role"
-                value={role}
-                onChange={(e) => switchRole(e.target.value as WorkspaceRole)}
+            <details
+              className="profile-menu"
+              ref={profileMenu}
+              onToggle={(event) => setProfileOpen(event.currentTarget.open)}
+            >
+              <summary
+                role="button"
+                aria-expanded={profileOpen}
+                aria-controls="profile-choices"
               >
-                <option value="candidate">Candidate</option>
-                <option value="recruiter">Recruiter</option>
-                <option value="organiser">Organiser</option>
-              </select>
-            </label>
+                <WorkspaceIcon name="talent" />
+                <span>
+                  {role === "candidate"
+                    ? "Candidate"
+                    : role === "recruiter"
+                      ? "Recruiter"
+                      : "Organiser"}
+                  <small>Demo profile</small>
+                </span>
+                <span className="profile-chevron" aria-hidden="true">
+                  <WorkspaceIcon name="arrow" />
+                </span>
+              </summary>
+              <div className="profile-menu-content" id="profile-choices">
+                <p>Switch demo workspace</p>
+                {(["candidate", "recruiter", "organiser"] as const).map(
+                  (next) => (
+                    <button
+                      key={next}
+                      type="button"
+                      onClick={() => switchRole(next)}
+                    >
+                      {next[0].toUpperCase() + next.slice(1)}
+                      {next === role && <small>Current</small>}
+                    </button>
+                  ),
+                )}
+                <Link href="/?choose=1">Back to welcome</Link>
+                <small>
+                  Fictional profiles. No authenticated accounts or access
+                  permissions.
+                </small>
+              </div>
+            </details>
             <label className="mobile-destination">
               <span className="sr-only">Workspace page</span>
               <select
@@ -202,9 +282,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <span className="local-indicator">
               <i />
               Local demo
-            </span>
-            <span className="workspace-avatar" aria-label="Demo workspace">
-              R
             </span>
           </div>
         </header>

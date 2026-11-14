@@ -29,3 +29,14 @@ After this framing validation, the owner requested Anthropic instead of Featherl
 - Existing tests still verify document privacy, persistence/deletion, the fixed framework, keyboard rosace selection, mean observations, human grading, explicit AI proposal acceptance and reduced motion.
 - Desktop/mobile captures and local launch instructions: [UI_REVIEW.md](UI_REVIEW.md). Visual checks include level selection, observation rows and review controls, not only initial pages.
 - UI-only changes are isolated after `8742471`: no edits to API routes, business libraries, schemas, scoring, authentication or database code. No actual Anthropic request, deployment or PR merge was performed.
+
+## Welcome and challenge-alignment follow-up
+
+- **159 unit tests**, TypeScript, ESLint and production build pass. Eight new unit cases check role destinations, exact preference validation and denied browser storage.
+- **26 Playwright tests** pass against the standalone production build. Four new scenarios cover the fictional email/code preview, wrong-code recovery, no identity or code in storage, no sign-in POST, returning visits, direct demo access, all three roles, storage denial, keyboard controls and Escape dismissal.
+- Existing journeys now use the profile menu and still exercise explicit AI acceptance, human grades and preserved check selections. The saved-card test also checks the candidate home shows the saved declaration, without inventing an observation. The route matrix includes all three new homes and the preserved overview.
+- New flow states fit 1440, 768, 390 and 320px without horizontal overflow or client errors. Desktop/mobile screenshots: [WELCOME_REVIEW.md](WELCOME_REVIEW.md).
+- Axe reports no WCAG A/AA violations on the new welcome/sign-in/code states and the three homes/profile menu at desktop and mobile after matching accessible control names to their visible text. This is a scoped automated check, not certification. The four welcome regressions were rerun after the final logo-label correction.
+- The Impeccable source detector reports the same six existing style warnings documented in the previous milestone, none in the new welcome stylesheet/components. The fixed pearl Aurora identity is preserved.
+- [CHALLENGE_ALIGNMENT.md](CHALLENGE_ALIGNMENT.md) maps the framing and original six-page Espoo PDF to implemented behaviour, prototype limits and validation still needed. It does not claim measured recruitment impact, live AI quality, real authentication or legal certification.
+- No API routes, scoring, business storage, schemas, auth service or database changed; the added local preference stores only a navigation mode. No email sent, real API call, deployment or PR merge.
