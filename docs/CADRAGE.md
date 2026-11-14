@@ -135,6 +135,7 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 
 - On travaille à partir de `feat/visual-workspace`, pas de `main`. Chaque changement passe par sa propre branche et une PR vers `feat/visual-workspace`.
 - PR ouvertes au 2026-11-14 : #7 (composantes concrètes et catalogue technique), #8 (direction artistique et effets Aceternity), #9 (parcours guidé, construit sur #8). Ordre de fusion : #7, puis #8, puis #9.
+- Codex a ouvert la PR #11 (`feat/coherent-ux`, construite sur #8) : thème clair perle avec fond Aurora d'Aceternity, et corrections UX. La suite du travail se fait sur cette branche, en suivant `docs/CODEX_BRIEF.md`, qui commence par fusionner #10, #7 et #9.
 
 ## 9. Journal des décisions
 
