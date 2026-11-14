@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   addNeed,
+  approveExercise,
   submitCheck,
   gradeCheck,
   addTalent,
@@ -180,4 +181,35 @@ it("never records a ten-minute observation for long-term commitments", () => {
       observation: "A",
     }),
   ).toThrow("Invalid observation");
+});
+
+it("keeps the submitted exercise version when a recruiter approves a later draft", () => {
+  const s = storage();
+  const e = {
+    skill: "C5.1",
+    level: 1 as const,
+    minutes: 6,
+    prompt: "Original fictional sensor task",
+    checks: ["Facts", "Questions", "Test"],
+    sourceIds: ["job:1"],
+    passages: [
+      { id: "job:1", sourceId: "job", title: "Job", text: "Test sensors" },
+    ],
+  };
+  approveExercise(s, "n", e);
+  submitCheck(s, {
+    needId: "n",
+    talentId: "t",
+    skill: e.skill,
+    taskLevel: 1,
+    answer: "Ask for the restart log",
+    exercise: e,
+  });
+  approveExercise(s, "n", { ...e, prompt: "Revised fictional task" });
+  expect(loadWorkspace(s).checks[0].exercise?.prompt).toBe(
+    "Original fictional sensor task",
+  );
+  expect(loadWorkspace(s).exercises[0].exercise.prompt).toBe(
+    "Revised fictional task",
+  );
 });

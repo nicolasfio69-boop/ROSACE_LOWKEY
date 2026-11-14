@@ -2,7 +2,7 @@ import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
 import { companyUrl, parseCompanyResponse, collectCompany } from "./company";
 import { generateExamples } from "./ai-examples";
 import { readRequest } from "./http";
-beforeEach(() => vi.stubEnv("AI_PROVIDER", "gemini"));
+beforeEach(() => vi.stubEnv("AI_PROVIDER", "anthropic"));
 afterEach(() => vi.unstubAllEnvs());
 describe("company context integration", () => {
   it.each([
@@ -63,9 +63,9 @@ describe("company context integration", () => {
     });
   });
 });
-describe("Gemini boundary", () => {
+describe("Claude boundary", () => {
   it("keeps manual operation available when unconfigured", async () => {
-    vi.stubEnv("GEMINI_API_KEY", "");
+    vi.stubEnv("ANTHROPIC_API_KEY", "");
     const f = vi.fn();
     await expect(
       generateExamples(
@@ -79,28 +79,23 @@ describe("Gemini boundary", () => {
     expect(f).not.toHaveBeenCalled();
   });
   it("validates model output against the retrieved sources", async () => {
-    vi.stubEnv("GEMINI_API_KEY", "test-key");
-    vi.stubEnv("GEMINI_MODEL", "test-model");
+    vi.stubEnv("ANTHROPIC_API_KEY", "test-key");
+    vi.stubEnv("ANTHROPIC_MODEL", "claude-test-model");
     const f = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          candidates: [
+          stop_reason: "end_turn",
+          content: [
             {
-              finishReason: "STOP",
-              content: {
-                parts: [
-                  {
-                    text: JSON.stringify({
-                      examples: {
-                        1: "With help",
-                        2: "Alone",
-                        3: "New situations",
-                      },
-                      sourceIds: ["job:1"],
-                    }),
-                  },
-                ],
-              },
+              type: "text",
+              text: JSON.stringify({
+                examples: {
+                  1: "With help",
+                  2: "Alone",
+                  3: "New situations",
+                },
+                sourceIds: ["job:1"],
+              }),
             },
           ],
         }),
@@ -115,12 +110,12 @@ describe("Gemini boundary", () => {
     );
     expect(r.sourceIds).toEqual(["job:1"]);
     const payload = JSON.parse(f.mock.calls[0][1].body);
-    expect(payload.systemInstruction.parts[0].text).toContain("untrusted data");
-    expect(payload.contents[0].parts[0].text).not.toContain("cvQuote");
+    expect(payload.system).toContain("untrusted data");
+    expect(payload.messages[0].content).not.toContain("cvQuote");
   });
   it("rejects unknown skills before calling the model", async () => {
-    vi.stubEnv("GEMINI_API_KEY", "test-key");
-    vi.stubEnv("GEMINI_MODEL", "test-model");
+    vi.stubEnv("ANTHROPIC_API_KEY", "test-key");
+    vi.stubEnv("ANTHROPIC_MODEL", "claude-test-model");
     const f = vi.fn();
     await expect(
       generateExamples("invented", "Demo", "", [], f),

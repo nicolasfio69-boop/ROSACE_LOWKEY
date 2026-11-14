@@ -1,3 +1,4 @@
+import { cleanExercise } from "@/lib/ai-proposals";
 import { generateFeedback } from "@/lib/server/exercise-feedback";
 import { checkExercise } from "@/lib/verification";
 import type { ExpectedLevel } from "@/lib/framework";
@@ -34,6 +35,9 @@ export async function POST(request: Request) {
         answer,
         fetch,
         data.level as ExpectedLevel | undefined,
+        data.exercise
+          ? cleanExercise(data.exercise, skill, data.level as ExpectedLevel)
+          : undefined,
       ),
     );
   } catch (e) {

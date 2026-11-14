@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeEach(async ({page}) => { page.setDefaultTimeout(15000); });
+test.beforeEach(async ({ page }) => {
+  page.setDefaultTimeout(15000);
+});
 
 const routes = [
   ["home", "/"],
@@ -10,6 +12,7 @@ const routes = [
   ["organiser", "/organiser"],
   ["brief", "/brief?need=nordchip-embedded&talent=amira"],
   ["checks", "/checks"],
+  ["candidate-checks", "/talent/checks"],
 ] as const;
 
 test("need supports three technical skills and four minors, with verification guidance", async ({
@@ -72,7 +75,7 @@ test("human grade A makes the correct task-level branch solid and survives reloa
   page.on("request", (r) => {
     if (r.url().includes("/api/exercise-feedback")) paidCalls++;
   });
-  await page.goto("/checks");
+  await page.goto("/talent/checks");
   await page
     .getByLabel("Your exercise answer", { exact: true })
     .fill(
@@ -82,7 +85,9 @@ test("human grade A makes the correct task-level branch solid and survives reloa
     .getByRole("button", { name: "Submit for recruiter review", exact: true })
     .click();
   await expect(page.getByRole("status")).toContainText("Done");
-  await page.getByLabel("Demo role", { exact: true }).selectOption("recruiter");
+  await page
+    .getByRole("combobox", { name: "Workspace role", exact: true })
+    .selectOption("recruiter");
   await page
     .getByRole("button", { name: "A — Seen clearly", exact: true })
     .click();
@@ -99,13 +104,13 @@ test("human grade A makes the correct task-level branch solid and survives reloa
   });
   await page.reload();
   await expect(bar).toHaveAttribute("data-level", "1");
-  await page.getByLabel("Demo role", { exact: true }).selectOption("recruiter");
+  await page
+    .getByRole("combobox", { name: "Workspace role", exact: true })
+    .selectOption("recruiter");
   await expect(
     page.getByRole("button", { name: "A — Seen clearly", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
-  await page
-    .getByText("Optional Featherless feedback", { exact: true })
-    .click();
+  await page.getByText("Optional Claude feedback", { exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Request AI feedback", exact: true }),
   ).toBeDisabled();
@@ -153,7 +158,7 @@ test("guided tour has four stages and an explicitly human-graded online example"
     page
       .getByRole("navigation", { name: "Workspace navigation" })
       .getByRole("link"),
-  ).toHaveCount(6);
+  ).toHaveCount(4);
 });
 
 for (const [width, height] of [
@@ -203,27 +208,226 @@ for (const [width, height] of [
   });
 }
 
-test("Featherless feedback is explicit and cannot grade a submitted exercise", async ({ page }) => {
-  await page.route("**/api/integrations", route => route.fulfill({json:{ai:true,provider:"Featherless",context:false}}));
+test("Claude feedback is explicit and cannot grade a submitted exercise", async ({
+  page,
+}) => {
+  await page.route("**/api/integrations", (route) =>
+    route.fulfill({ json: { ai: true, provider: "Claude", context: false } }),
+  );
   let calls = 0;
-  await page.route("**/api/exercise-feedback", route => {
+  await page.route("**/api/exercise-feedback", (route) => {
     calls++;
-    expect(route.request().postDataJSON()).toMatchObject({consent:true,skill:"J.EMBEDDED_C",level:3});
-    return route.fulfill({json:{strengths:[],questions:["How would you test wraparound?"],limitations:"A human must review this fictional answer."}});
+    expect(route.request().postDataJSON()).toMatchObject({
+      consent: true,
+      skill: "J.EMBEDDED_C",
+      level: 3,
+    });
+    return route.fulfill({
+      json: {
+        strengths: [],
+        questions: ["How would you test wraparound?"],
+        limitations: "A human must review this fictional answer.",
+      },
+    });
   });
-  await page.goto("/checks");
-  await page.getByRole("combobox", {name:"Exercise",exact:true}).selectOption("J.EMBEDDED_C");
-  await page.getByLabel("Your exercise answer",{exact:true}).fill("I would define a single-producer buffer and test wraparound before release.");
-  await page.getByRole("button",{name:"Submit for recruiter review",exact:true}).click();
-  await page.getByRole("combobox",{name:"Demo role",exact:true}).selectOption("recruiter");
-  await page.getByText("Optional Featherless feedback",{exact:true}).click();
-  const request = page.getByRole("button",{name:"Request AI feedback",exact:true});
+  await page.goto("/talent/checks");
+  await page
+    .getByRole("combobox", { name: "Exercise", exact: true })
+    .selectOption("J.EMBEDDED_C");
+  await page
+    .getByLabel("Your exercise answer", { exact: true })
+    .fill(
+      "I would define a single-producer buffer and test wraparound before release.",
+    );
+  await page
+    .getByRole("button", { name: "Submit for recruiter review", exact: true })
+    .click();
+  await page
+    .getByRole("combobox", { name: "Workspace role", exact: true })
+    .selectOption("recruiter");
+  await page.getByText("Optional Claude feedback", { exact: true }).click();
+  const request = page.getByRole("button", {
+    name: "Request AI feedback",
+    exact: true,
+  });
   await expect(request).toBeDisabled();
   expect(calls).toBe(0);
-  await page.getByRole("checkbox",{name:"Send this fictional answer to Featherless.",exact:true}).check();
+  await page
+    .getByRole("checkbox", {
+      name: "Send this fictional answer to Claude.",
+      exact: true,
+    })
+    .check();
   await request.click();
-  await expect(page.getByText("How would you test wraparound?",{exact:true})).toBeVisible();
+  await expect(
+    page.getByText("How would you test wraparound?", { exact: true }),
+  ).toBeVisible();
   expect(calls).toBe(1);
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("rosace.event-workspace.v1")!).observations)).toEqual([]);
+  expect(
+    await page.evaluate(
+      () =>
+        JSON.parse(localStorage.getItem("rosace.event-workspace.v1")!)
+          .observations,
+    ),
+  ).toEqual([]);
   await expect(page.getByRole("status")).toHaveText("Done");
+});
+
+test("candidate and recruiter workspaces are separate and approved Claude exercises travel between them", async ({
+  page,
+}) => {
+  await page.route("**/api/integrations", (route) =>
+    route.fulfill({ json: { ai: true, provider: "Claude", context: false } }),
+  );
+  const prompt =
+    "Fictional board restart: ask for the power log, state an assumption and propose one check.";
+  await page.route("**/api/check-proposal", (route) =>
+    route.fulfill({
+      json: {
+        skill: "C5.1",
+        level: 1,
+        minutes: 6,
+        prompt,
+        checks: [
+          "States a fact",
+          "Asks for missing information",
+          "Proposes a check",
+        ],
+        sourceIds: ["job:1"],
+        passages: [
+          {
+            id: "job:1",
+            sourceId: "job",
+            title: "Reviewed job",
+            text: "Investigate a fictional sensor restart.",
+          },
+        ],
+      },
+    }),
+  );
+  await page.goto("/checks");
+  await expect(
+    page.getByLabel("Your exercise answer", { exact: true }),
+  ).toHaveCount(0);
+  await page
+    .getByText("Prepare an exercise with Claude", { exact: true })
+    .click();
+  await page
+    .getByRole("checkbox", {
+      name: "I reviewed this fictional job and company context for Claude.",
+      exact: true,
+    })
+    .check();
+  await page
+    .getByRole("button", { name: "Propose an exercise", exact: true })
+    .click();
+  await expect(page.getByText(prompt, { exact: true })).toBeVisible();
+  expect(
+    await page.evaluate(
+      () =>
+        JSON.parse(
+          localStorage.getItem("rosace.event-workspace.v1") ||
+            '{"exercises":[]}',
+        ).exercises,
+    ),
+  ).toEqual([]);
+  await page
+    .getByRole("button", { name: "Approve this exercise", exact: true })
+    .click();
+  await page
+    .getByRole("combobox", { name: "Workspace role", exact: true })
+    .selectOption("candidate");
+  await expect(page).toHaveURL(/\/talent\/checks/);
+  await expect(page.getByText(prompt, { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "A — Seen clearly", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page
+      .getByRole("navigation", { name: "Workspace navigation" })
+      .getByRole("link", { name: "Recruiter need", exact: true }),
+  ).toHaveCount(0);
+  await page
+    .getByLabel("Your exercise answer", { exact: true })
+    .fill("I would ask for the fictional power log and reproduce the reset.");
+  await page
+    .getByRole("button", { name: "Submit for recruiter review", exact: true })
+    .click();
+  await page
+    .getByRole("combobox", { name: "Workspace role", exact: true })
+    .selectOption("recruiter");
+  await expect(page).toHaveURL(/\/checks\?/);
+  await expect(page.getByText(prompt, { exact: true })).toBeVisible();
+  await page
+    .getByRole("button", { name: "A — Seen clearly", exact: true })
+    .click();
+  await expect(
+    page.locator('[data-evidence="observed"][data-skill="C5.1"]').first(),
+  ).toHaveAttribute("data-level", "1");
+});
+
+test("Claude requirements are cited suggestions until the recruiter accepts them", async ({
+  page,
+}) => {
+  await page.route("**/api/integrations", (route) =>
+    route.fulfill({ json: { ai: true, provider: "Claude", context: false } }),
+  );
+  await page.route("**/api/need-proposal", (route) =>
+    route.fulfill({
+      json: {
+        requirements: ["C5.1", "C4.1", "C2.2"].map((skill) => ({
+          skill,
+          expected: 2,
+          major: true,
+          reason: "Investigate fictional hardware faults with the team.",
+          sourceIds: ["job:1"],
+        })),
+        passages: [
+          {
+            id: "job:1",
+            sourceId: "job",
+            title: "Reviewed job",
+            text: "Investigate fictional hardware faults with the team.",
+          },
+        ],
+      },
+    }),
+  );
+  await page.goto("/need/new");
+  await page
+    .getByRole("button", { name: "Try a fictional role", exact: false })
+    .click();
+  await page
+    .getByRole("button", { name: "Continue to working context", exact: false })
+    .click();
+  await page
+    .getByRole("checkbox", {
+      name: "I have reviewed the job and company context.",
+      exact: false,
+    })
+    .check();
+  await page
+    .getByRole("button", { name: "Explore the 12 components", exact: false })
+    .click();
+  await page
+    .getByText("Suggest requirements with Claude", { exact: true })
+    .click();
+  await page
+    .getByRole("button", {
+      name: "Suggest components for this role",
+      exact: true,
+    })
+    .click();
+  await expect(
+    page.getByText("Proposal · not applied", { exact: true }),
+  ).toBeVisible();
+  expect(
+    await page.locator('.rosace-branch[data-evidence="expected"]').count(),
+  ).toBe(0);
+  await page
+    .getByRole("button", { name: "Use these requirements", exact: true })
+    .click();
+  await expect(
+    page.locator('.rosace-branch[data-evidence="expected"]'),
+  ).toHaveCount(3);
 });

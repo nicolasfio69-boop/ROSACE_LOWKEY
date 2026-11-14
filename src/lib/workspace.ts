@@ -1,3 +1,9 @@
+import {
+  cleanExercise,
+  validateExercise,
+  type ExerciseProposal,
+} from "./ai-proposals";
+import type { CheckExercise } from "./verification";
 import { CHECK_SKILLS, checkSource, checkExercise } from "./verification";
 import type { JobContext } from "./need-draft";
 import { SKILL_CODES, type ExpectedLevel } from "./framework";
@@ -31,12 +37,14 @@ export type Seen = {
   /** Regrading the same situation replaces it; separate situations are averaged. */
   source?: string;
 };
+export type ApprovedExercise = { needId: string; exercise: ExerciseProposal };
 export type CheckSubmission = {
   needId: string;
   talentId: string;
   skill: string;
   taskLevel: ExpectedLevel;
   answer: string;
+  exercise?: CheckExercise;
 };
 export type Workspace = {
   version: 1;
@@ -45,6 +53,7 @@ export type Workspace = {
   journal: Meeting[];
   observations: Seen[];
   checks: CheckSubmission[];
+  exercises: ApprovedExercise[];
 };
 export function emptyWorkspace(): Workspace {
   return {
@@ -54,6 +63,7 @@ export function emptyWorkspace(): Workspace {
     journal: [],
     observations: [],
     checks: [],
+    exercises: [],
   };
 }
 function object(v: unknown): v is Record<string, unknown> {
@@ -174,12 +184,48 @@ export function loadWorkspace(
         [1, 2, 3].includes(s.taskLevel as number)) &&
       (s.source === undefined || typeof s.source === "string"),
   );
+  const exercises: ApprovedExercise[] = Array.isArray(value.exercises)
+    ? value.exercises.flatMap((item) => {
+        try {
+          if (
+            !object(item) ||
+            typeof item.needId !== "string" ||
+            !object(item.exercise) ||
+            !Array.isArray(item.exercise.passages)
+          )
+            return [];
+          const e = item.exercise;
+          const passages = (e.passages as unknown[]).filter(
+            (p): p is import("./context").Passage =>
+              object(p) &&
+              typeof p.id === "string" &&
+              typeof p.sourceId === "string" &&
+              typeof p.title === "string" &&
+              typeof p.text === "string",
+          );
+          return [
+            {
+              needId: item.needId,
+              exercise: validateExercise(
+                e,
+                String(e.skill),
+                e.level as ExpectedLevel,
+                passages,
+              ),
+            },
+          ];
+        } catch {
+          return [];
+        }
+      })
+    : [];
   const cleaned: Workspace = {
     version: 1,
     needs,
     talents,
     journal,
     observations,
+    exercises,
     checks: Array.isArray(value.checks)
       ? value.checks.filter(
           (c): c is CheckSubmission =>
@@ -196,6 +242,20 @@ export function loadWorkspace(
         )
       : [],
   };
+  cleaned.checks = cleaned.checks.flatMap((c) => {
+    try {
+      return [
+        {
+          ...c,
+          ...(c.exercise
+            ? { exercise: cleanExercise(c.exercise, c.skill, c.taskLevel) }
+            : {}),
+        },
+      ];
+    } catch {
+      return [];
+    }
+  });
   if (expiredIds.size && storage.setItem)
     storage.setItem(WORKSPACE_KEY, JSON.stringify(cleaned));
   return cleaned;
@@ -271,7 +331,9 @@ export function recordObservation(storage: Storage, seen: Seen) {
 }
 
 export function submitCheck(storage: Storage, submission: CheckSubmission) {
-  checkExercise(submission.skill, submission.taskLevel);
+  const exercise = submission.exercise
+    ? cleanExercise(submission.exercise, submission.skill, submission.taskLevel)
+    : checkExercise(submission.skill, submission.taskLevel);
   if (!submission.answer.trim() || submission.answer.length > 6000)
     throw new Error("Write an answer of at most 6000 characters.");
   const w = loadWorkspace(storage);
@@ -281,7 +343,7 @@ export function submitCheck(storage: Storage, submission: CheckSubmission) {
     c.skill === submission.skill;
   w.checks = [
     ...w.checks.filter((c) => !same(c)),
-    { ...submission, answer: submission.answer.trim() },
+    { ...submission, answer: submission.answer.trim(), exercise },
   ];
   w.observations = w.observations.filter(
     (c) => !(same(c) && c.source === checkSource(submission.skill)),
@@ -314,4 +376,30 @@ export function gradeCheck(
     observation,
     source: checkSource(saved.skill),
   });
+}
+
+export function approveExercise(
+  storage: Storage,
+  needId: string,
+  proposal: ExerciseProposal,
+) {
+  const exercise = validateExercise(
+    proposal,
+    proposal.skill,
+    proposal.level,
+    proposal.passages,
+  );
+  const w = loadWorkspace(storage);
+  w.exercises = [
+    ...w.exercises.filter(
+      (e) =>
+        !(
+          e.needId === needId &&
+          e.exercise.skill === exercise.skill &&
+          e.exercise.level === exercise.level
+        ),
+    ),
+    { needId, exercise },
+  ];
+  writeWorkspace(storage, w);
 }

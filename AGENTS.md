@@ -64,7 +64,7 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 - `/organiser`: company selection, suggestions, human decisions and journal. `/conversations` opens approved or clearly labelled fictional conversations.
 - `/brief?need=...&talent=...`: tailored discussion gaps, role examples and separate A/C/F/NE observations. The query-based URL replaces the originally planned dynamic path.
 - `/checks` (`/practice` redirects): three fictional online exercises, three levels each, talent submission and human-only A/C/F/NE grading. Answers stay in the browser; re-submission clears the previous grade. C4.3 is discussed, never marked observed.
-- Optional server-only Context.dev and Featherless (optional legacy Gemini) adapters are implemented but live calls await credentials. Company-site collection was explicitly requested by the owner; never search for a talent.
+- Optional server-only Context.dev and Claude (Anthropic) adapters are implemented but live calls await credentials. Company-site collection was explicitly requested by the owner; never search for a talent.
 - `start-local.cmd` / `npm run local`: install dependencies when necessary, start the app and open the browser. Cursor is optional.
 - See `docs/ROADMAP.md` for current delivery status. Storage remains local to one browser; no deployed service or authenticated accounts.
 
@@ -72,12 +72,12 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 
 The following is the original implementation sequence; screens 1–4 now exist, as listed above. Build further changes on their own branch with a pull request. Keep the demo data working at every step.
 
-1. **Screen 1, recruiter need** (`/need/new`): the recruiter types the job title and a short description; at most 4 questions to understand the job; then picks 3 majors and any number of minors from the 12 components (cards), up to 3 technical skills from a closed list grouped by job family, and an expected level for each. Each level shows a **level card**: the fixed Centrale descriptor plus an example adapted to the job (hand-written for now, Featherless later). A live rosace shows the gold majors as they are picked. Capacity defaults to 3. Use `checkNeed()` to block an invalid need.
-2. **Screen 2, talent card from CV** (`/talent/new`): the talent pastes a CV (not stored). Skills are spotted with the CV sentence quoted (hand-written rules or demo stub now, Featherless later). For each skill, three closed questions: done it? alone or with help? simple or new situation? A written rule suggests the level; the talent confirms or changes it. The talent sees only their rosace and grids, never a rank or a fraction.
+1. **Screen 1, recruiter need** (`/need/new`): the recruiter types the job title and a short description; at most 4 questions to understand the job; then picks 3 majors and any number of minors from the 12 components (cards), up to 3 technical skills from a closed list grouped by job family, and an expected level for each. Each level shows a **level card**: the fixed Centrale descriptor plus an example adapted to the job (hand-written defaults and optional Claude proposals). A live rosace shows the gold majors as they are picked. Capacity defaults to 3. Use `checkNeed()` to block an invalid need.
+2. **Screen 2, talent card from CV** (`/talent/new`): the talent pastes a CV (not stored). Skills are spotted with the CV sentence quoted (on-device rules; no CV is sent to Claude). For each skill, three closed questions: done it? alone or with help? simple or new situation? A written rule suggests the level; the talent confirms or changes it. The talent sees only their rosace and grids, never a rank or a fraction.
 3. **Organiser gesture** (`/organiser`): sees suggestions per need, ties, talents without suggestion and why; approves, adds or removes a talent with a one-line reason; every action goes to a journal.
 4. **Screen 3, brief and observation** (`/brief/[need]/[talent]`): why talk, 3 to 5 questions to verify the claims, what a good answer contains, talent rosace over the need. After the meeting the recruiter fills the A / C / F / NE grid; observed bars become solid.
 5. Deploy a standalone Next.js container on Aiven Runtime. Keep storage in the browser for now; do not add PostgreSQL.
-6. Featherless for: need questions, level-card examples, CV spotting, brief questions. AI output is always checked against the closed list of skills and shown to a human before use.
+6. Claude for: need requirements, level-card examples, contextual exercises and recruiter feedback. CV spotting remains on-device. AI output is always checked against the closed list of skills and shown to a human before use.
 
 ## Commands
 
@@ -91,3 +91,7 @@ npm run build
 ```
 
 Note: the planning document "Version simple" still shows the older example "11 out of 15" where a job skill was a major. The code and this file are the newer rule (3 major components, job skills apart).
+
+## Latest owner decision: Anthropic and separate workspaces
+
+All AI calls now use the Anthropic Messages API (`ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`), never Featherless or Gemini. RAG retrieves only reviewed company/job passages; CVs stay out. Requirements, level details and exercises are proposals for human review, never grades. The header selects Candidate (`/talent/new`, `/talent/checks`), Recruiter (`/need/new`, `/checks`, conversations) or Organiser. These are separate demo interfaces, not authenticated accounts. A submitted answer snapshots the approved exercise; later drafts do not change it. See `docs/CLAUDE_SETUP.md`.

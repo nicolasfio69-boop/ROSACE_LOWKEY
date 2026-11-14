@@ -1,10 +1,16 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import {
+  roleForPath,
+  roleDestination,
+  type WorkspaceRole,
+} from "@/lib/workspace-role";
+import { usePathname, useRouter } from "next/navigation";
 import { WorkspaceIcon } from "./WorkspaceIcon";
 import { Logo } from "./Logo";
 import { AuroraBackground } from "./AuroraBackground";
-const destinations = [
+const allDestinations = [
   {
     href: "/tour",
     label: "3-minute demo",
@@ -35,10 +41,70 @@ const destinations = [
     icon: "conversation",
     subtitle: "Prepare to meet",
   },
-  { href: "/checks", label: "Checks", icon: "pointer", subtitle: "Review a concrete situation" },
+  {
+    href: "/talent/checks",
+    label: "My checks",
+    icon: "pointer",
+    subtitle: "Answer at your declared level",
+  },
+  {
+    href: "/checks",
+    label: "Checks",
+    icon: "pointer",
+    subtitle: "Review a concrete situation",
+  },
 ];
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [rememberedRole, setRememberedRole] =
+    useState<WorkspaceRole>("recruiter");
+  const role = roleForPath(pathname) ?? rememberedRole;
+  useEffect(() => {
+    const inferred = roleForPath(pathname);
+    if (inferred) {
+      setRememberedRole(inferred);
+      try {
+        localStorage.setItem("rosace.workspace-role", inferred);
+      } catch {
+        /* Navigation works without storage. */
+      }
+      return;
+    }
+    try {
+      const saved = localStorage.getItem("rosace.workspace-role");
+      if (
+        saved === "candidate" ||
+        saved === "recruiter" ||
+        saved === "organiser"
+      )
+        setRememberedRole(saved);
+    } catch {
+      /* The route still identifies the role without storage. */
+    }
+  }, [pathname]);
+  const allowed =
+    role === "candidate"
+      ? ["/tour", "/talent/new", "/talent/checks"]
+      : role === "organiser"
+        ? ["/tour", "/organiser", "/conversations"]
+        : ["/tour", "/need/new", "/checks", "/conversations"];
+  const destinations = allDestinations.filter((d) => allowed.includes(d.href));
+  function switchRole(next: WorkspaceRole) {
+    setRememberedRole(next);
+    try {
+      localStorage.setItem("rosace.workspace-role", next);
+    } catch {
+      /* Navigation remains available. */
+    }
+    const path = roleDestination(next, pathname);
+    router.push(
+      path +
+        (["/checks", "/talent/checks"].includes(path)
+          ? window.location.search
+          : ""),
+    );
+  }
   const active = pathname === "/brief" ? "/conversations" : pathname;
   const current = destinations.find((d) => d.href === active);
   return (
@@ -59,7 +125,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <small>Event workspace · Demo</small>
           </div>
         </div>
-        <p className="sidebar-caption">YOUR WORKSPACE</p>
+        <p className="sidebar-caption">{role.toUpperCase()} WORKSPACE</p>
         <nav aria-label="Workspace navigation">
           {destinations.map((d) => (
             <Link
@@ -94,11 +160,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Workspace <span>/</span>
             </span>
             <strong>
-              {current?.label ??
-                (pathname === "/" ? "Overview" : "Demo data")}
+              {current?.label ?? (pathname === "/" ? "Overview" : "Demo data")}
             </strong>
           </div>
           <div className="topbar-right">
+            <label className="role-switch">
+              <span>View as</span>
+              <select
+                aria-label="Workspace role"
+                value={role}
+                onChange={(e) => switchRole(e.target.value as WorkspaceRole)}
+              >
+                <option value="candidate">Candidate</option>
+                <option value="recruiter">Recruiter</option>
+                <option value="organiser">Organiser</option>
+              </select>
+            </label>
             <label className="mobile-destination">
               <span className="sr-only">Workspace page</span>
               <select
@@ -136,7 +213,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
         <footer className="app-footer">
           <span>Rosace / Junction 2026</span>
-          <span>Your browser · Synthetic data · Human decisions</span>
+          <span>Demo roles · No authenticated accounts · Your browser</span>
         </footer>
       </div>
     </div>

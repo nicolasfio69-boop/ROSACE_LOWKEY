@@ -1,4 +1,5 @@
 "use client";
+import { NeedProposal } from "./NeedProposal";
 import { BackgroundBeams } from "./BackgroundBeams";
 import { LivePreview } from "./LivePreview";
 import Link from "next/link";
@@ -61,7 +62,7 @@ export function NeedForm() {
   const [integrations, setIntegrations] = useState({
     context: false,
     ai: false,
-    provider: "Featherless",
+    provider: "Claude",
   });
   const [pending, setPending] = useState<Generated | null>(null);
   const [accepted, setAccepted] = useState<Record<string, Generated>>({});
@@ -634,6 +635,17 @@ export function NeedForm() {
           )}
           {step === 1 && (
             <>
+              <NeedProposal
+                title={draft.title}
+                job={jobContext}
+                company={draft.companyContext ?? ""}
+                task={draft.context.task}
+                reviewed={reviewed}
+                connected={integrations.ai}
+                onAccept={(proposal) =>
+                  update({ requirements: proposal.requirements })
+                }
+              />
               <p className="eyebrow">
                 COMPONENT {String(index + 1).padStart(2, "0")} / 12 · {c.code}
               </p>

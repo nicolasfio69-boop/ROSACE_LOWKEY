@@ -72,24 +72,22 @@ remove only the generated `.next` folder, run `npm ci`, and start again.
 4. **Conversation — `/conversations` or “Prepare conversation”:** explore 3–5 questions prioritising unknown or below-expected declarations, compare
    declared and expected skills, and record A/C/F/NE observations. Observed
    values stay separate from declared levels.
-5. **Practice — `/practice`:** try one fictional exercise per component. Review
-   the checklist or explicitly request optional AI feedback. It does not
-   certify a skill or modify a talent card.
+5. **Checks:** candidates answer at `/talent/checks`; recruiters prepare and review at `/checks`. Choose a workspace in the header. Three demo skills each have three level variants; Claude can propose contextual exercises for recruiter approval. Only a recruiter gives a grade. `/practice` redirects to `/checks`.
 
 The original synthetic overview remains at `/demo`. The organiser handles one
 local event workspace with multiple companies; there are no authenticated roles.
 
-## Company context and Featherless AI
+## Company context and Claude AI
 
 Manual context and hand-written examples work immediately. Embedded developer
 roles have dedicated scenarios; other roles use framework examples with the
-entered job context visible alongside. Featherless can propose more specific examples
+entered job context visible alongside. Claude can propose more specific examples
 from approved job and company passages once configured. Online practice feedback
 is also optional. Neither integration has been validated with live credentials.
 
 Copy `.env.example` to `.env.local`, fill in only the credentials you have and
 restart the server. Never paste keys into chat or use `NEXT_PUBLIC_` for secrets.
-See [integration details and sponsor sources](docs/INTEGRATIONS.md).
+Run `npm run test:claude` after configuring the key. See [the Claude setup guide](docs/CLAUDE_SETUP.md) and [integration details](docs/INTEGRATIONS.md).
 
 ## Storage and privacy in this local demo
 
@@ -101,9 +99,7 @@ See [integration details and sponsor sources](docs/INTEGRATIONS.md).
   are saved. Cards expire after six months and are purged, with related decisions
   and observations, when the workspace is next opened. A closed browser cannot
   run a retention job. Talent cards can also be deleted immediately.
-- Practice answers are in page memory only. An explicit request sends the answer
-  to the configured AI provider; the app does not store or log it. Provider retention depends on the
-  API account terms: keep exercises fictional during the demo.
+- Unsubmitted exercise drafts stay in page memory. Submitted fictional answers, their exercise version and human grades are saved in this browser and removed with the talent card. Explicit consent is required to send an answer to Claude for feedback; the app never logs it.
 - Database-backed access control, deletion jobs and shared data are still future
   work. Do not expose these local API routes publicly before adding authentication,
   durable rate limits and account-level budget controls.

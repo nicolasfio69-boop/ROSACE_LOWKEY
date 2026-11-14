@@ -8,7 +8,7 @@ export function Practice() {
     [answer, setAnswer] = useState(""),
     [consent, setConsent] = useState(false),
     [connected, setConnected] = useState(false),
-    [provider, setProvider] = useState("Featherless"),
+    [provider, setProvider] = useState("Claude"),
     [busy, setBusy] = useState(false),
     [feedback, setFeedback] = useState<ExerciseFeedback | null>(null),
     [error, setError] = useState("");
@@ -18,7 +18,7 @@ export function Practice() {
       .then((r) => r.json())
       .then((r) => {
         setConnected(r.ai === true);
-        setProvider(r.provider ?? "Featherless");
+        setProvider(r.provider ?? "Claude");
       })
       .catch(() => {});
     return () => {

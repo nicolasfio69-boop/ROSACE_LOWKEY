@@ -97,7 +97,7 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
 
 - Next.js 15, React 19, TypeScript, Tailwind 4, Vitest et Playwright.
 - **Stockage** : dans le navigateur pour la démo. Tous les rôles partagent le même navigateur.
-- **IA : Featherless** (tech challenge retenu), côté serveur. Elle propose, par exemple des exemples de niveau ou un premier retour sur un exercice, et une personne relit toujours. Gemini n'est plus visé.
+- **IA : Claude via l’API Anthropic** (nouvelle décision de Nicolas, remplace Featherless), côté serveur. Elle propose, par exemple des exemples de niveau ou un premier retour sur un exercice, et une personne relit toujours. Gemini et Featherless ne sont plus utilisés.
 - **Contexte entreprise** (facultatif) : Context.dev, côté serveur. Ce n'est pas un tech challenge visé.
 - **Hébergement : Aiven** (tech challenge retenu), pas Vercel. [Aiven Runtime](https://aiven.io/runtime) fait tourner une application en conteneur, ce qui demande d'ajouter un `Dockerfile` (Next.js en mode `standalone`). La base de données serait Aiven PostgreSQL. Restent à vérifier : les crédits, la région européenne et la gestion des clés.
 - **Données** : on héberge d'abord sur Aiven avec le stockage dans le navigateur, sans base de données. Aiven PostgreSQL ne vient que s'il reste du temps.
@@ -172,6 +172,14 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - **Implémenté** : démo NordChip/Amira en quatre étapes avec exemple en ligne déjà noté ; fond perle Aurora et animations accessibles.
 - **Préparé, pas déployé** : image Node 22 / Next.js standalone et procédure Aiven Runtime. Pas de PostgreSQL. Les crédits, la région européenne, les paramètres du compte Aiven et les appels réels Featherless/Context.dev restent à vérifier.
 - La revue finale Playwright et les captures de livraison sont consignées dans `docs/VALIDATION.md`. Les validations de rendu et les informations événementielles ci-dessous restent ouvertes.
+
+### Changement demandé après le cadrage initial
+
+- Nicolas remplace Featherless par **Anthropic** pour tous les usages IA : propositions de compétences, exemples de niveaux, exercices et retour au recruteur. Les anciennes mentions Featherless dans le journal décrivent le choix précédent.
+- RAG sur les passages de fiche de poste et de contexte entreprise relus, avec références visibles et validation du catalogue fermé. Aucun CV dans ce corpus ; aucune note donnée par Claude.
+- **Espaces séparés**, choisis en haut : Candidat (fiche, `/talent/checks`), Recruteur (besoin, préparation/relecture dans `/checks`, conversations), Organisateur (événement). Ce sélecteur remplace le menu unique validé plus tôt. Il ne constitue pas une authentification.
+- Un exercice généré reste une proposition jusqu’à acceptation explicite du recruteur. La réponse conserve la version de l’exercice effectivement présentée.
+- Clé uniquement dans `.env.local` en local, ou les secrets runtime Aiven. Procédure : `docs/CLAUDE_SETUP.md`. Les tests simulés sont distincts du test API réel, encore dépendant de la configuration de la clé.
 
 ## 10. À trancher ensemble
 

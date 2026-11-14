@@ -27,9 +27,8 @@ The official [Runtime overview](https://aiven.io/docs/products/runtime), [deploy
 
 | Variable | Kind | Purpose |
 | --- | --- | --- |
-| `AI_PROVIDER` | Variable | Select `featherless` when enabling AI |
-| `FEATHERLESS_API_KEY` | Secret | Server-only Featherless credential |
-| `FEATHERLESS_MODEL` | Variable | Model identifier available in your Featherless account |
+| `ANTHROPIC_API_KEY` | Secret | Server-only Claude credential |
+| `ANTHROPIC_MODEL` | Variable | Model identifier available in your Claude account |
 | `CONTEXT_DEV_API_KEY` | Secret, optional | Server-only company-context collection |
 
 No credential value belongs in this document. Without AI credentials, human review and all manual flows work. Never use a `NEXT_PUBLIC_` name for a secret. For local development only, use ignored `.env.local` and restart `npm run dev` after configuration changes.
@@ -38,6 +37,6 @@ No credential value belongs in this document. Without AI credentials, human revi
 
 - Confirm available hackathon credits, Runtime eligibility, the chosen plan and the cost after credits expire.
 - Confirm a suitable **European region** is available for Runtime in this account. Do not infer region availability from PostgreSQL's region list.
-- Verify access to runtime secret settings and outbound HTTPS to Featherless and, optionally, Context.dev. Live provider calls still need validation with the account's model and credits.
+- Verify access to runtime secret settings and outbound HTTPS to Claude and, optionally, Context.dev. Live provider calls still need validation with the account's model and credits.
 - Browser data does not sync across devices or roles on different machines. The demo deliberately shares a single browser, with no authenticated accounts. Local talent-card deletion/expiry also removes linked checks and observations.
 - Aiven hosting is separate from a future shared database/authentication phase. No such phase is included here.

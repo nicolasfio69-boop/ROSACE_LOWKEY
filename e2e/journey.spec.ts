@@ -205,7 +205,10 @@ test("practice redirects to Checks and an unsubmitted draft stays in memory", as
   page,
 }) => {
   await page.goto("/practice");
-  await expect(page).toHaveURL(/\/checks$/);
+  await expect(page).toHaveURL(/\/checks(?:\?|$)/);
+  await page
+    .getByRole("combobox", { name: "Workspace role", exact: true })
+    .selectOption("candidate");
   await page
     .getByLabel("Your exercise answer", { exact: true })
     .fill("An unsubmitted fictional answer.");
@@ -282,9 +285,8 @@ test("interactive rosace supports keyboard, preserves levels and shows the activ
     page.getByRole("radio", { name: "Advanced", exact: true }),
   ).toBeChecked();
   await page
-    .getByRole("navigation", { name: "Workspace navigation" })
-    .getByRole("link", { name: "Talent card", exact: true })
-    .click();
+    .getByRole("combobox", { name: "Workspace role", exact: true })
+    .selectOption("candidate");
   await page
     .getByRole("button", {
       name: "Explore Get it right and spot the error",
@@ -310,7 +312,10 @@ test("conversation guide distinguishes unknown experience and expected work", as
   await expect(
     page.getByRole("heading", { name: "Amira × NordChip", exact: true }),
   ).toBeVisible();
-  const first = page.locator(".question-brief").filter({has: page.locator(".level-comparison")}).first();
+  const first = page
+    .locator(".question-brief")
+    .filter({ has: page.locator(".level-comparison") })
+    .first();
   await expect(first).toContainText("Not filled in");
   await expect(first).toContainText("No level has been declared");
   await first.locator("summary").click();
@@ -340,12 +345,12 @@ test("conversation guide distinguishes unknown experience and expected work", as
     }
   }
 });
-test("Featherless proposals require reviewed context and explicit acceptance", async ({
+test("Claude proposals require reviewed context and explicit acceptance", async ({
   page,
 }) => {
   await page.route("**/api/integrations", (route) =>
     route.fulfill({
-      json: { context: false, ai: true, provider: "Featherless" },
+      json: { context: false, ai: true, provider: "Claude" },
     }),
   );
   const proposal = {
@@ -363,7 +368,7 @@ test("Featherless proposals require reviewed context and explicit acceptance", a
         text: "Test fictional sensor boards.",
       },
     ],
-    provider: "Featherless",
+    provider: "Claude",
     model: "test-model",
   };
   let reviewed = false;

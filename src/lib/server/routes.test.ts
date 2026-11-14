@@ -2,7 +2,7 @@ import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
 import { POST as company } from "@/app/api/company-context/route";
 import { POST as examples } from "@/app/api/level-examples/route";
 import { POST as exercise } from "@/app/api/exercise-feedback/route";
-beforeEach(() => vi.stubEnv("AI_PROVIDER", "gemini"));
+beforeEach(() => vi.stubEnv("AI_PROVIDER", "anthropic"));
 afterEach(() => vi.unstubAllEnvs());
 const request = (data: unknown) =>
   new Request("http://localhost/api", {
@@ -18,8 +18,8 @@ describe("local API fallback and review gates", () => {
     expect(r.headers.get("Cache-Control")).toBe("no-store");
     expect((await r.json()).error).toContain("not configured");
   });
-  it("requires reviewed context and remains usable without Gemini", async () => {
-    vi.stubEnv("GEMINI_API_KEY", "");
+  it("requires reviewed context and remains usable without Claude", async () => {
+    vi.stubEnv("ANTHROPIC_API_KEY", "");
     const payload = {
       skill: "C1.1",
       title: "Demo",
@@ -32,7 +32,7 @@ describe("local API fallback and review gates", () => {
     ).toBe(503);
   });
   it("requires explicit exercise consent and a known component", async () => {
-    vi.stubEnv("GEMINI_API_KEY", "");
+    vi.stubEnv("ANTHROPIC_API_KEY", "");
     const payload = {
       skill: "C1.1",
       answer: "Fictional response",

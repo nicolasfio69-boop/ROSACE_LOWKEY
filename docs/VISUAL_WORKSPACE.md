@@ -1,112 +1,37 @@
-# Interactive workspace delivery
+# Interactive workspace — current delivery
 
-The latest UX update is delivered on `feat/coherent-ux`, based on
-`shader-art-direction` and the original `feat/visual-workspace` application. The audit-only branch
-`cursor/audit-strategie-hackathon-9b3f` does not contain this implementation.
-Until the application PR is merged, check out the application branch in Cursor.
+Use `feat/coherent-ux` (PR #11), which integrates `framing-doc`, `workspace-concrete-skills` and `guided-demo`. The audit-only branch does not contain this implementation. No PR has been merged on GitHub.
 
 ```bash
 git fetch origin
 git switch feat/coherent-ux
+git pull --ff-only origin feat/coherent-ux
 npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. On Windows use `npm.cmd` if PowerShell blocks npm's
-script. Node.js 24 LTS is recommended. Install dependencies once and after lockfile
-changes; later starts need only `npm run dev`. The optional `start-local.cmd`
-launcher opens the browser on port 3001 and reuses an existing installation.
+Open http://localhost:3000. In Bash use `npm`; on Windows `npm.cmd` is useful only if PowerShell blocks the npm script. Node 22.13+ is required; the deployment container uses Node 22. Install dependencies once and after lockfile changes.
 
-## What changed
+## Separate workspaces
 
-- One workspace navigation across recruiter, talent, event desk and conversations.
-- Company, role and working context in three short stages; a fictional role helps
-  explore the flow without inventing input. Imported text remains editable.
-- An interactive rosace: select a branch with a mouse or Tab/arrow keys/Enter.
-  Declared and expected values retain the fixed Centrale scale. Reduced-motion
-  preferences disable the branch transition.
-- Illustrated level cards, with concrete examples first and descriptors on demand.
-- One company need at a time in the event desk, with expandable talent reviews.
-- Conversation questions start with missing/unknown and below-expected declarations.
-  The brief explains why to discuss them and shows the expected job situation.
-  A/C/F/NE observations remain separate and never modify the declared card.
-- Featherless is now the preferred optional AI provider. Server routes validate
-  generated JSON, citations and answer quotes; humans review proposals. The
-  previous Gemini adapter is optional, not a requirement for the app.
+Choose **View as** in the header. Candidate navigation contains the talent card and My checks (`/talent/checks`); recruiter navigation contains the need, exercise preparation/review (`/checks`) and conversations. Organiser navigation keeps the event desk. The logo opens the overview and the guided tour remains available. These are demo workspaces, not authenticated permissions.
 
-## Art direction
+The need journey collects company, job and working context, then uses twelve exact action labels, three majors, any minors and up to three technical skills from the twenty-skill catalogue. Technical bars sit beside the rosace. Contextual level cards explain real work; unknown is never zero. The candidate card restores consented declarations without restoring CV text and can be deleted.
 
-- Following the owner's approved UX audit and request for a lighter background,
-  all roles share a light pearl palette: matching navigation, fields, level cards
-  and translucent surfaces. There is no dark sidebar or isolated white chart panel.
-- `AuroraBackground` adapts the freely available [Aceternity Aurora Background](https://ui.aceternity.com/components/aurora-background):
-  layered repeating gradients, a radial mask and a slow 60-second animation, tinted
-  in Centrale red and gold. It fills the viewport across routes and becomes static
-  under reduced motion. This is CSS, not a paid WebGL shader or an AI call.
-- Fonts remain self-hosted Space Grotesk and Inter. Larger chart labels and form
-  text make both mobile and projected demonstrations easier to read.
-- `theme.css` owns the shared palette and the responsive preview treatment.
-  `workspace.css` retains the existing layout. The old WavyBackground and
-  GlowingEffect are not mounted by the workspace.
+The event desk shows reasons, ties and people without suggestions. The brief shows relevant questions and on-site situations. Human observations use the mean of task-level performance values, excluding NE and including F as zero. C4.3 is discussed, never marked observed. Declared levels stay separate.
 
-## UX audit fixes
+## Claude and review
 
-- Only confirmed, consented talent levels and the display name are restored on
-  return; CV text, quoted passages and question answers are never restored.
-  Expired cards still follow the existing six-month deletion rules.
-- Mobile navigation uses an explicit destination selector; a sticky expandable
-  rosace stays accessible while filling in forms. Desktop keeps the full chart.
-- Recruiters can preview a level before selecting a priority. A neutral provisional
-  branch is clearly labelled and is never saved as a requirement by itself.
-  Review becomes directly available after the third major is chosen.
-- Organiser decision errors sit beside their reason input, with focus moved to
-  that field. Approvals remain human decisions and keep their journal entry.
-- Observation changes announce that they were saved. The original declaration
-  can be inspected separately without changing the scoring or observation rules.
-- Practice stays reachable by its URL but is removed from the main demo journey.
-  Demo data remains an organiser annex. The interface consistently states the
-  existing limit of two job skills; scoring is unchanged.
+Claude retrieves reviewed job/company passages to propose requirements, level examples and exercises. Sources and reasons are visible. The recruiter must accept a proposal before it changes requirements or becomes an exercise. Three demo skills have three versions each, with a twenty-minute total budget. Other verification tasks are described in the plan but not implemented as online exercises.
 
-## Frontend and backend
+Candidates submit from their own screen. Recruiters review the saved exercise version and answer, optionally request Claude feedback, then personally give A/C/F/NE. Replacing an answer clears its old grade. Submitted fictional answers persist locally; CVs do not. See [CLAUDE_SETUP.md](CLAUDE_SETUP.md) for keys, the real API connection test and remaining work.
 
-Next.js hosts both layers in one repository:
+## Visual design
 
-- React client components render the workspace and rosaces in the browser.
-- Node.js route handlers in `src/app/api` call Context.dev and the selected AI
-  provider. Credentials stay on the server. The scoring modules remain deterministic.
-- Browser storage is still the persistence layer for this local demo. Shared
-  PostgreSQL data, authentication and production rate limits are future work.
+All roles share a pearl background and matching navigation, fields and panels. Centrale red and gold are the strong colours; Space Grotesk and Inter are bundled locally. Free Aceternity adaptations provide a full-screen Aurora, word reveal, card glow and discreet header beams. Rosace construction, solid observed fills, arriving suggestions, transitions and counters explain progress; reduced-motion preferences make them static. See [ACETERNITY_ATTRIBUTION.md](ACETERNITY_ATTRIBUTION.md).
 
-## Verification
+On mobile, navigation and role selection stay in the header; the live rosace is a compact sticky disclosure. Interactive rosace branches support mouse, Tab, arrows and Enter. Form errors, save status and unsupported document errors are visible next to the relevant work.
 
-- 120 application tests, including discussion-gap and Featherless adapter tests.
-- Four launcher tests.
-- TypeScript, ESLint and production build pass.
-- Eleven Chromium journey tests pass against the production build: real synthetic
-  PDF/DOCX import, recruiter-to-observation flow, keyboard chart interaction,
-  restore behaviour, mobile/tablet/desktop overflow, and explicit acceptance of
-  mocked Featherless proposals.
-- No live provider generation was performed. The public Featherless model list
-  was reachable; API credentials and a selected model are still needed to check
-  real inference. See INTEGRATIONS.md.
-- Windows batch execution is not verified on a Windows machine in this environment.
+## Validation and limits
 
-## Actual browser captures
-
-![Workspace overview](images/coherent-home.png)
-
-![Interactive skills workspace](images/coherent-need.png)
-
-![Mobile rosace](images/coherent-mobile.png)
-
-## Framing delivery: steps 0–9
-
-- Three integrated branches: `framing-doc`, `workspace-concrete-skills`, `guided-demo`. No GitHub PR is merged by this delivery.
-- The menu now shows **3-minute demo**, Recruiter need, Talent card, Event desk, Conversations and Checks. The logo returns home; `/demo` remains available by URL.
-- The twenty technical skills include the owner's approved **Build data pipelines**. Three are allowed per need, beside the fixed twelve-component rosace. There is no extra cap on minor components.
-- Observed branches use the mean of task-level performance values, with NE ignored and F counted as zero. Expected, declared and observed values all use the same scale from the hub. Regrading a situation replaces it; another situation is kept separately.
-- `/checks` replaces `/practice`: C5.1, C2.2 and embedded C each have three written variants. The talent's declared level selects the variant. The demo has an explicit Talent/Recruiter switch: submit, review the checklist, then grade A/C/F/NE. Replacing an answer removes its old grade. Fictional answers and grades persist in this browser; CV text does not.
-- The brief shows on-site situations within a shared ten-minute allowance. C4.3 is **Discussed, not observed**. Other online exercises are described as requiring recruiter preparation; the three demo exercises do not claim to implement every verification task.
-- `/tour` follows NordChip and Amira through four stages; its final stage includes a clearly labelled fictional online grade.
-- Free Aceternity adaptations add a word reveal, pointer glow and discreet beams to the Aurora background. Rosace branches, observed fills, suggestions, transitions and counters explain progress. Reduced-motion preferences make them static.
-- Aiven Runtime packaging is ready for account validation, without PostgreSQL or a deployment. See [DEPLOY_AIVEN.md](DEPLOY_AIVEN.md) and [VALIDATION.md](VALIDATION.md).
+See [VALIDATION.md](VALIDATION.md) for checks and screenshot sets. Browser-local storage does not sync across computers. API responses are tested with mocks until the owner's key is configured; no live AI result, deployed Aiven URL or authenticated service is claimed. Aiven Runtime packaging is prepared in [DEPLOY_AIVEN.md](DEPLOY_AIVEN.md), without PostgreSQL.

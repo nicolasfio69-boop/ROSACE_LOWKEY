@@ -1,4 +1,5 @@
 "use client";
+import { ExerciseDesigner } from "./ExerciseDesigner";
 import { BackgroundBeams } from "./BackgroundBeams";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -26,12 +27,16 @@ import { Rosace } from "./Rosace";
 import { SkillBars } from "./SkillBars";
 import { LivePreview } from "./LivePreview";
 
-export function Checks() {
+export function Checks({
+  audience = "recruiter",
+}: {
+  audience?: "talent" | "recruiter";
+}) {
+  const role = audience;
   const [workspace, setWorkspace] = useState<Workspace>(emptyWorkspace);
   const [needId, setNeedId] = useState(NEEDS[0].id);
   const [talentId, setTalentId] = useState("amira");
   const [skill, setSkill] = useState<string>("C5.1");
-  const [role, setRole] = useState<"talent" | "recruiter">("talent");
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -44,7 +49,33 @@ export function Checks() {
   useEffect(() => {
     const requests = requestVersion;
     try {
-      setWorkspace(loadWorkspace(localStorage));
+      const saved = loadWorkspace(localStorage);
+      setWorkspace(saved);
+      const query = new URLSearchParams(window.location.search);
+      const nextNeed = [...NEEDS, ...saved.needs].some(
+        (n) => n.id === query.get("need"),
+      )
+        ? query.get("need")!
+        : NEEDS[0].id;
+      const nextTalent = [
+        ...TALENTS,
+        ...saved.talents.map((t) => t.talent),
+      ].some((t) => t.id === query.get("talent"))
+        ? query.get("talent")!
+        : audience === "talent" && saved.talents[0]
+          ? saved.talents[0].talent.id
+          : "amira";
+      const nextSkill = CHECK_SKILLS.some((s) => s === query.get("skill"))
+        ? query.get("skill")!
+        : "C5.1";
+      setSkill(nextSkill);
+      setNeedId(nextNeed);
+      setTalentId(nextTalent);
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}?need=${encodeURIComponent(nextNeed)}&talent=${encodeURIComponent(nextTalent)}&skill=${encodeURIComponent(nextSkill)}`,
+      );
       setReady(true);
     } catch {
       setError(
@@ -55,20 +86,27 @@ export function Checks() {
       .then((r) => r.json())
       .then((r) =>
         setConnected(
-          r.ai === true && String(r.provider).toLowerCase() === "featherless",
+          r.ai === true && String(r.provider).toLowerCase() === "claude",
         ),
       )
       .catch(() => {});
     return () => {
       requests.current++;
     };
-  }, []);
+  }, [audience]);
   const needs = [...NEEDS, ...workspace.needs];
   const talents = [...TALENTS, ...workspace.talents.map((t) => t.talent)];
   const need = needs.find((n) => n.id === needId)!;
   const talent = talents.find((t) => t.id === talentId)!;
   const level = talent.statements[skill]?.level;
-  const exercise = level ? checkExercise(skill, level) : null;
+  const exercise = level
+    ? (workspace.exercises.find(
+        (e) =>
+          e.needId === needId &&
+          e.exercise.skill === skill &&
+          e.exercise.level === level,
+      )?.exercise ?? checkExercise(skill, level))
+    : null;
   const submission = workspace.checks.find(
     (c) => c.needId === needId && c.talentId === talentId && c.skill === skill,
   );
@@ -112,6 +150,7 @@ export function Checks() {
         skill,
         taskLevel: exercise.level,
         answer,
+        exercise,
       });
       setWorkspace(loadWorkspace(localStorage));
       setNotice("Done · ready for recruiter review.");
@@ -149,6 +188,7 @@ export function Checks() {
         body: JSON.stringify({
           skill,
           level: submission.taskLevel,
+          exercise: submission.exercise,
           answer: submission.answer,
           consent: true,
         }),
@@ -168,7 +208,7 @@ export function Checks() {
       <header className="step-heading">
         <BackgroundBeams />
         <p className="eyebrow">CHECK A CONCRETE SITUATION</p>
-        <h1>Checks</h1>
+        <h1>{role === "talent" ? "My checks" : "Prepare and review checks"}</h1>
         <p>
           Three fictional exercises · 6 + 6 + 8 minutes, at most 20 minutes in
           total. A recruiter gives the grade.
@@ -183,6 +223,11 @@ export function Checks() {
             onChange={(e) => {
               reset();
               setNeedId(e.target.value);
+              window.history.replaceState(
+                null,
+                "",
+                `${window.location.pathname}?need=${encodeURIComponent(e.target.value)}&talent=${encodeURIComponent(talentId)}&skill=${encodeURIComponent(skill)}`,
+              );
             }}
           >
             {needs.map((n) => (
@@ -200,6 +245,11 @@ export function Checks() {
             onChange={(e) => {
               reset();
               setTalentId(e.target.value);
+              window.history.replaceState(
+                null,
+                "",
+                `${window.location.pathname}?need=${encodeURIComponent(needId)}&talent=${encodeURIComponent(e.target.value)}&skill=${encodeURIComponent(skill)}`,
+              );
             }}
           >
             {talents.map((t) => (
@@ -209,24 +259,9 @@ export function Checks() {
             ))}
           </select>
         </label>
-        <label className="field-label">
-          Demo role
-          <select
-            aria-label="Demo role"
-            value={role}
-            onChange={(e) => {
-              reset();
-              setRole(e.target.value as "talent" | "recruiter");
-            }}
-          >
-            <option value="talent">Talent · answer</option>
-            <option value="recruiter">Recruiter · review</option>
-          </select>
-        </label>
         <p className="quiet-note">
-          Demo role switch, without authenticated accounts. Use fictional
-          details only. Exercise answers are saved in this browser; CVs are
-          never stored.
+          Use fictional details only. Choose your workspace in the header.
+          Exercise answers are saved in this browser; CVs are never stored.
         </p>
       </div>
       {error && (
@@ -244,6 +279,11 @@ export function Checks() {
               onChange={(e) => {
                 reset();
                 setSkill(e.target.value);
+                window.history.replaceState(
+                  null,
+                  "",
+                  `${window.location.pathname}?need=${encodeURIComponent(needId)}&talent=${encodeURIComponent(talentId)}&skill=${encodeURIComponent(e.target.value)}`,
+                );
               }}
             >
               {CHECK_SKILLS.map((s) => (
@@ -257,6 +297,32 @@ export function Checks() {
             {notice || status}
           </p>
           <h2>{skillName(skill)}</h2>
+          {role === "recruiter" && exercise && (
+            <ExerciseDesigner
+              key={`${needId}-${skill}-${level}`}
+              needId={needId}
+              title={need.title}
+              job={
+                "description" in need
+                  ? String(need.description)
+                  : need.requirements
+                      .map(
+                        (r) =>
+                          `${skillName(r.skill)}: ${r.reason ?? r.example ?? ""}`,
+                      )
+                      .join("\n")
+              }
+              company={
+                "companyContext" in need
+                  ? String(need.companyContext)
+                  : `${need.company}, a fictional demo company.`
+              }
+              skill={skill}
+              level={exercise.level}
+              connected={connected}
+              onApproved={() => setWorkspace(loadWorkspace(localStorage))}
+            />
+          )}
           {role === "talent" &&
             (exercise ? (
               <>
@@ -305,7 +371,12 @@ export function Checks() {
                   Submitted at {LEVELS[submission.taskLevel].name}
                 </p>
                 <p className="check-prompt">
-                  {checkExercise(skill, submission.taskLevel).prompt}
+                  {
+                    (
+                      submission.exercise ??
+                      checkExercise(skill, submission.taskLevel)
+                    ).prompt
+                  }
                 </p>
                 <h3>Talent answer</h3>
                 <blockquote className="check-answer">
@@ -313,11 +384,12 @@ export function Checks() {
                 </blockquote>
                 <h3>Review checklist</h3>
                 <ul className="practice-checks">
-                  {checkExercise(skill, submission.taskLevel).checks.map(
-                    (c) => (
-                      <li key={c}>{c}</li>
-                    ),
-                  )}
+                  {(
+                    submission.exercise ??
+                    checkExercise(skill, submission.taskLevel)
+                  ).checks.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
                 </ul>
                 <p className="quiet-note">
                   Judge this situation at the submitted level. A: demonstrated
@@ -341,7 +413,7 @@ export function Checks() {
                   ))}
                 </div>
                 <details className="context-details">
-                  <summary>Optional Featherless feedback</summary>
+                  <summary>Optional Claude feedback</summary>
                   <p>
                     Only the fictional answer and exercise are sent. Feedback
                     never assigns a grade.
@@ -352,7 +424,7 @@ export function Checks() {
                       checked={consent}
                       onChange={(e) => setConsent(e.target.checked)}
                     />
-                    Send this fictional answer to Featherless.
+                    Send this fictional answer to Claude.
                   </label>
                   <button
                     className="secondary-button"
@@ -363,7 +435,7 @@ export function Checks() {
                   </button>
                   {!connected && (
                     <p className="quiet-note">
-                      Featherless is not configured. Human review works now.
+                      Claude is not configured. Human review works now.
                     </p>
                   )}
                   {feedback && (
@@ -386,7 +458,7 @@ export function Checks() {
               </>
             ) : (
               <p className="quiet-note">
-                To check · waiting for the talent’s answer. Switch to Talent to
+                To check · waiting for the talent’s answer. Choose Candidate in the header to
                 complete the exercise first.
               </p>
             ))}
@@ -418,12 +490,14 @@ export function Checks() {
               );
             })}
           </details>
-          <Link
-            href={`/brief?need=${needId}&talent=${talentId}`}
-            className="text-button"
-          >
-            Open the conversation brief →
-          </Link>
+          {role === "recruiter" && (
+            <Link
+              href={`/brief?need=${needId}&talent=${talentId}`}
+              className="text-button"
+            >
+              Open the conversation brief →
+            </Link>
+          )}
         </section>
         <LivePreview
           label="Checks rosace"

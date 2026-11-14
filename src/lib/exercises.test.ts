@@ -3,7 +3,7 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { COMPONENTS } from "./framework";
 import { exerciseFor, validateFeedback } from "./exercises";
 import { generateFeedback } from "./server/exercise-feedback";
-beforeEach(() => vi.stubEnv("AI_PROVIDER", "gemini"));
+beforeEach(() => vi.stubEnv("AI_PROVIDER", "anthropic"));
 afterEach(() => vi.unstubAllEnvs());
 describe("practice without automatic assessment", () => {
   it("covers exactly the twelve components with concrete review criteria", () => {
@@ -35,7 +35,7 @@ describe("practice without automatic assessment", () => {
     ).toThrow();
   });
   it("never calls a provider without a key", async () => {
-    vi.stubEnv("GEMINI_API_KEY", "");
+    vi.stubEnv("ANTHROPIC_API_KEY", "");
     const f = vi.fn();
     await expect(
       generateFeedback("C1.1", "A synthetic answer", f),
@@ -43,8 +43,8 @@ describe("practice without automatic assessment", () => {
     expect(f).not.toHaveBeenCalled();
   });
   it("checks the model response and cites only the practice answer", async () => {
-    vi.stubEnv("GEMINI_API_KEY", "test-key");
-    vi.stubEnv("GEMINI_MODEL", "test-model");
+    vi.stubEnv("ANTHROPIC_API_KEY", "test-key");
+    vi.stubEnv("ANTHROPIC_MODEL", "claude-test-model");
     const feedback = {
       strengths: [],
       questions: ["What would you clarify?"],
@@ -53,10 +53,11 @@ describe("practice without automatic assessment", () => {
     const f = vi.fn().mockResolvedValue(
       new Response(
         JSON.stringify({
-          candidates: [
+          stop_reason: "end_turn",
+          content: [
             {
-              finishReason: "STOP",
-              content: { parts: [{ text: JSON.stringify(feedback) }] },
+              type: "text",
+              text: JSON.stringify(feedback),
             },
           ],
         }),
@@ -65,8 +66,6 @@ describe("practice without automatic assessment", () => {
     expect(
       await generateFeedback("C1.1", "I would ask about the task.", f),
     ).toEqual(feedback);
-    expect(
-      JSON.parse(f.mock.calls[0][1].body).systemInstruction.parts[0].text,
-    ).toContain("No scores");
+    expect(JSON.parse(f.mock.calls[0][1].body).system).toContain("No scores");
   });
 });
