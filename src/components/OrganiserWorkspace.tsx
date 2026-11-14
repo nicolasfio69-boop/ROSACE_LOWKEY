@@ -6,6 +6,7 @@ import {
   suggestForNeed,
   withoutSuggestion,
   NO_SUGGESTION_LABELS,
+  NO_SUGGESTION_NEXT_STEPS,
 } from "@/lib/suggestions";
 import {
   loadWorkspace,
@@ -97,10 +98,13 @@ export function OrganiserWorkspace() {
         <h2>People without a suggestion</h2>
         {missing.length ? (
           missing.map(({ talent, reason }) => (
-            <p key={talent.id}>
-              <strong>{talent.pseudonym}</strong> ·{" "}
-              {NO_SUGGESTION_LABELS[reason]}
-            </p>
+            <div key={talent.id} className="no-suggestion-item">
+              <p>
+                <strong>{talent.pseudonym}</strong> ·{" "}
+                {NO_SUGGESTION_LABELS[reason]}
+              </p>
+              <small>Next step: {NO_SUGGESTION_NEXT_STEPS[reason]}</small>
+            </div>
           ))
         ) : (
           <p>Every talent has a suggestion or a tie to review.</p>
@@ -119,8 +123,9 @@ export function OrganiserWorkspace() {
             <span>{result.need.company}</span>
             <strong>{result.need.title}</strong>
             <small>
-              {result.suggested.length} suggestions · {result.tied.length} tied
-              for review
+              {result.suggested.length}{" "}
+              {result.suggested.length === 1 ? "suggestion" : "suggestions"} ·{" "}
+              {result.tied.length} tied for review
             </small>
           </button>
         ))}
@@ -154,7 +159,15 @@ export function OrganiserWorkspace() {
             )}
             <details open>
               <summary>Review the people for this need</summary>
-              {talents.map((talent, candidateIndex) => {
+              {[
+                ...result.suggested,
+                ...result.tied,
+                ...result.others,
+                ...result.ineligible,
+              ]
+                .map((a) => talents.find((t) => t.id === a.talentId))
+                .filter((t): t is (typeof talents)[number] => !!t)
+                .map((talent, candidateIndex) => {
                 const key = `${result.need.id}:${talent.id}`;
                 const a = [
                   ...result.suggested,

@@ -68,6 +68,16 @@ export const NO_SUGGESTION_LABELS: Record<NoSuggestionReason, string> = {
   outranked: "Eligible, but capacity is filled by closer fits",
 };
 
+/** What the organiser can do next, so nobody is simply left out. */
+export const NO_SUGGESTION_NEXT_STEPS: Record<NoSuggestionReason, string> = {
+  card_too_sparse:
+    "Invite them to confirm a few more levels before the event; a CV mention alone is not compared.",
+  no_major_reached:
+    "Point them to an online check on a major they are close to, or to another event.",
+  outranked:
+    "Keep them as a back-up and offer a meeting if a company adds capacity.",
+};
+
 /** Talents with no suggestion at all, with the reason shown to the organiser. */
 export function withoutSuggestion(
   results: NeedSuggestions[],

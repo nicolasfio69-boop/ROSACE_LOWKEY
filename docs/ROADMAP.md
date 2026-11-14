@@ -11,14 +11,14 @@ Current delivery: `feat/coherent-ux`, PR #11. The local flow is implemented; thi
 | 4. Conversation | Questions, on-site situations, human observations averaged on the task-level scale; C4.3 discussed only | Recruiter usability in a ten-minute meeting |
 | 5. Checks | 26 online skills × three levels, selected plan within twenty minutes; explicit timed attempt and submission, advisory Claude grade with evidence, human validation and separate observation; on-site guidance | Recruiter review of task quality, real provider validation; local timer is not exam security |
 | 6. Welcome and visual UX | Candidate/recruiter choice, discreet organiser access, skippable fictional sign-in, remembered local mode, separate role homes, automatic prefilled four-stage demo with pause/replay, light pearl Aurora and reduced motion | Owner flow review; real email/code authentication remains deferred |
-| 7. Hosting | Next.js standalone, Node 22 Dockerfile, documented Aiven Runtime deployment from GitHub | Account credits, European region, live deployment and provider secrets |
+| 7. Hosting | Deployed on Aiven Runtime (eur-1) from `feat/coherent-ux`; security headers; per-visitor AI limits | Add the Claude and Context.dev secrets on Aiven, then redeploy |
 | 8. Shared event service | Deferred | Authentication, shared storage, server retention/deletion; no PostgreSQL in this delivery |
 
 ## Credentials and local use
 
 No credentials are needed for the manual flow. In Cursor, fetch and switch to `feat/coherent-ux`, run `npm ci` once (and after lockfile changes), then `npm run dev`. Open http://localhost:3000.
 
-For optional AI, configure `ANTHROPIC_API_KEY` and `ANTHROPIC_MODEL` in ignored `.env.local`, then restart. `CONTEXT_DEV_API_KEY` is optional for company context. On Aiven use runtime secret settings, never Git. No live paid call or deployment is part of this change. See [DEPLOY_AIVEN.md](DEPLOY_AIVEN.md).
+For optional AI, configure `ANTHROPIC_API_KEY` in ignored `.env.local` (`ANTHROPIC_MODEL` is optional), then restart. `CONTEXT_DEV_API_KEY` is optional for company context. On Aiven use runtime secret settings, never Git. No live paid call or deployment is part of this change. See [DEPLOY_AIVEN.md](DEPLOY_AIVEN.md).
 
 Browser storage is not shared across devices. The demo uses fictional companies and talents and a role switch without authentication. CVs remain transient; local card deletion/expiry removes linked checks and observations. The talent never sees a ranking or alignment score.
 

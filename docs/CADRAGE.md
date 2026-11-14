@@ -10,7 +10,7 @@ Ce fichier est la source de vérité du projet. Il est tenu à jour à chaque d�
 
 **Pour mettre à jour :** quand Nicolas tranche un point, déplace-le de « À trancher » vers « Journal des décisions », avec la date. Si une règle change, modifie aussi la partie concernée plus haut.
 
-Dernière mise à jour : 2026-11-14 — décisions UX : démo hors sidebar, palette gris/rouge/or, wording organisateur, rendu = vidéo `/tour` + slides.
+Dernière mise à jour : 2026-11-14 (21 h 30, Paris) — tests du site en ligne, correctifs, données de démo réalistes, nettoyage du dépôt.
 
 ---
 
@@ -133,7 +133,7 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 
 ## 8. Branches et pull requests
 
-- **Version actuelle de l’application :** branche `feat/coherent-ux` (PR #11 vers `main`). Elle contient le cadrage, le catalogue, la démo guidée, l’UX cohérente, les checks chronométrés et l’audit stratégie (`docs/AUDIT_STRATEGIE_HACKATHON.md`).
+- **Version actuelle de l’application :** branche `feat/coherent-ux` (PR #11 vers `main`). Elle contient le cadrage, le catalogue, la démo guidée, l’UX cohérente, les checks chronométrés.
 - Les anciennes branches / PR #3 à #10 (descripteurs, catalogue, visual-workspace, shader, guided-demo, framing, etc.) sont **intégrées** dans `feat/coherent-ux` puis fermées / supprimées pour éviter la confusion. Ne pas les rouvrir.
 - Nouveau travail : brancher depuis `feat/coherent-ux` (ou depuis `main` après fusion de la PR #11). Une PR = un sujet. Ne pas réintroduire Featherless / Gemini.
 - `main` ne reçoit l’application qu’après fusion explicite de la PR #11.
@@ -172,7 +172,7 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - **Implémenté** : consignes sur place dans le brief (budget commun de dix minutes), C4.3 « Discussed, not observed », sans note d’observation. Retour Claude (Anthropic) facultatif sur action explicite ; recommandation A/C/F/NE possible, note finale humaine seulement.
 - **Implémenté** : démo NordChip/Amira en quatre étapes avec exemple en ligne déjà noté ; fond perle Aurora et animations accessibles.
 - **Préparé, pas déployé** : image Node 22 / Next.js standalone et procédure Aiven Runtime. Pas de PostgreSQL. Les crédits, la région européenne, les paramètres du compte Aiven et les appels réels Claude/Context.dev restent à vérifier.
-- La revue finale Playwright et les captures de livraison sont consignées dans `docs/VALIDATION.md`. Les validations de rendu et les informations événementielles ci-dessous restent ouvertes.
+- Les tests Playwright du dossier `e2e/` tiennent lieu de revue finale. Les validations de rendu et les informations événementielles ci-dessous restent ouvertes.
 
 ### Changement demandé après le cadrage initial
 
@@ -200,6 +200,15 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - **Limite existante conservée en attendant un éventuel changement de Nicolas** : vingt minutes au total pour le programme sélectionné, pas 78 exercices imposés à une personne. Le recruteur choisit les priorités du besoin ; une compétence non sélectionnée n’est pas considérée comme échouée. Dix minutes partagées sur place.
 - **Choix de fonctionnement annoncé, ajustable** : à la fin du temps, la saisie s’arrête et le candidat peut soumettre sa réponse existante. Le chronomètre est local, sans contrôle d’identité ni surveillance, et un brouillon non soumis ne survit pas au rechargement. Les durées ne donnent jamais une note automatique.
 - Les propositions de compétences/exercices restent distinctes de cette nouvelle recommandation sur une réponse. Les anciennes mentions « jamais la note » dans les comptes rendus décrivent l’étape précédente ; la décision finale appartient toujours à une personne.
+
+### Tests du site en ligne et préparation du rendu (14 novembre 2026, soir)
+
+- **Demandé par Nicolas** après les tests du site Aiven : corriger les bugs trouvés, ajouter les améliorations recommandées, rendre les données de démo réalistes et cohérentes, nettoyer le dépôt. Il ne doit rester que la vidéo.
+- **Implémenté** : limite des appels IA par visiteur (6 par minute), plus un plafond du site (40 par minute, 600 par jour) ; `ANTHROPIC_MODEL` devient facultatif (`claude-sonnet-5-5` par défaut), seule la clé est nécessaire sur Aiven ; en-têtes de sécurité (CSP, HSTS, X-Frame-Options, Referrer-Policy) ; vraie page 404 ; `/tour` remonte en haut à chaque étape et la barre latérale suit le rôle de l'étape ; lien retour du brief vers Conversations.
+- **Implémenté** : la promesse sur l'accueil ; une section « Responsible by design » sur `/overview` (AI Act, une personne décide, raisons lisibles, aucun critère de biais, données minimales) ; un brief de conversation imprimable ; une prochaine étape proposée à l'organisateur pour chaque personne sans suggestion ; la liste par besoin commence par les personnes suggérées.
+- **Données de démo** : un événement, trois besoins (NordChip, Lumora, Vireo Data · Junior data analyst) et dix talents (Elina, Omar, Tuomas et Priya ajoutés). Chaque niveau déclaré s'appuie sur une ligne de CV ou reste une simple déclaration. L'égalité à la limite se montre désormais sur Vireo Data (Priya et Tuomas) ; Jonas et Kwame restent sans suggestion faute de carte remplie. Les chiffres de la démo NordChip/Amira ne changent pas.
+- **Nettoyage** : comptes rendus d'audit et captures d'écran périmés retirés (ils restent dans l'historique Git). Restent : ce cadrage, `AGENTS.md`, `README.md`, `ROADMAP.md`, `CHALLENGE_ALIGNMENT.md`, `CLAUDE_SETUP.md`, `INTEGRATIONS.md`, `DEPLOY_AIVEN.md`, `ACETERNITY_ATTRIBUTION.md`.
+- **Context.dev** : l'appel serveur correspond à la documentation officielle (`POST /v1/web/scrape`, Bearer, `formats.markdown`). Il devient actif dès que `CONTEXT_DEV_API_KEY` est posée sur Aiven.
 
 ## 10. À trancher ensemble
 

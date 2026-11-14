@@ -86,6 +86,10 @@ export function WelcomeGate() {
               <h1 ref={heading} tabIndex={-1}>
                 What brings you here?
               </h1>
+              <p className="entry-promise">
+                AI-written CVs all look alike. Rosace turns each claim into a
+                question you can check during the conversation.
+              </p>
               <p>
                 Prepare for a recruitment event in Espoo.
                 <br />

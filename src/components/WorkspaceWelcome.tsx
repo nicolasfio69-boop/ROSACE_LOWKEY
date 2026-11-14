@@ -72,7 +72,7 @@ export function WorkspaceWelcome({ role }: { role: WorkspaceRole }) {
           </h2>
           <p>
             {organiser
-              ? "A fictional event with NordChip, Lumora and synthetic talent cards. Local decisions are shared between the demo spaces in this browser."
+              ? "A fictional event with NordChip, Lumora, Vireo Data and ten synthetic talent cards. Local decisions are shared between the demo spaces in this browser."
               : candidate
                 ? "Import a fictional CV or start in your own words. Review the clues and confirm what you have done, with what support and in which situations."
                 : "Import a fictional job description or describe the work yourself. Add the location, remote or on-site setup, team and expected outcomes."}

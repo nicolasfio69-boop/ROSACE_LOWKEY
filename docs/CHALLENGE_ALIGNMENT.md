@@ -4,7 +4,7 @@ Revue du 14 novembre 2026, actualisée après la demande de démo automatique et
 
 ## Sources et conclusion
 
-- Source projet : [CADRAGE.md](CADRAGE.md), lu intégralement, avec les décisions de Nicolas ; [AGENTS.md](../AGENTS.md) et [CODEX_BRIEF.md](CODEX_BRIEF.md).
+- Source projet : [CADRAGE.md](CADRAGE.md), lu intégralement, avec les décisions de Nicolas ; [AGENTS.md](../AGENTS.md).
 - Source challenge : PDF fourni **CHALLENGE RETHINK RECRUITEMENT.pdf**, six pages, capture du 13 novembre 2026, [Rethinking Recruitment — City of Espoo](https://hackjunction.app/participate/45/challenges/319). Les pages citées ci-dessous sont celles du PDF, pas une vérification en direct de la plateforme.
 - Périmètre contrôlé : accueil, accueils candidat/recruteur/organisateur, aperçu, parcours guidé, besoin, fiche talent, organisation, conversations, brief, checks des deux rôles et démo historique ; bibliothèques de calcul, observations, stockage et adaptateurs IA relus pour étayer les conclusions.
 
@@ -56,4 +56,4 @@ Le challenge autorise de traiter une seule étape, avant, pendant ou après l’
 
 ## Lecture de la livraison
 
-Le sas et les accueils sont testables localement ; l’authentification est simulée. Les parcours métier, la démo préremplie automatique, les exercices à durée limitée, l’approbation humaine et les observations fonctionnent dans un même navigateur. Le minuteur local n’est pas un dispositif de surveillance ; la recommandation montrée dans `/tour` est explicitement préécrite, pas un appel Claude réel. Les appels réels Claude, l’usage entre plusieurs appareils, la charge événementielle et le déploiement restent à réaliser. Les validations de cette livraison sont consignées dans [VALIDATION.md](VALIDATION.md).
+Le sas et les accueils sont testables localement ; l’authentification est simulée. Les parcours métier, la démo préremplie automatique, les exercices à durée limitée, l’approbation humaine et les observations fonctionnent dans un même navigateur. Le minuteur local n’est pas un dispositif de surveillance ; la recommandation montrée dans `/tour` est explicitement préécrite, pas un appel Claude réel. Les appels réels Claude, l’usage entre plusieurs appareils, la charge événementielle et le déploiement restent à réaliser.

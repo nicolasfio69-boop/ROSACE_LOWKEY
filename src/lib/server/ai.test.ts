@@ -118,3 +118,8 @@ it("validates quoted exercise feedback without assigning a level", async () => {
     await generateFeedback("C1.1", "I would ask about the task.", f),
   ).not.toHaveProperty("level");
 });
+it("only needs the API key: the model falls back to the default", () => {
+  vi.stubEnv("ANTHROPIC_API_KEY", "test-key");
+  vi.stubEnv("ANTHROPIC_MODEL", "");
+  expect(aiStatus()).toEqual({ provider: "Claude", configured: true });
+});

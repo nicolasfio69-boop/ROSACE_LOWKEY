@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       ![1, 2, 3].includes(data.level as number)
     )
       throw new ServiceError("Unknown exercise or level.");
-    limitCalls("ai");
+    limitCalls("ai", request);
     return noStore(
       await proposeExercise(skill, data.level as ExpectedLevel, title, sources),
     );

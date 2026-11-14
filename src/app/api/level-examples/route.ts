@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         title: "Recruiter-reviewed company context",
         text: company,
       });
-    limitCalls("ai");
+    limitCalls("ai", request);
     return noStore(await generateExamples(skill, title, task, sources));
   } catch (error) {
     return failure(error);

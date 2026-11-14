@@ -84,8 +84,8 @@ export function ConversationBrief() {
   }
   return (
     <div className="workspace">
-      <Link href="/organiser" className="back-link">
-        ← Organiser
+      <Link href="/conversations" className="back-link">
+        ← Conversations
       </Link>
       <div className="step-heading">
         <BackgroundBeams />
@@ -102,6 +102,19 @@ export function ConversationBrief() {
           {error}
         </p>
       )}
+      <div className="brief-actions">
+        <button
+          type="button"
+          className="secondary-button"
+          onClick={() => {
+            setMode("prepare");
+            window.setTimeout(() => window.print(), 50);
+          }}
+        >
+          Print this brief
+        </button>
+        <small>One page to keep on the table during an in-person meeting.</small>
+      </div>
       <div className="brief-tabs" aria-label="Conversation stage">
         <button
           type="button"
