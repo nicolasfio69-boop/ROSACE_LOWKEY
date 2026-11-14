@@ -12,7 +12,7 @@ first. Do not change code during the audit: report first, the team decides.
 ## What the product must do in a 3-minute demo
 
 1. A recruiter prepares a need: 3 major Centrale components (gold), other components
-   (red), up to 3 technical skills, an expected level for each.
+   (red), up to 2 technical skills, an expected level for each.
 2. A talent builds a skills card from a CV. Declared levels are dotted on the rosace.
 3. The organiser sees suggestions with their reasons, ties at the cut and people
    without a suggestion, and decides.
@@ -27,8 +27,9 @@ responsible and feasible 20 %.
 - A person always decides. No automatic ranking shown to talents, no score to talents.
 - No nationality, language, age, gender or degree used to suggest anyone.
 - Synthetic data only. The CV is never stored.
-- Product UI in English. Night chrome and Centrale red `#C8102E` and gold `#F0C300`
-  only; no serif, cream or green; no marketing slogans.
+- Product UI in English. Following the owner’s approved update, use a continuous light
+  pearl Aurora background and matching surfaces, with Centrale red `#C8102E` and
+  gold `#F0C300` accents; no serif, green or marketing slogans.
 
 ## How to run it
 

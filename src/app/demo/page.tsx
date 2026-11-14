@@ -59,7 +59,7 @@ export default function Overview() {
           {results.map((result) => (
             <article
               key={result.need.id}
-              className="rounded-lg border border-line bg-white p-4"
+              className="rounded-lg border border-line demo-surface p-4"
             >
               <NeedHeader need={result.need} />
               <Rosace
@@ -98,7 +98,7 @@ export default function Overview() {
           ))}
         </div>
 
-        <div className="mt-6 rounded-lg border border-line bg-white p-4">
+        <div className="mt-6 rounded-lg border border-line demo-surface p-4">
           <h3 className="font-semibold">Talents without any suggestion</h3>
           <p className="text-sm text-muted">
             The organiser sees them before approving, and can add them with a
@@ -264,7 +264,7 @@ function TalentCard({ talent }: { talent: Talent }) {
   );
   const jobSkills = JOB_SKILLS.filter((j) => talent.statements[j.code]);
   return (
-    <article className="rounded-lg border border-line bg-white p-4">
+    <article className="rounded-lg border border-line demo-surface p-4">
       <Rosace declared={declared} size={260} title={talent.pseudonym} />
       {jobSkills.length > 0 ? (
         <ul className="mt-2 space-y-1 text-sm">

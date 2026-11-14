@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import { GlowingEffect } from "./GlowingEffect";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NEEDS, TALENTS } from "@/data/demo";
 import {
   suggestForNeed,
@@ -18,6 +17,10 @@ import {
 import { skillName } from "@/lib/framework";
 
 export function OrganiserWorkspace() {
+  const reasonInputs = useRef<Record<string, HTMLInputElement | null>>({});
+  const [decisionErrors, setDecisionErrors] = useState<Record<string, string>>(
+    {},
+  );
   const [activeNeed, setActiveNeed] = useState("");
   const [workspace, setWorkspace] = useState<Workspace>(emptyWorkspace),
     [ready, setReady] = useState(false),
@@ -51,10 +54,14 @@ export function OrganiserWorkspace() {
         reason: reasons[key] ?? "",
       });
       reload();
+      setDecisionErrors((previous) => ({ ...previous, [key]: "" }));
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : "Could not record the decision.",
-      );
+      setDecisionErrors((previous) => ({
+        ...previous,
+        [key]:
+          e instanceof Error ? e.message : "Could not record the decision.",
+      }));
+      reasonInputs.current[key]?.focus();
     }
   }
   if (!ready)
@@ -63,17 +70,17 @@ export function OrganiserWorkspace() {
     <div className="workspace">
       <p className="eyebrow">ESPOO TECH MATCHMAKING · ORGANISER</p>
       <div className="step-heading">
-        <h1>Turn suggestions into conversations.</h1>
+        <h1>Review the proposed meetings.</h1>
         <p>
           Review needs, ties and people without suggestions. Every decision is
           yours, with a short reason.
         </p>
       </div>
       <div className="role-links">
-        <Link href="/need/new" className="primary-button">
+        <Link href="/need/new" className="text-button">
           Prepare a company need →
         </Link>
-        <Link href="/talent/new" className="secondary-button">
+        <Link href="/talent/new" className="text-button">
           Create a fictional talent card →
         </Link>
       </div>
@@ -110,7 +117,6 @@ export function OrganiserWorkspace() {
             }
             onClick={() => setActiveNeed(result.need.id)}
           >
-            <GlowingEffect />
             <span>{result.need.company}</span>
             <strong>{result.need.title}</strong>
             <small>
@@ -138,7 +144,7 @@ export function OrganiserWorkspace() {
             </p>
             {result.tied.length > 0 && (
               <p className="role-context">
-                Tie at the cut:{" "}
+                Same fit for the last place:{" "}
                 {result.tied
                   .map(
                     (a) => talents.find((t) => t.id === a.talentId)?.pseudonym,
@@ -168,7 +174,7 @@ export function OrganiserWorkspace() {
                   : result.tied.includes(a)
                     ? "Tie — organiser decision"
                     : result.ineligible.includes(a)
-                      ? "Not eligible under the current rule"
+                      ? "More information needed"
                       : "No suggestion for this need";
                 return (
                   <details className="meeting-card" key={talent.id}>
@@ -198,17 +204,39 @@ export function OrganiserWorkspace() {
                     <label className="field-label">
                       Reason for {talent.pseudonym}
                       <input
+                        ref={(node) => {
+                          reasonInputs.current[key] = node;
+                        }}
+                        aria-invalid={!!decisionErrors[key]}
+                        aria-describedby={
+                          decisionErrors[key]
+                            ? `reason-error-${key}`
+                            : undefined
+                        }
                         maxLength={300}
                         placeholder="Why include or remove this person?"
                         value={reasons[key] ?? ""}
-                        onChange={(e) =>
-                          setReasons({ ...reasons, [key]: e.target.value })
-                        }
+                        onChange={(e) => {
+                          setReasons({ ...reasons, [key]: e.target.value });
+                          setDecisionErrors((previous) => ({
+                            ...previous,
+                            [key]: "",
+                          }));
+                        }}
                       />
                     </label>
+                    {decisionErrors[key] && (
+                      <p
+                        role="alert"
+                        className="inline-error"
+                        id={`reason-error-${key}`}
+                      >
+                        {decisionErrors[key]}
+                      </p>
+                    )}
                     <div className="role-links">
                       <button
-                        className="secondary-button"
+                        className="primary-button"
                         onClick={() => decide(result.need.id, talent.id, true)}
                       >
                         Approve / add
@@ -227,7 +255,7 @@ export function OrganiserWorkspace() {
                       </Link>
                     </div>
                     {decision && (
-                      <p className="decision-note">
+                      <p className="decision-note" role="status">
                         {decision.approved ? "Approved" : "Removed"} ·{" "}
                         {decision.reason}
                       </p>

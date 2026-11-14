@@ -34,6 +34,15 @@ export async function readDocument(file: File): Promise<string> {
             .join(" ") + "\n";
         if (text.length > MAX_DOCUMENT_TEXT) break;
       }
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message === "Choose a PDF with no more than 20 pages."
+      )
+        throw error;
+      throw new Error(
+        "This PDF could not be read. Try another document or paste its text instead.",
+      );
     } finally {
       await task.destroy();
     }

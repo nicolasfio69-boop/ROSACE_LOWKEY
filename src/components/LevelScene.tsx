@@ -4,7 +4,7 @@ export function LevelScene({ level }: { level: 1 | 2 | 3 }) {
     <g
       transform={`translate(${x} ${y})`}
       fill="none"
-      stroke={muted ? "#bdb6ab" : "#8e1027"}
+      stroke={muted ? "#738096" : "#9c1730"}
       strokeWidth="1.6"
     >
       <circle cy="-8" r="4" />
@@ -19,7 +19,7 @@ export function LevelScene({ level }: { level: 1 | 2 | 3 }) {
         width="128"
         height="60"
         rx="12"
-        fill={level === 3 ? "#f8f0dc" : "#f5f3ed"}
+        fill={level === 3 ? "#eee2bb" : "#dce2ed"}
       />
       {level === 1 ? (
         <>
@@ -32,10 +32,10 @@ export function LevelScene({ level }: { level: 1 | 2 | 3 }) {
             width="15"
             height="18"
             rx="2"
-            fill="white"
+            fill="#e8ecf4"
             stroke="#a49c8b"
           />
-          <path d="m99 31 3 3 6-7" fill="none" stroke="#8e1027" />
+          <path d="m99 31 3 3 6-7" fill="none" stroke="#9c1730" />
         </>
       ) : level === 2 ? (
         <>
@@ -47,13 +47,13 @@ export function LevelScene({ level }: { level: 1 | 2 | 3 }) {
             width="28"
             height="23"
             rx="3"
-            fill="white"
+            fill="#e8ecf4"
             stroke="#a49c8b"
           />
           <path
             d="m82 30 5 5 9-10"
             fill="none"
-            stroke="#8e1027"
+            stroke="#9c1730"
             strokeWidth="2"
           />
         </>
@@ -64,13 +64,13 @@ export function LevelScene({ level }: { level: 1 | 2 | 3 }) {
           <path d="M69 30h13" stroke="#a49c8b" />
           <path
             d="m100 14 5 10 11 2-8 8 2 12-10-5-10 5 2-12-8-8 11-2z"
-            fill="white"
+            fill="#e8ecf4"
             stroke="#b89642"
           />
           <path
             d="m95 30 4 4 7-8"
             fill="none"
-            stroke="#8e1027"
+            stroke="#9c1730"
             strokeWidth="1.5"
           />
         </>

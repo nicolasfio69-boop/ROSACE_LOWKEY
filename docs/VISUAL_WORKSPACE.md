@@ -1,12 +1,13 @@
 # Interactive workspace delivery
 
-The application is delivered on `feat/visual-workspace`. The audit-only branch
+The latest UX update is delivered on `feat/coherent-ux`, based on
+`shader-art-direction` and the original `feat/visual-workspace` application. The audit-only branch
 `cursor/audit-strategie-hackathon-9b3f` does not contain this implementation.
 Until the application PR is merged, check out the application branch in Cursor.
 
 ```bash
 git fetch origin
-git switch feat/visual-workspace
+git switch feat/coherent-ux
 npm ci
 npm run dev
 ```
@@ -35,17 +36,36 @@ launcher opens the browser on port 3001 and reuses an existing installation.
 
 ## Art direction
 
-- Night chrome (sidebar and home hero) and white working surfaces. Centrale red
-  `#C8102E` and gold `#F0C300` are the only accent colours; the old cream, green
-  and Georgia serif styling is gone.
-- Fonts are self-hosted with `@fontsource-variable`: Space Grotesk for headings,
-  Inter for text. No request to Google Fonts at runtime.
-- Effects come from free Aceternity UI components, recoloured in Centrale red and
-  gold: `WavyBackground` (canvas and `simplex-noise`) behind the home hero, and
-  `GlowingEffect`, a border glow that follows the pointer, on the home steps and the
-  event desk need cards. Both pause or stay still under reduced motion. The paid
-  Aceternity shader blocks are not used.
-- Copy says what the tool does. Avoid slogans such as "Beyond a CV".
+- Following the owner's approved UX audit and request for a lighter background,
+  all roles share a light pearl palette: matching navigation, fields, level cards
+  and translucent surfaces. There is no dark sidebar or isolated white chart panel.
+- `AuroraBackground` adapts the freely available [Aceternity Aurora Background](https://ui.aceternity.com/components/aurora-background):
+  layered repeating gradients, a radial mask and a slow 60-second animation, tinted
+  in Centrale red and gold. It fills the viewport across routes and becomes static
+  under reduced motion. This is CSS, not a paid WebGL shader or an AI call.
+- Fonts remain self-hosted Space Grotesk and Inter. Larger chart labels and form
+  text make both mobile and projected demonstrations easier to read.
+- `theme.css` owns the shared palette and the responsive preview treatment.
+  `workspace.css` retains the existing layout. The old WavyBackground and
+  GlowingEffect are not mounted by the workspace.
+
+## UX audit fixes
+
+- Only confirmed, consented talent levels and the display name are restored on
+  return; CV text, quoted passages and question answers are never restored.
+  Expired cards still follow the existing six-month deletion rules.
+- Mobile navigation uses an explicit destination selector; a sticky expandable
+  rosace stays accessible while filling in forms. Desktop keeps the full chart.
+- Recruiters can preview a level before selecting a priority. A neutral provisional
+  branch is clearly labelled and is never saved as a requirement by itself.
+  Review becomes directly available after the third major is chosen.
+- Organiser decision errors sit beside their reason input, with focus moved to
+  that field. Approvals remain human decisions and keep their journal entry.
+- Observation changes announce that they were saved. The original declaration
+  can be inspected separately without changing the scoring or observation rules.
+- Practice stays reachable by its URL but is removed from the main demo journey.
+  Demo data remains an organiser annex. The interface consistently states the
+  existing limit of two job skills; scoring is unchanged.
 
 ## Frontend and backend
 
@@ -62,7 +82,7 @@ Next.js hosts both layers in one repository:
 - 120 application tests, including discussion-gap and Featherless adapter tests.
 - Four launcher tests.
 - TypeScript, ESLint and production build pass.
-- Five Chromium journey tests pass against the production build: real synthetic
+- Eleven Chromium journey tests pass against the production build: real synthetic
   PDF/DOCX import, recruiter-to-observation flow, keyboard chart interaction,
   restore behaviour, mobile/tablet/desktop overflow, and explicit acceptance of
   mocked Featherless proposals.
@@ -73,8 +93,8 @@ Next.js hosts both layers in one repository:
 
 ## Actual browser captures
 
-![Workspace overview](images/workspace-overview.png)
+![Workspace overview](images/coherent-home.png)
 
-![Interactive skills workspace](images/skill-workspace.png)
+![Interactive skills workspace](images/coherent-need.png)
 
-![Conversation guide](images/conversation-guide.png)
+![Mobile rosace](images/coherent-mobile.png)

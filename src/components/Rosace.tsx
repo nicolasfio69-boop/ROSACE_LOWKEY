@@ -34,6 +34,7 @@ export type RosaceProps = {
   labels?: "full" | "short";
   activeSkill?: string;
   onSelect?: (skill: string) => void;
+  preview?: { skill: string; level: ExpectedLevel };
 };
 
 export const RED = "#C8102E";
@@ -54,8 +55,9 @@ export function Rosace({
   labels = size >= 360 ? "full" : "short",
   activeSkill,
   onSelect,
+  preview,
 }: RosaceProps) {
-  const font = Math.max(10, Math.round(size / (labels === "full" ? 40 : 26)));
+  const font = Math.max(12, Math.round(size / (labels === "full" ? 40 : 18)));
   const margin = Math.round(font * (labels === "full" ? 9 : 4));
   const center = size / 2;
   const radius = round(center - font * (labels === "full" ? 4.2 : 2.4));
@@ -122,7 +124,7 @@ export function Rosace({
     });
 
   return (
-    <figure className="flex w-full flex-col items-center">
+    <figure className="rosace-figure flex w-full flex-col items-center">
       {title ? (
         <figcaption
           className="mb-1 text-center font-bold leading-tight"
@@ -194,6 +196,30 @@ export function Rosace({
         />
         {bars(false)}
         {bars(true)}
+        {preview &&
+          (() => {
+            const index = COMPONENTS.findIndex((c) => c.code === preview.skill);
+            if (index < 0) return null;
+            const start = point(center, hub, angleOf(index));
+            const end = point(center, at(preview.level), angleOf(index));
+            return (
+              <line
+                className="rosace-preview"
+                x1={start.x}
+                y1={start.y}
+                x2={end.x}
+                y2={end.y}
+                stroke="currentColor"
+                strokeWidth={thickness}
+                strokeOpacity={0.5}
+                strokeLinecap="round"
+              >
+                <title>
+                  Level preview — choose Major or Minor to include it
+                </title>
+              </line>
+            );
+          })()}
         {showTalent
           ? COMPONENTS.map((component, index) => {
               const want = expected[component.code];
@@ -306,6 +332,7 @@ function ExpectedTick({
   const dy = Math.cos(angle) * half;
   return (
     <line
+      className="expected-tick"
       x1={round(mid.x - dx)}
       y1={round(mid.y - dy)}
       x2={round(mid.x + dx)}

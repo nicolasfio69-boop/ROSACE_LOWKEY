@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   COMPONENTS,
   JOB_SKILLS,
@@ -16,7 +16,8 @@ import {
   suggestLevel,
   type Answers,
 } from "@/lib/talent-intake";
-import { addTalent, removeTalent } from "@/lib/workspace";
+import { addTalent, loadWorkspace, removeTalent } from "@/lib/workspace";
+import { LivePreview } from "./LivePreview";
 import { DocumentInput } from "./DocumentInput";
 import { JourneyRail } from "./JourneyRail";
 import { Rosace } from "./Rosace";
@@ -35,7 +36,34 @@ export function TalentForm() {
     [name, setName] = useState("Demo talent"),
     [consent, setConsent] = useState(false),
     [saved, setSaved] = useState(false),
-    [error, setError] = useState("");
+    [error, setError] = useState(""),
+    [ready, setReady] = useState(false);
+  useEffect(() => {
+    try {
+      const card = loadWorkspace(localStorage).talents.find(
+        (item) => item.talent.id === "local-talent",
+      );
+      if (card) {
+        const restored = Object.fromEntries(
+          Object.entries(card.talent.statements).flatMap(([code, statement]) =>
+            statement.level === null ? [] : [[code, statement.level]],
+          ),
+        ) as Record<string, LevelValue>;
+        setLevels(restored);
+        setOverrides(restored);
+        setName(card.talent.pseudonym);
+        setConsent(true);
+        setSaved(true);
+        setStep(2);
+      }
+    } catch {
+      setError(
+        "Your saved card could not be opened. Reload to try again; your existing data has not been replaced.",
+      );
+    } finally {
+      setReady(true);
+    }
+  }, []);
   const skills = [...COMPONENTS, ...JOB_SKILLS],
     skill = skills[index],
     response = answers[skill.code] ?? emptyAnswers,
@@ -79,6 +107,12 @@ export function TalentForm() {
       setError(e instanceof Error ? e.message : "Could not save the card.");
     }
   }
+  if (!ready)
+    return (
+      <p className="loading-state" role="status">
+        Opening your skills card…
+      </p>
+    );
   return (
     <div className="workspace talent-workspace">
       <div className="workspace-top">
@@ -131,7 +165,7 @@ export function TalentForm() {
             <>
               <p className="eyebrow">A CV IS A STARTING POINT</p>
               <div className="step-heading">
-                <h1>Make your experience visible.</h1>
+                <h1>Build your skills card.</h1>
                 <p>
                   Use a fictional CV for this demo, or start without one. A
                   mention suggests a question — it never assigns a level.
@@ -264,18 +298,21 @@ export function TalentForm() {
                   </fieldset>
                 </>
               )}
-              <div className="role-context">
+              <div className="role-context" aria-live="polite">
                 <strong>
                   {suggested === null
                     ? "No level suggested yet"
                     : `Suggested level: ${LEVELS[suggested].name}`}
                 </strong>
-                <p className="quiet-note">
-                  Written rule: not done → Not yet; with help → Foundation;
-                  alone on defined work → Intermediate; alone in new or complex
-                  work where others rely on you → Advanced. You can correct the
-                  suggestion.
-                </p>
+                <details className="level-rule">
+                  <summary>How the suggestion works</summary>
+                  <p className="quiet-note">
+                    Written rule: not done → Not yet; with help → Foundation;
+                    alone on defined work → Intermediate; alone in new or
+                    complex work where others rely on you → Advanced. You can
+                    correct the suggestion.
+                  </p>
+                </details>
               </div>
               <fieldset className="talent-levels">
                 <legend>Your choice</legend>
@@ -300,6 +337,11 @@ export function TalentForm() {
                 ))}
               </fieldset>
               <div className="form-actions">
+                {Object.keys(levels).length > 0 && (
+                  <button className="text-button" onClick={() => setStep(2)}>
+                    Review my card ({Object.keys(levels).length})
+                  </button>
+                )}
                 <button
                   className="secondary-button"
                   onClick={() => {
@@ -326,7 +368,11 @@ export function TalentForm() {
             <>
               <p className="eyebrow">YOUR CONFIRMED DECLARATIONS</p>
               <div className="step-heading">
-                <h1>A clearer way to tell your story.</h1>
+                <h1>
+                  {saved
+                    ? "Your saved skills card."
+                    : "Review your skills card."}
+                </h1>
                 <p>
                   These levels are your declarations, not verified results. No
                   rank or matching score is shown here.
@@ -356,9 +402,9 @@ export function TalentForm() {
                   ))}
                 </div>
               )}
-              <p>
-                <Link href="/practice">Try a fictional exercise →</Link>
-              </p>
+              <button className="secondary-button" onClick={() => setStep(1)}>
+                Edit my card
+              </button>
               <label className="field-label">
                 Fictional display name
                 <input
@@ -420,7 +466,10 @@ export function TalentForm() {
             </>
           )}
         </section>
-        <aside className="live-panel" aria-label="Live talent rosace">
+        <LivePreview
+          label="Live talent rosace"
+          summary={`${Object.keys(levels).length} confirmed skills · Declared`}
+        >
           <p className="eyebrow">YOUR DECLARED SKILLS</p>
           <Rosace
             title={name || "Your skills"}
@@ -454,7 +503,7 @@ export function TalentForm() {
                 {skillName(code)} · {LEVELS[l].name}
               </p>
             ))}
-        </aside>
+        </LivePreview>
       </div>
     </div>
   );

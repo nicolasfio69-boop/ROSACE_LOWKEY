@@ -1,4 +1,5 @@
 "use client";
+import { LivePreview } from "./LivePreview";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -656,27 +657,6 @@ export function NeedForm() {
                   </small>
                 </details>
               )}
-              <LevelCards
-                jobTitle={draft.title}
-                skill={c.code}
-                value={selected?.expected ?? levelChoices[c.code]}
-                examples={accepted[c.code]?.examples}
-                onChange={(level) => {
-                  setLevelChoices({ ...levelChoices, [c.code]: level });
-                  if (!selected) {
-                    setStatus(
-                      "Level noted. Choose Major or Minor to include this component.",
-                    );
-                    setError("");
-                    return;
-                  }
-                  update({
-                    requirements: draft.requirements.map((r) =>
-                      r.skill === c.code ? { ...r, expected: level } : r,
-                    ),
-                  });
-                }}
-              />
               <div className="priority-controls">
                 <div>
                   <strong>How important is this for the role?</strong>
@@ -716,6 +696,27 @@ export function NeedForm() {
                   ))}
                 </div>
               </div>
+              <LevelCards
+                jobTitle={draft.title}
+                skill={c.code}
+                value={selected?.expected ?? levelChoices[c.code]}
+                examples={accepted[c.code]?.examples}
+                onChange={(level) => {
+                  setLevelChoices({ ...levelChoices, [c.code]: level });
+                  if (!selected) {
+                    setStatus(
+                      "Level noted. Choose Major or Minor to include this component.",
+                    );
+                    setError("");
+                    return;
+                  }
+                  update({
+                    requirements: draft.requirements.map((r) =>
+                      r.skill === c.code ? { ...r, expected: level } : r,
+                    ),
+                  });
+                }}
+              />
               <details className="context-details">
                 <summary>
                   Context behind these examples{" "}
@@ -819,6 +820,17 @@ export function NeedForm() {
                 </button>
               </div>
             </>
+          )}
+          {step === 1 && majors === 3 && (
+            <div className="review-shortcut">
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => go(3)}
+              >
+                Review my need →
+              </button>
+            </div>
           )}
           {step === 2 && (
             <>
@@ -949,7 +961,10 @@ export function NeedForm() {
             </>
           )}
         </section>
-        <aside className="live-panel" aria-label="Live need preview">
+        <LivePreview
+          label="Live need preview"
+          summary={`${majors} of 3 majors · ${minors} minors · ${jobs} job skills`}
+        >
           <p className="eyebrow">
             {draft.company || "YOUR COMPANY"} · EXPECTED SKILLS
           </p>
@@ -959,6 +974,11 @@ export function NeedForm() {
             labels="short"
             activeSkill={step === 1 ? c.code : undefined}
             onSelect={roleReady ? exploreSkill : undefined}
+            preview={
+              step === 1 && !selected && levelChoices[c.code]
+                ? { skill: c.code, level: levelChoices[c.code] }
+                : undefined
+            }
             expected={Object.fromEntries(
               draft.requirements
                 .filter((r) => isComponent(r.skill))
@@ -967,9 +987,11 @@ export function NeedForm() {
           />
           <div className="chart-instruction">
             <WorkspaceIcon name="pointer" />
-            {roleReady
-              ? "Select a branch to explore its levels"
-              : "Your role will take shape here"}
+            {step === 1 && !selected && levelChoices[c.code]
+              ? "Preview only · Choose Major or Minor to include this level"
+              : roleReady
+                ? "Select a branch to explore its levels"
+                : "Your role will take shape here"}
           </div>
           <div className="preview-summary">
             <span>
@@ -1003,7 +1025,7 @@ export function NeedForm() {
               Advanced.
             </p>
           </details>
-        </aside>
+        </LivePreview>
       </div>
       <div className="workspace-bottom">
         <Link href="/talent/new">Explore the talent journey →</Link>

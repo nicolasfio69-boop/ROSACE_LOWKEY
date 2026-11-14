@@ -16,7 +16,9 @@ import {
 } from "@/lib/workspace";
 import { prepareConversation } from "@/lib/conversation";
 import { Rosace } from "./Rosace";
+import { LivePreview } from "./LivePreview";
 export function ConversationBrief() {
+  const [savedObservation, setSavedObservation] = useState("");
   const [mode, setMode] = useState<"prepare" | "observe">("prepare");
   const [workspace, setWorkspace] = useState<Workspace>(emptyWorkspace),
     [ids, setIds] = useState<{ need: string; talent: string } | null>(null),
@@ -69,7 +71,11 @@ export function ConversationBrief() {
       });
       setWorkspace(loadWorkspace(localStorage));
       setError("");
+      setSavedObservation(
+        `Observation saved · ${skillName(skill)} · ${OBSERVATION_LABELS[observation]}`,
+      );
     } catch {
+      setSavedObservation("");
       setError("Could not save this observation.");
     }
   }
@@ -169,14 +175,13 @@ export function ConversationBrief() {
                 </details>
               </article>
             ))}
-            <p>
-              <Link href="/practice">
-                Explore a fictional exercise together →
-              </Link>
-            </p>
           </div>
           <div hidden={mode !== "observe"}>
             <h2>After the conversation</h2>
+            <p role="status" className="observation-status">
+              {savedObservation ||
+                "Choose what you observed. Each change is saved in this browser."}
+            </p>
             <p className="quiet-note">
               A = Seen clearly · C = Seen in part · F = Not seen · NE = Not
               covered. Observations stay separate from declared levels.
@@ -201,7 +206,7 @@ export function ConversationBrief() {
                   </select>
                   <small>
                     {observation !== "NE"
-                      ? `Observed value at expected level ${r.expected}: ${observedValue(r.expected, observation)}`
+                      ? `Saved · ${OBSERVATION_LABELS[observation]}`
                       : "Not covered"}
                   </small>
                 </label>
@@ -209,7 +214,14 @@ export function ConversationBrief() {
             })}
           </div>
         </div>
-        <aside className="live-panel">
+        <LivePreview
+          label="Conversation rosace"
+          summary={
+            mode === "prepare"
+              ? "Declared · Expected"
+              : `${seen.filter((s) => s.observation !== "NE").length} observations saved`
+          }
+        >
           <div hidden={mode !== "prepare"}>
             <p className="eyebrow">EXPECTATIONS MEET EXPERIENCE</p>
             <Rosace
@@ -249,8 +261,22 @@ export function ConversationBrief() {
               Solid bars: observation at the expected task level. “Not covered”
               stays empty. These values never change the declared card.
             </p>
+            <details className="chart-help">
+              <summary>Compare with the original declaration</summary>
+              <Rosace
+                title="Original declaration · unchanged"
+                size={440}
+                labels="short"
+                declared={declared}
+                expected={expected}
+              />
+              <p className="quiet-note">
+                Dotted bars are the talent’s confirmed declarations.
+                Observations above are separate.
+              </p>
+            </details>
           </div>
-        </aside>
+        </LivePreview>
       </div>
     </div>
   );

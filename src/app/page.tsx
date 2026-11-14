@@ -1,8 +1,6 @@
 import { WorkspaceIcon } from "@/components/WorkspaceIcon";
 import Link from "next/link";
 import { Rosace } from "@/components/Rosace";
-import { GlowingEffect } from "@/components/GlowingEffect";
-import { WavyBackground } from "@/components/WavyBackground";
 import { NEEDS } from "@/data/demo";
 import { isComponent } from "@/lib/framework";
 
@@ -11,7 +9,7 @@ const STEPS = [
     icon: "need",
     step: "01",
     title: "Prepare a recruiter need",
-    text: "Pick the 3 Centrale components that matter most for the role, the other useful ones, and up to 3 technical skills. Set the level you expect for each.",
+    text: "Choose 3 major components, up to 2 minors and 2 job skills. Compare concrete examples to set the expected levels.",
     href: "/need/new",
     link: "Open the recruiter form",
   },
@@ -46,12 +44,15 @@ export default function Home() {
   return (
     <main className="site-shell">
       <section className="home-hero">
-        <WavyBackground />
         <div className="home-hero-copy">
           <p className="hero-kicker">
             <span className="status-dot" /> Espoo Tech Matchmaking · demo
           </p>
-          <h1>Prepare the right conversations.</h1>
+          <h1>
+            Start with the work.
+            <br />
+            Prepare the conversation.
+          </h1>
           <p>
             A company says which skills matter for a role. A talent turns their
             CV into a skills card. Rosace suggests who should meet and shows the
@@ -103,7 +104,6 @@ export default function Home() {
       <section className="overview-paths" aria-label="How the event works">
         {STEPS.map((item) => (
           <article className="overview-path" key={item.href}>
-            <GlowingEffect />
             <div className="path-head">
               <span className="path-icon">
                 <WorkspaceIcon name={item.icon} />
@@ -121,7 +121,7 @@ export default function Home() {
           Synthetic data only. No nationality, language, age, gender or degree
           is used to suggest anyone.
         </span>
-        <Link href="/demo">See the fictional demo data →</Link>
+        <Link href="/organiser">Review the event’s suggestions →</Link>
       </div>
     </main>
   );

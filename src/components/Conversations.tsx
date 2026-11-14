@@ -97,9 +97,6 @@ export function Conversations() {
         <Link className="secondary-button" href="/organiser">
           Review meetings in the event desk →
         </Link>
-        <Link className="text-button" href="/practice">
-          Explore a practice situation ↗
-        </Link>
       </div>
       <p className="quiet-note">
         Approval prepares a conversation. This demo does not send invitations or

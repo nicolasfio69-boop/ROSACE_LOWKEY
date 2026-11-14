@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { WorkspaceIcon } from "./WorkspaceIcon";
 import { Logo } from "./Logo";
+import { AuroraBackground } from "./AuroraBackground";
 const destinations = [
   {
     href: "/",
@@ -34,12 +35,6 @@ const destinations = [
     icon: "conversation",
     subtitle: "Prepare to meet",
   },
-  {
-    href: "/practice",
-    label: "Practice studio",
-    icon: "practice",
-    subtitle: "Explore a concrete situation",
-  },
 ];
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -47,6 +42,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const current = destinations.find((d) => d.href === active);
   return (
     <div className="app-shell">
+      <AuroraBackground />
       <a href="#workspace-content" className="skip-link">
         Skip to workspace
       </a>
@@ -87,9 +83,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Talents never see a rank or a score.
             </p>
           </div>
-          <Link href="/demo">
-            See the demo data <WorkspaceIcon name="arrow" />
-          </Link>
+          {(pathname === "/organiser" || pathname === "/demo") && (
+            <Link href="/demo">
+              Organiser demo data <WorkspaceIcon name="arrow" />
+            </Link>
+          )}
           <small>Synthetic profiles · Local workspace</small>
         </div>
       </aside>
@@ -99,9 +97,35 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <span className="topbar-breadcrumb">
               Workspace <span>/</span>
             </span>
-            <strong>{current?.label ?? "Demo data"}</strong>
+            <strong>
+              {current?.label ??
+                (pathname === "/practice" ? "Practice studio" : "Demo data")}
+            </strong>
           </div>
           <div className="topbar-right">
+            <label className="mobile-destination">
+              <span className="sr-only">Workspace page</span>
+              <select
+                aria-label="Workspace page"
+                value={
+                  active && destinations.some((d) => d.href === active)
+                    ? active
+                    : ""
+                }
+                onChange={(event) => {
+                  window.location.assign(event.target.value);
+                }}
+              >
+                <option value="" disabled>
+                  More tools
+                </option>
+                {destinations.map((d) => (
+                  <option key={d.href} value={d.href}>
+                    {d.label}
+                  </option>
+                ))}
+              </select>
+            </label>
             <span className="local-indicator">
               <i />
               Local demo
@@ -116,10 +140,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
         <footer className="app-footer">
           <span>Rosace / Junction 2026</span>
-          <span>
-            Dotted bar: declared by the talent · Solid bar: observed by a
-            recruiter
-          </span>
+          <span>Your browser · Synthetic data · Human decisions</span>
         </footer>
       </div>
     </div>
