@@ -1,3 +1,4 @@
+import { CHECK_SKILLS, checkSource, checkExercise } from "./verification";
 import type { JobContext } from "./need-draft";
 import { SKILL_CODES, type ExpectedLevel } from "./framework";
 import { checkNeed, type Need, type Talent, type Observation } from "./scoring";
@@ -30,15 +31,30 @@ export type Seen = {
   /** Regrading the same situation replaces it; separate situations are averaged. */
   source?: string;
 };
+export type CheckSubmission = {
+  needId: string;
+  talentId: string;
+  skill: string;
+  taskLevel: ExpectedLevel;
+  answer: string;
+};
 export type Workspace = {
   version: 1;
   needs: LocalNeed[];
   talents: SavedTalent[];
   journal: Meeting[];
   observations: Seen[];
+  checks: CheckSubmission[];
 };
 export function emptyWorkspace(): Workspace {
-  return { version: 1, needs: [], talents: [], journal: [], observations: [] };
+  return {
+    version: 1,
+    needs: [],
+    talents: [],
+    journal: [],
+    observations: [],
+    checks: [],
+  };
 }
 function object(v: unknown): v is Record<string, unknown> {
   return !!v && typeof v === "object" && !Array.isArray(v);
@@ -153,7 +169,8 @@ export function loadWorkspace(
       typeof s.skill === "string" &&
       SKILL_CODES.has(s.skill) &&
       ["A", "C", "F", "NE"].includes(s.observation as string) &&
-      (s.taskLevel === undefined || [1, 2, 3].includes(s.taskLevel as number)) &&
+      (s.taskLevel === undefined ||
+        [1, 2, 3].includes(s.taskLevel as number)) &&
       (s.source === undefined || typeof s.source === "string"),
   );
   const cleaned: Workspace = {
@@ -162,6 +179,21 @@ export function loadWorkspace(
     talents,
     journal,
     observations,
+    checks: Array.isArray(value.checks)
+      ? value.checks.filter(
+          (c): c is CheckSubmission =>
+            object(c) &&
+            typeof c.needId === "string" &&
+            typeof c.talentId === "string" &&
+            !expiredIds.has(c.talentId) &&
+            typeof c.skill === "string" &&
+            CHECK_SKILLS.includes(c.skill as (typeof CHECK_SKILLS)[number]) &&
+            [1, 2, 3].includes(c.taskLevel as number) &&
+            typeof c.answer === "string" &&
+            c.answer.trim().length > 0 &&
+            c.answer.length <= 6000,
+        )
+      : [],
   };
   if (expiredIds.size && storage.setItem)
     storage.setItem(WORKSPACE_KEY, JSON.stringify(cleaned));
@@ -202,6 +234,7 @@ export function removeTalent(storage: Storage, id: string) {
   w.talents = w.talents.filter((t) => t.talent.id !== id);
   w.journal = w.journal.filter((m) => m.talentId !== id);
   w.observations = w.observations.filter((m) => m.talentId !== id);
+  w.checks = w.checks.filter((c) => c.talentId !== id);
   writeWorkspace(storage, w);
 }
 export function recordMeeting(storage: Storage, meeting: Omit<Meeting, "at">) {
@@ -233,4 +266,50 @@ export function recordObservation(storage: Storage, seen: Seen) {
   );
   w.observations.push(seen);
   writeWorkspace(storage, w);
+}
+
+export function submitCheck(storage: Storage, submission: CheckSubmission) {
+  checkExercise(submission.skill, submission.taskLevel);
+  if (!submission.answer.trim() || submission.answer.length > 6000)
+    throw new Error("Write an answer of at most 6000 characters.");
+  const w = loadWorkspace(storage);
+  const same = (c: { needId: string; talentId: string; skill: string }) =>
+    c.needId === submission.needId &&
+    c.talentId === submission.talentId &&
+    c.skill === submission.skill;
+  w.checks = [
+    ...w.checks.filter((c) => !same(c)),
+    { ...submission, answer: submission.answer.trim() },
+  ];
+  w.observations = w.observations.filter(
+    (c) => !(same(c) && c.source === checkSource(submission.skill)),
+  );
+  writeWorkspace(storage, w);
+}
+export function gradeCheck(
+  storage: Storage,
+  submission: CheckSubmission,
+  observation: Observation,
+) {
+  const w = loadWorkspace(storage);
+  const saved = w.checks.find(
+    (c) =>
+      c.needId === submission.needId &&
+      c.talentId === submission.talentId &&
+      c.skill === submission.skill,
+  );
+  if (
+    !saved ||
+    saved.answer !== submission.answer ||
+    saved.taskLevel !== submission.taskLevel
+  )
+    throw new Error("Submit the current answer before grading.");
+  recordObservation(storage, {
+    needId: saved.needId,
+    talentId: saved.talentId,
+    skill: saved.skill,
+    taskLevel: saved.taskLevel,
+    observation,
+    source: checkSource(saved.skill),
+  });
 }

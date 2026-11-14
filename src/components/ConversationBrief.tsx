@@ -3,10 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NEEDS, TALENTS } from "@/data/demo";
 import { COMPONENTS, isComponent, skillName } from "@/lib/framework";
-import {
-  OBSERVATION_LABELS,
-  type Observation,
-} from "@/lib/scoring";
+import { OBSERVATION_LABELS, type Observation } from "@/lib/scoring";
 import {
   emptyWorkspace,
   loadWorkspace,
@@ -14,6 +11,7 @@ import {
   type Workspace,
 } from "@/lib/workspace";
 import { prepareConversation } from "@/lib/conversation";
+import { verificationFor, verificationLabel } from "@/lib/verification";
 import { meanObservedValue } from "@/lib/observations";
 import { SkillBars } from "./SkillBars";
 import { Rosace } from "./Rosace";
@@ -63,13 +61,14 @@ export function ConversationBrief() {
     COMPONENTS.map((c) => [c.code, talent.statements[c.code]?.level ?? null]),
   );
   function observe(skill: string, observation: Observation) {
+    if (skill === "C4.3") return;
     try {
       recordObservation(localStorage, {
         needId: ids!.need,
         talentId: ids!.talent,
         skill,
         observation,
-        taskLevel: need!.requirements.find(r => r.skill === skill)!.expected,
+        taskLevel: need!.requirements.find((r) => r.skill === skill)!.expected,
         source: "interview",
       });
       setWorkspace(loadWorkspace(localStorage));
@@ -150,6 +149,45 @@ export function ConversationBrief() {
               </p>
             </details>
             <h2 style={{ marginTop: 24 }}>Your conversation guide</h2>
+            <p className="quiet-note">
+              Use at most 10 minutes in total for on-site situations. Select the
+              situations relevant to this conversation.
+            </p>
+            {need.requirements
+              .filter((r) => verificationFor(r.skill).modes.includes("onsite"))
+              .map((r) => (
+                <article className="question-brief" key={r.skill}>
+                  <p className="eyebrow">
+                    On-site situation · 10-minute shared allowance
+                  </p>
+                  <h3>{skillName(r.skill)}</h3>
+                  <p>{verificationFor(r.skill).situation}</p>
+                  <p>
+                    Task level: {r.expected}. Observe the result, the help
+                    needed and how the person responds to new information.
+                  </p>
+                  <div
+                    className="tour-answers"
+                    role="group"
+                    aria-label={`On-site grade: ${skillName(r.skill)}`}
+                  >
+                    {Object.entries(OBSERVATION_LABELS).map(([code, label]) => (
+                      <button
+                        key={code}
+                        aria-pressed={seen.some(
+                          (s) =>
+                            s.skill === r.skill &&
+                            s.observation === code &&
+                            (!s.source || s.source === "interview"),
+                        )}
+                        onClick={() => observe(r.skill, code as Observation)}
+                      >
+                        {code} — {label}
+                      </button>
+                    ))}
+                  </div>
+                </article>
+              ))}
             {brief.questions.map((q, i) => (
               <article key={q.skill} className="question-brief">
                 <p className="eyebrow">
@@ -190,11 +228,28 @@ export function ConversationBrief() {
               covered. Observations stay separate from declared levels.
             </p>
             {need.requirements.map((r) => {
+              if (r.skill === "C4.3")
+                return (
+                  <article className="question-brief" key={r.skill}>
+                    <strong>{skillName(r.skill)}</strong>
+                    <p>Discussed, not observed</p>
+                    <p>{verificationFor(r.skill).situation}</p>
+                  </article>
+                );
               const observation =
-                seen.find((s) => s.skill === r.skill && (!s.source || s.source === "interview"))?.observation ?? "NE";
+                seen.find(
+                  (s) =>
+                    s.skill === r.skill &&
+                    (!s.source || s.source === "interview"),
+                )?.observation ?? "NE";
               return (
                 <label className="observation-row" key={r.skill}>
-                  <span>{skillName(r.skill)}</span>
+                  <span>
+                    {skillName(r.skill)}
+                    <small>
+                      How it’s checked: {verificationLabel(r.skill)}
+                    </small>
+                  </span>
                   <select
                     value={observation}
                     onChange={(e) =>
@@ -249,7 +304,13 @@ export function ConversationBrief() {
                 need.requirements
                   .filter((r) => isComponent(r.skill))
                   .map((r) => {
-                    return [r.skill, meanObservedValue(seen.filter(s => s.skill === r.skill), r.expected)];
+                    return [
+                      r.skill,
+                      meanObservedValue(
+                        seen.filter((s) => s.skill === r.skill),
+                        r.expected,
+                      ),
+                    ];
                   }),
               )}
               observed={Object.fromEntries(
@@ -276,7 +337,23 @@ export function ConversationBrief() {
               </p>
             </details>
           </div>
-          <SkillBars items={need.requirements.filter(r => !isComponent(r.skill)).map(r => ({ code: r.skill, expected: r.expected, level: talent.statements[r.skill]?.level ?? null, ...(mode === "observe" ? { observedValue: meanObservedValue(seen.filter(s => s.skill === r.skill), r.expected) } : {}) }))} />
+          <SkillBars
+            items={need.requirements
+              .filter((r) => !isComponent(r.skill))
+              .map((r) => ({
+                code: r.skill,
+                expected: r.expected,
+                level: talent.statements[r.skill]?.level ?? null,
+                ...(mode === "observe"
+                  ? {
+                      observedValue: meanObservedValue(
+                        seen.filter((s) => s.skill === r.skill),
+                        r.expected,
+                      ),
+                    }
+                  : {}),
+              }))}
+          />
         </LivePreview>
       </div>
     </div>

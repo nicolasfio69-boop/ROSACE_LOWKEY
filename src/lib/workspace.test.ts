@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
 import {
   addNeed,
+  submitCheck,
+  gradeCheck,
   addTalent,
   loadWorkspace,
   removeTalent,
@@ -128,10 +130,32 @@ describe("local event workspace", () => {
 
 it("keeps separate situations but replaces a revised grade for the same one", () => {
   const s = storage();
-  const base = { needId: "n", talentId: "t", skill: "C5.1", taskLevel: 2 as const };
-  recordObservation(s, {...base, observation: "A", source: "online"});
-  recordObservation(s, {...base, observation: "F", source: "interview"});
-  recordObservation(s, {...base, observation: "C", source: "online"});
+  const base = {
+    needId: "n",
+    talentId: "t",
+    skill: "C5.1",
+    taskLevel: 2 as const,
+  };
+  recordObservation(s, { ...base, observation: "A", source: "online" });
+  recordObservation(s, { ...base, observation: "F", source: "interview" });
+  recordObservation(s, { ...base, observation: "C", source: "online" });
   expect(loadWorkspace(s).observations).toHaveLength(2);
-  expect(loadWorkspace(s).observations.find(o => o.source === "online")?.observation).toBe("C");
+  expect(
+    loadWorkspace(s).observations.find((o) => o.source === "online")
+      ?.observation,
+  ).toBe("C");
+});
+
+it("requires a current submission, resets its grade on replacement and deletes answers with the card", () => {
+  const s = storage();
+  const submission = {needId: "n", talentId: "local-talent", skill: "C5.1", taskLevel: 1 as const, answer: "Ask which sensor fails and reproduce the startup."};
+  expect(() => gradeCheck(s, submission, "A")).toThrow();
+  submitCheck(s, submission);
+  gradeCheck(s, submission, "A");
+  expect(loadWorkspace(s).observations[0]).toMatchObject({taskLevel:1, observation:"A", source:"online:C5.1"});
+  submitCheck(s, {...submission, answer:"A revised fictional answer."});
+  expect(loadWorkspace(s).observations).toHaveLength(0);
+  expect(() => gradeCheck(s, submission, "A")).toThrow();
+  removeTalent(s, "local-talent");
+  expect(loadWorkspace(s).checks).toHaveLength(0);
 });

@@ -1,4 +1,6 @@
 import { generateFeedback } from "@/lib/server/exercise-feedback";
+import { checkExercise } from "@/lib/verification";
+import type { ExpectedLevel } from "@/lib/framework";
 import { exerciseFor } from "@/lib/exercises";
 import {
   failure,
@@ -19,12 +21,21 @@ export async function POST(request: Request) {
     const skill = field(data, "skill", 30),
       answer = field(data, "answer", 6000);
     try {
-      exerciseFor(skill);
+      if (data.level !== undefined)
+        checkExercise(skill, data.level as ExpectedLevel);
+      else exerciseFor(skill);
     } catch {
       throw new ServiceError("Unknown component.");
     }
     limitCalls("ai");
-    return noStore(await generateFeedback(skill, answer));
+    return noStore(
+      await generateFeedback(
+        skill,
+        answer,
+        fetch,
+        data.level as ExpectedLevel | undefined,
+      ),
+    );
   } catch (e) {
     return failure(e);
   }

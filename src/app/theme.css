@@ -1112,3 +1112,9 @@ input::file-selector-button {
 .tour-approve.done, .tour-answers button[aria-pressed="true"] { background: #c8102e; border-color: #c8102e; color: white; }
 .tour-card > span, .tour-label, .tour-nav small, .tour-rosace > figcaption { color: #535b6b; }
 @media (prefers-reduced-motion: reduce) { .tour-steps > i, .tour-steps button, .tour-approve, .tour-answers button { transition: none; } }
+
+.checks-context { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin-bottom: 24px; }
+.checks-context > p { grid-column: 1 / -1; }
+.check-prompt, .check-answer { margin: 18px 0; padding: 18px; border: 1px solid #cbd0db; border-radius: 12px; background: #e0e4ed; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.check-status { color: #a40d26; font-weight: 650; margin: 16px 0; }
+@media (max-width: 700px) { .checks-context { grid-template-columns: minmax(0,1fr); } }

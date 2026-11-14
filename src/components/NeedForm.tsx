@@ -19,6 +19,7 @@ import {
 import { JOB_QUESTIONS, prepareNeed, type NeedDraft } from "@/lib/need-draft";
 import { changeSelection, type SelectionRole } from "@/lib/need-selection";
 import { MAX_JOB_SKILLS } from "@/lib/scoring";
+import { verificationFor, verificationLabel } from "@/lib/verification";
 import { SkillBars } from "./SkillBars";
 import { spotSkills } from "@/lib/talent-intake";
 import { addNeed } from "@/lib/workspace";
@@ -927,6 +928,8 @@ export function NeedForm() {
                             : "Job skill"}{" "}
                         · {LEVELS[r.expected].name}
                       </small>
+                      <small>How it’s checked: {verificationLabel(r.skill)} · To check</small>
+                      <p className="quiet-note">{verificationFor(r.skill).situation}</p>
                     </div>
                     <button
                       type="button"
