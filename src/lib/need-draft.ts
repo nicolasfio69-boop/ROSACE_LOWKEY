@@ -135,7 +135,9 @@ export function levelExample(
   level: ExpectedLevel,
   draft: Pick<NeedDraft, "title" | "context">,
 ): string {
-  const example = EXAMPLES[skill]?.[level - 1] ?? (SKILL_CODES.has(skill) ? descriptor(skill, level) : undefined);
+  const example =
+    EXAMPLES[skill]?.[level - 1] ??
+    (SKILL_CODES.has(skill) ? descriptor(skill, level) : undefined);
   if (!example) throw new Error("Choose a known skill and expected level.");
   const context = [
     draft.title.trim() && `Role: ${draft.title.trim()}.`,

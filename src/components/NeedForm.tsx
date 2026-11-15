@@ -290,9 +290,7 @@ export function NeedForm() {
     <div className="workspace recruiter-workspace">
       <div className="workspace-top">
         <Link href="/">← Home</Link>
-        <span role="status">
-          {status || "Recruiter workspace"}
-        </span>
+        <span role="status">{status || "Recruiter workspace"}</span>
       </div>
       <ol className="stepper">
         {["Company & role", "12 components", "Job skills", "Review"].map(

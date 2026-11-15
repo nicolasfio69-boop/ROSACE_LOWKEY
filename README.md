@@ -1,124 +1,131 @@
 # Rosace
 
-A local recruitment-event demo for Junction 2026 and the City of Espoo.
-“We turn claims into questions you can check during the conversation.”
+Skills-based matchmaking for Espoo recruitment events. Built for the City of
+Espoo challenge "Rethinking Recruitment" at Junction 2026.
 
-The fixed Centrale framework has 5 competencies, 12 components, three skill
-levels plus “Not yet”, and a rosace that grows as selections are confirmed.
-A human chooses the requirements and approves meetings. Repository examples are fictional.
+> We turn claims into questions you can check during the conversation.
 
-## Get the current application from GitHub
+AI-written CVs all look alike. Rosace helps a company say which skills a role
+really needs, helps a talent describe what they have actually done, and gives
+the recruiter a short conversation guide to check those claims in person.
+A person always makes the decision.
 
-**Current app branch:** `feat/coherent-ux` (delivery PR [#11](https://github.com/nicolasfio69-boop/JUNCTION_RECRUITMENT_COMPETENCIES/pull/11) → `main`).
-Older feature PRs were folded into this branch and closed. The source of truth is
-`docs/CADRAGE.md`, then `AGENTS.md`.
+- **Live demo:** https://holy-nice-impala.eur-1.aiven.app (fictional data only)
+- **3-minute guided demo:** `/tour`
 
-```bash
-git fetch origin
-git switch feat/coherent-ux
-git pull --ff-only
-```
+## How it works
 
-Stay on that branch until PR #11 is merged; `main` does not receive the new
-application just because the PR is open. No ZIP download is needed.
+1. **Recruiter need** (`/need/new`). The company describes the role, then picks
+   3 major components, any number of minor components and up to 3 technical
+   skills, each with an expected level. Level cards and optional Claude
+   suggestions, grounded in the reviewed job and company text, help choose.
+2. **Talent card** (`/talent/new`). The talent imports a CV, which is parsed in
+   the browser and never stored. Local rules quote possible clues; the talent
+   answers factual questions and confirms each level.
+3. **Event desk** (`/organiser`). Rosace suggests who should meet and shows the
+   reasons. Ties are never broken automatically, and people without a
+   suggestion are listed with a next step. The organiser approves each meeting
+   with a one-line reason.
+4. **Conversation guide** (`/brief`). Questions target unknown or
+   below-expected skills. After the meeting the recruiter records what was
+   observed (A / C / F / NE), kept separate from what was declared.
+5. **Checks** (`/checks`, `/talent/checks`). Short timed exercises reviewed by a
+   person. Claude may recommend a grade with quoted evidence; only the
+   recruiter can record it.
 
-## Open in Cursor and run locally
+### The skills framework
 
-Install **Node.js 24 LTS** (22.13 or newer is required).
+The framework comes from the Centrale Lyon junior-enterprise skills tool:
+5 competencies, 12 components written as action verbs (for example "Break down
+a problem", "Get it right and spot the error"), three levels (Foundation,
+Intermediate, Advanced, plus "Not yet") and the rosace chart. It is fixed;
+company needs adapt on top of it.
 
-**Windows: open the repository folder and double-click `start-local.cmd`.** It installs dependencies on first launch or when the lockfile
-or Node major version changes, starts the server and opens the browser when ready.
-Later launches skip installation. Cursor does not need to be open. Keep the
-server window open; Ctrl+C stops it. If Rosace is already running, the launcher
-opens it again without starting a second copy.
+Alignment is a fraction, never a percentage: `points = weight × min(declared,
+expected)`, with weight 2 for majors and technical skills and 1 for minors. A
+card is complete when 70 % of the requirement weight is filled in. Details:
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
-If you prefer the Cursor terminal (open the folder containing `package.json`):
+## Responsible by design
+
+- **Human decision.** Suggestions are explained and editable; no tie is broken
+  automatically; AI output is a proposal that a person accepts or discards.
+- **No bias inputs.** Nationality, language, age, gender, degree names and
+  career path never enter a calculation or a prompt.
+- **Minimal personal data.** CVs are parsed on the device and never uploaded,
+  stored or sent to an AI provider. A saved talent card holds a pseudonym and
+  confirmed levels, needs explicit consent and expires after six months.
+- **Talents never see a rank or a score**, only their own rosace.
+- **Grounded AI.** Claude only sees recruiter-reviewed job and company text,
+  must cite the passages it used and answer from a closed catalogue. Every
+  response is schema-checked on the server.
+
+## Getting started
+
+Requirements: Node.js 22.13 or newer (24 LTS recommended).
 
 ```bash
 npm ci
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-Use `npm.cmd` on Windows if PowerShell blocks `npm.ps1`. `npm ci` is needed only
-for the first manual installation or after dependency changes. After that,
-`npm run dev` is enough. On macOS/Linux, `npm run local` provides
-the automatic launcher too.
+On Windows, `start-local.cmd` installs dependencies when needed, starts the
+app on port 3001 and opens the browser.
 
-For `npm run dev`, open **http://localhost:3000** on the same computer. The
-one-click launcher uses **http://localhost:3001** instead. No AI key or hosting
-account is needed. Cursor and Claude subscriptions do not replace Node.js or
-API credits.
+No API key is needed for the manual flows. To enable Claude and company
+context, copy `.env.example` to `.env.local` and fill in the keys (see
+[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)). Never commit a key.
 
-If port 3001 is occupied, use `--port 3002` and open `http://localhost:3002`.
-If an old server shows an error after updating files, stop it with Ctrl+C,
-remove only the generated `.next` folder, run `npm ci`, and start again.
+## Scripts
 
-## What to try
+| Command                       | What it does                             |
+| ----------------------------- | ---------------------------------------- |
+| `npm run dev`                 | Development server                       |
+| `npm run build` / `npm start` | Production build and server              |
+| `npm run lint`                | ESLint                                   |
+| `npm run typecheck`           | TypeScript, no emit                      |
+| `npm test`                    | Unit tests (Vitest)                      |
+| `npm run test:e2e`            | Browser tests (Playwright)               |
+| `npm run check`               | Lint, typecheck and unit tests           |
+| `npm run test:claude`         | One bounded call to check the Claude key |
 
-Start at `/` to choose your demo workspace, or open `/tour` for the prefilled, automatic three-minute scenario. Pause or jump to any moment; no data is saved by the recording. The sign-in screen is an explicitly fictional preview.
+CI runs lint, typecheck, unit tests, build and the Playwright suite on every
+pull request (`.github/workflows/ci.yml`).
 
-1. **Recruiter — `/need/new`:** enter the company, role, job description, on-site /
-   hybrid / remote setting, workplace and available support. Four questions
-   clarify the task, collaborators, expected outcome and difficulty. Import a
-   text PDF, DOCX, TXT or MD, or paste text. Click a rosace branch (or use Tab, arrows and Enter) to explore the 12 components,
-   compare level cards and pick exactly 3 majors, any relevant minors, then up to 3
-   technical skills. Watch the live rosace and confirm the need.
-2. **Talent — `/talent/new`:** import a fictional CV or use the example. Local
-   keyword rules quote possible clues without assigning a level. Answer factual
-   questions, confirm or correct each level and build the other side of the
-   rosace. Optionally save the confirmed card with explicit consent.
-3. **Organiser — `/organiser`:** saved needs and cards join the synthetic examples.
-   Review suggestions, ties and people without suggestions. Approve, add or
-   remove a meeting with a reason; the decision appears in a journal.
-4. **Conversation — `/conversations` or “Prepare conversation”:** explore 3–5 questions prioritising unknown or below-expected declarations, compare
-   declared and expected skills, and record A/C/F/NE observations. Observed
-   values stay separate from declared levels.
-5. **Checks:** candidates answer at `/talent/checks`; recruiters prepare and review at `/checks`. Choose a workspace in the header. All 26 online skills have three task-level variants. Recruiters select a plan of at most 20 minutes; candidates start timed tasks and submit. Claude can recommend A/C/F/NE with evidence; only the recruiter validates the final grade. On-site tasks remain in the conversation brief. `/practice` redirects to `/checks`.
+## Project layout
 
-`/demo` redirects to the guided demo at `/tour`. The organiser handles one
-local event workspace with multiple companies; there are no authenticated roles.
-
-## Company context and Claude AI
-
-Manual context and hand-written examples work immediately. Embedded developer
-roles have dedicated scenarios; other roles use framework examples with the
-entered job context visible alongside. Claude can propose more specific examples
-from approved job and company passages once configured. Online practice feedback
-is also optional. Neither integration has been validated with live credentials.
-
-Copy `.env.example` to `.env.local`, fill in only the credentials you have and
-restart the server. Never paste keys into chat or use `NEXT_PUBLIC_` for secrets.
-Run `npm run test:claude` after configuring the key. See [the Claude setup guide](docs/CLAUDE_SETUP.md) and [integration details](docs/INTEGRATIONS.md).
-
-## Storage and privacy in this local demo
-
-- Job drafts, confirmed needs, organiser decisions and observations are stored in
-  this browser. They are not shared across computers or browser profiles.
-- Documents are parsed on the device. **CV files and CV text are never uploaded,
-  persisted or sent to any AI provider.** Short quoted clues exist only in page memory.
-- Saving a talent card requires consent; only its pseudonym and confirmed levels
-  are saved. Cards expire after six months and are purged, with related decisions
-  and observations, when the workspace is next opened. A closed browser cannot
-  run a retention job. Talent cards can also be deleted immediately.
-- Unsubmitted exercise drafts stay in page memory. Submitted fictional answers, their exercise version and human grades are saved in this browser and removed with the talent card. Explicit consent is required to send an answer to Claude for feedback; the app never logs it.
-- Database-backed access control, deletion jobs and shared data are still future
-  work. Do not expose these local API routes publicly before adding authentication,
-  durable rate limits and account-level budget controls.
-
-## Checks
-
-```bash
-npm test
-npm run test:launcher
-npm run typecheck
-npx eslint src
-npm run build
-npx playwright install chromium
-npm run test:e2e
+```
+src/
+  app/          Next.js routes (pages and /api handlers)
+  components/   React components (Rosace chart, forms, workspaces)
+  data/         Synthetic demo data and exercises
+  lib/          Domain logic: framework, scoring, suggestions, storage
+  lib/server/   Server-only code: Claude, Context.dev, HTTP guards
+e2e/            Playwright tests and synthetic fixtures
+docs/           Architecture, deployment, credits, decision log
+scripts/        Local launcher and Claude connection check
 ```
 
-Browser tests use synthetic PDF/DOCX fixtures and check the recruiter-to-interview
-flow, local CV handling and mobile layouts. In a managed Linux environment with
-Chromium installed, use `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`.
+## Known limitations
 
-See [the delivery ladder](docs/ROADMAP.md). Coding agents: read [AGENTS.md](AGENTS.md).
+- Data lives in one browser. Roles are separate workspaces, not authenticated
+  accounts, and nothing is shared across devices.
+- Retention runs when the workspace is opened; a closed browser cannot purge.
+- AI rate limits are kept in process memory, so with several server instances
+  each instance counts separately. They protect demo credits; they are not
+  multi-user controls.
+- The quality of Claude's suggestions and grade recommendations has not been
+  evaluated with Espoo recruiters yet.
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md): modules, data flow, AI pipeline, security
+- [Deployment](docs/DEPLOYMENT.md): configuration, Docker, Aiven Runtime
+- [Credits](docs/CREDITS.md): third-party UI adaptations
+- [Decision log](docs/CADRAGE.md) (French): every product decision, dated
+
+## How it was built
+
+Built in 48 hours at Junction 2026. Product decisions were made by the team and
+logged in the decision log; AI coding assistants were used for implementation,
+reviews and tests.

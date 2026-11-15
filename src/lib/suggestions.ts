@@ -19,21 +19,27 @@ export type NeedSuggestions = {
 };
 
 export function isEligible(alignment: Alignment): boolean {
-  const reachesAMajor = alignment.rows.some((row) => row.requirement.major && (row.level ?? 0) >= 1);
+  const reachesAMajor = alignment.rows.some(
+    (row) => row.requirement.major && (row.level ?? 0) >= 1,
+  );
   return alignment.complete && reachesAMajor;
 }
 
 function byPointsThenName(talents: Map<string, Talent>) {
   return (a: Alignment, b: Alignment) =>
     b.points - a.points ||
-    (talents.get(a.talentId)?.pseudonym ?? "").localeCompare(talents.get(b.talentId)?.pseudonym ?? "");
+    (talents.get(a.talentId)?.pseudonym ?? "").localeCompare(
+      talents.get(b.talentId)?.pseudonym ?? "",
+    );
 }
 
 export function suggestForNeed(need: Need, talents: Talent[]): NeedSuggestions {
   const index = new Map(talents.map((t) => [t.id, t]));
   const all = talents.map((talent) => align(need, talent));
   const eligible = all.filter(isEligible).sort(byPointsThenName(index));
-  const ineligible = all.filter((a) => !isEligible(a)).sort(byPointsThenName(index));
+  const ineligible = all
+    .filter((a) => !isEligible(a))
+    .sort(byPointsThenName(index));
 
   if (eligible.length <= need.capacity) {
     return { need, suggested: eligible, tied: [], others: [], ineligible };
@@ -60,7 +66,8 @@ export function suggestForNeed(need: Need, talents: Talent[]): NeedSuggestions {
   };
 }
 
-export type NoSuggestionReason = "card_too_sparse" | "no_major_reached" | "outranked";
+export type NoSuggestionReason =
+  "card_too_sparse" | "no_major_reached" | "outranked";
 
 export const NO_SUGGESTION_LABELS: Record<NoSuggestionReason, string> = {
   card_too_sparse: "Card not filled in enough for any need",
@@ -83,11 +90,15 @@ export function withoutSuggestion(
   results: NeedSuggestions[],
   talents: Talent[],
 ): { talent: Talent; reason: NoSuggestionReason }[] {
-  const placed = new Set(results.flatMap((r) => [...r.suggested, ...r.tied].map((a) => a.talentId)));
+  const placed = new Set(
+    results.flatMap((r) => [...r.suggested, ...r.tied].map((a) => a.talentId)),
+  );
   return talents
     .filter((talent) => !placed.has(talent.id))
     .map((talent) => {
-      const mine = results.map((r) => [...r.others, ...r.ineligible].find((a) => a.talentId === talent.id)!);
+      const mine = results.map((r) =>
+        [...r.others, ...r.ineligible].find((a) => a.talentId === talent.id)!,
+      );
       let reason: NoSuggestionReason;
       if (mine.some(isEligible)) reason = "outranked";
       else if (mine.every((a) => !a.complete)) reason = "card_too_sparse";

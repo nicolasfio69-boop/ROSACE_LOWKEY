@@ -79,26 +79,23 @@ it("uses reviewed source passages for an exercise and rejects invented reference
   vi.stubEnv("ANTHROPIC_API_KEY", "test-only");
   vi.stubEnv("ANTHROPIC_MODEL", "claude-test-model");
   try {
-    const f = vi
-      .fn()
-      .mockResolvedValue(
-        new Response(
-          JSON.stringify({
-            stop_reason: "end_turn",
-            content: [
-              {
-                type: "text",
-                text: JSON.stringify({
-                  prompt:
-                    "Inspect a fictional sensor reset using its power log.",
-                  checks: ["Facts", "Questions", "Check"],
-                  sourceIds: ["job:1"],
-                }),
-              },
-            ],
-          }),
-        ),
-      );
+    const f = vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          stop_reason: "end_turn",
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify({
+                prompt: "Inspect a fictional sensor reset using its power log.",
+                checks: ["Facts", "Questions", "Check"],
+                sourceIds: ["job:1"],
+              }),
+            },
+          ],
+        }),
+      ),
+    );
     const result = await proposeExercise(
       "C5.1",
       1,

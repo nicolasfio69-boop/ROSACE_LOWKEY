@@ -26,17 +26,28 @@ export function LogoMark({ cx, cy, r }: { cx: number; cy: number; r: number }) {
       />
     );
   };
-  const order = [...Array(12).keys()].sort((a, b) => Number(TOP.has(a)) - Number(TOP.has(b)));
+  const order = [...Array(12).keys()].sort(
+    (a, b) => Number(TOP.has(a)) - Number(TOP.has(b)),
+  );
   return <g aria-hidden="true">{order.map(ray)}</g>;
 }
 
-export function Logo({ size = 40, name = "Rosace" }: { size?: number; name?: string }) {
+export function Logo({
+  size = 40,
+  name = "Rosace",
+}: {
+  size?: number;
+  name?: string;
+}) {
   return (
     <span className="inline-flex items-center gap-2">
       <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true">
         <LogoMark cx={50} cy={50} r={46} />
       </svg>
-      <span className="font-bold tracking-tight" style={{ color: RED, fontSize: size * 0.6 }}>
+      <span
+        className="font-bold tracking-tight"
+        style={{ color: RED, fontSize: size * 0.6 }}
+      >
         {name}
       </span>
     </span>

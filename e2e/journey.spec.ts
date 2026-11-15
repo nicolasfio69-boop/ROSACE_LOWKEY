@@ -12,13 +12,11 @@ test("recruiter, document import, consented talent and observed conversation", a
       requests.push({ url: r.url(), data: r.postData() });
   });
   await page.goto("/need/new");
-  console.log("Recruiter loaded");
   await page.getByLabel("Company name", { exact: true }).fill("NordChip demo");
   await page.getByRole("button", { name: "Continue to the role" }).click();
   await page
     .getByLabel("Import a job description", { exact: true })
     .setInputFiles("e2e/fixtures/job.pdf");
-  console.log("Import submitted");
   await page
     .getByText("Text extracted. Review it below before continuing.", {
       exact: true,
@@ -90,7 +88,6 @@ test("recruiter, document import, consented talent and observed conversation", a
   await page
     .getByLabel("Import a synthetic CV", { exact: true })
     .setInputFiles("e2e/fixtures/cv.docx");
-  console.log("Import submitted");
   await page
     .getByText("Text extracted. Review it below before continuing.", {
       exact: true,
@@ -200,9 +197,6 @@ test("recruiter, document import, consented talent and observed conversation", a
     fullPage: true,
   });
   assert.deepEqual(errors, []);
-  console.log(
-    "PASS: real PDF + DOCX parsing, 12-step recruiter flow, limits, restore, talent questions and consent, no CV in storage/POST, organiser decision, saved observation, mobile routes, no client errors.",
-  );
 });
 test("practice redirects to Checks and an unsubmitted draft stays in memory", async ({
   page,
