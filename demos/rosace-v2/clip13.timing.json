@@ -1,118 +1,118 @@
 {
  "clip": 13,
- "total": 7.352,
+ "total": 6.73,
  "lines": [
   {
    "id": "u03",
    "clip": 13,
    "text": "Each skill already says how it will be checked: an online exercise before the event, or a question at the meeting.",
    "start": 0.3,
-   "dur": 6.452,
+   "dur": 5.93,
    "words": [
     {
      "w": "Each",
-     "start": 0.335,
-     "end": 0.613
+     "start": 0.346,
+     "end": 0.602
     },
     {
      "w": "skill",
-     "start": 0.672,
-     "end": 0.997
+     "start": 0.66,
+     "end": 0.985
     },
     {
      "w": "already",
-     "start": 1.078,
-     "end": 1.403
+     "start": 1.055,
+     "end": 1.368
     },
     {
      "w": "says",
-     "start": 1.461,
-     "end": 1.716
+     "start": 1.415,
+     "end": 1.635
     },
     {
      "w": "how",
-     "start": 1.774,
-     "end": 1.891
+     "start": 1.682,
+     "end": 1.774
     },
     {
      "w": "it",
-     "start": 1.949,
-     "end": 2.018
+     "start": 1.821,
+     "end": 1.867
     },
     {
      "w": "will",
-     "start": 2.053,
-     "end": 2.192
+     "start": 1.902,
+     "end": 2.007
     },
     {
      "w": "be",
-     "start": 2.239,
-     "end": 2.309
+     "start": 2.041,
+     "end": 2.111
     },
     {
      "w": "checked:",
-     "start": 2.343,
-     "end": 2.831
+     "start": 2.134,
+     "end": 2.518
     },
     {
      "w": "an",
-     "start": 3.168,
-     "end": 3.295
+     "start": 2.831,
+     "end": 2.959
     },
     {
      "w": "online",
-     "start": 3.377,
-     "end": 3.748
+     "start": 3.028,
+     "end": 3.377
     },
     {
      "w": "exercise",
-     "start": 3.795,
-     "end": 4.317
+     "start": 3.411,
+     "end": 3.899
     },
     {
      "w": "before",
-     "start": 4.352,
-     "end": 4.584
+     "start": 3.934,
+     "end": 4.166
     },
     {
      "w": "the",
-     "start": 4.607,
-     "end": 4.677
+     "start": 4.201,
+     "end": 4.271
     },
     {
      "w": "event,",
-     "start": 4.723,
-     "end": 5.13
+     "start": 4.329,
+     "end": 4.712
     },
     {
      "w": "or",
-     "start": 5.269,
-     "end": 5.408
+     "start": 4.828,
+     "end": 4.967
     },
     {
      "w": "a",
-     "start": 5.466,
-     "end": 5.49
+     "start": 5.014,
+     "end": 5.037
     },
     {
      "w": "question",
-     "start": 5.548,
-     "end": 5.85
+     "start": 5.083,
+     "end": 5.385
     },
     {
      "w": "at",
-     "start": 5.896,
-     "end": 5.954
+     "start": 5.42,
+     "end": 5.478
     },
     {
      "w": "the",
-     "start": 5.977,
-     "end": 6.047
+     "start": 5.513,
+     "end": 5.583
     },
     {
      "w": "meeting.",
-     "start": 6.082,
-     "end": 6.477
+     "start": 5.617,
+     "end": 5.966
     }
    ]
   }

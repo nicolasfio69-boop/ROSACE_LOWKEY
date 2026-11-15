@@ -1,0 +1,185 @@
+{
+ "clip": 20,
+ "total": 13.574,
+ "lines": [
+  {
+   "id": "u09",
+   "clip": 20,
+   "text": "Rosace has tests built in. Before the event, the recruiter picks short online exercises, twenty minutes at most. Fatima answers one. Claude suggests a grade with evidence, and the recruiter gives the final grade.",
+   "start": 0.3,
+   "dur": 12.774,
+   "words": [
+    {
+     "w": "Rosace",
+     "start": 0.358,
+     "end": 0.904
+    },
+    {
+     "w": "has",
+     "start": 0.962,
+     "end": 1.113
+    },
+    {
+     "w": "tests",
+     "start": 1.182,
+     "end": 1.438
+    },
+    {
+     "w": "built",
+     "start": 1.484,
+     "end": 1.682
+    },
+    {
+     "w": "in.",
+     "start": 1.74,
+     "end": 2.007
+    },
+    {
+     "w": "Before",
+     "start": 2.367,
+     "end": 2.692
+    },
+    {
+     "w": "the",
+     "start": 2.726,
+     "end": 2.796
+    },
+    {
+     "w": "event,",
+     "start": 2.854,
+     "end": 3.191
+    },
+    {
+     "w": "the",
+     "start": 3.214,
+     "end": 3.295
+    },
+    {
+     "w": "recruiter",
+     "start": 3.365,
+     "end": 3.748
+    },
+    {
+     "w": "picks",
+     "start": 3.806,
+     "end": 4.027
+    },
+    {
+     "w": "short",
+     "start": 4.073,
+     "end": 4.352
+    },
+    {
+     "w": "online",
+     "start": 4.41,
+     "end": 4.747
+    },
+    {
+     "w": "exercises,",
+     "start": 4.781,
+     "end": 5.571
+    },
+    {
+     "w": "twenty",
+     "start": 5.71,
+     "end": 5.977
+    },
+    {
+     "w": "minutes",
+     "start": 6.012,
+     "end": 6.233
+    },
+    {
+     "w": "at",
+     "start": 6.268,
+     "end": 6.326
+    },
+    {
+     "w": "most.",
+     "start": 6.372,
+     "end": 6.744
+    },
+    {
+     "w": "Fatima",
+     "start": 7.324,
+     "end": 7.696
+    },
+    {
+     "w": "answers",
+     "start": 7.754,
+     "end": 8.044
+    },
+    {
+     "w": "one.",
+     "start": 8.102,
+     "end": 8.404
+    },
+    {
+     "w": "Claude",
+     "start": 8.822,
+     "end": 9.182
+    },
+    {
+     "w": "suggests",
+     "start": 9.228,
+     "end": 9.716
+    },
+    {
+     "w": "a",
+     "start": 9.751,
+     "end": 9.785
+    },
+    {
+     "w": "grade",
+     "start": 9.855,
+     "end": 10.099
+    },
+    {
+     "w": "with",
+     "start": 10.122,
+     "end": 10.25
+    },
+    {
+     "w": "evidence,",
+     "start": 10.308,
+     "end": 10.853
+    },
+    {
+     "w": "and",
+     "start": 11.016,
+     "end": 11.155
+    },
+    {
+     "w": "the",
+     "start": 11.19,
+     "end": 11.26
+    },
+    {
+     "w": "recruiter",
+     "start": 11.318,
+     "end": 11.736
+    },
+    {
+     "w": "gives",
+     "start": 11.794,
+     "end": 11.991
+    },
+    {
+     "w": "the",
+     "start": 12.014,
+     "end": 12.084
+    },
+    {
+     "w": "final",
+     "start": 12.131,
+     "end": 12.374
+    },
+    {
+     "w": "grade.",
+     "start": 12.409,
+     "end": 12.804
+    }
+   ]
+  }
+ ]
+}

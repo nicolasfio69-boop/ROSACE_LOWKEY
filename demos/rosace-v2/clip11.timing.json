@@ -1,13 +1,13 @@
 {
  "clip": 11,
- "total": 8.188,
+ "total": 8.036,
  "lines": [
   {
    "id": "u01",
    "clip": 11,
    "text": "Kaarna drops in its job post. Claude proposes the key skills and quotes the job text. The recruiter accepts.",
    "start": 0.3,
-   "dur": 7.288,
+   "dur": 7.236,
    "words": [
     {
      "w": "Kaarna",
@@ -16,93 +16,93 @@
     },
     {
      "w": "drops",
-     "start": 0.753,
-     "end": 1.066
+     "start": 0.764,
+     "end": 1.101
     },
     {
      "w": "in",
-     "start": 1.113,
-     "end": 1.171
+     "start": 1.136,
+     "end": 1.194
     },
     {
      "w": "its",
-     "start": 1.229,
-     "end": 1.333
+     "start": 1.24,
+     "end": 1.345
     },
     {
      "w": "job",
-     "start": 1.391,
-     "end": 1.658
+     "start": 1.403,
+     "end": 1.647
     },
     {
      "w": "post.",
-     "start": 1.728,
-     "end": 2.204
+     "start": 1.705,
+     "end": 2.134
     },
     {
      "w": "Claude",
-     "start": 2.668,
-     "end": 3.017
+     "start": 2.552,
+     "end": 2.924
     },
     {
      "w": "proposes",
-     "start": 3.052,
-     "end": 3.539
+     "start": 2.97,
+     "end": 3.528
     },
     {
      "w": "the",
-     "start": 3.597,
-     "end": 3.667
+     "start": 3.586,
+     "end": 3.655
     },
     {
      "w": "key",
      "start": 3.713,
-     "end": 3.876
+     "end": 3.922
     },
     {
      "w": "skills",
-     "start": 3.934,
-     "end": 4.305
+     "start": 3.969,
+     "end": 4.363
     },
     {
      "w": "and",
-     "start": 4.34,
-     "end": 4.422
+     "start": 4.398,
+     "end": 4.48
     },
     {
      "w": "quotes",
-     "start": 4.468,
-     "end": 4.723
+     "start": 4.538,
+     "end": 4.816
     },
     {
      "w": "the",
-     "start": 4.781,
-     "end": 4.851
+     "start": 4.863,
+     "end": 4.932
     },
     {
      "w": "job",
-     "start": 4.898,
-     "end": 5.13
+     "start": 4.979,
+     "end": 5.199
     },
     {
      "w": "text.",
-     "start": 5.199,
-     "end": 5.629
+     "start": 5.269,
+     "end": 5.687
     },
     {
      "w": "The",
-     "start": 6.035,
+     "start": 6.047,
      "end": 6.151
     },
     {
      "w": "recruiter",
      "start": 6.221,
-     "end": 6.616
+     "end": 6.627
     },
     {
      "w": "accepts.",
-     "start": 6.662,
-     "end": 7.289
+     "start": 6.674,
+     "end": 7.278
     }
    ]
   }

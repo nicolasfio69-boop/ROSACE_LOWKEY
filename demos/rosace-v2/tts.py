@@ -10,7 +10,7 @@ for l in lines:
     spoken = l["text"]
     for a, b in SAY.items(): spoken = spoken.replace(a, b)
     body = json.dumps({"text": spoken, "model_id": "eleven_multilingual_v2",
-        "voice_settings": {"stability": 0.45, "similarity_boost": 0.8, "style": 0.0, "use_speaker_boost": True, "speed": 0.95}}).encode()
+        "voice_settings": {"stability": 0.45, "similarity_boost": 0.8, "style": 0.0, "use_speaker_boost": True, "speed": 1.05}}).encode()
     req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE}/with-timestamps?output_format=mp3_44100_128",
         data=body, headers={"xi-api-key": key, "Content-Type": "application/json"})
     d = json.load(urllib.request.urlopen(req, timeout=120))

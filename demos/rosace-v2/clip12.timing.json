@@ -1,83 +1,83 @@
 {
  "clip": 12,
- "total": 5.759,
+ "total": 5.894,
  "lines": [
   {
    "id": "u02",
    "clip": 12,
    "text": "The recruiter stays in charge: for a junior, Kaarna makes Keep commitments a major.",
    "start": 0.3,
-   "dur": 4.859,
+   "dur": 5.094,
    "words": [
     {
      "w": "The",
-     "start": 0.358,
-     "end": 0.451
+     "start": 0.37,
+     "end": 0.463
     },
     {
      "w": "recruiter",
      "start": 0.532,
-     "end": 0.904
+     "end": 0.939
     },
     {
      "w": "stays",
-     "start": 0.939,
-     "end": 1.171
+     "start": 0.985,
+     "end": 1.229
     },
     {
      "w": "in",
-     "start": 1.217,
-     "end": 1.275
+     "start": 1.275,
+     "end": 1.345
     },
     {
      "w": "charge:",
-     "start": 1.322,
-     "end": 1.856
+     "start": 1.391,
+     "end": 1.867
     },
     {
      "w": "for",
-     "start": 2.111,
-     "end": 2.274
+     "start": 2.227,
+     "end": 2.401
     },
     {
      "w": "a",
-     "start": 2.32,
-     "end": 2.343
+     "start": 2.448,
+     "end": 2.471
     },
     {
      "w": "junior,",
-     "start": 2.413,
-     "end": 2.796
+     "start": 2.541,
+     "end": 2.959
     },
     {
      "w": "Kaarna",
-     "start": 2.843,
-     "end": 3.214
+     "start": 3.017,
+     "end": 3.353
     },
     {
      "w": "makes",
-     "start": 3.272,
-     "end": 3.47
+     "start": 3.411,
+     "end": 3.62
     },
     {
      "w": "Keep",
-     "start": 3.562,
-     "end": 3.783
+     "start": 3.737,
+     "end": 3.969
     },
     {
      "w": "commitments",
-     "start": 3.841,
-     "end": 4.329
+     "start": 4.038,
+     "end": 4.526
     },
     {
      "w": "a",
-     "start": 4.375,
-     "end": 4.41
+     "start": 4.584,
+     "end": 4.631
     },
     {
      "w": "major.",
-     "start": 4.468,
-     "end": 4.909
+     "start": 4.7,
+     "end": 5.13
     }
    ]
   }

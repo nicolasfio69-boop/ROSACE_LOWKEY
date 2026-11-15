@@ -1,108 +1,108 @@
 {
  "clip": 14,
- "total": 8.267,
+ "total": 7.487,
  "lines": [
   {
    "id": "u04",
    "clip": 14,
    "text": "Fatima imports her CV. It never leaves her device. Rosace points to clues, and she confirms each level herself.",
    "start": 0.3,
-   "dur": 7.367,
+   "dur": 6.687,
    "words": [
     {
      "w": "Fatima",
-     "start": 0.346,
-     "end": 0.753
+     "start": 0.335,
+     "end": 0.73
     },
     {
      "w": "imports",
-     "start": 0.811,
-     "end": 1.159
+     "start": 0.776,
+     "end": 1.113
     },
     {
      "w": "her",
-     "start": 1.194,
-     "end": 1.264
+     "start": 1.136,
+     "end": 1.206
     },
     {
      "w": "CV.",
-     "start": 1.322,
-     "end": 1.844
+     "start": 1.252,
+     "end": 1.751
     },
     {
      "w": "It",
-     "start": 2.1,
-     "end": 2.239
+     "start": 1.891,
+     "end": 2.018
     },
     {
      "w": "never",
-     "start": 2.32,
-     "end": 2.552
+     "start": 2.1,
+     "end": 2.309
     },
     {
      "w": "leaves",
-     "start": 2.61,
-     "end": 2.808
+     "start": 2.355,
+     "end": 2.541
     },
     {
      "w": "her",
-     "start": 2.843,
-     "end": 2.912
+     "start": 2.576,
+     "end": 2.645
     },
     {
      "w": "device.",
-     "start": 2.97,
-     "end": 3.504
+     "start": 2.692,
+     "end": 3.214
     },
     {
      "w": "Rosace",
-     "start": 4.143,
-     "end": 4.631
+     "start": 3.574,
+     "end": 3.969
     },
     {
      "w": "points",
-     "start": 4.7,
-     "end": 4.932
+     "start": 4.038,
+     "end": 4.282
     },
     {
      "w": "to",
-     "start": 4.979,
-     "end": 5.037
+     "start": 4.317,
+     "end": 4.375
     },
     {
      "w": "clues,",
-     "start": 5.095,
-     "end": 5.466
+     "start": 4.445,
+     "end": 4.828
     },
     {
      "w": "and",
-     "start": 5.49,
-     "end": 5.559
+     "start": 4.851,
+     "end": 4.932
     },
     {
      "w": "she",
-     "start": 5.606,
-     "end": 5.71
+     "start": 4.979,
+     "end": 5.083
     },
     {
      "w": "confirms",
-     "start": 5.757,
-     "end": 6.175
+     "start": 5.141,
+     "end": 5.536
     },
     {
      "w": "each",
-     "start": 6.302,
-     "end": 6.5
+     "start": 5.629,
+     "end": 5.815
     },
     {
      "w": "level",
-     "start": 6.558,
-     "end": 6.802
+     "start": 5.873,
+     "end": 6.105
     },
     {
      "w": "herself.",
-     "start": 6.86,
-     "end": 7.382
+     "start": 6.163,
+     "end": 6.709
     }
    ]
   }

@@ -1,68 +1,68 @@
 {
  "clip": 16,
- "total": 4.609,
+ "total": 4.091,
  "lines": [
   {
    "id": "u06",
    "clip": 16,
    "text": "At the meeting, the recruiter asks questions that test each claim.",
    "start": 0.3,
-   "dur": 3.709,
+   "dur": 3.291,
    "words": [
     {
      "w": "At",
      "start": 0.335,
-     "end": 0.463
+     "end": 0.451
     },
     {
      "w": "the",
-     "start": 0.497,
-     "end": 0.567
+     "start": 0.486,
+     "end": 0.555
     },
     {
      "w": "meeting,",
-     "start": 0.625,
-     "end": 0.904
+     "start": 0.602,
+     "end": 0.869
     },
     {
      "w": "the",
-     "start": 0.927,
-     "end": 0.997
+     "start": 0.892,
+     "end": 0.962
     },
     {
      "w": "recruiter",
-     "start": 1.066,
-     "end": 1.449
+     "start": 1.02,
+     "end": 1.391
     },
     {
      "w": "asks",
-     "start": 1.519,
-     "end": 1.705
+     "start": 1.461,
+     "end": 1.67
     },
     {
      "w": "questions",
-     "start": 1.763,
-     "end": 2.32
+     "start": 1.728,
+     "end": 2.169
     },
     {
      "w": "that",
-     "start": 2.483,
-     "end": 2.668
+     "start": 2.204,
+     "end": 2.332
     },
     {
      "w": "test",
-     "start": 2.715,
-     "end": 2.994
+     "start": 2.367,
+     "end": 2.622
     },
     {
      "w": "each",
-     "start": 3.04,
-     "end": 3.202
+     "start": 2.668,
+     "end": 2.808
     },
     {
      "w": "claim.",
-     "start": 3.249,
-     "end": 3.748
+     "start": 2.854,
+     "end": 3.319
     }
    ]
   }

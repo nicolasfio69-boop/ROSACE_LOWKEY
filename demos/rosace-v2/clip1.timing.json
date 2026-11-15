@@ -1,73 +1,73 @@
 {
  "clip": 1,
- "total": 46.498,
+ "total": 43.266,
  "lines": [
   {
    "id": "s01",
    "clip": 1,
    "text": "Espoo. A recruitment evening. Four companies, ten talents, fifteen minutes per conversation.",
-   "start": 0.6,
-   "dur": 6.4,
+   "start": 0.5,
+   "dur": 5.851,
    "words": [
     {
      "w": "Espoo.",
-     "start": 0.635,
-     "end": 1.436
+     "start": 0.535,
+     "end": 1.08
     },
     {
      "w": "A",
-     "start": 1.691,
-     "end": 1.773
+     "start": 1.394,
+     "end": 1.475
     },
     {
      "w": "recruitment",
-     "start": 1.854,
-     "end": 2.353
+     "start": 1.568,
+     "end": 2.033
     },
     {
      "w": "evening.",
-     "start": 2.4,
-     "end": 2.829
+     "start": 2.079,
+     "end": 2.439
     },
     {
      "w": "Four",
-     "start": 3.166,
-     "end": 3.398
+     "start": 2.706,
+     "end": 2.938
     },
     {
      "w": "companies,",
-     "start": 3.468,
-     "end": 4.002
+     "start": 3.008,
+     "end": 3.553
     },
     {
      "w": "ten",
-     "start": 4.037,
-     "end": 4.269
+     "start": 3.6,
+     "end": 3.832
     },
     {
      "w": "talents,",
-     "start": 4.338,
-     "end": 4.931
+     "start": 3.902,
+     "end": 4.343
     },
     {
      "w": "fifteen",
-     "start": 5.07,
-     "end": 5.476
+     "start": 4.389,
+     "end": 4.784
     },
     {
      "w": "minutes",
-     "start": 5.523,
-     "end": 5.755
+     "start": 4.842,
+     "end": 5.098
     },
     {
      "w": "per",
-     "start": 5.79,
-     "end": 5.894
+     "start": 5.144,
+     "end": 5.248
     },
     {
      "w": "conversation.",
-     "start": 5.941,
-     "end": 6.753
+     "start": 5.295,
+     "end": 6.084
     }
    ]
   },
@@ -75,88 +75,88 @@
    "id": "s02",
    "clip": 1,
    "text": "This is Fatima. She was a pharmacy assistant, then she learned to code in a bootcamp.",
-   "start": 7.8,
-   "dur": 5.042,
+   "start": 6.951,
+   "dur": 4.911,
    "words": [
     {
      "w": "This",
-     "start": 7.858,
-     "end": 7.986
+     "start": 7.009,
+     "end": 7.148
     },
     {
      "w": "is",
-     "start": 8.044,
-     "end": 8.113
+     "start": 7.195,
+     "end": 7.264
     },
     {
      "w": "Fatima.",
-     "start": 8.183,
-     "end": 8.729
+     "start": 7.334,
+     "end": 7.891
     },
     {
      "w": "She",
-     "start": 9.019,
-     "end": 9.147
+     "start": 8.031,
+     "end": 8.158
     },
     {
      "w": "was",
-     "start": 9.182,
-     "end": 9.286
+     "start": 8.205,
+     "end": 8.309
     },
     {
      "w": "a",
-     "start": 9.333,
-     "end": 9.356
+     "start": 8.344,
+     "end": 8.379
     },
     {
      "w": "pharmacy",
-     "start": 9.402,
-     "end": 9.855
+     "start": 8.414,
+     "end": 8.785
     },
     {
      "w": "assistant,",
-     "start": 9.901,
-     "end": 10.424
+     "start": 8.843,
+     "end": 9.377
     },
     {
      "w": "then",
-     "start": 10.83,
-     "end": 10.97
+     "start": 9.737,
+     "end": 9.9
     },
     {
      "w": "she",
-     "start": 11.016,
-     "end": 11.12
+     "start": 9.958,
+     "end": 10.074
     },
     {
      "w": "learned",
-     "start": 11.202,
-     "end": 11.422
+     "start": 10.167,
+     "end": 10.422
     },
     {
      "w": "to",
-     "start": 11.446,
-     "end": 11.492
+     "start": 10.446,
+     "end": 10.492
     },
     {
      "w": "code",
-     "start": 11.55,
-     "end": 11.771
+     "start": 10.562,
+     "end": 10.817
     },
     {
      "w": "in",
-     "start": 11.794,
-     "end": 11.84
+     "start": 10.84,
+     "end": 10.887
     },
     {
      "w": "a",
-     "start": 11.887,
-     "end": 11.91
+     "start": 10.933,
+     "end": 10.956
     },
     {
      "w": "bootcamp.",
-     "start": 11.956,
-     "end": 12.537
+     "start": 11.014,
+     "end": 11.63
     }
    ]
   },
@@ -164,83 +164,83 @@
    "id": "s03",
    "clip": 1,
    "text": "And this is Kaarna Health, a small Espoo start-up looking for a junior web developer.",
-   "start": 13.642,
-   "dur": 4.911,
+   "start": 12.462,
+   "dur": 4.963,
    "words": [
     {
      "w": "And",
-     "start": 13.677,
-     "end": 13.805
+     "start": 12.497,
+     "end": 12.625
     },
     {
      "w": "this",
-     "start": 13.863,
-     "end": 14.002
+     "start": 12.683,
+     "end": 12.834
     },
     {
      "w": "is",
-     "start": 14.072,
-     "end": 14.153
+     "start": 12.903,
+     "end": 12.984
     },
     {
      "w": "Kaarna",
-     "start": 14.234,
-     "end": 14.571
+     "start": 13.054,
+     "end": 13.391
     },
     {
      "w": "Health,",
-     "start": 14.629,
-     "end": 15.024
+     "start": 13.46,
+     "end": 13.797
     },
     {
      "w": "a",
-     "start": 15.244,
-     "end": 15.314
+     "start": 13.844,
+     "end": 13.913
     },
     {
      "w": "small",
-     "start": 15.395,
-     "end": 15.72
+     "start": 14.006,
+     "end": 14.378
     },
     {
      "w": "Espoo",
-     "start": 15.801,
-     "end": 16.138
+     "start": 14.494,
+     "end": 14.9
     },
     {
      "w": "start-up",
-     "start": 16.196,
-     "end": 16.591
+     "start": 14.97,
+     "end": 15.399
     },
     {
      "w": "looking",
-     "start": 16.672,
-     "end": 16.962
+     "start": 15.492,
+     "end": 15.782
     },
     {
      "w": "for",
-     "start": 17.021,
-     "end": 17.125
+     "start": 15.841,
+     "end": 15.945
     },
     {
      "w": "a",
-     "start": 17.171,
-     "end": 17.195
+     "start": 15.991,
+     "end": 16.026
     },
     {
      "w": "junior",
-     "start": 17.253,
-     "end": 17.543
+     "start": 16.084,
+     "end": 16.363
     },
     {
      "w": "web",
-     "start": 17.589,
-     "end": 17.74
+     "start": 16.409,
+     "end": 16.572
     },
     {
      "w": "developer.",
-     "start": 17.787,
-     "end": 18.286
+     "start": 16.63,
+     "end": 17.152
     }
    ]
   },
@@ -248,83 +248,83 @@
    "id": "s04",
    "clip": 1,
    "text": "Fatima's CV was polished by AI, like everyone else's. Kaarna can't tell what is real.",
-   "start": 19.353,
-   "dur": 5.46,
+   "start": 18.026,
+   "dur": 5.094,
    "words": [
     {
      "w": "Fatima's",
-     "start": 19.423,
-     "end": 19.829
+     "start": 18.084,
+     "end": 18.514
     },
     {
      "w": "CV",
-     "start": 19.852,
-     "end": 20.108
+     "start": 18.548,
+     "end": 18.804
     },
     {
      "w": "was",
-     "start": 20.235,
-     "end": 20.34
+     "start": 18.966,
+     "end": 19.094
     },
     {
      "w": "polished",
-     "start": 20.398,
-     "end": 20.735
+     "start": 19.152,
+     "end": 19.477
     },
     {
      "w": "by",
-     "start": 20.769,
-     "end": 20.874
+     "start": 19.5,
+     "end": 19.605
     },
     {
      "w": "AI,",
-     "start": 20.932,
-     "end": 21.35
+     "start": 19.675,
+     "end": 20.069
     },
     {
      "w": "like",
-     "start": 21.408,
-     "end": 21.582
+     "start": 20.127,
+     "end": 20.278
     },
     {
      "w": "everyone",
-     "start": 21.617,
-     "end": 21.93
+     "start": 20.313,
+     "end": 20.58
     },
     {
      "w": "else's.",
-     "start": 21.965,
-     "end": 22.488
+     "start": 20.603,
+     "end": 21.068
     },
     {
      "w": "Kaarna",
-     "start": 23.022,
-     "end": 23.358
+     "start": 21.486,
+     "end": 21.811
     },
     {
      "w": "can't",
-     "start": 23.405,
-     "end": 23.614
+     "start": 21.857,
+     "end": 22.055
     },
     {
      "w": "tell",
-     "start": 23.649,
-     "end": 23.8
+     "start": 22.078,
+     "end": 22.206
     },
     {
      "w": "what",
-     "start": 23.846,
-     "end": 23.962
+     "start": 22.24,
+     "end": 22.345
     },
     {
      "w": "is",
-     "start": 23.997,
-     "end": 24.067
+     "start": 22.38,
+     "end": 22.449
     },
     {
      "w": "real.",
-     "start": 24.136,
-     "end": 24.531
+     "start": 22.519,
+     "end": 22.891
     }
    ]
   },
@@ -332,113 +332,113 @@
    "id": "s05",
    "clip": 1,
    "text": "Rosace measures skills on one shared map: Kaarna sets the level each skill needs, and Fatima shows the level she has.",
-   "start": 25.612,
-   "dur": 7.654,
+   "start": 23.72,
+   "dur": 7.549,
    "words": [
     {
      "w": "Rosace",
-     "start": 25.693,
-     "end": 26.192
+     "start": 23.778,
+     "end": 24.3
     },
     {
      "w": "measures",
-     "start": 26.32,
-     "end": 26.669
+     "start": 24.417,
+     "end": 24.765
     },
     {
      "w": "skills",
-     "start": 26.703,
-     "end": 27.098
+     "start": 24.788,
+     "end": 25.171
     },
     {
      "w": "on",
-     "start": 27.156,
-     "end": 27.249
+     "start": 25.229,
+     "end": 25.322
     },
     {
      "w": "one",
-     "start": 27.33,
-     "end": 27.528
+     "start": 25.415,
+     "end": 25.612
     },
     {
      "w": "shared",
-     "start": 27.551,
-     "end": 27.818
+     "start": 25.647,
+     "end": 25.926
     },
     {
      "w": "map:",
-     "start": 27.864,
-     "end": 28.329
+     "start": 25.972,
+     "end": 26.367
     },
     {
      "w": "Kaarna",
-     "start": 28.735,
-     "end": 29.176
+     "start": 26.855,
+     "end": 27.307
     },
     {
      "w": "sets",
-     "start": 29.234,
-     "end": 29.467
+     "start": 27.377,
+     "end": 27.598
     },
     {
      "w": "the",
-     "start": 29.501,
-     "end": 29.583
+     "start": 27.644,
+     "end": 27.714
     },
     {
      "w": "level",
-     "start": 29.641,
-     "end": 29.919
+     "start": 27.772,
+     "end": 28.004
     },
     {
      "w": "each",
-     "start": 30.001,
-     "end": 30.152
+     "start": 28.074,
+     "end": 28.225
     },
     {
      "w": "skill",
-     "start": 30.175,
-     "end": 30.407
+     "start": 28.248,
+     "end": 28.492
     },
     {
      "w": "needs,",
-     "start": 30.477,
-     "end": 30.964
+     "start": 28.55,
+     "end": 29.037
     },
     {
      "w": "and",
-     "start": 31.127,
-     "end": 31.278
+     "start": 29.27,
+     "end": 29.42
     },
     {
      "w": "Fatima",
-     "start": 31.336,
-     "end": 31.696
+     "start": 29.479,
+     "end": 29.838
     },
     {
      "w": "shows",
-     "start": 31.742,
-     "end": 31.974
+     "start": 29.885,
+     "end": 30.094
     },
     {
      "w": "the",
-     "start": 32.009,
-     "end": 32.079
+     "start": 30.129,
+     "end": 30.198
     },
     {
      "w": "level",
-     "start": 32.125,
-     "end": 32.323
+     "start": 30.233,
+     "end": 30.431
     },
     {
      "w": "she",
-     "start": 32.369,
-     "end": 32.462
+     "start": 30.477,
+     "end": 30.57
     },
     {
      "w": "has.",
-     "start": 32.52,
-     "end": 32.973
+     "start": 30.64,
+     "end": 31.034
     }
    ]
   },
@@ -446,138 +446,138 @@
    "id": "s05b",
    "clip": 1,
    "text": "Rosace matches the two, then checks each skill: before the meeting with a short exercise, or during the conversation with a targeted question. The recruiter decides.",
-   "start": 34.066,
-   "dur": 10.632,
+   "start": 31.869,
+   "dur": 10.397,
    "words": [
     {
      "w": "Rosace",
-     "start": 34.112,
-     "end": 34.716
+     "start": 31.939,
+     "end": 32.484
     },
     {
      "w": "matches",
-     "start": 34.844,
-     "end": 35.204
+     "start": 32.566,
+     "end": 32.902
     },
     {
      "w": "the",
-     "start": 35.262,
-     "end": 35.331
+     "start": 32.96,
+     "end": 33.03
     },
     {
      "w": "two,",
-     "start": 35.378,
-     "end": 35.866
+     "start": 33.076,
+     "end": 33.518
     },
     {
      "w": "then",
-     "start": 36.156,
-     "end": 36.318
+     "start": 33.785,
+     "end": 33.959
     },
     {
      "w": "checks",
-     "start": 36.376,
-     "end": 36.655
+     "start": 34.017,
+     "end": 34.261
     },
     {
      "w": "each",
-     "start": 36.701,
-     "end": 36.841
+     "start": 34.307,
+     "end": 34.458
     },
     {
      "w": "skill:",
-     "start": 36.876,
-     "end": 37.41
+     "start": 34.481,
+     "end": 34.946
     },
     {
      "w": "before",
-     "start": 37.746,
-     "end": 38.037
+     "start": 35.306,
+     "end": 35.642
     },
     {
      "w": "the",
-     "start": 38.071,
-     "end": 38.141
+     "start": 35.677,
+     "end": 35.747
     },
     {
      "w": "meeting",
-     "start": 38.176,
-     "end": 38.397
+     "start": 35.828,
+     "end": 36.13
     },
     {
      "w": "with",
-     "start": 38.42,
-     "end": 38.524
+     "start": 36.165,
+     "end": 36.292
     },
     {
      "w": "a",
-     "start": 38.559,
-     "end": 38.582
+     "start": 36.327,
+     "end": 36.362
     },
     {
      "w": "short",
-     "start": 38.629,
-     "end": 38.849
+     "start": 36.432,
+     "end": 36.664
     },
     {
      "w": "exercise,",
-     "start": 38.896,
-     "end": 39.65
+     "start": 36.722,
+     "end": 37.337
     },
     {
      "w": "or",
-     "start": 39.987,
-     "end": 40.161
+     "start": 37.372,
+     "end": 37.558
     },
     {
      "w": "during",
-     "start": 40.219,
-     "end": 40.451
+     "start": 37.871,
+     "end": 38.138
     },
     {
      "w": "the",
-     "start": 40.486,
-     "end": 40.556
+     "start": 38.173,
+     "end": 38.243
     },
     {
      "w": "conversation",
-     "start": 40.602,
-     "end": 41.334
+     "start": 38.289,
+     "end": 39.021
     },
     {
      "w": "with",
-     "start": 41.369,
-     "end": 41.496
+     "start": 39.067,
+     "end": 39.207
     },
     {
      "w": "a",
-     "start": 41.531,
-     "end": 41.554
+     "start": 39.241,
+     "end": 39.276
     },
     {
      "w": "targeted",
-     "start": 41.612,
-     "end": 42.019
+     "start": 39.334,
+     "end": 39.741
     },
     {
      "w": "question.",
-     "start": 42.065,
-     "end": 42.646
+     "start": 39.787,
+     "end": 40.344
     },
     {
      "w": "The",
-     "start": 43.052,
-     "end": 43.168
+     "start": 40.704,
+     "end": 40.832
     },
     {
      "w": "recruiter",
-     "start": 43.249,
-     "end": 43.656
+     "start": 40.913,
+     "end": 41.331
     },
     {
      "w": "decides.",
-     "start": 43.725,
-     "end": 44.469
+     "start": 41.389,
+     "end": 42.074
     }
    ]
   }

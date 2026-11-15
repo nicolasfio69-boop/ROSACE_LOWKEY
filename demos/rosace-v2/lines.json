@@ -14,8 +14,9 @@
  {"id": "u02", "clip": 12, "text": "The recruiter stays in charge: for a junior, Kaarna makes Keep commitments a major."},
  {"id": "u03", "clip": 13, "text": "Each skill already says how it will be checked: an online exercise before the event, or a question at the meeting."},
  {"id": "u04", "clip": 14, "text": "Fatima imports her CV. It never leaves her device. Rosace points to clues, and she confirms each level herself."},
- {"id": "u05", "clip": 15, "text": "For Kaarna, Fatima is suggested, with the reasons. The recruiter approves the meeting."},
+ {"id": "u05", "clip": 15, "text": "There is no ranking. For each company, people are suggested or need more information, always with the reasons. Fatima is suggested for Kaarna, and the recruiter approves the meeting."},
  {"id": "u06", "clip": 16, "text": "At the meeting, the recruiter asks questions that test each claim."},
  {"id": "u07", "clip": 17, "text": "Then they note what they saw: A, C or F. Observed stays separate from what Fatima declared."},
- {"id": "u08", "clip": 18, "text": "Rosace only suggests, and always shows why. A person decides."}
+ {"id": "u08", "clip": 18, "text": "Rosace only suggests, and always shows why. A person decides."},
+ {"id": "u09", "clip": 20, "text": "Rosace has tests built in. Before the event, the recruiter picks short online exercises, twenty minutes at most. Fatima answers one. Claude suggests a grade with evidence, and the recruiter gives the final grade."}
 ]

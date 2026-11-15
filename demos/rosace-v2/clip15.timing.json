@@ -1,78 +1,158 @@
 {
  "clip": 15,
- "total": 5.811,
+ "total": 10.909,
  "lines": [
   {
    "id": "u05",
    "clip": 15,
-   "text": "For Kaarna, Fatima is suggested, with the reasons. The recruiter approves the meeting.",
+   "text": "There is no ranking. For each company, people are suggested or need more information, always with the reasons. Fatima is suggested for Kaarna, and the recruiter approves the meeting.",
    "start": 0.3,
-   "dur": 4.911,
+   "dur": 10.109,
    "words": [
     {
-     "w": "For",
+     "w": "There",
      "start": 0.358,
-     "end": 0.497
-    },
-    {
-     "w": "Kaarna,",
-     "start": 0.555,
-     "end": 0.892
-    },
-    {
-     "w": "Fatima",
-     "start": 0.927,
-     "end": 1.31
+     "end": 0.509
     },
     {
      "w": "is",
-     "start": 1.345,
-     "end": 1.403
+     "start": 0.544,
+     "end": 0.602
     },
     {
-     "w": "suggested,",
-     "start": 1.438,
-     "end": 2.041
+     "w": "no",
+     "start": 0.648,
+     "end": 0.73
     },
     {
-     "w": "with",
-     "start": 2.169,
-     "end": 2.32
+     "w": "ranking.",
+     "start": 0.822,
+     "end": 1.322
     },
     {
-     "w": "the",
-     "start": 2.355,
-     "end": 2.425
+     "w": "For",
+     "start": 1.682,
+     "end": 1.833
     },
     {
-     "w": "reasons.",
-     "start": 2.483,
+     "w": "each",
+     "start": 1.902,
+     "end": 2.076
+    },
+    {
+     "w": "company,",
+     "start": 2.123,
+     "end": 2.552
+    },
+    {
+     "w": "people",
+     "start": 2.587,
+     "end": 2.831
+    },
+    {
+     "w": "are",
+     "start": 2.854,
      "end": 2.959
     },
     {
-     "w": "The",
-     "start": 3.423,
+     "w": "suggested",
+     "start": 2.982,
      "end": 3.539
     },
     {
-     "w": "recruiter",
-     "start": 3.62,
-     "end": 4.015
+     "w": "or",
+     "start": 3.586,
+     "end": 3.667
     },
     {
-     "w": "approves",
-     "start": 4.062,
-     "end": 4.41
+     "w": "need",
+     "start": 3.713,
+     "end": 3.864
+    },
+    {
+     "w": "more",
+     "start": 3.911,
+     "end": 4.05
+    },
+    {
+     "w": "information,",
+     "start": 4.085,
+     "end": 4.816
+    },
+    {
+     "w": "always",
+     "start": 4.898,
+     "end": 5.281
+    },
+    {
+     "w": "with",
+     "start": 5.316,
+     "end": 5.432
     },
     {
      "w": "the",
-     "start": 4.433,
-     "end": 4.503
+     "start": 5.466,
+     "end": 5.536
+    },
+    {
+     "w": "reasons.",
+     "start": 5.583,
+     "end": 6.14
+    },
+    {
+     "w": "Fatima",
+     "start": 6.5,
+     "end": 6.883
+    },
+    {
+     "w": "is",
+     "start": 6.929,
+     "end": 6.999
+    },
+    {
+     "w": "suggested",
+     "start": 7.034,
+     "end": 7.579
+    },
+    {
+     "w": "for",
+     "start": 7.626,
+     "end": 7.73
+    },
+    {
+     "w": "Kaarna,",
+     "start": 7.788,
+     "end": 8.311
+    },
+    {
+     "w": "and",
+     "start": 8.473,
+     "end": 8.613
+    },
+    {
+     "w": "the",
+     "start": 8.659,
+     "end": 8.729
+    },
+    {
+     "w": "recruiter",
+     "start": 8.798,
+     "end": 9.24
+    },
+    {
+     "w": "approves",
+     "start": 9.298,
+     "end": 9.658
+    },
+    {
+     "w": "the",
+     "start": 9.692,
+     "end": 9.762
     },
     {
      "w": "meeting.",
-     "start": 4.549,
-     "end": 4.956
+     "start": 9.809,
+     "end": 10.18
     }
    ]
   }
