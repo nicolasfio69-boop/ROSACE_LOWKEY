@@ -123,6 +123,7 @@ scripts/        Local launcher and Claude connection check
 - [Deployment](docs/DEPLOYMENT.md): configuration, Docker, Aiven Runtime
 - [Credits](docs/CREDITS.md): third-party UI adaptations
 - [Decision log](docs/CADRAGE.md) (French): every product decision, dated
+- [Security](SECURITY.md) and [Changelog](CHANGELOG.md)
 
 ## How it was built
 
