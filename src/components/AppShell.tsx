@@ -310,7 +310,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </div>
         <footer className="app-footer">
-          <span>Rosace / Junction 2026</span>
+          <span>
+            Inspired by a real, working competency system designed at École
+            Centrale de Lyon
+          </span>
         </footer>
       </div>
     </div>
