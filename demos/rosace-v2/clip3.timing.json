@@ -1,78 +1,78 @@
 {
  "clip": 3,
- "total": 28.959,
+ "total": 27.13,
  "lines": [
   {
    "id": "s07",
    "clip": 3,
    "text": "Everyone uses the same twelve skills, in five families. That is the rosace.",
    "start": 0.4,
-   "dur": 5.329,
+   "dur": 4.859,
    "words": [
     {
      "w": "Everyone",
-     "start": 0.446,
-     "end": 0.864
+     "start": 0.435,
+     "end": 0.876
     },
     {
      "w": "uses",
-     "start": 0.911,
-     "end": 1.213
+     "start": 0.934,
+     "end": 1.248
     },
     {
      "w": "the",
-     "start": 1.271,
-     "end": 1.34
+     "start": 1.306,
+     "end": 1.387
     },
     {
      "w": "same",
-     "start": 1.387,
-     "end": 1.642
+     "start": 1.445,
+     "end": 1.7
     },
     {
      "w": "twelve",
-     "start": 1.689,
-     "end": 2.002
+     "start": 1.735,
+     "end": 2.037
     },
     {
      "w": "skills,",
-     "start": 2.037,
-     "end": 2.571
+     "start": 2.072,
+     "end": 2.467
     },
     {
      "w": "in",
-     "start": 2.606,
-     "end": 2.734
+     "start": 2.49,
+     "end": 2.559
     },
     {
      "w": "five",
-     "start": 2.826,
-     "end": 3.105
+     "start": 2.629,
+     "end": 2.885
     },
     {
      "w": "families.",
-     "start": 3.14,
-     "end": 3.802
+     "start": 2.931,
+     "end": 3.43
     },
     {
      "w": "That",
-     "start": 4.208,
-     "end": 4.463
+     "start": 3.837,
+     "end": 4.115
     },
     {
      "w": "is",
-     "start": 4.522,
-     "end": 4.591
+     "start": 4.185,
+     "end": 4.278
     },
     {
      "w": "the",
-     "start": 4.649,
-     "end": 4.719
+     "start": 4.324,
+     "end": 4.394
     },
     {
      "w": "rosace.",
-     "start": 4.777,
-     "end": 5.462
+     "start": 4.44,
+     "end": 4.974
     }
    ]
   },
@@ -80,93 +80,93 @@
    "id": "s08",
    "clip": 3,
    "text": "Each level describes a real situation. Get it right, Intermediate: your work passes review with few corrections.",
-   "start": 6.729,
-   "dur": 7.419,
+   "start": 6.259,
+   "dur": 7.131,
    "words": [
     {
      "w": "Each",
-     "start": 6.787,
-     "end": 7.031
+     "start": 6.294,
+     "end": 6.607
     },
     {
      "w": "level",
-     "start": 7.089,
-     "end": 7.321
+     "start": 6.735,
+     "end": 7.095
     },
     {
      "w": "describes",
-     "start": 7.379,
-     "end": 7.902
+     "start": 7.176,
+     "end": 7.687
     },
     {
      "w": "a",
-     "start": 7.936,
-     "end": 7.971
+     "start": 7.733,
+     "end": 7.768
     },
     {
      "w": "real",
-     "start": 8.041,
-     "end": 8.262
+     "start": 7.838,
+     "end": 8.012
     },
     {
      "w": "situation.",
-     "start": 8.32,
-     "end": 9.155
+     "start": 8.07,
+     "end": 8.778
     },
     {
      "w": "Get",
-     "start": 9.701,
-     "end": 9.887
+     "start": 9.185,
+     "end": 9.37
     },
     {
      "w": "it",
-     "start": 9.933,
-     "end": 10.003
+     "start": 9.405,
+     "end": 9.475
     },
     {
      "w": "right,",
-     "start": 10.061,
-     "end": 10.375
+     "start": 9.533,
+     "end": 9.823
     },
     {
      "w": "Intermediate:",
-     "start": 10.398,
-     "end": 11.176
+     "start": 9.846,
+     "end": 10.473
     },
     {
      "w": "your",
-     "start": 11.396,
-     "end": 11.547
+     "start": 10.81,
+     "end": 10.984
     },
     {
      "w": "work",
-     "start": 11.605,
-     "end": 11.826
+     "start": 11.042,
+     "end": 11.251
     },
     {
      "w": "passes",
-     "start": 11.895,
-     "end": 12.279
+     "start": 11.309,
+     "end": 11.692
     },
     {
      "w": "review",
-     "start": 12.348,
-     "end": 12.65
+     "start": 11.774,
+     "end": 12.076
     },
     {
      "w": "with",
-     "start": 12.708,
-     "end": 12.847
+     "start": 12.122,
+     "end": 12.261
     },
     {
      "w": "few",
-     "start": 12.894,
-     "end": 13.068
+     "start": 12.296,
+     "end": 12.424
     },
     {
      "w": "corrections.",
-     "start": 13.126,
-     "end": 13.892
+     "start": 12.482,
+     "end": 13.097
     }
    ]
   },
@@ -174,58 +174,58 @@
    "id": "s09",
    "clip": 3,
    "text": "The company picks its three most important skills, in gold.",
-   "start": 15.148,
-   "dur": 3.788,
+   "start": 14.39,
+   "dur": 3.291,
    "words": [
     {
      "w": "The",
-     "start": 15.206,
-     "end": 15.299
+     "start": 14.448,
+     "end": 14.541
     },
     {
      "w": "company",
-     "start": 15.357,
-     "end": 15.67
+     "start": 14.599,
+     "end": 14.889
     },
     {
      "w": "picks",
-     "start": 15.728,
-     "end": 15.961
+     "start": 14.947,
+     "end": 15.168
     },
     {
      "w": "its",
-     "start": 15.996,
-     "end": 16.112
+     "start": 15.203,
+     "end": 15.307
     },
     {
      "w": "three",
-     "start": 16.158,
-     "end": 16.379
+     "start": 15.354,
+     "end": 15.563
     },
     {
      "w": "most",
-     "start": 16.437,
-     "end": 16.634
+     "start": 15.609,
+     "end": 15.783
     },
     {
      "w": "important",
-     "start": 16.681,
-     "end": 17.098
+     "start": 15.818,
+     "end": 16.178
     },
     {
      "w": "skills,",
-     "start": 17.145,
-     "end": 17.76
+     "start": 16.201,
+     "end": 16.608
     },
     {
      "w": "in",
-     "start": 17.888,
-     "end": 18.027
+     "start": 16.642,
+     "end": 16.828
     },
     {
      "w": "gold.",
-     "start": 18.12,
-     "end": 18.631
+     "start": 16.909,
+     "end": 17.374
     }
    ]
   },
@@ -233,103 +233,103 @@
    "id": "s10",
    "clip": 3,
    "text": "After the talk, the recruiter notes what they saw: A, seen clearly. C, seen in part. F, not seen.",
-   "start": 19.936,
-   "dur": 7.523,
+   "start": 18.682,
+   "dur": 6.949,
    "words": [
     {
      "w": "After",
-     "start": 19.971,
-     "end": 20.215
+     "start": 18.717,
+     "end": 18.961
     },
     {
      "w": "the",
-     "start": 20.261,
-     "end": 20.342
+     "start": 19.019,
+     "end": 19.088
     },
     {
      "w": "talk,",
-     "start": 20.389,
-     "end": 20.679
+     "start": 19.135,
+     "end": 19.425
     },
     {
      "w": "the",
-     "start": 20.702,
-     "end": 20.772
+     "start": 19.448,
+     "end": 19.518
     },
     {
      "w": "recruiter",
-     "start": 20.83,
-     "end": 21.225
+     "start": 19.576,
+     "end": 19.936
     },
     {
      "w": "notes",
-     "start": 21.294,
-     "end": 21.492
+     "start": 19.994,
+     "end": 20.168
     },
     {
      "w": "what",
-     "start": 21.527,
-     "end": 21.643
+     "start": 20.191,
+     "end": 20.296
     },
     {
      "w": "they",
-     "start": 21.677,
-     "end": 21.805
+     "start": 20.319,
+     "end": 20.423
     },
     {
      "w": "saw:",
-     "start": 21.863,
-     "end": 22.374
+     "start": 20.458,
+     "end": 20.911
     },
     {
      "w": "A,",
-     "start": 22.641,
-     "end": 22.92
+     "start": 21.317,
+     "end": 21.654
     },
     {
      "w": "seen",
-     "start": 22.955,
-     "end": 23.233
+     "start": 21.689,
+     "end": 21.886
     },
     {
      "w": "clearly.",
-     "start": 23.326,
-     "end": 23.86
+     "start": 21.956,
+     "end": 22.49
     },
     {
      "w": "C,",
-     "start": 24.162,
-     "end": 24.534
+     "start": 22.827,
+     "end": 23.14
     },
     {
      "w": "seen",
-     "start": 24.592,
-     "end": 24.801
+     "start": 23.163,
+     "end": 23.326
     },
     {
      "w": "in",
-     "start": 24.859,
-     "end": 24.917
+     "start": 23.384,
+     "end": 23.442
     },
     {
      "w": "part.",
-     "start": 25.01,
-     "end": 25.52
+     "start": 23.489,
+     "end": 23.895
     },
     {
      "w": "F,",
-     "start": 26.066,
-     "end": 26.345
+     "start": 24.301,
+     "end": 24.568
     },
     {
      "w": "not",
-     "start": 26.391,
-     "end": 26.589
+     "start": 24.615,
+     "end": 24.859
     },
     {
      "w": "seen.",
-     "start": 26.647,
-     "end": 27.134
+     "start": 24.917,
+     "end": 25.346
     }
    ]
   }

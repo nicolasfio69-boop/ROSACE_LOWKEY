@@ -1,12 +1,13 @@
 [
- {"id":"s01","clip":1,"text":"Espoo. A recruitment evening. Four companies, ten talents, fifteen minutes per conversation."},
- {"id":"s02","clip":1,"text":"This is Fatima. She was a pharmacy assistant, then she learned to code in a bootcamp."},
- {"id":"s03","clip":1,"text":"And this is Kaarna Health, a small Espoo start-up looking for a junior web developer."},
- {"id":"s04","clip":1,"text":"Fatima's CV was polished by AI, like everyone else's. Kaarna can't tell what is real."},
- {"id":"s05","clip":1,"text":"Rosace turns each claim into a question Kaarna can check during the conversation."},
- {"id":"s06","clip":2,"text":"Rosace has three spaces: the company describes its need, the talent builds a skills card, and the organiser prepares the meetings."},
- {"id":"s07","clip":3,"text":"Everyone uses the same twelve skills, in five families. That is the rosace."},
- {"id":"s08","clip":3,"text":"Each level describes a real situation. Get it right, Intermediate: your work passes review with few corrections."},
- {"id":"s09","clip":3,"text":"The company picks its three most important skills, in gold."},
- {"id":"s10","clip":3,"text":"After the talk, the recruiter notes what they saw: A, seen clearly. C, seen in part. F, not seen."}
+ {"id": "s01", "clip": 1, "text": "Espoo. A recruitment evening. Four companies, ten talents, fifteen minutes per conversation."},
+ {"id": "s02", "clip": 1, "text": "This is Fatima. She was a pharmacy assistant, then she learned to code in a bootcamp."},
+ {"id": "s03", "clip": 1, "text": "And this is Kaarna Health, a small Espoo start-up looking for a junior web developer."},
+ {"id": "s04", "clip": 1, "text": "Fatima's CV was polished by AI, like everyone else's. Kaarna can't tell what is real."},
+ {"id": "s05", "clip": 1, "text": "Rosace measures skills on one shared map: Kaarna sets the level each skill needs, and Fatima shows the level she has."},
+ {"id": "s05b", "clip": 1, "text": "Rosace matches the two, then checks each skill: before the meeting with a short exercise, or during the conversation with a targeted question. The recruiter decides."},
+ {"id": "s06", "clip": 2, "text": "Rosace has three spaces: the company describes its need, the talent builds a skills card, and the organiser prepares the meetings."},
+ {"id": "s07", "clip": 3, "text": "Everyone uses the same twelve skills, in five families. That is the rosace."},
+ {"id": "s08", "clip": 3, "text": "Each level describes a real situation. Get it right, Intermediate: your work passes review with few corrections."},
+ {"id": "s09", "clip": 3, "text": "The company picks its three most important skills, in gold."},
+ {"id": "s10", "clip": 3, "text": "After the talk, the recruiter notes what they saw: A, seen clearly. C, seen in part. F, not seen."}
 ]
