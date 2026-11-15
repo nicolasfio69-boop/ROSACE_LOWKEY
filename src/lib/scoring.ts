@@ -11,11 +11,12 @@ import { isComponent, type ExpectedLevel, type LevelValue } from "./framework";
 
 /**
  * Shape of a need, as in the Centrale tool: exactly three major components (gold on the rosace),
- * up to two minor components, and, on top of the Centrale base, up to two job skills.
+ * any number of the other components as minors (as in the Centrale grid), and, on top of the
+ * Centrale base, up to three technical skills.
  */
 export const MAJOR_COUNT = 3;
-export const MAX_MINORS = 2;
-export const MAX_JOB_SKILLS = 2;
+/** No real limit: every component that is not a major can be a minor, as in the Centrale grid. */
+export const MAX_JOB_SKILLS = 3;
 export const MAJOR_WEIGHT = 2;
 export const MINOR_WEIGHT = 1;
 export const JOB_SKILL_WEIGHT = 2;
@@ -100,11 +101,21 @@ export function checkNeed(need: Need): string[] {
   const jobSkills = need.requirements.filter((r) => !isComponent(r.skill));
   const majors = components.filter((r) => r.major);
   const problems: string[] = [];
-  if (majors.length !== MAJOR_COUNT) problems.push(`Pick exactly ${MAJOR_COUNT} major components (now ${majors.length}).`);
-  if (components.length - majors.length > MAX_MINORS) problems.push(`At most ${MAX_MINORS} minor components.`);
-  if (jobSkills.length > MAX_JOB_SKILLS) problems.push(`At most ${MAX_JOB_SKILLS} job skills.`);
-  if (jobSkills.some((r) => r.major)) problems.push("A job skill cannot be a major: majors are Centrale components.");
-  if (new Set(need.requirements.map((r) => r.skill)).size !== need.requirements.length) problems.push("Each skill only once.");
+  if (majors.length !== MAJOR_COUNT)
+    problems.push(
+      `Pick exactly ${MAJOR_COUNT} major components (now ${majors.length}).`,
+    );
+  if (jobSkills.length > MAX_JOB_SKILLS)
+    problems.push(`At most ${MAX_JOB_SKILLS} job skills.`);
+  if (jobSkills.some((r) => r.major))
+    problems.push(
+      "A job skill cannot be a major: majors are Centrale components.",
+    );
+  if (
+    new Set(need.requirements.map((r) => r.skill)).size !==
+    need.requirements.length
+  )
+    problems.push("Each skill only once.");
   return problems;
 }
 
@@ -130,7 +141,10 @@ export function align(need: Need, talent: Talent): Alignment {
   });
 
   const totalWeight = rows.reduce((sum, row) => sum + row.weight, 0);
-  const coveredWeight = rows.reduce((sum, row) => sum + (row.level === null ? 0 : row.weight), 0);
+  const coveredWeight = rows.reduce(
+    (sum, row) => sum + (row.level === null ? 0 : row.weight),
+    0,
+  );
 
   return {
     needId: need.id,
@@ -139,12 +153,19 @@ export function align(need: Need, talent: Talent): Alignment {
     max: rows.reduce((sum, row) => sum + row.max, 0),
     coveredWeight,
     totalWeight,
-    complete: totalWeight > 0 && coveredWeight / totalWeight >= COVERAGE_THRESHOLD,
-    missingMajors: rows.filter((row) => row.requirement.major && row.status !== "met").map((row) => row.requirement.skill),
-    missingJobSkills: rows
-      .filter((row) => !isComponent(row.requirement.skill) && row.status !== "met")
+    complete:
+      totalWeight > 0 && coveredWeight / totalWeight >= COVERAGE_THRESHOLD,
+    missingMajors: rows
+      .filter((row) => row.requirement.major && row.status !== "met")
       .map((row) => row.requirement.skill),
-    aboveExpected: rows.filter((row) => row.aboveExpected).map((row) => row.requirement.skill),
+    missingJobSkills: rows
+      .filter(
+        (row) => !isComponent(row.requirement.skill) && row.status !== "met",
+      )
+      .map((row) => row.requirement.skill),
+    aboveExpected: rows
+      .filter((row) => row.aboveExpected)
+      .map((row) => row.requirement.skill),
     rows,
   };
 }
@@ -159,10 +180,17 @@ export const OBSERVATION_LABELS: Record<Observation, string> = {
   NE: "Not covered",
 };
 
-const PERFORMANCE: Record<Exclude<Observation, "NE">, number> = { A: 1, C: 0.6, F: 0 };
+const PERFORMANCE: Record<Exclude<Observation, "NE">, number> = {
+  A: 1,
+  C: 0.6,
+  F: 0,
+};
 
 /** Observed value = level points × performance. "Not covered" yields nothing. Never added to the declared value. */
-export function observedValue(level: LevelValue, observation: Observation): number | null {
+export function observedValue(
+  level: LevelValue,
+  observation: Observation,
+): number | null {
   if (observation === "NE") return null;
   return level * PERFORMANCE[observation];
 }

@@ -16,8 +16,12 @@ describe("framework", () => {
   });
 
   it("only uses known skill codes in the demo data", () => {
-    for (const n of NEEDS) for (const r of n.requirements) expect(SKILL_CODES.has(r.skill)).toBe(true);
-    for (const t of TALENTS) for (const code of Object.keys(t.statements)) expect(SKILL_CODES.has(code)).toBe(true);
+    for (const n of NEEDS)
+      for (const r of n.requirements)
+        expect(SKILL_CODES.has(r.skill)).toBe(true);
+    for (const t of TALENTS)
+      for (const code of Object.keys(t.statements))
+        expect(SKILL_CODES.has(code)).toBe(true);
     expect(JOB_SKILLS.length).toBeGreaterThan(0);
   });
 
@@ -27,10 +31,22 @@ describe("framework", () => {
 
   it("refuses a job skill as a major, and a need without three majors", () => {
     const n = need("nordchip-embedded");
-    const jobMajor = { ...n, requirements: n.requirements.map((r) => (r.skill === "J.EMBEDDED_C" ? { ...r, major: true } : r)) };
-    expect(checkNeed(jobMajor)).toContain("A job skill cannot be a major: majors are Centrale components.");
-    const twoMajors = { ...n, requirements: n.requirements.filter((r) => r.skill !== "C5.2") };
-    expect(checkNeed(twoMajors)).toContain("Pick exactly 3 major components (now 2).");
+    const jobMajor = {
+      ...n,
+      requirements: n.requirements.map((r) =>
+        r.skill === "J.EMBEDDED_C" ? { ...r, major: true } : r,
+      ),
+    };
+    expect(checkNeed(jobMajor)).toContain(
+      "A job skill cannot be a major: majors are Centrale components.",
+    );
+    const twoMajors = {
+      ...n,
+      requirements: n.requirements.filter((r) => r.skill !== "C5.2"),
+    };
+    expect(checkNeed(twoMajors)).toContain(
+      "Pick exactly 3 major components (now 2).",
+    );
   });
 });
 
@@ -53,7 +69,9 @@ describe("declared alignment (worked example)", () => {
 
   it("caps the level at the expected level, and shows what is above", () => {
     const a = align(need("nordchip-embedded"), talent("amira"));
-    const embedded = a.rows.find((r) => r.requirement.skill === "J.EMBEDDED_C")!;
+    const embedded = a.rows.find(
+      (r) => r.requirement.skill === "J.EMBEDDED_C",
+    )!;
     expect(embedded.level).toBe(3);
     expect(embedded.points).toBe(4);
     expect(a.aboveExpected).toContain("J.EMBEDDED_C");
@@ -61,7 +79,9 @@ describe("declared alignment (worked example)", () => {
 
   it("a CV mention without detail counts as unknown, not as a level", () => {
     const a = align(need("nordchip-embedded"), talent("amira"));
-    const protocols = a.rows.find((r) => r.requirement.skill === "J.PROTOCOLS")!;
+    const protocols = a.rows.find(
+      (r) => r.requirement.skill === "J.PROTOCOLS",
+    )!;
     expect(protocols.status).toBe("mentioned");
     expect(protocols.points).toBe(0);
   });
@@ -70,9 +90,14 @@ describe("declared alignment (worked example)", () => {
     const withLink = talent("amira");
     const withoutLink = {
       ...withLink,
-      statements: { ...withLink.statements, "J.EMBEDDED_C": { level: 3 as const, evidence: "declared" as const } },
+      statements: {
+        ...withLink.statements,
+        "J.EMBEDDED_C": { level: 3 as const, evidence: "declared" as const },
+      },
     };
-    expect(align(need("nordchip-embedded"), withoutLink).points).toBe(align(need("nordchip-embedded"), withLink).points);
+    expect(align(need("nordchip-embedded"), withoutLink).points).toBe(
+      align(need("nordchip-embedded"), withLink).points,
+    );
   });
 
   it("lists majors and job skills that are unknown or below expectations, even with a complete card", () => {
@@ -95,14 +120,31 @@ describe("observation grid", () => {
 describe("suggestions", () => {
   it("suggests the best aligned eligible talents up to the capacity", () => {
     const result = suggestForNeed(need("nordchip-embedded"), TALENTS);
-    expect(result.suggested.map((a) => a.talentId)).toEqual(["lin", "amira", "sofia"]);
+    expect(result.suggested.map((a) => a.talentId)).toEqual([
+      "lin",
+      "amira",
+      "sofia",
+    ]);
     expect(result.tied).toEqual([]);
   });
 
   it("never breaks a tie at the cut: tied talents go to the organiser", () => {
+    const result = suggestForNeed(need("vireo-data"), TALENTS);
+    expect(result.suggested.map((a) => a.talentId)).toEqual(["omar"]);
+    expect(result.tied.map((a) => a.talentId).sort()).toEqual([
+      "priya",
+      "tuomas",
+    ]);
+  });
+
+  it("a tie above the cut is not a tie for the organiser", () => {
     const result = suggestForNeed(need("lumora-support"), TALENTS);
-    expect(result.suggested.map((a) => a.talentId)).toEqual(["mateo", "sofia"]);
-    expect(result.tied.map((a) => a.talentId).sort()).toEqual(["amira", "lin"]);
+    expect(result.suggested.map((a) => a.talentId)).toEqual([
+      "elina",
+      "mateo",
+      "sofia",
+    ]);
+    expect(result.tied).toEqual([]);
   });
 
   it("shows the organiser who has no suggestion, and why", () => {
