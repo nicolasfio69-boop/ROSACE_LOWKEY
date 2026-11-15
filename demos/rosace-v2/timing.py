@@ -6,6 +6,7 @@ gap = float(sys.argv[3]) if len(sys.argv) > 3 else 0.9; tail = float(sys.argv[4]
 lines = [l for l in json.load(open("lines.json")) if l["clip"] == clip]
 t = lead; out = []
 for l in lines:
+    if out: t += l.get("pause", gap) - gap   # per-line pause before, when set
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f"voice/{l['id']}.mp3"]).decode())
     vj = json.load(open(f"voice/{l['id']}.json")); al = vj["alignment"]
     k = "".join(al["characters"]).find(vj["spoken"]); assert k >= 0, l["id"]

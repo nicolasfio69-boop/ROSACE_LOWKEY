@@ -35,6 +35,7 @@ for i, cu in enumerate(cues):
     if not eol and i + 1 < len(cues):  # same line: hold until the next cue starts
         end = [w for w in cues[i + 1] if "w" in w][0]["start"] - 0.08
     out.append((start, end, " ".join(w["w"] for w in words)))
+out = [(s, min(e, out[i + 1][0] - 0.02) if i + 1 < len(out) else e, t) for i, (s, e, t) in enumerate(out)]  # never two cues at once
 head = """[Script Info]
 ScriptType: v4.00+
 PlayResX: 1920

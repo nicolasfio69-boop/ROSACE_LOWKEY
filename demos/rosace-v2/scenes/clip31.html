@@ -167,30 +167,30 @@ function grow(sel, levels, p) {
   $$(sel).forEach((el) => { const i = +el.dataset.i, [x, y] = pt(i, HB * 0.5 + (rr(levels[i]) - HB * 0.5) * p); el.setAttribute('x2', x); el.setAttribute('y2', y); el.style.opacity = p > 0.01 ? 1 : 0 })
 }
 
-const A_OUT = W('i01', 'This') - 0.45, B_SHIFT = L('i02') - 0.35, C_OUT = L('i03') - 0.45, D_OUT = TIMING.total + 5
+const A_OUT = L('i01b') - 0.45, B_SHIFT = L('i02') - 0.35, C_OUT = L('i03') - 0.45, D_OUT = TIMING.total + 5
 
 window.setT = (t) => {
   // A — the event
   const aOut = 1 - ramp(t, A_OUT, 0.45)
   rise('#a-eyebrow', Math.min(ramp(t, 0.05, 0.6), aOut))
-  rise('#a-title', Math.min(ramp(t, W('i01', 'a', 0) - 0.2, 0.6), aOut))
-  $$('#a-companies .co').forEach((el, i) => rise(el, Math.min(ramp(t, W('i01', 'recruitment') - 0.1 + i * 0.12, 0.45), aOut)))
-  rise('#a-colab', Math.min(ramp(t, W('i01', 'recruitment') + 0.3, 0.4), aOut), 10)
-  $$('#a-talents .tal').forEach((el, i) => put(el, { o: Math.min(ramp(t, W('i01', 'evening') - 0.1 + i * 0.06, 0.35), aOut), s: 0.6 + 0.4 * ramp(t, W('i01', 'evening') - 0.1 + i * 0.06, 0.35) }))
-  rise('#a-talab', Math.min(ramp(t, W('i01', 'evening') + 0.3, 0.4), aOut), 10)
-  rise('#a-clock', Math.min(ramp(t, 999 - 0.1, 0.45), aOut))
+  rise('#a-title', Math.min(ramp(t, W('i00', 'Espoo') - 0.2, 0.6), aOut))
+  $$('#a-companies .co').forEach((el, i) => rise(el, Math.min(ramp(t, W('i00', 'four') - 0.1 + i * 0.12, 0.45), aOut)))
+  rise('#a-colab', Math.min(ramp(t, W('i00', 'companies'), 0.4), aOut), 10)
+  $$('#a-talents .tal').forEach((el, i) => put(el, { o: Math.min(ramp(t, W('i00', 'ten') - 0.1 + i * 0.06, 0.35), aOut), s: 0.6 + 0.4 * ramp(t, W('i00', 'ten') - 0.1 + i * 0.06, 0.35) }))
+  rise('#a-talab', Math.min(ramp(t, W('i00', 'job'), 0.4), aOut), 10)
+  rise('#a-clock', Math.min(ramp(t, W('i00', 'fifteen') - 0.1, 0.45), aOut))
 
   // B — Fatima, then shrinks left for C
-  const bIn = ramp(t, W('i01', 'This') - 0.3, 0.6)
+  const bIn = ramp(t, L('i01b') - 0.3, 0.6)
   const shift = easeInOut((t - B_SHIFT) / 0.8)
   const bOut = 1 - ramp(t, C_OUT, 0.45)
   put('#fatima', { o: Math.min(bIn, bOut), x: -60 * shift, y: (1 - bIn) * 30 + 40 * shift, s: 1 - 0.18 * shift })
   const pathO = Math.min(1 - ramp(t, B_SHIFT, 0.4), bOut)
   put('#path-line', { o: pathO, s: 1 })
-  $('#path-line').style.transform = `scaleY(${ramp(t, W('i01', 'pharmacy') - 0.2, 2.2)})`
-  rise('#st1', Math.min(ramp(t, W('i01', 'pharmacy') - 0.15, 0.5), pathO))
-  rise('#st2', Math.min(ramp(t, W('i01', 'bootcamp') - 0.6, 0.5), pathO))
-  rise('#st3', Math.min(ramp(t, W('i01', 'bootcamp') + 0.35, 0.5), pathO))
+  $('#path-line').style.transform = `scaleY(${ramp(t, W('i01c', 'pharmacy') - 0.2, 2.2)})`
+  rise('#st1', Math.min(ramp(t, W('i01c', 'pharmacy') - 0.15, 0.5), pathO))
+  rise('#st2', Math.min(ramp(t, W('i01c', 'bootcamp') - 0.6, 0.5), pathO))
+  rise('#st3', Math.min(ramp(t, W('i01c', 'bootcamp') + 0.35, 0.5), pathO))
 
   // C — Kaarna
   const cIn = ramp(t, W('i02', 'Kaarna') - 0.2, 0.6)

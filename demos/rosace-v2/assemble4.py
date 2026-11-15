@@ -25,11 +25,11 @@ SEGS = {
     41: (V1, [(29.0, 39.6, WIN, None, None)], 0.3),
     12: (V1, [(48.6, 57.6, WIN, None, None)], 0.3),
     14: (V1, [(86.7, 91.0, WIN, None, None), (99.3, 105.0, WIN, None, None)], 0.3),
-    21: (CODE, [(3.0, 5.3, ZWIN, 1.4, None), (5.3, 9.9, PROMPT, 3.8, None),
-                (11.5, 19.4, TYPE, 4.2, "Demo answer, typed for this video"), (21.0, 22.6, WIN, 0.8, None)], 0),
-    22: (CODE, [(33.2, 36.3, ZWIN, 2.4, None), (42.6, 49.4, REC, 6.0, None), (49.4, 50.8, REC, 1.2, None),
-                (50.8, 53.4, GRADE, 1.6, None)], 0),
-    43: (CODE, [(53.4, 55.9, ASIDE, 2.6, None)], 0),
+    21: (CODE, [(3.0, 5.3, ZWIN, 1.3, None), (5.3, 9.9, PROMPT, 3.6, None),
+                (11.5, 19.4, TYPE, 4.0, "Demo answer, typed for this video"), (21.0, 22.6, WIN, 0.7, None)], 0),
+    22: (CODE, [(33.2, 36.3, ZWIN, 2.3, None), (42.6, 49.4, REC, 5.8, None), (49.4, 50.8, REC, 1.2, None),
+                (50.8, 53.4, GRADE, 1.5, None)], 0),
+    43: (CODE, [(53.4, 55.9, ASIDE, 2.4, None)], 0),
     15: (V1, [(128.4, 145.5, WIN, None, None)], 0.3),
     16: (V1, [(146.0, 151.5, WIN, None, None)], 0.2),
     17: (V1, [(153.4, 163.5, WIN, None, None)], 0.3),
@@ -64,16 +64,19 @@ def norm(src, dst, t=None, af=LOUD):
 for c in SEGS: tool(c)
 norm("out/clip31.mp4", "out/v4seg31.mp4")
 norm("out/clip33.mp4", "out/v4seg33.mp4")
-L24 = total(24) + 0.4
+L24 = total(24) + 0.2
 run(["-loop", "1", "-t", f"{L24:.3f}", "-i", "scenes/endcard.png", "-i", "out/clip24.wav",
      "-vf", f"fps=30,fade=t=in:d=0.3,fade=t=out:st={L24 - 0.4:.3f}:d=0.4,{subs(24)}", "-af", f"apad,{LOUD}",
      "-t", f"{L24:.3f}", *ENC, "out/v4seg24.mp4"])
-order = [31, 50, 41, 33, 12, 14, 21, 22, 43, 15, 16, 17, 24]   # 50 = Nicolas, made separately (8 s)
-open("out/concat4.txt", "w").write("".join(f"file 'v4seg{c}.mp4'\n" for c in order))
+REST, SPEED = [41, 33, 12, 14, 21, 22, 43, 15, 16, 17, 24], 1.04   # after Nicolas: voice and picture x1.04 to fit 2:00
+order = [31, 50] + REST                                           # 50 = Nicolas, made separately (8 s)
+open("out/concat4r.txt", "w").write("".join(f"file 'v4seg{c}.mp4'\n" for c in REST))
+run(["-f", "concat", "-safe", "0", "-i", "out/concat4r.txt", "-vf", f"setpts=PTS/{SPEED},fps=30", "-af", f"atempo={SPEED}", *ENC, "out/v4rest.mp4"])
+open("out/concat4.txt", "w").write("file 'v4seg31.mp4'\nfile 'v4seg50.mp4'\nfile 'v4rest.mp4'\n")
 run(["-f", "concat", "-safe", "0", "-i", "out/concat4.txt", "-c", "copy", "out/rosace-v4-full.mp4"])
 d = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", "out/rosace-v4-full.mp4"]))
 t = 0
-for c in order:
-    dd = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f"out/v4seg{c}.mp4"]))
-    print(f"seg{c:>2} starts {t:6.2f}s  {dd:5.2f}s"); t += dd
+for c in [31, 50, "rest"]:
+    dd = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f"out/v4seg{c}.mp4" if c != "rest" else "out/v4rest.mp4"]))
+    print(f"seg{c!s:>4} starts {t:6.2f}s  {dd:5.2f}s"); t += dd
 print("final", round(d, 2), "s")

@@ -1,98 +1,175 @@
 {
  "clip": 31,
- "total": 16.598,
+ "total": 22.415,
  "lines": [
   {
-   "id": "i01",
+   "id": "i00",
    "clip": 31,
-   "text": "Espoo, a recruitment evening. This is Fatima: a pharmacy assistant who learned to code in a bootcamp.",
-   "start": 0.4,
-   "dur": 6.217,
+   "text": "Espoo hosts a recruitment evening: four local companies meet ten job seekers, in fifteen-minute conversations.",
+   "start": 0.6,
+   "dur": 6.766,
    "words": [
     {
-     "w": "Espoo,",
-     "start": 0.435,
-     "end": 1.073
+     "w": "Espoo",
+     "start": 0.635,
+     "end": 1.053
+    },
+    {
+     "w": "hosts",
+     "start": 1.134,
+     "end": 1.424
     },
     {
      "w": "a",
-     "start": 1.108,
-     "end": 1.189
+     "start": 1.471,
+     "end": 1.506
     },
     {
      "w": "recruitment",
-     "start": 1.271,
-     "end": 1.724
+     "start": 1.575,
+     "end": 2.028
     },
     {
-     "w": "evening.",
-     "start": 1.77,
-     "end": 2.211
+     "w": "evening:",
+     "start": 2.074,
+     "end": 2.516
     },
     {
-     "w": "This",
-     "start": 2.525,
-     "end": 2.699
+     "w": "four",
+     "start": 2.934,
+     "end": 3.154
     },
     {
-     "w": "is",
-     "start": 2.757,
-     "end": 2.838
+     "w": "local",
+     "start": 3.224,
+     "end": 3.491
     },
     {
-     "w": "Fatima:",
-     "start": 2.896,
-     "end": 3.453
+     "w": "companies",
+     "start": 3.549,
+     "end": 3.967
     },
     {
-     "w": "a",
-     "start": 3.767,
-     "end": 3.837
+     "w": "meet",
+     "start": 4.025,
+     "end": 4.211
     },
     {
-     "w": "pharmacy",
-     "start": 3.906,
-     "end": 4.347
+     "w": "ten",
+     "start": 4.257,
+     "end": 4.478
     },
     {
-     "w": "assistant",
-     "start": 4.405,
-     "end": 4.858
+     "w": "job",
+     "start": 4.559,
+     "end": 4.803
     },
     {
-     "w": "who",
-     "start": 4.893,
-     "end": 4.998
-    },
-    {
-     "w": "learned",
-     "start": 5.067,
-     "end": 5.276
-    },
-    {
-     "w": "to",
-     "start": 5.299,
-     "end": 5.346
-    },
-    {
-     "w": "code",
-     "start": 5.392,
-     "end": 5.59
+     "w": "seekers,",
+     "start": 4.872,
+     "end": 5.36
     },
     {
      "w": "in",
-     "start": 5.613,
-     "end": 5.659
+     "start": 5.418,
+     "end": 5.546
+    },
+    {
+     "w": "fifteen-minute",
+     "start": 5.627,
+     "end": 6.266
+    },
+    {
+     "w": "conversations.",
+     "start": 6.3,
+     "end": 7.102
+    }
+   ]
+  },
+  {
+   "id": "i01b",
+   "clip": 31,
+   "text": "This is Fatima:",
+   "from": "i01",
+   "pause": 0.6,
+   "start": 7.966,
+   "dur": 1.097,
+   "words": [
+    {
+     "w": "This",
+     "start": 7.946,
+     "end": 8.12
+    },
+    {
+     "w": "is",
+     "start": 8.178,
+     "end": 8.259
+    },
+    {
+     "w": "Fatima:",
+     "start": 8.317,
+     "end": 8.874
+    }
+   ]
+  },
+  {
+   "id": "i01c",
+   "clip": 31,
+   "text": "a pharmacy assistant who learned to code in a bootcamp.",
+   "from": "i01",
+   "pause": 0.3,
+   "start": 9.363,
+   "dur": 2.821,
+   "words": [
+    {
+     "w": "a",
+     "start": 9.343,
+     "end": 9.413
+    },
+    {
+     "w": "pharmacy",
+     "start": 9.482,
+     "end": 9.923
+    },
+    {
+     "w": "assistant",
+     "start": 9.981,
+     "end": 10.434
+    },
+    {
+     "w": "who",
+     "start": 10.469,
+     "end": 10.574
+    },
+    {
+     "w": "learned",
+     "start": 10.643,
+     "end": 10.852
+    },
+    {
+     "w": "to",
+     "start": 10.875,
+     "end": 10.922
+    },
+    {
+     "w": "code",
+     "start": 10.968,
+     "end": 11.166
+    },
+    {
+     "w": "in",
+     "start": 11.189,
+     "end": 11.235
     },
     {
      "w": "a",
-     "start": 5.706,
-     "end": 5.729
+     "start": 11.282,
+     "end": 11.305
     },
     {
      "w": "bootcamp.",
-     "start": 5.775,
-     "end": 6.333
+     "start": 11.351,
+     "end": 11.909
     }
    ]
   },
@@ -100,58 +177,59 @@
    "id": "i02",
    "clip": 31,
    "text": "Kaarna Health, a small start-up, needs a junior web developer.",
-   "start": 7.067,
+   "pause": 0.6,
+   "start": 12.784,
    "dur": 3.187,
    "words": [
     {
      "w": "Kaarna",
-     "start": 7.125,
-     "end": 7.427
+     "start": 12.842,
+     "end": 13.144
     },
     {
      "w": "Health,",
-     "start": 7.485,
-     "end": 7.775
+     "start": 13.202,
+     "end": 13.492
     },
     {
      "w": "a",
-     "start": 7.798,
-     "end": 7.833
+     "start": 13.515,
+     "end": 13.55
     },
     {
      "w": "small",
-     "start": 7.903,
-     "end": 8.158
+     "start": 13.62,
+     "end": 13.875
     },
     {
      "w": "start-up,",
-     "start": 8.205,
-     "end": 8.646
+     "start": 13.922,
+     "end": 14.363
     },
     {
      "w": "needs",
-     "start": 8.692,
-     "end": 8.901
+     "start": 14.409,
+     "end": 14.618
     },
     {
      "w": "a",
-     "start": 8.925,
-     "end": 8.948
+     "start": 14.642,
+     "end": 14.665
     },
     {
      "w": "junior",
-     "start": 9.006,
-     "end": 9.261
+     "start": 14.723,
+     "end": 14.978
     },
     {
      "w": "web",
-     "start": 9.308,
-     "end": 9.435
+     "start": 15.025,
+     "end": 15.152
     },
     {
      "w": "developer.",
-     "start": 9.482,
-     "end": 9.958
+     "start": 15.199,
+     "end": 15.675
     }
    ]
   },
@@ -160,83 +238,84 @@
    "clip": 31,
    "text": "Fatima's CV was polished by AI, like everyone else's. Kaarna can't tell what is real.",
    "from": "s04",
-   "start": 10.704,
+   "pause": 0.6,
+   "start": 16.571,
    "dur": 5.094,
    "words": [
     {
      "w": "Fatima's",
-     "start": 10.762,
-     "end": 11.192
+     "start": 16.629,
+     "end": 17.059
     },
     {
      "w": "CV",
-     "start": 11.226,
-     "end": 11.482
+     "start": 17.093,
+     "end": 17.349
     },
     {
      "w": "was",
-     "start": 11.644,
-     "end": 11.772
+     "start": 17.511,
+     "end": 17.639
     },
     {
      "w": "polished",
-     "start": 11.83,
-     "end": 12.155
+     "start": 17.697,
+     "end": 18.022
     },
     {
      "w": "by",
-     "start": 12.178,
-     "end": 12.283
+     "start": 18.045,
+     "end": 18.15
     },
     {
      "w": "AI,",
-     "start": 12.353,
-     "end": 12.747
+     "start": 18.22,
+     "end": 18.614
     },
     {
      "w": "like",
-     "start": 12.805,
-     "end": 12.956
+     "start": 18.672,
+     "end": 18.823
     },
     {
      "w": "everyone",
-     "start": 12.991,
-     "end": 13.258
+     "start": 18.858,
+     "end": 19.125
     },
     {
      "w": "else's.",
-     "start": 13.281,
-     "end": 13.746
+     "start": 19.148,
+     "end": 19.613
     },
     {
      "w": "Kaarna",
-     "start": 14.164,
-     "end": 14.489
+     "start": 20.031,
+     "end": 20.356
     },
     {
      "w": "can't",
-     "start": 14.535,
-     "end": 14.733
+     "start": 20.402,
+     "end": 20.6
     },
     {
      "w": "tell",
-     "start": 14.756,
-     "end": 14.884
+     "start": 20.623,
+     "end": 20.751
     },
     {
      "w": "what",
-     "start": 14.918,
-     "end": 15.023
+     "start": 20.785,
+     "end": 20.89
     },
     {
      "w": "is",
-     "start": 15.058,
-     "end": 15.127
+     "start": 20.925,
+     "end": 20.994
     },
     {
      "w": "real.",
-     "start": 15.197,
-     "end": 15.569
+     "start": 21.064,
+     "end": 21.436
     }
    ]
   }
