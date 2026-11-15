@@ -1,6 +1,6 @@
 {
  "clip": 2,
- "total": 10.194,
+ "total": 9.994,
  "lines": [
   {
    "id": "s06",
@@ -11,108 +11,108 @@
    "words": [
     {
      "w": "Rosace",
-     "start": 0.458,
-     "end": 0.934
+     "start": 0.47,
+     "end": 1.015
     },
     {
      "w": "has",
-     "start": 0.992,
-     "end": 1.108
+     "start": 1.073,
+     "end": 1.213
     },
     {
      "w": "three",
-     "start": 1.166,
-     "end": 1.41
+     "start": 1.271,
+     "end": 1.48
     },
     {
      "w": "spaces:",
-     "start": 1.445,
-     "end": 2.211
+     "start": 1.503,
+     "end": 2.165
     },
     {
      "w": "the",
-     "start": 2.618,
-     "end": 2.71
+     "start": 2.629,
+     "end": 2.734
     },
     {
      "w": "company",
-     "start": 2.768,
-     "end": 3.105
+     "start": 2.803,
+     "end": 3.186
     },
     {
      "w": "describes",
-     "start": 3.163,
-     "end": 3.639
+     "start": 3.256,
+     "end": 3.72
     },
     {
      "w": "its",
-     "start": 3.686,
-     "end": 3.825
+     "start": 3.767,
+     "end": 3.883
     },
     {
      "w": "need,",
-     "start": 3.895,
-     "end": 4.336
+     "start": 3.953,
+     "end": 4.417
     },
     {
      "w": "the",
-     "start": 4.522,
-     "end": 4.626
+     "start": 4.754,
+     "end": 4.858
     },
     {
      "w": "talent",
-     "start": 4.684,
-     "end": 5.032
+     "start": 4.928,
+     "end": 5.346
     },
     {
      "w": "builds",
-     "start": 5.09,
-     "end": 5.357
+     "start": 5.392,
+     "end": 5.648
     },
     {
      "w": "a",
-     "start": 5.392,
-     "end": 5.416
+     "start": 5.683,
+     "end": 5.717
     },
     {
      "w": "skills",
-     "start": 5.474,
-     "end": 5.799
+     "start": 5.764,
+     "end": 6.077
     },
     {
      "w": "card,",
-     "start": 5.857,
-     "end": 6.321
+     "start": 6.124,
+     "end": 6.542
     },
     {
      "w": "and",
-     "start": 6.588,
-     "end": 6.727
+     "start": 6.611,
+     "end": 6.913
     },
     {
      "w": "the",
-     "start": 6.774,
-     "end": 6.844
+     "start": 6.971,
+     "end": 7.053
     },
     {
      "w": "organiser",
-     "start": 6.902,
-     "end": 7.389
+     "start": 7.134,
+     "end": 7.645
     },
     {
      "w": "prepares",
-     "start": 7.436,
-     "end": 7.877
+     "start": 7.703,
+     "end": 8.051
     },
     {
      "w": "the",
-     "start": 7.935,
-     "end": 8.005
+     "start": 8.086,
+     "end": 8.155
     },
     {
      "w": "meetings.",
-     "start": 8.051,
-     "end": 8.701
+     "start": 8.19,
+     "end": 8.736
     }
    ]
   }

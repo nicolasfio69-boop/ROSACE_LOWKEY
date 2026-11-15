@@ -1,0 +1,80 @@
+{
+ "clip": 15,
+ "total": 5.811,
+ "lines": [
+  {
+   "id": "u05",
+   "clip": 15,
+   "text": "For Kaarna, Fatima is suggested, with the reasons. The recruiter approves the meeting.",
+   "start": 0.3,
+   "dur": 4.911,
+   "words": [
+    {
+     "w": "For",
+     "start": 0.358,
+     "end": 0.497
+    },
+    {
+     "w": "Kaarna,",
+     "start": 0.555,
+     "end": 0.892
+    },
+    {
+     "w": "Fatima",
+     "start": 0.927,
+     "end": 1.31
+    },
+    {
+     "w": "is",
+     "start": 1.345,
+     "end": 1.403
+    },
+    {
+     "w": "suggested,",
+     "start": 1.438,
+     "end": 2.041
+    },
+    {
+     "w": "with",
+     "start": 2.169,
+     "end": 2.32
+    },
+    {
+     "w": "the",
+     "start": 2.355,
+     "end": 2.425
+    },
+    {
+     "w": "reasons.",
+     "start": 2.483,
+     "end": 2.959
+    },
+    {
+     "w": "The",
+     "start": 3.423,
+     "end": 3.539
+    },
+    {
+     "w": "recruiter",
+     "start": 3.62,
+     "end": 4.015
+    },
+    {
+     "w": "approves",
+     "start": 4.062,
+     "end": 4.41
+    },
+    {
+     "w": "the",
+     "start": 4.433,
+     "end": 4.503
+    },
+    {
+     "w": "meeting.",
+     "start": 4.549,
+     "end": 4.956
+    }
+   ]
+  }
+ ]
+}

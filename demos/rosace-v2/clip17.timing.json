@@ -1,0 +1,100 @@
+{
+ "clip": 17,
+ "total": 6.778,
+ "lines": [
+  {
+   "id": "u07",
+   "clip": 17,
+   "text": "Then they note what they saw: A, C or F. Observed stays separate from what Fatima declared.",
+   "start": 0.3,
+   "dur": 5.878,
+   "words": [
+    {
+     "w": "Then",
+     "start": 0.358,
+     "end": 0.486
+    },
+    {
+     "w": "they",
+     "start": 0.521,
+     "end": 0.625
+    },
+    {
+     "w": "note",
+     "start": 0.683,
+     "end": 0.834
+    },
+    {
+     "w": "what",
+     "start": 0.857,
+     "end": 0.962
+    },
+    {
+     "w": "they",
+     "start": 0.997,
+     "end": 1.101
+    },
+    {
+     "w": "saw:",
+     "start": 1.148,
+     "end": 1.473
+    },
+    {
+     "w": "A,",
+     "start": 1.6,
+     "end": 1.96
+    },
+    {
+     "w": "C",
+     "start": 1.983,
+     "end": 2.169
+    },
+    {
+     "w": "or",
+     "start": 2.39,
+     "end": 2.564
+    },
+    {
+     "w": "F.",
+     "start": 2.634,
+     "end": 3.017
+    },
+    {
+     "w": "Observed",
+     "start": 3.423,
+     "end": 3.829
+    },
+    {
+     "w": "stays",
+     "start": 3.853,
+     "end": 4.108
+    },
+    {
+     "w": "separate",
+     "start": 4.166,
+     "end": 4.607
+    },
+    {
+     "w": "from",
+     "start": 4.642,
+     "end": 4.758
+    },
+    {
+     "w": "what",
+     "start": 4.805,
+     "end": 4.921
+    },
+    {
+     "w": "Fatima",
+     "start": 4.967,
+     "end": 5.327
+    },
+    {
+     "w": "declared.",
+     "start": 5.385,
+     "end": 5.873
+    }
+   ]
+  }
+ ]
+}

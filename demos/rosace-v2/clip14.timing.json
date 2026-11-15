@@ -1,0 +1,110 @@
+{
+ "clip": 14,
+ "total": 8.267,
+ "lines": [
+  {
+   "id": "u04",
+   "clip": 14,
+   "text": "Fatima imports her CV. It never leaves her device. Rosace points to clues, and she confirms each level herself.",
+   "start": 0.3,
+   "dur": 7.367,
+   "words": [
+    {
+     "w": "Fatima",
+     "start": 0.346,
+     "end": 0.753
+    },
+    {
+     "w": "imports",
+     "start": 0.811,
+     "end": 1.159
+    },
+    {
+     "w": "her",
+     "start": 1.194,
+     "end": 1.264
+    },
+    {
+     "w": "CV.",
+     "start": 1.322,
+     "end": 1.844
+    },
+    {
+     "w": "It",
+     "start": 2.1,
+     "end": 2.239
+    },
+    {
+     "w": "never",
+     "start": 2.32,
+     "end": 2.552
+    },
+    {
+     "w": "leaves",
+     "start": 2.61,
+     "end": 2.808
+    },
+    {
+     "w": "her",
+     "start": 2.843,
+     "end": 2.912
+    },
+    {
+     "w": "device.",
+     "start": 2.97,
+     "end": 3.504
+    },
+    {
+     "w": "Rosace",
+     "start": 4.143,
+     "end": 4.631
+    },
+    {
+     "w": "points",
+     "start": 4.7,
+     "end": 4.932
+    },
+    {
+     "w": "to",
+     "start": 4.979,
+     "end": 5.037
+    },
+    {
+     "w": "clues,",
+     "start": 5.095,
+     "end": 5.466
+    },
+    {
+     "w": "and",
+     "start": 5.49,
+     "end": 5.559
+    },
+    {
+     "w": "she",
+     "start": 5.606,
+     "end": 5.71
+    },
+    {
+     "w": "confirms",
+     "start": 5.757,
+     "end": 6.175
+    },
+    {
+     "w": "each",
+     "start": 6.302,
+     "end": 6.5
+    },
+    {
+     "w": "level",
+     "start": 6.558,
+     "end": 6.802
+    },
+    {
+     "w": "herself.",
+     "start": 6.86,
+     "end": 7.382
+    }
+   ]
+  }
+ ]
+}

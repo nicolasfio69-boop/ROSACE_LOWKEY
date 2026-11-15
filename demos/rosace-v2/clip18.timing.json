@@ -1,0 +1,65 @@
+{
+ "clip": 18,
+ "total": 5.027,
+ "lines": [
+  {
+   "id": "u08",
+   "clip": 18,
+   "text": "Rosace only suggests, and always shows why. A person decides.",
+   "start": 0.3,
+   "dur": 4.127,
+   "words": [
+    {
+     "w": "Rosace",
+     "start": 0.37,
+     "end": 0.846
+    },
+    {
+     "w": "only",
+     "start": 0.915,
+     "end": 1.124
+    },
+    {
+     "w": "suggests,",
+     "start": 1.182,
+     "end": 1.728
+    },
+    {
+     "w": "and",
+     "start": 1.763,
+     "end": 1.844
+    },
+    {
+     "w": "always",
+     "start": 1.891,
+     "end": 2.123
+    },
+    {
+     "w": "shows",
+     "start": 2.146,
+     "end": 2.367
+    },
+    {
+     "w": "why.",
+     "start": 2.413,
+     "end": 2.831
+    },
+    {
+     "w": "A",
+     "start": 3.017,
+     "end": 3.086
+    },
+    {
+     "w": "person",
+     "start": 3.156,
+     "end": 3.435
+    },
+    {
+     "w": "decides.",
+     "start": 3.493,
+     "end": 4.131
+    }
+   ]
+  }
+ ]
+}
