@@ -1,4 +1,19 @@
-# Aurora Background attribution
+# Credits
+
+## Skills framework
+
+The 5 competencies, 12 components, levels and the rosace chart come from the
+skills tool of the Centrale Lyon junior enterprise, adapted to English and to
+recruitment events.
+
+## Open-source libraries
+
+Next.js, React, Tailwind CSS, pdf.js (`pdfjs-dist`), mammoth, and the Inter and
+Space Grotesk typefaces (SIL Open Font License, self-hosted via Fontsource).
+
+## Aceternity UI adaptations
+
+### Aurora Background
 
 The workspace background adapts the publicly installable **Aurora Background**
 component from Aceternity UI.
@@ -21,7 +36,7 @@ No paid shader block, Pro template, external runtime script, account or API key
 is required. The adaptation is part of the Rosace end application, not a component
 library or template offered for redistribution.
 
-## Free component adaptations added on 14 November 2026
+### Other free components
 
 - **Glowing Effect** — https://ui.aceternity.com/components/glowing-effect — `src/components/GlowingEffect.tsx`, already present on the imported design branch, now mounted on the overview cards. Pointer-following border, recoloured red and gold; disabled for reduced motion.
 - **Text Generate Effect** — https://ui.aceternity.com/components/text-generate-effect — public source https://ui.aceternity.com/registry/text-generate-effect.json consulted on 14 November 2026. `src/components/TextGenerateEffect.tsx` keeps the staggered word opacity/blur reveal with CSS instead of Motion, preserves an accessible complete title and becomes static for reduced motion.
