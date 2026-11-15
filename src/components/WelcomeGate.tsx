@@ -231,7 +231,10 @@ export function WelcomeGate() {
         )}
       </main>
       <footer className="entry-footer">
-        <span>Rosace · Espoo recruitment events</span>
+        <span>
+          Inspired by a real, working competency system designed at École
+          Centrale de Lyon
+        </span>
         <span>Fictional demo · A person always decides</span>
       </footer>
     </div>
