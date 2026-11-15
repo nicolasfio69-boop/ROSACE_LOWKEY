@@ -203,7 +203,6 @@ test("mobile roles and rosace remain accessible in the coherent, reduced-motion 
     "/conversations",
     "/brief?need=nordchip-embedded&talent=amira",
     "/practice",
-    "/demo",
   ]) {
     await page.goto(route);
     await page.locator("h1").waitFor();

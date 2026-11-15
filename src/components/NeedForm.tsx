@@ -291,7 +291,7 @@ export function NeedForm() {
       <div className="workspace-top">
         <Link href="/">← Home</Link>
         <span role="status">
-          {status || "Recruiter workspace · Local demo"}
+          {status || "Recruiter workspace"}
         </span>
       </div>
       <ol className="stepper">

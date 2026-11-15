@@ -10,7 +10,7 @@ export default function NewNeed() {
           <Logo size={40} />
         </Link>
         <div className="nav-links">
-          <Link href="/demo">Demo overview</Link>
+          <Link href="/tour">3-minute demo</Link>
           <span className="event-pill">Recruiter workspace</span>
         </div>
       </nav>

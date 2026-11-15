@@ -75,7 +75,7 @@ Start at `/` to choose your demo workspace, or open `/tour` for the prefilled, a
    values stay separate from declared levels.
 5. **Checks:** candidates answer at `/talent/checks`; recruiters prepare and review at `/checks`. Choose a workspace in the header. All 26 online skills have three task-level variants. Recruiters select a plan of at most 20 minutes; candidates start timed tasks and submit. Claude can recommend A/C/F/NE with evidence; only the recruiter validates the final grade. On-site tasks remain in the conversation brief. `/practice` redirects to `/checks`.
 
-The original synthetic overview remains at `/demo`. The organiser handles one
+`/demo` redirects to the guided demo at `/tour`. The organiser handles one
 local event workspace with multiple companies; there are no authenticated roles.
 
 ## Company context and Claude AI
