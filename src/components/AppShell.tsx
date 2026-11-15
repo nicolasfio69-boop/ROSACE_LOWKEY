@@ -183,7 +183,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <span className="event-avatar">E</span>
           <div>
             <strong>Espoo Tech Matchmaking</strong>
-            <small>Event workspace · Demo</small>
+            <small>Event workspace</small>
           </div>
         </div>
         <p className="sidebar-caption">{role.toUpperCase()} WORKSPACE</p>
@@ -211,7 +211,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Talents never see a rank or a score.
             </p>
           </div>
-          <small>Synthetic profiles · Local workspace</small>
         </div>
       </aside>
       <div className="app-main">
@@ -298,9 +297,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 ))}
               </select>
             </label>
-            <span className="local-indicator">
+            <span
+              className="local-indicator"
+              title="Fictional profiles, saved only in this browser. No real accounts."
+            >
               <i />
-              Local demo
+              Fictional demo
             </span>
           </div>
         </header>
@@ -309,7 +311,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
         <footer className="app-footer">
           <span>Rosace / Junction 2026</span>
-          <span>Demo roles · No authenticated accounts · Your browser</span>
         </footer>
       </div>
     </div>

@@ -84,18 +84,16 @@ export function OrganiserWorkspace() {
           Create a fictional talent card →
         </Link>
       </div>
-      <p className="quiet-note">
-        Local demo: all roles share this browser. Existing examples are
-        fictional. Saved needs and consented talent cards appear below; there
-        are no real accounts or shared server data yet.
-      </p>
       {error && (
         <p role="alert" className="error-panel">
           {error}
         </p>
       )}
-      <section className="form-panel no-suggestion">
-        <h2>People without a suggestion</h2>
+      <details className="form-panel no-suggestion">
+        <summary>
+          <h2>People without a suggestion · {missing.length}</h2>
+          {missing.length > 0 && <span>Show reasons and next steps</span>}
+        </summary>
         {missing.length ? (
           missing.map(({ talent, reason }) => (
             <div key={talent.id} className="no-suggestion-item">
@@ -109,7 +107,7 @@ export function OrganiserWorkspace() {
         ) : (
           <p>Every talent has a suggestion or a tie to review.</p>
         )}
-      </section>
+      </details>
       <div className="need-switcher" aria-label="Choose a company need">
         {results.map((result) => (
           <button
@@ -157,24 +155,14 @@ export function OrganiserWorkspace() {
                 . No tie is broken automatically.
               </p>
             )}
-            <details open>
-              <summary>Review the people for this need</summary>
-              {[
-                ...result.suggested,
-                ...result.tied,
-                ...result.others,
-                ...result.ineligible,
-              ]
-                .map((a) => talents.find((t) => t.id === a.talentId))
-                .filter((t): t is (typeof talents)[number] => !!t)
-                .map((talent, candidateIndex) => {
+            {(() => {
+              const card = (
+                a: (typeof result.suggested)[number],
+                candidateIndex: number,
+              ) => {
+                const talent = talents.find((t) => t.id === a.talentId);
+                if (!talent) return null;
                 const key = `${result.need.id}:${talent.id}`;
-                const a = [
-                  ...result.suggested,
-                  ...result.tied,
-                  ...result.others,
-                  ...result.ineligible,
-                ].find((a) => a.talentId === talent.id)!;
                 const decision = workspace.journal
                   .filter(
                     (m) =>
@@ -278,8 +266,32 @@ export function OrganiserWorkspace() {
                     )}
                   </details>
                 );
-              })}
-            </details>
+              };
+              const main = [...result.suggested, ...result.tied],
+                rest = [...result.others, ...result.ineligible];
+              return (
+                <>
+                  <h3 className="people-heading">
+                    Suggested and tied · {main.length}
+                  </h3>
+                  {main.length ? (
+                    main.map(card)
+                  ) : (
+                    <p className="quiet-note">
+                      No suggestion for this need yet.
+                    </p>
+                  )}
+                  {rest.length > 0 && (
+                    <details className="other-people">
+                      <summary>
+                        Other people for this need · {rest.length}
+                      </summary>
+                      {rest.map((a, i) => card(a, i))}
+                    </details>
+                  )}
+                </>
+              );
+            })()}
           </section>
         ))}
       </div>

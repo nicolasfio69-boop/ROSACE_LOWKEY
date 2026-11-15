@@ -89,7 +89,7 @@ En 4 étapes, avec un parcours guidé de 3 minutes sur `/tour` (données NordChi
 - Thème clair perle partagé par la barre latérale, le bandeau, les formulaires et les panneaux. Fond Aurora plein écran ; pas de juxtaposition de panneaux blancs et noirs.
 - Seules couleurs fortes : rouge Centrale `#C8102E` et or `#F0C300`, plus des gris. Plus de crème, de bleu, de vert, de violet ni de police à empattements. Les cinq compétences parentes n’utilisent que cette palette.
 - Titres en Space Grotesk, texte en Inter, hébergés dans le projet (aucun appel à Google Fonts).
-- Adaptations des composants gratuits Aceternity : Aurora Background, Glowing Effect sur les cartes d’accueil, Text Generate Effect sur le titre et Background Beams discrets dans les en-têtes. Attributions dans `docs/ACETERNITY_ATTRIBUTION.md`. Tout devient statique si l’utilisateur demande moins d’animations.
+- Adaptations des composants gratuits Aceternity : Aurora Background, Glowing Effect sur les cartes d’accueil, Text Generate Effect sur le titre et Background Beams discrets dans les en-têtes. Attributions dans `docs/CREDITS.md`. Tout devient statique si l’utilisateur demande moins d’animations.
 - Motion design : des animations qui expliquent (la rosace qui se construit, le pointillé qui devient plein, l'arrivée des suggestions, les transitions), plus des effets décoratifs. Implémenté sur `feat/coherent-ux`, y compris les compteurs animés.
 - Les textes disent ce que fait l'outil. Pas de slogans.
 
@@ -180,7 +180,7 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - RAG sur les passages de fiche de poste et de contexte entreprise relus, avec références visibles et validation du catalogue fermé. Aucun CV dans ce corpus ; aucune note finale enregistrée par Claude. La dernière décision ci-dessous autorise une recommandation de note sur une réponse soumise.
 - **Espaces séparés** : Candidat (fiche, `/talent/checks`), Recruteur (besoin, préparation/relecture dans `/checks`, conversations), Organisateur (événement). Le sas et le menu de profil décrits ci-dessous remplacent le sélecteur initial. Ils ne constituent pas une authentification.
 - Un exercice généré reste une proposition jusqu’à acceptation explicite du recruteur. La réponse conserve la version de l’exercice effectivement présentée.
-- Clé uniquement dans `.env.local` en local, ou les secrets runtime Aiven. Procédure : `docs/CLAUDE_SETUP.md`. Les tests simulés sont distincts du test API réel, encore dépendant de la configuration de la clé.
+- Clé uniquement dans `.env.local` en local, ou les secrets runtime Aiven. Procédure : `docs/DEPLOYMENT.md`. Les tests simulés sont distincts du test API réel, encore dépendant de la configuration de la clé.
 
 ### Sas d’accueil validé par Nicolas le 14 novembre 2026
 
@@ -189,7 +189,7 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - Accueils propres à chaque rôle : `/candidate`, `/recruiter`, `/event`. Une action principale et la rosace locale lorsqu’une carte/un besoin a été sauvegardé. L’ancien aperçu reste sur `/overview`.
 - Le navigateur mémorise uniquement le mode choisi : le retour sur `/` ouvre son accueil. Le menu **Demo profile** permet de changer d’espace ou de revenir au sas. Les données de démo restent partagées dans ce navigateur.
 - Cible ultérieure : véritable connexion par e-mail/code et organisateurs sur invitation. **À brancher après validation du parcours**, avec permissions côté serveur et stockage partagé. La maquette ne réserve pas réellement l’espace organisateur aux invités.
-- Vérification face au challenge : voir `CHALLENGE_ALIGNMENT.md`. Le cadre Centrale reste le choix de ce projet, pas une exigence formulée par Espoo. Aucun calcul, catalogue ou seuil n’est modifié par cet audit.
+- Vérification face au challenge : résumée dans le README (« Responsible by design », « Known limitations »). Le cadre Centrale reste le choix de ce projet, pas une exigence formulée par Espoo. Aucun calcul, catalogue ou seuil n’est modifié par cet audit.
 
 ### Clarification suivante : démo autonome et vérification en deux temps
 
@@ -207,8 +207,15 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - **Implémenté** : limite des appels IA par visiteur (6 par minute), plus un plafond du site (40 par minute, 600 par jour) ; `ANTHROPIC_MODEL` devient facultatif (`claude-sonnet-5-5` par défaut), seule la clé est nécessaire sur Aiven ; en-têtes de sécurité (CSP, HSTS, X-Frame-Options, Referrer-Policy) ; vraie page 404 ; `/tour` remonte en haut à chaque étape et la barre latérale suit le rôle de l'étape ; lien retour du brief vers Conversations.
 - **Implémenté** : la promesse sur l'accueil ; une section « Responsible by design » sur `/overview` (AI Act, une personne décide, raisons lisibles, aucun critère de biais, données minimales) ; un brief de conversation imprimable ; une prochaine étape proposée à l'organisateur pour chaque personne sans suggestion ; la liste par besoin commence par les personnes suggérées.
 - **Données de démo** : un événement, trois besoins (NordChip, Lumora, Vireo Data · Junior data analyst) et dix talents (Elina, Omar, Tuomas et Priya ajoutés). Chaque niveau déclaré s'appuie sur une ligne de CV ou reste une simple déclaration. L'égalité à la limite se montre désormais sur Vireo Data (Priya et Tuomas) ; Jonas et Kwame restent sans suggestion faute de carte remplie. Les chiffres de la démo NordChip/Amira ne changent pas.
-- **Nettoyage** : comptes rendus d'audit et captures d'écran périmés retirés (ils restent dans l'historique Git). Restent : ce cadrage, `AGENTS.md`, `README.md`, `ROADMAP.md`, `CHALLENGE_ALIGNMENT.md`, `CLAUDE_SETUP.md`, `INTEGRATIONS.md`, `DEPLOY_AIVEN.md`, `ACETERNITY_ATTRIBUTION.md`.
+- **Nettoyage** : comptes rendus d'audit et captures d'écran périmés retirés (ils restent dans l'historique Git). Restent (après le nettoyage du 15 novembre) : ce cadrage, `AGENTS.md`, `README.md`, `docs/ARCHITECTURE.md`, `docs/DEPLOYMENT.md`, `docs/CREDITS.md`.
 - **Context.dev** : l'appel serveur correspond à la documentation officielle (`POST /v1/web/scrape`, Bearer, `formats.markdown`). Il devient actif dès que `CONTEXT_DEV_API_KEY` est posée sur Aiven.
+
+### Simplifications légères du 15 novembre 2026
+
+- **Validé par Nicolas** : la vidéo V3 (2 min 39) est conservée, donc les écrans filmés ne changent pas de fond. Les onglets du formulaire recruteur et le parcours Fatima × Kaarna restent identiques.
+- **Implémenté** : un seul rappel de démo par écran (« Fictional demo » en haut, détail au survol). Retirés : « Synthetic profiles · Local workspace » dans la barre latérale, la ligne de pied de page et le paragraphe « Local demo » du bureau organisateur.
+- **Implémenté** : bureau organisateur. Le nombre de personnes sans suggestion reste visible, leurs raisons et prochaines étapes s’ouvrent d’un clic. Pour chaque besoin, les suggérés et les égalités sont affichés, les autres personnes sont repliées sous « Other people for this need ».
+- **Implémenté** : `/demo` redirige vers `/tour`. Le bloc « Responsible by design » reste sur `/overview`, `/tour` n’est pas modifié.
 
 ## 10. À trancher ensemble
 

@@ -191,7 +191,7 @@ test("decision errors stay with the reason and observations announce their saved
   );
 });
 
-test("mobile roles and rosace remain accessible in the coherent, reduced-motion theme", async ({
+test("mobile roles and rosace stay usable on a phone with reduced motion", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -203,7 +203,6 @@ test("mobile roles and rosace remain accessible in the coherent, reduced-motion 
     "/conversations",
     "/brief?need=nordchip-embedded&talent=amira",
     "/practice",
-    "/demo",
   ]) {
     await page.goto(route);
     await page.locator("h1").waitFor();

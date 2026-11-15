@@ -28,10 +28,25 @@ describe("guided priority selection", () => {
     expect(current[0].major).toBe(false);
   });
   it("lets every other component be a minor, as in the Centrale grid", () => {
-    const others = ["C2.2", "C3.1", "C3.2", "C4.1", "C4.2", "C4.3", "C5.1", "C5.2", "C5.3"];
-    const current = others.reduce<Requirement[]>((list, skill) => changeSelection(list, skill, "minor"), majors);
+    const others = [
+      "C2.2",
+      "C3.1",
+      "C3.2",
+      "C4.1",
+      "C4.2",
+      "C4.3",
+      "C5.1",
+      "C5.2",
+      "C5.3",
+    ];
+    const current = others.reduce<Requirement[]>(
+      (list, skill) => changeSelection(list, skill, "minor"),
+      majors,
+    );
     expect(current.filter((r) => !r.major)).toHaveLength(9);
-    expect(changeSelection(majors, "C1.1", "minor").filter((r) => !r.major)).toHaveLength(1);
+    expect(
+      changeSelection(majors, "C1.1", "minor").filter((r) => !r.major),
+    ).toHaveLength(1);
   });
   it("caps job skills separately and never allows them as majors", () => {
     const current = ["J.PYTHON", "J.LINUX", "J.GIT"].reduce<Requirement[]>(
