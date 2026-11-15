@@ -1882,3 +1882,40 @@ h3 {
   font-size: 14px;
   line-height: 1.55;
 }
+
+/* Organiser desk: count always visible, details on demand */
+.form-panel.no-suggestion > summary {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+.form-panel.no-suggestion > summary h2 {
+  display: inline;
+  margin: 0;
+}
+.form-panel.no-suggestion > summary span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.form-panel.no-suggestion[open] > summary {
+  margin-bottom: 12px;
+}
+.people-heading {
+  margin: 18px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.other-people {
+  margin-top: 14px;
+}
+.other-people > summary {
+  cursor: pointer;
+  padding: 10px 0;
+  font-weight: 600;
+  color: var(--muted);
+}

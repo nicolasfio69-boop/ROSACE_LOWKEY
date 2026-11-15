@@ -210,6 +210,13 @@ Chaque exercice existe en trois versions, Foundation, Intermediate et Advanced. 
 - **Nettoyage** : comptes rendus d'audit et captures d'écran périmés retirés (ils restent dans l'historique Git). Restent : ce cadrage, `AGENTS.md`, `README.md`, `ROADMAP.md`, `CHALLENGE_ALIGNMENT.md`, `CLAUDE_SETUP.md`, `INTEGRATIONS.md`, `DEPLOY_AIVEN.md`, `ACETERNITY_ATTRIBUTION.md`.
 - **Context.dev** : l'appel serveur correspond à la documentation officielle (`POST /v1/web/scrape`, Bearer, `formats.markdown`). Il devient actif dès que `CONTEXT_DEV_API_KEY` est posée sur Aiven.
 
+### Simplifications légères du 15 novembre 2026
+
+- **Validé par Nicolas** : la vidéo V3 (2 min 39) est conservée, donc les écrans filmés ne changent pas de fond. Les onglets du formulaire recruteur et le parcours Fatima × Kaarna restent identiques.
+- **Implémenté** : un seul rappel de démo par écran (« Fictional demo » en haut, détail au survol). Retirés : « Synthetic profiles · Local workspace » dans la barre latérale, la ligne de pied de page et le paragraphe « Local demo » du bureau organisateur.
+- **Implémenté** : bureau organisateur. Le nombre de personnes sans suggestion reste visible, leurs raisons et prochaines étapes s’ouvrent d’un clic. Pour chaque besoin, les suggérés et les égalités sont affichés, les autres personnes sont repliées sous « Other people for this need ».
+- **Implémenté** : `/demo` redirige vers `/tour`. Le bloc « Responsible by design » reste sur `/overview`, `/tour` n’est pas modifié.
+
 ## 10. À trancher ensemble
 
 Pour chaque point : les options, et ma recommandation en gras.

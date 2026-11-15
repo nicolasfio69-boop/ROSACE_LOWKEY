@@ -58,7 +58,7 @@ Drawn like the Centrale Lyon JE tool: grey disk, red dashed axes and outer circl
 - `src/lib/framework.ts`: the 12 components in English with descriptors per level, 20 technical skills in 4 families.
 - `src/lib/scoring.ts`, `src/lib/suggestions.ts`: the rules above. Tests in `src/lib/scoring.test.ts`.
 - `src/data/demo.ts`: event "Espoo Tech Matchmaking", 2 needs (NordChip embedded developer, Lumora support engineer), 6 talents.
-- `/`: role choice and explicitly fictional sign-in preview, with direct demo access. `/candidate`, `/recruiter`, `/event`: role homes; `/overview`: previous workspace overview; `/tour`: four-step guided demo (welcome header, Demo profile menu, quiet link on role homes — not in the role sidebar); `/demo`: original synthetic overview, outside the menu.
+- `/`: role choice and explicitly fictional sign-in preview, with direct demo access. `/candidate`, `/recruiter`, `/event`: role homes; `/overview`: previous workspace overview; `/tour`: four-step guided demo (welcome header, Demo profile menu, quiet link on role homes — not in the role sidebar); `/demo`: redirects to `/tour`.
 - `/need/new`: progressive company/role context, interactive 12-component rosace, level cards, browser draft and confirmation.
 - `/talent/new`: on-device document parsing, quoted clues, factual questions and confirmed declarations. CVs remain transient.
 - `/organiser`: company selection, suggestions, human decisions and journal. `/conversations` opens approved or clearly labelled fictional conversations.

@@ -149,6 +149,9 @@ test("recruiter, document import, consented talent and observed conversation", a
   const card = section
     .locator(".meeting-card")
     .filter({ has: page.getByText("Demo talent", { exact: true }) });
+  // People who are neither suggested nor tied sit under "Other people".
+  if (!(await card.isVisible()))
+    await section.locator(".other-people > summary").click();
   await card.locator("summary").first().click();
   await card
     .getByLabel("Reason for Demo talent", { exact: true })
