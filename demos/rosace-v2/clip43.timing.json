@@ -1,0 +1,36 @@
+{
+ "clip": 43,
+ "total": 2.367,
+ "lines": [
+  {
+   "id": "n12",
+   "clip": 43,
+   "text": "Only this skill changes.",
+   "from": "u12",
+   "start": 0.3,
+   "dur": 1.567,
+   "words": [
+    {
+     "w": "Only",
+     "start": 0.335,
+     "end": 0.567
+    },
+    {
+     "w": "this",
+     "start": 0.625,
+     "end": 0.753
+    },
+    {
+     "w": "skill",
+     "start": 0.788,
+     "end": 1.043
+    },
+    {
+     "w": "changes.",
+     "start": 1.101,
+     "end": 1.682
+    }
+   ]
+  }
+ ]
+}

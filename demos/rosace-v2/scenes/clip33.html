@@ -1,0 +1,156 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Clip 3 · How the skills work</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  #freeze { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+  #dim { position: absolute; inset: 0; background: rgba(238, 240, 244, .94); }
+  #pause { right: 60px; top: 46px; background: var(--ink); color: #fff; font-size: 24px; padding: 12px 24px 12px 18px; }
+  #pause .ic { width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; font-size: 15px; font-weight: 800; }
+  #title { left: 120px; top: 70px; font-size: 54px; font-weight: 600; }
+  #rosace { left: 160px; top: 120px; width: 900px; height: 860px; overflow: visible; }
+  #panel { left: 1075px; top: 170px; width: 775px; height: 740px; padding: 46px 52px; }
+  .sect { position: absolute; left: 52px; right: 52px; top: 46px; }
+  .k { font-size: 20px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  .h { font-family: 'SG'; font-size: 44px; font-weight: 600; margin: 10px 0 24px; line-height: 1.15; }
+  .fam { display: flex; align-items: center; gap: 18px; font-size: 28px; margin: 18px 0; }
+  .fam i { width: 22px; height: 22px; border-radius: 50%; flex: none; }
+  .fam small { color: var(--muted); font-size: 22px; margin-left: auto; }
+  .lvl { display: flex; gap: 22px; padding: 18px 22px; border-radius: 18px; border: 2px solid transparent; margin: 8px 0; }
+  .lvl .n { font-family: 'SG'; font-weight: 700; font-size: 26px; width: 200px; flex: none; }
+  .lvl .d { font-size: 22px; color: var(--muted); line-height: 1.35; }
+  .lvl.on { background: #FFF6D6; border-color: var(--gold); }
+  .lvl.on .d { color: var(--ink); }
+  .maj { display: flex; align-items: center; gap: 16px; font-size: 30px; margin: 22px 0; font-weight: 600; }
+  .maj b { width: 44px; height: 12px; border-radius: 6px; background: var(--gold); }
+  .note { font-size: 24px; color: var(--muted); line-height: 1.4; margin-top: 26px; }
+  .obs { display: flex; align-items: center; gap: 24px; margin: 18px 0; font-size: 32px; font-weight: 600; }
+  .obs .l { width: 76px; height: 76px; border-radius: 20px; display: grid; place-items: center; font-family: 'SG'; font-weight: 700; font-size: 40px; color: #fff; flex: none; }
+  .obs small { font-size: 22px; color: var(--muted); font-weight: 500; margin-left: auto; }
+  .legend { display: flex; gap: 34px; margin-top: 30px; font-size: 22px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 12px; }
+  svg text { font-family: 'IN'; }
+</style></head>
+<body><div class="stage">
+  <img id="freeze" src="freeze-need.png" alt="">
+  <div id="dim" class="abs"></div>
+  <div id="pause" class="abs pill"><span class="ic">❚❚</span><span id="pause-t">Paused · how the skills work</span></div>
+  <svg id="rosace" class="abs" viewBox="0 0 900 860"></svg>
+  <div id="panel" class="abs card">
+    <div id="p1" class="sect">
+      <div class="k">One shared framework</div>
+      <div class="h">12 skills in 5 families, the same for every company</div>
+      <div id="fams"></div>
+    </div>
+    <div id="p2" class="sect">
+      <div class="k">Levels are real situations</div>
+      <div class="h">Get it right and spot the error</div>
+      <div class="lvl" id="l0"><div class="n">Not yet</div><div class="d">Has never done it.</div></div>
+      <div class="lvl" id="l1"><div class="n">Foundation</div><div class="d">Delivers work without obvious mistakes.</div></div>
+      <div class="lvl" id="l2"><div class="n">Intermediate</div><div class="d">Work passes review or tests with few corrections.</div></div>
+      <div class="lvl" id="l3"><div class="n">Advanced</div><div class="d">Sets up the checks that catch errors before the customer.</div></div>
+    </div>
+    <div id="p3" class="sect">
+      <div class="k">Kaarna Health decides</div>
+      <div class="h">3 majors, in gold</div>
+      <div class="maj"><b></b>Follow the rules</div>
+      <div class="maj"><b></b>Get it right</div>
+      <div class="maj"><b></b>Keep commitments</div>
+      <div class="note">The other skills it needs are minors, in red.</div>
+    </div>
+    <div id="p4" class="sect">
+      <div class="k">Declared vs observed</div>
+      <div class="h">Two lines on the same skill</div>
+      <div class="obs" id="oA"><svg width="76" height="20"><line x1="6" y1="10" x2="70" y2="10" stroke="#17181C" stroke-width="9" stroke-dasharray="2 12" stroke-linecap="round"/></svg>Declared by Fatima</div>
+      <div class="obs" id="oC"><svg width="76" height="20"><line x1="6" y1="10" x2="70" y2="10" stroke="#17181C" stroke-width="9" stroke-linecap="round"/></svg>Observed by a recruiter</div>
+      <div class="note" id="leg">The level is the difficulty of the situation. The letters A, C, F and NE come later, when someone is assessed.</div>
+    </div>
+  </div>
+</div>
+<script src="lib.js"></script>
+<script>
+const SK = ['Reach out', 'Convince', 'Follow the rules', 'Get it right', 'Scope the work', 'See it through', 'Work with others', 'Own decisions', 'Keep commitments', 'Break down problems', 'Learn fast', 'Communicate clearly']
+const FAM = [['Clients and stakeholders', '#C8102E', [0, 1]], ['Rigour and compliance', '#5C5C5C', [2, 3]], ['Running a project', '#9A9AA2', [4, 5]], ['Commitment and self-management', '#F0C300', [6, 7, 8]], ['Analysis, learning, communication', '#3D3D3D', [9, 10, 11]]]
+const MAJ = [2, 3, 8], GIR = 3
+const cx = 440, cy = 440, R = 215, HUB = 34
+const rad = (lv) => HUB + (lv / 3) * (R - HUB)
+const ang = (i) => (-90 + i * 30) * Math.PI / 180
+const P = (i, r) => [cx + r * Math.cos(ang(i)), cy + r * Math.sin(ang(i))]
+const svg = $('#rosace')
+let h = ''
+// family ring
+FAM.forEach(([n, c, idx], f) => {
+  const a0 = ang(idx[0]) - 0.24, a1 = ang(idx[idx.length - 1]) + 0.24, rr = R + 36
+  const [x0, y0] = [cx + rr * Math.cos(a0), cy + rr * Math.sin(a0)], [x1, y1] = [cx + rr * Math.cos(a1), cy + rr * Math.sin(a1)]
+  h += `<path class="fam-arc" d="M${x0} ${y0} A${rr} ${rr} 0 0 1 ${x1} ${y1}" stroke="${c}" stroke-width="12" fill="none" stroke-linecap="round"/>`
+})
+h += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="#E7E8EE"/>`
+h += `<circle id="disk" cx="${cx}" cy="${cy}" r="${rad(1)}" fill="#DADCE4"/>`
+;[1, 2, 3].forEach((lv) => { h += `<circle class="ring" cx="${cx}" cy="${cy}" r="${rad(lv)}" fill="none" stroke="#C8102E" stroke-opacity=".55" stroke-width="2" stroke-dasharray="6 7"/>` })
+SK.forEach((s, i) => { const [x, y] = P(i, R); h += `<line class="axis" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#C8102E" stroke-opacity=".45" stroke-width="2" stroke-dasharray="5 7"/>` })
+// level tick labels on the Get it right axis
+;['F', 'I', 'A'].forEach((l, k) => { const [x, y] = P(GIR, rad(k + 1)); h += `<g class="tick"><circle cx="${x}" cy="${y}" r="17" fill="#fff" stroke="#17181C" stroke-width="2"/><text x="${x}" y="${y + 7}" text-anchor="middle" font-size="19" font-weight="700">${l}</text></g>` })
+// branches: minor red (all except majors, shown later), majors gold
+SK.forEach((s, i) => {
+  const lv = MAJ.includes(i) ? 2 : (i === 5 ? 1 : 0)
+  const [x, y] = P(i, rad(lv || 0.001))
+  if (lv) h += `<line class="br ${MAJ.includes(i) ? 'gold' : 'red'}" data-i="${i}" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${MAJ.includes(i) ? '#F0C300' : '#C8102E'}" stroke-width="16" stroke-linecap="round"/>`
+})
+// Fatima on Get it right: declared dotted, observed solid
+{ const [x, y] = P(GIR, rad(2)); const [x2, y2] = P(GIR, rad(2)), off = 13
+  h += `<line id="decl" x1="${cx}" y1="${cy - off}" x2="${x}" y2="${y - off}" stroke="#17181C" stroke-width="9" stroke-dasharray="2 12" stroke-linecap="round"/>`
+  h += `<line id="seen" x1="${cx}" y1="${cy + off}" x2="${x2}" y2="${y2 + off}" stroke="#17181C" stroke-width="9" stroke-linecap="round"/>` }
+h += `<circle cx="${cx}" cy="${cy}" r="10" fill="#C8102E"/>`
+SK.forEach((s, i) => {
+  const [x, y] = P(i, R + 78), c = Math.cos(ang(i))
+  const anchor = Math.abs(c) < 0.2 ? 'middle' : c > 0 ? 'start' : 'end'
+  h += `<text class="lab" data-i="${i}" x="${x}" y="${y + 9}" text-anchor="${anchor}" font-size="27" fill="#17181C">${s}</text>`
+})
+svg.innerHTML = h
+$('#fams').innerHTML = FAM.map(([n, c, idx]) => `<div class="fam"><i style="background:${c}"></i>${n}<small>${idx.length} skills</small></div>`).join('')
+
+const END = TIMING.total - 1.0
+window.setT = (t) => {
+  const dimIn = ramp(t, 0.05, 0.5), dimOut = 1 - ramp(t, END, 0.6)
+  const on = Math.min(dimIn, dimOut)
+  $('#dim').style.opacity = on
+  $('#freeze').style.filter = `blur(${6 * on}px)`
+  put('#pause', { o: Math.min(ramp(t, 0.05, 0.35), 1 - ramp(t, TIMING.total - 0.5, 0.3)) })
+  $('#pause-t').textContent = t < END ? 'Paused · how the skills work' : 'Back to the demo'
+  $('#pause .ic').textContent = t < END ? '❚❚' : '▶'
+  // rosace frame
+  put('#rosace', { o: on, s: 0.92 + 0.08 * ramp(t, 0.1, 0.6) })
+  put('#panel', { o: on, x: 40 * (1 - ramp(t, 0.3, 0.6)) })
+  // s07: 12 labels, then 5 families
+  $$('.lab').forEach((el, i) => { el.style.opacity = ramp(t, W('r07', 'twelve') - 0.3 + i * 0.07, 0.3) })
+  $$('.fam-arc').forEach((el, f) => { el.style.opacity = ramp(t, W('r07', 'same') - 0.1 + f * 0.12, 0.35) })
+  $$('#fams .fam').forEach((el, f) => rise(el, ramp(t, W('r07', 'same') - 0.1 + f * 0.12, 0.35), 12))
+  const s2 = ramp(t, L('r08') - 0.2, 0.4), s3 = ramp(t, L('r09') - 0.2, 0.4), s4 = ramp(t, L('r10') - 0.2, 0.4)
+  rise('#p1', ramp(t, 0.4, 0.5) * (1 - s2), 16)
+  rise('#p2', s2 * (1 - s3), 16)
+  rise('#p3', s3 * (1 - s4), 16)
+  rise('#p4', s4, 16)
+  // s08: focus Get it right, level rows, ticks
+  const focus = Math.max(0, s2 * (1 - s3))
+  $$('.lab').forEach((el) => { const i = +el.dataset.i; el.setAttribute('font-weight', (i === GIR && focus > 0.5) || (MAJ.includes(i) && s3 > 0.5) ? '700' : '400'); if (focus > 0 && i !== GIR) el.style.opacity = Math.min(el.style.opacity, 1 - 0.7 * focus) })
+  $$('.tick').forEach((el, k) => { el.style.opacity = Math.min(ramp(t, W('r08', 'level') + k * 0.25, 0.35), 1 - s3) })
+  ;['#l0', '#l1', '#l2', '#l3'].forEach((id, k) => rise(id, ramp(t, W('r08', 'real') + k * 0.2, 0.35), 10))
+  $('#l2').classList.toggle('on', t >= W('r08', 'Intermediate') - 0.1)
+  // s09: majors grow in gold, one minor in red
+  $$('.br').forEach((el) => {
+    const i = +el.dataset.i, gold = el.classList.contains('gold')
+    const p = gold ? ramp(t, W('r09', 'three') - 0.1 + MAJ.indexOf(i) * 0.25, 0.5) : ramp(t, W('r09', 'skills') + 0.2, 0.5)
+    const lv = gold ? 2 : 1, [x, y] = P(i, rad(lv * p + 0.001)); el.setAttribute('x2', x); el.setAttribute('y2', y)
+    el.style.opacity = p > 0.01 ? 1 - 0.75 * s4 * (i !== GIR ? 1 : 0) : 0
+  })
+  $$('#p3 .maj').forEach((el, k) => rise(el, ramp(t, W('r09', 'three') - 0.1 + k * 0.25, 0.4), 10))
+  // s10: declared (dotted) vs observed (solid) on Get it right
+  rise('#oA', ramp(t, W('r10', 'declared') - 0.15, 0.35), 10)
+  rise('#oC', ramp(t, W('r10', 'observes') - 0.15, 0.35), 10)
+  rise('#leg', ramp(t, W('r10', 'solid') + 0.3, 0.4), 10)
+  const d = ramp(t, W('r10', 'declared') - 0.1, 0.5), sn = ramp(t, W('r10', 'observes') - 0.1, 0.6)
+  $('#decl').style.opacity = d; $('#seen').style.opacity = sn
+  { const [x, y] = P(GIR, rad(2 * sn + 0.001)); $('#seen').setAttribute('x2', x); $('#seen').setAttribute('y2', y + 13) }
+}
+window.setT(0)
+</script>
+</body></html>

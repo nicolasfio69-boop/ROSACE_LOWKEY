@@ -1,0 +1,228 @@
+{
+ "clip": 33,
+ "total": 15.483,
+ "lines": [
+  {
+   "id": "r07",
+   "clip": 33,
+   "text": "Twelve skills, the same for every company.",
+   "start": 0.4,
+   "dur": 2.325,
+   "words": [
+    {
+     "w": "Twelve",
+     "start": 0.435,
+     "end": 0.818
+    },
+    {
+     "w": "skills,",
+     "start": 0.864,
+     "end": 1.317
+    },
+    {
+     "w": "the",
+     "start": 1.34,
+     "end": 1.422
+    },
+    {
+     "w": "same",
+     "start": 1.457,
+     "end": 1.642
+    },
+    {
+     "w": "for",
+     "start": 1.677,
+     "end": 1.77
+    },
+    {
+     "w": "every",
+     "start": 1.816,
+     "end": 1.979
+    },
+    {
+     "w": "company.",
+     "start": 2.025,
+     "end": 2.455
+    }
+   ]
+  },
+  {
+   "id": "r08",
+   "clip": 33,
+   "text": "Each level is a real situation, like Get it right, Intermediate.",
+   "start": 3.125,
+   "dur": 3.788,
+   "words": [
+    {
+     "w": "Each",
+     "start": 3.183,
+     "end": 3.392
+    },
+    {
+     "w": "level",
+     "start": 3.462,
+     "end": 3.717
+    },
+    {
+     "w": "is",
+     "start": 3.764,
+     "end": 3.833
+    },
+    {
+     "w": "a",
+     "start": 3.891,
+     "end": 3.926
+    },
+    {
+     "w": "real",
+     "start": 3.996,
+     "end": 4.182
+    },
+    {
+     "w": "situation,",
+     "start": 4.251,
+     "end": 5.099
+    },
+    {
+     "w": "like",
+     "start": 5.18,
+     "end": 5.354
+    },
+    {
+     "w": "Get",
+     "start": 5.389,
+     "end": 5.517
+    },
+    {
+     "w": "it",
+     "start": 5.563,
+     "end": 5.621
+    },
+    {
+     "w": "right,",
+     "start": 5.668,
+     "end": 5.935
+    },
+    {
+     "w": "Intermediate.",
+     "start": 5.958,
+     "end": 6.643
+    }
+   ]
+  },
+  {
+   "id": "r09",
+   "clip": 33,
+   "text": "The company picks its three most important skills, in gold.",
+   "from": "s09",
+   "start": 7.313,
+   "dur": 3.527,
+   "words": [
+    {
+     "w": "The",
+     "start": 7.371,
+     "end": 7.476
+    },
+    {
+     "w": "company",
+     "start": 7.545,
+     "end": 7.882
+    },
+    {
+     "w": "picks",
+     "start": 7.952,
+     "end": 8.195
+    },
+    {
+     "w": "its",
+     "start": 8.242,
+     "end": 8.323
+    },
+    {
+     "w": "three",
+     "start": 8.381,
+     "end": 8.613
+    },
+    {
+     "w": "most",
+     "start": 8.671,
+     "end": 8.869
+    },
+    {
+     "w": "important",
+     "start": 8.904,
+     "end": 9.298
+    },
+    {
+     "w": "skills,",
+     "start": 9.333,
+     "end": 9.844
+    },
+    {
+     "w": "in",
+     "start": 9.89,
+     "end": 10.041
+    },
+    {
+     "w": "gold.",
+     "start": 10.123,
+     "end": 10.575
+    }
+   ]
+  },
+  {
+   "id": "r10",
+   "clip": 33,
+   "text": "Declared is dotted. What a recruiter observes is solid.",
+   "start": 11.239,
+   "dur": 3.344,
+   "words": [
+    {
+     "w": "Declared",
+     "start": 11.297,
+     "end": 11.68
+    },
+    {
+     "w": "is",
+     "start": 11.715,
+     "end": 11.785
+    },
+    {
+     "w": "dotted.",
+     "start": 11.843,
+     "end": 12.307
+    },
+    {
+     "w": "What",
+     "start": 12.504,
+     "end": 12.679
+    },
+    {
+     "w": "a",
+     "start": 12.713,
+     "end": 12.737
+    },
+    {
+     "w": "recruiter",
+     "start": 12.806,
+     "end": 13.201
+    },
+    {
+     "w": "observes",
+     "start": 13.259,
+     "end": 13.654
+    },
+    {
+     "w": "is",
+     "start": 13.7,
+     "end": 13.758
+    },
+    {
+     "w": "solid.",
+     "start": 13.816,
+     "end": 14.292
+    }
+   ]
+  }
+ ]
+}
