@@ -1,68 +1,88 @@
 {
  "clip": 16,
- "total": 4.091,
+ "total": 5.345,
  "lines": [
   {
    "id": "u06",
    "clip": 16,
-   "text": "At the meeting, the recruiter asks questions that test each claim.",
+   "text": "At the meeting, the recruiter has questions and short situations to check the other skills.",
    "start": 0.3,
-   "dur": 3.291,
+   "dur": 4.545,
    "words": [
     {
      "w": "At",
      "start": 0.335,
-     "end": 0.451
+     "end": 0.463
     },
     {
      "w": "the",
-     "start": 0.486,
-     "end": 0.555
+     "start": 0.509,
+     "end": 0.579
     },
     {
      "w": "meeting,",
-     "start": 0.602,
-     "end": 0.869
+     "start": 0.648,
+     "end": 0.95
     },
     {
      "w": "the",
-     "start": 0.892,
-     "end": 0.962
+     "start": 0.973,
+     "end": 1.043
     },
     {
      "w": "recruiter",
-     "start": 1.02,
-     "end": 1.391
+     "start": 1.113,
+     "end": 1.496
     },
     {
-     "w": "asks",
-     "start": 1.461,
-     "end": 1.67
+     "w": "has",
+     "start": 1.554,
+     "end": 1.682
     },
     {
      "w": "questions",
-     "start": 1.728,
-     "end": 2.169
+     "start": 1.751,
+     "end": 2.181
     },
     {
-     "w": "that",
-     "start": 2.204,
-     "end": 2.332
+     "w": "and",
+     "start": 2.216,
+     "end": 2.297
     },
     {
-     "w": "test",
+     "w": "short",
      "start": 2.367,
-     "end": 2.622
+     "end": 2.587
     },
     {
-     "w": "each",
-     "start": 2.668,
-     "end": 2.808
+     "w": "situations",
+     "start": 2.622,
+     "end": 3.272
     },
     {
-     "w": "claim.",
-     "start": 2.854,
-     "end": 3.319
+     "w": "to",
+     "start": 3.33,
+     "end": 3.411
+    },
+    {
+     "w": "check",
+     "start": 3.481,
+     "end": 3.702
+    },
+    {
+     "w": "the",
+     "start": 3.748,
+     "end": 3.818
+    },
+    {
+     "w": "other",
+     "start": 3.864,
+     "end": 4.027
+    },
+    {
+     "w": "skills.",
+     "start": 4.062,
+     "end": 4.572
     }
    ]
   }

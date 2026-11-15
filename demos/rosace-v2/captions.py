@@ -43,11 +43,11 @@ WrapStyle: 2
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,Inter,40,&H00FFFFFF,&H00FFFFFF,&H40161616,&H00000000,-1,0,0,0,100,100,0,0,3,16,0,2,80,80,44,1
+Style: Cap,Inter,40,&H00FFFFFF,&H00FFFFFF,&H00161616,&H00000000,-1,0,0,0,100,100,0,0,3,16,0,2,80,80,44,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
-body = "".join(f"Dialogue: 0,{ts(s)},{ts(e)},Cap,,0,0,0,,{{\\fad(120,120)}}{t}\n" for s, e, t in out)
+body = "".join(f"Dialogue: 0,{ts(s)},{ts(e)},Cap,,0,0,0,,{t}\n" for s, e, t in out)
 open(f"out/clip{c}.ass", "w").write(head + body)
 for s, e, t in out: print(f"{s:6.2f}-{e:6.2f} {t}")

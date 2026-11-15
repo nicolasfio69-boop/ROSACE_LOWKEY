@@ -1,98 +1,98 @@
 {
  "clip": 17,
- "total": 6.913,
+ "total": 7.566,
  "lines": [
   {
    "id": "u07",
    "clip": 17,
-   "text": "Then they note what they saw: A, C or F. Observed stays separate from what Fatima declared.",
+   "text": "Afterwards, the recruiter notes what was seen, skill by skill. Observed stays separate from what Fatima declared.",
    "start": 0.3,
-   "dur": 6.113,
+   "dur": 6.766,
    "words": [
     {
-     "w": "Then",
-     "start": 0.358,
-     "end": 0.497
+     "w": "Afterwards,",
+     "start": 0.335,
+     "end": 0.869
     },
     {
-     "w": "they",
-     "start": 0.532,
-     "end": 0.637
+     "w": "the",
+     "start": 0.892,
+     "end": 0.962
     },
     {
-     "w": "note",
-     "start": 0.706,
-     "end": 0.904
+     "w": "recruiter",
+     "start": 1.043,
+     "end": 1.484
+    },
+    {
+     "w": "notes",
+     "start": 1.565,
+     "end": 1.786
     },
     {
      "w": "what",
-     "start": 0.927,
-     "end": 1.066
+     "start": 1.833,
+     "end": 1.983
     },
     {
-     "w": "they",
-     "start": 1.101,
-     "end": 1.217
+     "w": "was",
+     "start": 2.018,
+     "end": 2.123
     },
     {
-     "w": "saw:",
-     "start": 1.275,
-     "end": 1.67
+     "w": "seen,",
+     "start": 2.181,
+     "end": 2.622
     },
     {
-     "w": "A,",
-     "start": 1.74,
-     "end": 2.03
+     "w": "skill",
+     "start": 2.785,
+     "end": 3.156
     },
     {
-     "w": "C",
-     "start": 2.1,
-     "end": 2.297
+     "w": "by",
+     "start": 3.249,
+     "end": 3.388
     },
     {
-     "w": "or",
-     "start": 2.494,
-     "end": 2.634
-    },
-    {
-     "w": "F.",
-     "start": 2.703,
-     "end": 3.063
+     "w": "skill.",
+     "start": 3.458,
+     "end": 3.946
     },
     {
      "w": "Observed",
-     "start": 3.551,
-     "end": 3.969
+     "start": 4.305,
+     "end": 4.7
     },
     {
      "w": "stays",
-     "start": 4.004,
-     "end": 4.34
+     "start": 4.816,
+     "end": 5.107
     },
     {
      "w": "separate",
-     "start": 4.398,
-     "end": 4.828
+     "start": 5.153,
+     "end": 5.524
     },
     {
      "w": "from",
-     "start": 4.851,
-     "end": 4.979
+     "start": 5.548,
+     "end": 5.652
     },
     {
      "w": "what",
-     "start": 5.025,
-     "end": 5.165
+     "start": 5.699,
+     "end": 5.826
     },
     {
      "w": "Fatima",
-     "start": 5.211,
-     "end": 5.571
+     "start": 5.873,
+     "end": 6.233
     },
     {
      "w": "declared.",
-     "start": 5.617,
-     "end": 6.117
+     "start": 6.279,
+     "end": 6.778
     }
    ]
   }

@@ -55,15 +55,14 @@
       <div class="maj"><b></b>Follow the rules</div>
       <div class="maj"><b></b>Get it right</div>
       <div class="maj"><b></b>Keep commitments</div>
-      <div class="note">The other skills it needs are minors, in red. Majors count double.</div>
+      <div class="note">The other skills it needs are minors, in red.</div>
     </div>
     <div id="p4" class="sect">
-      <div class="k">After the conversation</div>
-      <div class="h">The recruiter notes what they saw</div>
-      <div class="obs" id="oA"><div class="l" style="background:#17181C">A</div>Seen clearly<small>full level</small></div>
-      <div class="obs" id="oC"><div class="l" style="background:#8A8D99">C</div>Seen in part<small>60 %</small></div>
-      <div class="obs" id="oF"><div class="l" style="background:#C8102E">F</div>Not seen<small>zero</small></div>
-      <div class="legend" id="leg"><span><svg width="54" height="10"><line x1="2" y1="5" x2="52" y2="5" stroke="#17181C" stroke-width="7" stroke-dasharray="2 9" stroke-linecap="round"/></svg>Fatima's own words</span><span><svg width="54" height="10"><line x1="2" y1="5" x2="52" y2="5" stroke="#17181C" stroke-width="7" stroke-linecap="round"/></svg>What the recruiter saw</span></div>
+      <div class="k">Declared vs observed</div>
+      <div class="h">Two lines on the same skill</div>
+      <div class="obs" id="oA"><svg width="76" height="20"><line x1="6" y1="10" x2="70" y2="10" stroke="#17181C" stroke-width="9" stroke-dasharray="2 12" stroke-linecap="round"/></svg>Declared by Fatima</div>
+      <div class="obs" id="oC"><svg width="76" height="20"><line x1="6" y1="10" x2="70" y2="10" stroke="#17181C" stroke-width="9" stroke-linecap="round"/></svg>Observed by a recruiter</div>
+      <div class="note" id="leg">The level is the difficulty of the situation. The letters A, C, F and NE come later, when someone is assessed.</div>
     </div>
   </div>
 </div>
@@ -144,12 +143,11 @@ window.setT = (t) => {
     el.style.opacity = p > 0.01 ? 1 - 0.75 * s4 * (i !== GIR ? 1 : 0) : 0
   })
   $$('#p3 .maj').forEach((el, k) => rise(el, ramp(t, W('s09', 'three') - 0.1 + k * 0.25, 0.4), 10))
-  // s10: letters, then declared vs observed on Get it right
-  rise('#oA', ramp(t, W('s10', 'A,') - 0.15, 0.35), 10)
-  rise('#oC', ramp(t, W('s10', 'C,') - 0.15, 0.35), 10)
-  rise('#oF', ramp(t, W('s10', 'F,') - 0.15, 0.35), 10)
-  rise('#leg', ramp(t, W('s10', 'F,') + 0.6, 0.4), 10)
-  const d = ramp(t, W('s10', 'notes') - 0.2, 0.5), sn = ramp(t, W('s10', 'A,') - 0.1, 0.6)
+  // s10: declared (dotted) vs observed (solid) on Get it right
+  rise('#oA', ramp(t, W('s10', 'declared') - 0.15, 0.35), 10)
+  rise('#oC', ramp(t, W('s10', 'observes') - 0.15, 0.35), 10)
+  rise('#leg', ramp(t, W('s10', 'solid') + 0.3, 0.4), 10)
+  const d = ramp(t, W('s10', 'declared') - 0.1, 0.5), sn = ramp(t, W('s10', 'observes') - 0.1, 0.6)
   $('#decl').style.opacity = d; $('#seen').style.opacity = sn
   { const [x, y] = P(GIR, rad(2 * sn + 0.001)); $('#seen').setAttribute('x2', x); $('#seen').setAttribute('y2', y + 13) }
 }

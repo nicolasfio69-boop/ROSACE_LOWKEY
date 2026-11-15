@@ -1,0 +1,105 @@
+{
+ "clip": 23,
+ "total": 7.252,
+ "lines": [
+  {
+   "id": "u12",
+   "clip": 23,
+   "text": "Only this skill changes. A means seen clearly, C seen in part, F not seen, NE not covered.",
+   "start": 0.3,
+   "dur": 6.452,
+   "words": [
+    {
+     "w": "Only",
+     "start": 0.335,
+     "end": 0.567
+    },
+    {
+     "w": "this",
+     "start": 0.625,
+     "end": 0.753
+    },
+    {
+     "w": "skill",
+     "start": 0.788,
+     "end": 1.043
+    },
+    {
+     "w": "changes.",
+     "start": 1.101,
+     "end": 1.682
+    },
+    {
+     "w": "A",
+     "start": 1.751,
+     "end": 1.821
+    },
+    {
+     "w": "means",
+     "start": 1.902,
+     "end": 2.123
+    },
+    {
+     "w": "seen",
+     "start": 2.146,
+     "end": 2.343
+    },
+    {
+     "w": "clearly,",
+     "start": 2.413,
+     "end": 2.982
+    },
+    {
+     "w": "C",
+     "start": 3.214,
+     "end": 3.377
+    },
+    {
+     "w": "seen",
+     "start": 3.539,
+     "end": 3.702
+    },
+    {
+     "w": "in",
+     "start": 3.76,
+     "end": 3.818
+    },
+    {
+     "w": "part,",
+     "start": 3.876,
+     "end": 4.282
+    },
+    {
+     "w": "F",
+     "start": 4.514,
+     "end": 4.654
+    },
+    {
+     "w": "not",
+     "start": 4.735,
+     "end": 4.898
+    },
+    {
+     "w": "seen,",
+     "start": 4.956,
+     "end": 5.432
+    },
+    {
+     "w": "NE",
+     "start": 5.594,
+     "end": 5.792
+    },
+    {
+     "w": "not",
+     "start": 5.861,
+     "end": 6.0
+    },
+    {
+     "w": "covered.",
+     "start": 6.047,
+     "end": 6.442
+    }
+   ]
+  }
+ ]
+}

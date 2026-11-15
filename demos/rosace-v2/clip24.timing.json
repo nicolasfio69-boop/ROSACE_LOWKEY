@@ -1,0 +1,75 @@
+{
+ "clip": 24,
+ "total": 5.998,
+ "lines": [
+  {
+   "id": "u13",
+   "clip": 24,
+   "text": "A clearer reason to meet. Concrete skills to discuss. A human decision.",
+   "start": 0.3,
+   "dur": 5.198,
+   "words": [
+    {
+     "w": "A",
+     "start": 0.335,
+     "end": 0.404
+    },
+    {
+     "w": "clearer",
+     "start": 0.497,
+     "end": 0.834
+    },
+    {
+     "w": "reason",
+     "start": 0.892,
+     "end": 1.182
+    },
+    {
+     "w": "to",
+     "start": 1.229,
+     "end": 1.287
+    },
+    {
+     "w": "meet.",
+     "start": 1.345,
+     "end": 1.682
+    },
+    {
+     "w": "Concrete",
+     "start": 2.041,
+     "end": 2.645
+    },
+    {
+     "w": "skills",
+     "start": 2.68,
+     "end": 2.982
+    },
+    {
+     "w": "to",
+     "start": 3.017,
+     "end": 3.063
+    },
+    {
+     "w": "discuss.",
+     "start": 3.121,
+     "end": 3.748
+    },
+    {
+     "w": "A",
+     "start": 4.108,
+     "end": 4.189
+    },
+    {
+     "w": "human",
+     "start": 4.271,
+     "end": 4.561
+    },
+    {
+     "w": "decision.",
+     "start": 4.619,
+     "end": 5.188
+    }
+   ]
+  }
+ ]
+}

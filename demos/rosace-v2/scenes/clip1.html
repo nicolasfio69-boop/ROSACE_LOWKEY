@@ -119,7 +119,7 @@
   <div id="e-head" class="abs"><img src="rosace-logo.svg" alt=""><span class="display">Rosace</span><span class="sub">one shared skills map</span></div>
   <div id="k-card" class="abs card rc"><div class="t"><img src="kaarna.svg" alt=""><div><h3>Kaarna Health</h3><div class="s">The level each skill needs</div></div></div><svg id="k-svg" width="470" height="470"></svg>
     <div class="lg"><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#F0C300" stroke-width="10" stroke-linecap="round"/></svg>Most important</span><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#C8102E" stroke-width="10" stroke-linecap="round"/></svg>Also needed</span></div></div>
-  <div id="f-card" class="abs card rc"><div class="t"><img src="fatima.svg" alt="" style="border-radius:50%"><div><h3>Fatima</h3><div class="s">The level she says she has</div></div></div><svg id="f-svg" width="470" height="470"></svg>
+  <div id="f-card" class="abs card rc"><div class="t"><img src="fatima.svg" alt="" style="border-radius:50%"><div><h3>Fatima</h3><div class="s">The level she declares</div></div></div><svg id="f-svg" width="470" height="470"></svg>
     <div class="lg"><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#17181C" stroke-width="7" stroke-dasharray="1 9" stroke-linecap="round"/></svg>Her own words, not yet checked</span></div></div>
   <div id="m-card" class="abs card rc"><div class="t"><img src="kaarna.svg" alt=""><div><h3>Kaarna × Fatima</h3><div class="s">Need and claim on the same map</div></div></div><svg id="m-svg" width="470" height="470"></svg>
     <div class="lg"><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#F0C300" stroke-width="10" stroke-linecap="round"/></svg>Kaarna needs</span><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#17181C" stroke-width="7" stroke-dasharray="1 9" stroke-linecap="round"/></svg>Fatima says</span><span id="gap" class="pill">? to check</span></div></div>
@@ -215,12 +215,15 @@ window.setT = (t) => {
   // E — Rosace: measure on one map, match, suggest questions, a person decides
   const eIn = ramp(t, L('s05') - 0.3, 0.6)
   put('#e-head', { o: eIn, y: (1 - eIn) * -20 })
-  const merge = ramp(t, L('s05b') - 0.25, 0.8)
+  const HAS_B = TIMING.lines.some((l) => l.id === 's05b')
+  if (!HAS_B) { ['#m-card', '#q1', '#q2', '#decide'].forEach((id) => put(id, { o: 0 })) }
+  const merge = HAS_B ? ramp(t, L('s05b') - 0.25, 0.8) : 0
   const kIn = ramp(t, W('s05', 'Kaarna') - 0.35, 0.5), fIn = ramp(t, W('s05', 'Fatima') - 0.35, 0.5)
   put('#k-card', { o: Math.min(kIn, 1 - merge), x: (1 - kIn) * -40 })
   put('#f-card', { o: Math.min(fIn, 1 - merge * 1.4), x: (1 - fIn) * 40 - 880 * easeInOut(merge) })
   grow('.kn', NEED, ramp(t, W('s05', 'level', 0) - 0.2, 0.9))
   grow('.fs', SAYS, ramp(t, W('s05', 'shows') - 0.2, 0.9))
+  if (HAS_B) {
   put('#m-card', { o: merge })
   grow('.mn', NEED, 1); grow('.ms', SAYS, 1)
   const qmP = ramp(t, W('s05b', 'checks') - 0.3, 0.4)
@@ -229,6 +232,7 @@ window.setT = (t) => {
   rise('#q1', ramp(t, W('s05b', 'before') - 0.2, 0.5))
   rise('#q2', ramp(t, W('s05b', 'during') - 0.2, 0.5))
   put('#decide', { o: ramp(t, W('s05b', 'recruiter') - 0.3, 0.4), s: 0.9 + 0.1 * ramp(t, W('s05b', 'recruiter') - 0.3, 0.4) })
+  }
 }
 window.setT(0)
 </script>

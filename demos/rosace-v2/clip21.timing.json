@@ -1,0 +1,140 @@
+{
+ "clip": 21,
+ "total": 9.342,
+ "lines": [
+  {
+   "id": "u10",
+   "clip": 21,
+   "text": "Before the event, Fatima takes a short timed exercise, at the level she declared. She spots the boundary bug, fixes the condition and proposes tests.",
+   "start": 0.3,
+   "dur": 8.542,
+   "words": [
+    {
+     "w": "Before",
+     "start": 0.358,
+     "end": 0.648
+    },
+    {
+     "w": "the",
+     "start": 0.672,
+     "end": 0.741
+    },
+    {
+     "w": "event,",
+     "start": 0.799,
+     "end": 1.194
+    },
+    {
+     "w": "Fatima",
+     "start": 1.357,
+     "end": 1.751
+    },
+    {
+     "w": "takes",
+     "start": 1.798,
+     "end": 1.983
+    },
+    {
+     "w": "a",
+     "start": 2.018,
+     "end": 2.053
+    },
+    {
+     "w": "short",
+     "start": 2.134,
+     "end": 2.39
+    },
+    {
+     "w": "timed",
+     "start": 2.425,
+     "end": 2.692
+    },
+    {
+     "w": "exercise,",
+     "start": 2.738,
+     "end": 3.33
+    },
+    {
+     "w": "at",
+     "start": 3.353,
+     "end": 3.423
+    },
+    {
+     "w": "the",
+     "start": 3.47,
+     "end": 3.539
+    },
+    {
+     "w": "level",
+     "start": 3.586,
+     "end": 3.795
+    },
+    {
+     "w": "she",
+     "start": 3.841,
+     "end": 3.934
+    },
+    {
+     "w": "declared.",
+     "start": 3.992,
+     "end": 4.526
+    },
+    {
+     "w": "She",
+     "start": 4.944,
+     "end": 5.083
+    },
+    {
+     "w": "spots",
+     "start": 5.13,
+     "end": 5.42
+    },
+    {
+     "w": "the",
+     "start": 5.443,
+     "end": 5.513
+    },
+    {
+     "w": "boundary",
+     "start": 5.548,
+     "end": 5.838
+    },
+    {
+     "w": "bug,",
+     "start": 5.884,
+     "end": 6.221
+    },
+    {
+     "w": "fixes",
+     "start": 6.488,
+     "end": 6.848
+    },
+    {
+     "w": "the",
+     "start": 6.906,
+     "end": 6.976
+    },
+    {
+     "w": "condition",
+     "start": 7.011,
+     "end": 7.452
+    },
+    {
+     "w": "and",
+     "start": 7.521,
+     "end": 7.614
+    },
+    {
+     "w": "proposes",
+     "start": 7.661,
+     "end": 8.102
+    },
+    {
+     "w": "tests.",
+     "start": 8.148,
+     "end": 8.555
+    }
+   ]
+  }
+ ]
+}
