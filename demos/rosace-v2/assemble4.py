@@ -10,6 +10,11 @@ PROMPT = (960, 540, 390, 360)        # exercise prompt + timer
 REC = (1180, 664, 370, 300)          # Claude's recommendation and criteria
 GRADE = (1440, 810, 380, 150)        # grade buttons + observed rosace
 ASIDE = (450, 420, 1335, 180, 960, 540)  # the observed rosace card alone, padded on the app background
+REC_A = (960, 484, 400, 350, 960, 540, "top")  # recommendation + 3 criteria x2, plain band at the bottom for captions
+REC_B = (1007, 566, 360, 420)        # third criterion, quote and the human "Validate" button, above the captions
+NOTE = "C — Correct fix, but remaining risks not explained."   # matches the 3rd criterion (partial)
+NOTE_A = (NOTE, "w-tw-60", 18)       # top right, beside the grade title
+NOTE_B = (NOTE, "720", 885)          # right of the Validate button, clear of the captions
 ZWIN = (1400, 788, 250, 120)         # main column while the recording is already zoomed in
 TYPE = (1400, 788, 250, 190)         # timer, prompt and answer while typing (zoomed)
 ENC = ["-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-r", "30",
@@ -27,7 +32,7 @@ SEGS = {
     14: (V1, [(86.7, 91.0, WIN, None, None), (99.3, 105.0, WIN, None, None)], 0.3),
     21: (CODE, [(3.0, 5.3, ZWIN, 1.3, None), (5.3, 9.9, PROMPT, 3.6, None),
                 (11.5, 19.4, TYPE, 4.0, "Demo answer, typed for this video"), (21.0, 22.6, WIN, 0.7, None)], 0),
-    22: (CODE, [(33.2, 36.3, ZWIN, 2.3, None), (42.6, 49.4, REC, 5.8, None), (49.4, 50.8, REC, 1.2, None),
+    22: (CODE, [(33.2, 36.3, ZWIN, 2.3, None), (42.6, 46.6, REC_A, 3.6, NOTE_A), (46.6, 49.4, REC_B, 2.2, NOTE_B), (49.4, 50.8, REC_B, 1.2, NOTE_B),
                 (50.8, 53.4, GRADE, 1.5, None)], 0),
     43: (CODE, [(53.4, 55.9, ASIDE, 2.4, None)], 0),
     15: (V1, [(128.4, 145.5, WIN, None, None)], 0.3),
@@ -45,10 +50,12 @@ def tool(c):
     for i, (a, b, cr, d, label) in enumerate(ranges):
         sp = (b - a) / d if d else k
         w, h, x, y = cr[:4]
-        pad = f",pad={cr[4]}:{cr[5]}:(ow-iw)/2:(oh-ih)/2:color=0xE9E8ED" if len(cr) > 4 else ""
+        py = "0" if len(cr) > 6 else "(oh-ih)/2"
+        pad = f",pad={cr[4]}:{cr[5]}:(ow-iw)/2:{py}:color=0xEDEDF5" if len(cr) > 4 else ""
         f = f"[0:v]trim={a}:{b},setpts=(PTS-STARTPTS)/{sp:.4f},crop={w}:{h}:{x}:{y}{pad},scale=1920:1080:flags=lanczos,setsar=1,fps=30"
         if label:
-            f += (f",drawtext=fontfile={FONT}:text='{label}':x=w-tw-60:y=60:fontsize=30:fontcolor=white"
+            label, lx, ly = label if isinstance(label, tuple) else (label, "w-tw-60", 60)
+            f += (f",drawtext=fontfile={FONT}:text='{label}':x={lx}:y={ly}:fontsize=30:fontcolor=white"
                   f":box=1:boxcolor=0x17181C@1:boxborderw=16")
         parts.append(f + f"[r{i}]")
     L = max(narr, sum(d if d else (b - a) / k for a, b, cr, d, l in ranges))
