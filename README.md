@@ -35,8 +35,8 @@ A person always makes the decision.
 
 ### The skills framework
 
-The framework comes from the Centrale Lyon junior-enterprise skills tool:
-5 competencies, 12 components written as action verbs (for example "Break down
+Rosace is inspired by a real, working competency system designed at École
+Centrale de Lyon: 5 competencies, 12 components written as action verbs (for example "Break down
 a problem", "Get it right and spot the error"), three levels (Foundation,
 Intermediate, Advanced, plus "Not yet") and the rosace chart. It is fixed;
 company needs adapt on top of it.

@@ -75,7 +75,7 @@ export default function Home() {
             <TextGenerateEffect words="Prepare your recruitment event." />
           </h1>
           <p className="hero-kicker">
-            <span className="status-dot" /> Espoo Tech Matchmaking · demo
+            <span className="status-dot" /> Espoo Tech Matchmaking
           </p>
 
           <p>

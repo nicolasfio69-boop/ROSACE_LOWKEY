@@ -2,9 +2,9 @@
 
 ## Skills framework
 
-The 5 competencies, 12 components, levels and the rosace chart come from the
-skills tool of the Centrale Lyon junior enterprise, adapted to English and to
-recruitment events.
+The 5 competencies, 12 components, levels and the rosace chart are inspired by
+a real, working competency system designed at École Centrale de Lyon, adapted
+to English and to recruitment events.
 
 ## Open-source libraries
 
