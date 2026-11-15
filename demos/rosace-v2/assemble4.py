@@ -68,7 +68,7 @@ L24 = total(24) + 0.2
 run(["-loop", "1", "-t", f"{L24:.3f}", "-i", "scenes/endcard.png", "-i", "out/clip24.wav",
      "-vf", f"fps=30,fade=t=in:d=0.3,fade=t=out:st={L24 - 0.4:.3f}:d=0.4,{subs(24)}", "-af", f"apad,{LOUD}",
      "-t", f"{L24:.3f}", *ENC, "out/v4seg24.mp4"])
-REST, SPEED = [41, 33, 12, 14, 21, 22, 43, 15, 16, 17, 24], 1.04   # after Nicolas: voice and picture x1.04 to fit 2:00
+REST, SPEED = [41, 33, 12, 14, 21, 22, 43, 15, 16, 17, 24], 1.022  # after Nicolas: voice and picture x1.022 to fit 1:59
 order = [31, 50] + REST                                           # 50 = Nicolas, made separately (8 s)
 open("out/concat4r.txt", "w").write("".join(f"file 'v4seg{c}.mp4'\n" for c in REST))
 run(["-f", "concat", "-safe", "0", "-i", "out/concat4r.txt", "-vf", f"setpts=PTS/{SPEED},fps=30", "-af", f"atempo={SPEED}", *ENC, "out/v4rest.mp4"])

@@ -11,7 +11,12 @@
 
   "camera": { "padding": 0.22, "maxZoom": 1.7, "transitionSec": 0.72 },
 
-  "speedup": { "toolWaitMax": 4, "preToolWaitMax": 2.5, "idleGapMax": 1.8, "idleGapMin": 3.5 },
+  "speedup": {
+    "toolWaitMax": 4,
+    "preToolWaitMax": 2.5,
+    "idleGapMax": 1.8,
+    "idleGapMin": 3.5
+  },
 
   "frame": {
     "preset": "macos-light",
