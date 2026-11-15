@@ -10,25 +10,41 @@
 export type LevelValue = 0 | 1 | 2 | 3;
 export type ExpectedLevel = 1 | 2 | 3;
 
-export const LEVELS: Record<LevelValue, { name: string; definition: string }> = {
-  0: { name: "Not yet", definition: "Has never done it." },
-  1: { name: "Foundation", definition: "Has done it with help, on simple tasks." },
-  2: { name: "Intermediate", definition: "Does it alone, in real situations, on well-defined tasks." },
-  3: {
-    name: "Advanced",
-    definition: "Does it alone when the situation is new, unclear or changing, and other people's work depends on the result.",
-  },
-};
+export const LEVELS: Record<LevelValue, { name: string; definition: string }> =
+  {
+    0: { name: "Not yet", definition: "Has never done it." },
+    1: {
+      name: "Foundation",
+      definition: "Has done it with help, on simple tasks.",
+    },
+    2: {
+      name: "Intermediate",
+      definition: "Does it alone, in real situations, on well-defined tasks.",
+    },
+    3: {
+      name: "Advanced",
+      definition:
+        "Does it alone when the situation is new, unclear or changing, and other people's work depends on the result.",
+    },
+  };
 
 export type Competency = { code: string; name: string; color: string };
 
 /** Palette kept to Centrale red, gold and greys only (no blue/green/purple accents). */
 export const COMPETENCIES: Competency[] = [
-  { code: "C1", name: "Working with clients and stakeholders", color: "#C8102E" },
+  {
+    code: "C1",
+    name: "Working with clients and stakeholders",
+    color: "#C8102E",
+  },
   { code: "C2", name: "Rigour and compliance", color: "#5C5C5C" },
   { code: "C3", name: "Running a project", color: "#7A7A7A" },
   { code: "C4", name: "Commitment and self-management", color: "#F0C300" },
-  { code: "C5", name: "Analysis, learning and communication", color: "#3D3D3D" },
+  {
+    code: "C5",
+    name: "Analysis, learning and communication",
+    color: "#3D3D3D",
+  },
 ];
 
 export type Component = {
@@ -57,7 +73,8 @@ export const COMPONENTS: Component[] = [
     competency: "C1",
     name: "Reach out to people",
     short: "Reach out",
-    activity: "contacted people you did not know (users, other teams, suppliers) to get what the work needed",
+    activity:
+      "contacted people you did not know (users, other teams, suppliers) to get what the work needed",
     descriptors: {
       1: "Contacts someone they do not know (a user, another team, a supplier) to get information, and does not freeze after a no.",
       2: "Regularly goes to users or other teams to get what the work needs, and adapts the approach to the person (engineer, customer, manager).",
@@ -81,7 +98,8 @@ export const COMPONENTS: Component[] = [
     competency: "C2",
     name: "Know the rules and stick to them",
     short: "Follow the rules",
-    activity: "followed rules or standards that applied to your work (coding rules, data protection, safety)",
+    activity:
+      "followed rules or standards that applied to your work (coding rules, data protection, safety)",
     descriptors: {
       1: "Knows the main rules of the job (coding rules, data protection, safety, the company's process) and answers questions about them correctly.",
       2: "Applies them without being reminded, and refuses a shortcut or a request that would break them.",
@@ -93,7 +111,8 @@ export const COMPONENTS: Component[] = [
     competency: "C2",
     name: "Get it right and spot the error",
     short: "Get it right",
-    activity: "delivered work that had to pass a review, tests or an acceptance check",
+    activity:
+      "delivered work that had to pass a review, tests or an acceptance check",
     descriptors: {
       1: "Delivers work without obvious mistakes, and spots visible errors in someone else's work.",
       2: "Delivers work that passes review or tests with few corrections, and finds real problems when reviewing someone else's code or document.",
@@ -226,7 +245,8 @@ export const JOB_SKILLS: JobSkill[] = [
     code: "J.EMBEDDED_C",
     family: "embedded",
     name: "Program embedded systems in C",
-    activity: "written C code that runs on a microcontroller or an embedded device",
+    activity:
+      "written C code that runs on a microcontroller or an embedded device",
     descriptors: {
       1: "Changes a small C routine on a development board with help, then builds and flashes it.",
       2: "Writes and debugs a driver or a feature in C on a microcontroller alone, within memory and timing limits.",
@@ -237,7 +257,8 @@ export const JOB_SKILLS: JobSkill[] = [
     code: "J.PROTOCOLS",
     family: "embedded",
     name: "Use communication protocols (UART, SPI, I2C, CAN)",
-    activity: "made devices talk to each other over a protocol such as UART, SPI, I2C or CAN",
+    activity:
+      "made devices talk to each other over a protocol such as UART, SPI, I2C or CAN",
     descriptors: {
       1: "Reads and sends data over UART or I2C by following an example.",
       2: "Configures and debugs a link between devices over SPI, I2C or CAN alone, using the datasheet.",
@@ -248,7 +269,8 @@ export const JOB_SKILLS: JobSkill[] = [
     code: "J.RTOS",
     family: "embedded",
     name: "Use a real-time operating system (FreeRTOS, Zephyr)",
-    activity: "built firmware with several tasks on a real-time operating system",
+    activity:
+      "built firmware with several tasks on a real-time operating system",
     descriptors: {
       1: "Runs and modifies an example project with tasks on FreeRTOS or Zephyr.",
       2: "Splits a firmware into tasks, queues and interrupts alone, without blocking or priority problems.",
@@ -259,7 +281,8 @@ export const JOB_SKILLS: JobSkill[] = [
     code: "J.HW_DEBUG",
     family: "embedded",
     name: "Debug hardware with lab tools (oscilloscope, logic analyser, debugger)",
-    activity: "used an oscilloscope, a logic analyser or a hardware debugger to find a fault",
+    activity:
+      "used an oscilloscope, a logic analyser or a hardware debugger to find a fault",
     descriptors: {
       1: "Uses a multimeter, an oscilloscope or a debugger with guidance to check a signal or step through code.",
       2: "Finds alone whether a fault comes from the hardware or the software, with an oscilloscope, a logic analyser or JTAG.",
@@ -281,7 +304,8 @@ export const JOB_SKILLS: JobSkill[] = [
     code: "J.GIT",
     family: "software",
     name: "Work with Git and code review",
-    activity: "worked on a shared Git repository with branches and code reviews",
+    activity:
+      "worked on a shared Git repository with branches and code reviews",
     descriptors: {
       1: "Commits, pushes and pulls on a shared repository, following the team's instructions.",
       2: "Works with branches and pull requests, resolves merge conflicts, and gives useful review comments.",
@@ -435,7 +459,8 @@ export const JOB_SKILLS: JobSkill[] = [
     code: "J.DATA_PIPELINES",
     family: "data",
     name: "Build data pipelines",
-    activity: "built a repeatable process to move and prepare data between systems",
+    activity:
+      "built a repeatable process to move and prepare data between systems",
     descriptors: {
       1: "Runs and adapts a small file-to-table pipeline with help, checking the row count and required fields.",
       2: "Builds a repeatable pipeline alone for real data, with validation, retries and a clear failure report.",
@@ -444,18 +469,29 @@ export const JOB_SKILLS: JobSkill[] = [
   },
 ];
 
-export const SKILL_CODES = new Set<string>([...COMPONENTS.map((c) => c.code), ...JOB_SKILLS.map((j) => j.code)]);
+export const SKILL_CODES = new Set<string>([
+  ...COMPONENTS.map((c) => c.code),
+  ...JOB_SKILLS.map((j) => j.code),
+]);
 
 export function isComponent(code: string): boolean {
   return COMPONENTS.some((c) => c.code === code);
 }
 
 export function skillName(code: string): string {
-  return COMPONENTS.find((c) => c.code === code)?.name ?? JOB_SKILLS.find((j) => j.code === code)?.name ?? code;
+  return (
+    COMPONENTS.find((c) => c.code === code)?.name ??
+    JOB_SKILLS.find((j) => j.code === code)?.name ??
+    code
+  );
 }
 
 export function skillActivity(code: string): string {
-  return COMPONENTS.find((c) => c.code === code)?.activity ?? JOB_SKILLS.find((j) => j.code === code)?.activity ?? code;
+  return (
+    COMPONENTS.find((c) => c.code === code)?.activity ??
+    JOB_SKILLS.find((j) => j.code === code)?.activity ??
+    code
+  );
 }
 
 /** Descriptor of a level, for a Centrale component or a technical skill. */

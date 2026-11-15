@@ -113,7 +113,9 @@ export function ConversationBrief() {
         >
           Print this brief
         </button>
-        <small>One page to keep on the table during an in-person meeting.</small>
+        <small>
+          One page to keep on the table during an in-person meeting.
+        </small>
       </div>
       <div className="brief-tabs" aria-label="Conversation stage">
         <button

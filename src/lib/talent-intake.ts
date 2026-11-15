@@ -34,7 +34,8 @@ const PATTERNS: Record<string, RegExp> = {
   "J.GIT": /\bgit\b|github|gitlab|pull request/i,
   "J.WEB_BACKEND": /backend|back-end|\bapi\b|node\.?js|django/i,
   "J.WEB_FRONTEND": /react|typescript|javascript|frontend|front-end|website/i,
-  "J.TESTING": /automated (regression )?tests?|unit tests?|regression tests?|test automation|testing tools/i,
+  "J.TESTING":
+    /automated (regression )?tests?|unit tests?|regression tests?|test automation|testing tools/i,
   "J.SQL": /\bsql\b|postgres|mysql/i,
   "J.DATA_ANALYSIS": /pandas|notebook|dataset|cleaned .*data|excel/i,
   "J.ML": /machine.learning|\bml model/i,

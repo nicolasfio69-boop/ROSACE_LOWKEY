@@ -82,11 +82,21 @@ export function field(
 const WINDOW_MS = 60000;
 const DAY_MS = 24 * 60 * 60000;
 /** Per visitor and per minute; the whole site per minute and per day protects the API credits. */
-export const LIMITS = { visitorPerMinute: 6, sitePerMinute: 40, sitePerDay: 600 };
+export const LIMITS = {
+  visitorPerMinute: 6,
+  sitePerMinute: 40,
+  sitePerDay: 600,
+};
 const calls = new Map<string, { since: number; count: number }>();
 function visitor(request?: Request): string {
-  const forwarded = request?.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  return (forwarded || request?.headers.get("x-real-ip") || "local").slice(0, 64);
+  const forwarded = request?.headers
+    .get("x-forwarded-for")
+    ?.split(",")[0]
+    ?.trim();
+  return (forwarded || request?.headers.get("x-real-ip") || "local").slice(
+    0,
+    64,
+  );
 }
 function count(key: string, windowMs: number, max: number, message: string) {
   const now = Date.now();
