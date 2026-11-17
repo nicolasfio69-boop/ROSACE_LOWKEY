@@ -1,0 +1,466 @@
+{
+ "clip": 1,
+ "total": 34.444,
+ "lines": [
+  {
+   "id": "s01",
+   "clip": 1,
+   "text": "Espoo. A recruitment evening. Four companies, ten talents, fifteen minutes per conversation.",
+   "start": 0.5,
+   "dur": 5.851,
+   "words": [
+    {
+     "w": "Espoo.",
+     "start": 0.535,
+     "end": 1.08
+    },
+    {
+     "w": "A",
+     "start": 1.394,
+     "end": 1.475
+    },
+    {
+     "w": "recruitment",
+     "start": 1.568,
+     "end": 2.033
+    },
+    {
+     "w": "evening.",
+     "start": 2.079,
+     "end": 2.439
+    },
+    {
+     "w": "Four",
+     "start": 2.706,
+     "end": 2.938
+    },
+    {
+     "w": "companies,",
+     "start": 3.008,
+     "end": 3.553
+    },
+    {
+     "w": "ten",
+     "start": 3.6,
+     "end": 3.832
+    },
+    {
+     "w": "talents,",
+     "start": 3.902,
+     "end": 4.343
+    },
+    {
+     "w": "fifteen",
+     "start": 4.389,
+     "end": 4.784
+    },
+    {
+     "w": "minutes",
+     "start": 4.842,
+     "end": 5.098
+    },
+    {
+     "w": "per",
+     "start": 5.144,
+     "end": 5.248
+    },
+    {
+     "w": "conversation.",
+     "start": 5.295,
+     "end": 6.084
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "clip": 1,
+   "text": "This is Fatima. She was a pharmacy assistant, then she learned to code in a bootcamp.",
+   "start": 6.951,
+   "dur": 4.911,
+   "words": [
+    {
+     "w": "This",
+     "start": 7.009,
+     "end": 7.148
+    },
+    {
+     "w": "is",
+     "start": 7.195,
+     "end": 7.264
+    },
+    {
+     "w": "Fatima.",
+     "start": 7.334,
+     "end": 7.891
+    },
+    {
+     "w": "She",
+     "start": 8.031,
+     "end": 8.158
+    },
+    {
+     "w": "was",
+     "start": 8.205,
+     "end": 8.309
+    },
+    {
+     "w": "a",
+     "start": 8.344,
+     "end": 8.379
+    },
+    {
+     "w": "pharmacy",
+     "start": 8.414,
+     "end": 8.785
+    },
+    {
+     "w": "assistant,",
+     "start": 8.843,
+     "end": 9.377
+    },
+    {
+     "w": "then",
+     "start": 9.737,
+     "end": 9.9
+    },
+    {
+     "w": "she",
+     "start": 9.958,
+     "end": 10.074
+    },
+    {
+     "w": "learned",
+     "start": 10.167,
+     "end": 10.422
+    },
+    {
+     "w": "to",
+     "start": 10.446,
+     "end": 10.492
+    },
+    {
+     "w": "code",
+     "start": 10.562,
+     "end": 10.817
+    },
+    {
+     "w": "in",
+     "start": 10.84,
+     "end": 10.887
+    },
+    {
+     "w": "a",
+     "start": 10.933,
+     "end": 10.956
+    },
+    {
+     "w": "bootcamp.",
+     "start": 11.014,
+     "end": 11.63
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "clip": 1,
+   "text": "And this is Kaarna Health, a small Espoo start-up looking for a junior web developer.",
+   "start": 12.462,
+   "dur": 4.963,
+   "words": [
+    {
+     "w": "And",
+     "start": 12.497,
+     "end": 12.625
+    },
+    {
+     "w": "this",
+     "start": 12.683,
+     "end": 12.834
+    },
+    {
+     "w": "is",
+     "start": 12.903,
+     "end": 12.984
+    },
+    {
+     "w": "Kaarna",
+     "start": 13.054,
+     "end": 13.391
+    },
+    {
+     "w": "Health,",
+     "start": 13.46,
+     "end": 13.797
+    },
+    {
+     "w": "a",
+     "start": 13.844,
+     "end": 13.913
+    },
+    {
+     "w": "small",
+     "start": 14.006,
+     "end": 14.378
+    },
+    {
+     "w": "Espoo",
+     "start": 14.494,
+     "end": 14.9
+    },
+    {
+     "w": "start-up",
+     "start": 14.97,
+     "end": 15.399
+    },
+    {
+     "w": "looking",
+     "start": 15.492,
+     "end": 15.782
+    },
+    {
+     "w": "for",
+     "start": 15.841,
+     "end": 15.945
+    },
+    {
+     "w": "a",
+     "start": 15.991,
+     "end": 16.026
+    },
+    {
+     "w": "junior",
+     "start": 16.084,
+     "end": 16.363
+    },
+    {
+     "w": "web",
+     "start": 16.409,
+     "end": 16.572
+    },
+    {
+     "w": "developer.",
+     "start": 16.63,
+     "end": 17.152
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "clip": 1,
+   "text": "Fatima's CV was polished by AI, like everyone else's. Kaarna can't tell what is real.",
+   "start": 18.026,
+   "dur": 5.094,
+   "words": [
+    {
+     "w": "Fatima's",
+     "start": 18.084,
+     "end": 18.514
+    },
+    {
+     "w": "CV",
+     "start": 18.548,
+     "end": 18.804
+    },
+    {
+     "w": "was",
+     "start": 18.966,
+     "end": 19.094
+    },
+    {
+     "w": "polished",
+     "start": 19.152,
+     "end": 19.477
+    },
+    {
+     "w": "by",
+     "start": 19.5,
+     "end": 19.605
+    },
+    {
+     "w": "AI,",
+     "start": 19.675,
+     "end": 20.069
+    },
+    {
+     "w": "like",
+     "start": 20.127,
+     "end": 20.278
+    },
+    {
+     "w": "everyone",
+     "start": 20.313,
+     "end": 20.58
+    },
+    {
+     "w": "else's.",
+     "start": 20.603,
+     "end": 21.068
+    },
+    {
+     "w": "Kaarna",
+     "start": 21.486,
+     "end": 21.811
+    },
+    {
+     "w": "can't",
+     "start": 21.857,
+     "end": 22.055
+    },
+    {
+     "w": "tell",
+     "start": 22.078,
+     "end": 22.206
+    },
+    {
+     "w": "what",
+     "start": 22.24,
+     "end": 22.345
+    },
+    {
+     "w": "is",
+     "start": 22.38,
+     "end": 22.449
+    },
+    {
+     "w": "real.",
+     "start": 22.519,
+     "end": 22.891
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "clip": 1,
+   "text": "Rosace puts job requirements and declared skills on the same map: Kaarna sets the level each skill needs, and Fatima shows the level she declares.",
+   "start": 23.72,
+   "dur": 8.725,
+   "words": [
+    {
+     "w": "Rosace",
+     "start": 23.778,
+     "end": 24.289
+    },
+    {
+     "w": "puts",
+     "start": 24.359,
+     "end": 24.579
+    },
+    {
+     "w": "job",
+     "start": 24.649,
+     "end": 24.893
+    },
+    {
+     "w": "requirements",
+     "start": 24.974,
+     "end": 25.52
+    },
+    {
+     "w": "and",
+     "start": 25.543,
+     "end": 25.612
+    },
+    {
+     "w": "declared",
+     "start": 25.647,
+     "end": 25.984
+    },
+    {
+     "w": "skills",
+     "start": 26.054,
+     "end": 26.414
+    },
+    {
+     "w": "on",
+     "start": 26.448,
+     "end": 26.506
+    },
+    {
+     "w": "the",
+     "start": 26.541,
+     "end": 26.611
+    },
+    {
+     "w": "same",
+     "start": 26.646,
+     "end": 26.866
+    },
+    {
+     "w": "map:",
+     "start": 26.901,
+     "end": 27.319
+    },
+    {
+     "w": "Kaarna",
+     "start": 27.737,
+     "end": 28.109
+    },
+    {
+     "w": "sets",
+     "start": 28.178,
+     "end": 28.399
+    },
+    {
+     "w": "the",
+     "start": 28.434,
+     "end": 28.503
+    },
+    {
+     "w": "level",
+     "start": 28.561,
+     "end": 28.794
+    },
+    {
+     "w": "each",
+     "start": 28.863,
+     "end": 29.037
+    },
+    {
+     "w": "skill",
+     "start": 29.061,
+     "end": 29.293
+    },
+    {
+     "w": "needs,",
+     "start": 29.362,
+     "end": 29.827
+    },
+    {
+     "w": "and",
+     "start": 30.14,
+     "end": 30.291
+    },
+    {
+     "w": "Fatima",
+     "start": 30.373,
+     "end": 30.79
+    },
+    {
+     "w": "shows",
+     "start": 30.837,
+     "end": 31.058
+    },
+    {
+     "w": "the",
+     "start": 31.081,
+     "end": 31.15
+    },
+    {
+     "w": "level",
+     "start": 31.185,
+     "end": 31.394
+    },
+    {
+     "w": "she",
+     "start": 31.452,
+     "end": 31.545
+    },
+    {
+     "w": "declares.",
+     "start": 31.603,
+     "end": 32.207
+    }
+   ]
+  }
+ ]
+}

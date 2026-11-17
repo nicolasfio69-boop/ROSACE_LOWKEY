@@ -1,0 +1,120 @@
+{
+ "clip": 2,
+ "total": 9.037,
+ "lines": [
+  {
+   "id": "s06",
+   "clip": 2,
+   "text": "Rosace has three spaces: the company describes its need, the talent builds a skills card, and the organiser prepares the meetings.",
+   "start": 0.4,
+   "dur": 7.837,
+   "words": [
+    {
+     "w": "Rosace",
+     "start": 0.446,
+     "end": 0.864
+    },
+    {
+     "w": "has",
+     "start": 0.922,
+     "end": 1.073
+    },
+    {
+     "w": "three",
+     "start": 1.143,
+     "end": 1.352
+    },
+    {
+     "w": "spaces:",
+     "start": 1.375,
+     "end": 1.979
+    },
+    {
+     "w": "the",
+     "start": 2.246,
+     "end": 2.35
+    },
+    {
+     "w": "company",
+     "start": 2.409,
+     "end": 2.745
+    },
+    {
+     "w": "describes",
+     "start": 2.803,
+     "end": 3.268
+    },
+    {
+     "w": "its",
+     "start": 3.314,
+     "end": 3.419
+    },
+    {
+     "w": "need,",
+     "start": 3.5,
+     "end": 3.964
+    },
+    {
+     "w": "the",
+     "start": 4.278,
+     "end": 4.371
+    },
+    {
+     "w": "talent",
+     "start": 4.429,
+     "end": 4.754
+    },
+    {
+     "w": "builds",
+     "start": 4.789,
+     "end": 5.021
+    },
+    {
+     "w": "a",
+     "start": 5.056,
+     "end": 5.079
+    },
+    {
+     "w": "skills",
+     "start": 5.125,
+     "end": 5.45
+    },
+    {
+     "w": "card,",
+     "start": 5.508,
+     "end": 5.903
+    },
+    {
+     "w": "and",
+     "start": 5.984,
+     "end": 6.217
+    },
+    {
+     "w": "the",
+     "start": 6.275,
+     "end": 6.344
+    },
+    {
+     "w": "organiser",
+     "start": 6.414,
+     "end": 6.96
+    },
+    {
+     "w": "prepares",
+     "start": 7.018,
+     "end": 7.366
+    },
+    {
+     "w": "the",
+     "start": 7.412,
+     "end": 7.482
+    },
+    {
+     "w": "meetings.",
+     "start": 7.529,
+     "end": 7.993
+    }
+   ]
+  }
+ ]
+}

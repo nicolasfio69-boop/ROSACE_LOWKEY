@@ -1,0 +1,10 @@
+{
+  "name": "rosace-demos",
+  "private": true,
+  "type": "module",
+  "description": "Video recording for the Rosace demo (demo-studio). Separate from the app so the app build stays unchanged.",
+  "dependencies": {
+    "playwright": "1.63.0",
+    "sharp": "^0.35.3"
+  }
+}

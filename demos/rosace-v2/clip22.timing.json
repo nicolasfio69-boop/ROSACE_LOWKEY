@@ -1,0 +1,135 @@
+{
+ "clip": 22,
+ "total": 10.674,
+ "lines": [
+  {
+   "id": "u11",
+   "clip": 22,
+   "text": "Claude reviews her answer against clear criteria and suggests a grade with evidence. Here: C, seen in part. The recruiter reads it and confirms.",
+   "start": 0.3,
+   "dur": 9.874,
+   "words": [
+    {
+     "w": "Claude",
+     "start": 0.335,
+     "end": 0.706
+    },
+    {
+     "w": "reviews",
+     "start": 0.753,
+     "end": 1.159
+    },
+    {
+     "w": "her",
+     "start": 1.217,
+     "end": 1.31
+    },
+    {
+     "w": "answer",
+     "start": 1.38,
+     "end": 1.786
+    },
+    {
+     "w": "against",
+     "start": 1.902,
+     "end": 2.25
+    },
+    {
+     "w": "clear",
+     "start": 2.297,
+     "end": 2.518
+    },
+    {
+     "w": "criteria",
+     "start": 2.576,
+     "end": 3.249
+    },
+    {
+     "w": "and",
+     "start": 3.516,
+     "end": 3.713
+    },
+    {
+     "w": "suggests",
+     "start": 3.771,
+     "end": 4.236
+    },
+    {
+     "w": "a",
+     "start": 4.271,
+     "end": 4.305
+    },
+    {
+     "w": "grade",
+     "start": 4.363,
+     "end": 4.596
+    },
+    {
+     "w": "with",
+     "start": 4.619,
+     "end": 4.735
+    },
+    {
+     "w": "evidence.",
+     "start": 4.793,
+     "end": 5.304
+    },
+    {
+     "w": "Here:",
+     "start": 5.722,
+     "end": 6.151
+    },
+    {
+     "w": "C,",
+     "start": 6.314,
+     "end": 6.778
+    },
+    {
+     "w": "seen",
+     "start": 6.848,
+     "end": 7.057
+    },
+    {
+     "w": "in",
+     "start": 7.115,
+     "end": 7.173
+    },
+    {
+     "w": "part.",
+     "start": 7.231,
+     "end": 7.626
+    },
+    {
+     "w": "The",
+     "start": 8.044,
+     "end": 8.183
+    },
+    {
+     "w": "recruiter",
+     "start": 8.264,
+     "end": 8.706
+    },
+    {
+     "w": "reads",
+     "start": 8.764,
+     "end": 8.996
+    },
+    {
+     "w": "it",
+     "start": 9.042,
+     "end": 9.135
+    },
+    {
+     "w": "and",
+     "start": 9.193,
+     "end": 9.309
+    },
+    {
+     "w": "confirms.",
+     "start": 9.356,
+     "end": 10.006
+    }
+   ]
+  }
+ ]
+}

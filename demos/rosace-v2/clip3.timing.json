@@ -1,0 +1,327 @@
+{
+ "clip": 3,
+ "total": 25.342,
+ "lines": [
+  {
+   "id": "s07",
+   "clip": 3,
+   "text": "Everyone uses the same twelve skills, in five families. That is the rosace.",
+   "start": 0.4,
+   "dur": 4.598,
+   "words": [
+    {
+     "w": "Everyone",
+     "start": 0.446,
+     "end": 0.876
+    },
+    {
+     "w": "uses",
+     "start": 0.922,
+     "end": 1.213
+    },
+    {
+     "w": "the",
+     "start": 1.282,
+     "end": 1.364
+    },
+    {
+     "w": "same",
+     "start": 1.433,
+     "end": 1.712
+    },
+    {
+     "w": "twelve",
+     "start": 1.747,
+     "end": 2.049
+    },
+    {
+     "w": "skills,",
+     "start": 2.083,
+     "end": 2.501
+    },
+    {
+     "w": "in",
+     "start": 2.525,
+     "end": 2.594
+    },
+    {
+     "w": "five",
+     "start": 2.652,
+     "end": 2.861
+    },
+    {
+     "w": "families.",
+     "start": 2.896,
+     "end": 3.395
+    },
+    {
+     "w": "That",
+     "start": 3.813,
+     "end": 3.976
+    },
+    {
+     "w": "is",
+     "start": 4.022,
+     "end": 4.092
+    },
+    {
+     "w": "the",
+     "start": 4.127,
+     "end": 4.196
+    },
+    {
+     "w": "rosace.",
+     "start": 4.231,
+     "end": 4.731
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "clip": 3,
+   "text": "Each level describes a real situation. Get it right, Intermediate: your work passes review with few corrections.",
+   "start": 5.798,
+   "dur": 6.531,
+   "words": [
+    {
+     "w": "Each",
+     "start": 5.844,
+     "end": 6.1
+    },
+    {
+     "w": "level",
+     "start": 6.181,
+     "end": 6.437
+    },
+    {
+     "w": "describes",
+     "start": 6.495,
+     "end": 6.901
+    },
+    {
+     "w": "a",
+     "start": 6.936,
+     "end": 6.959
+    },
+    {
+     "w": "real",
+     "start": 7.005,
+     "end": 7.145
+    },
+    {
+     "w": "situation.",
+     "start": 7.191,
+     "end": 7.865
+    },
+    {
+     "w": "Get",
+     "start": 8.352,
+     "end": 8.515
+    },
+    {
+     "w": "it",
+     "start": 8.561,
+     "end": 8.619
+    },
+    {
+     "w": "right,",
+     "start": 8.677,
+     "end": 8.886
+    },
+    {
+     "w": "Intermediate:",
+     "start": 8.909,
+     "end": 9.502
+    },
+    {
+     "w": "your",
+     "start": 9.664,
+     "end": 9.815
+    },
+    {
+     "w": "work",
+     "start": 9.861,
+     "end": 10.047
+    },
+    {
+     "w": "passes",
+     "start": 10.105,
+     "end": 10.5
+    },
+    {
+     "w": "review",
+     "start": 10.616,
+     "end": 10.953
+    },
+    {
+     "w": "with",
+     "start": 11.011,
+     "end": 11.15
+    },
+    {
+     "w": "few",
+     "start": 11.185,
+     "end": 11.324
+    },
+    {
+     "w": "corrections.",
+     "start": 11.382,
+     "end": 12.067
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "clip": 3,
+   "text": "The company picks its three most important skills, in gold.",
+   "start": 13.128,
+   "dur": 3.527,
+   "words": [
+    {
+     "w": "The",
+     "start": 13.186,
+     "end": 13.291
+    },
+    {
+     "w": "company",
+     "start": 13.36,
+     "end": 13.697
+    },
+    {
+     "w": "picks",
+     "start": 13.767,
+     "end": 14.01
+    },
+    {
+     "w": "its",
+     "start": 14.057,
+     "end": 14.138
+    },
+    {
+     "w": "three",
+     "start": 14.196,
+     "end": 14.428
+    },
+    {
+     "w": "most",
+     "start": 14.486,
+     "end": 14.684
+    },
+    {
+     "w": "important",
+     "start": 14.719,
+     "end": 15.113
+    },
+    {
+     "w": "skills,",
+     "start": 15.148,
+     "end": 15.659
+    },
+    {
+     "w": "in",
+     "start": 15.705,
+     "end": 15.856
+    },
+    {
+     "w": "gold.",
+     "start": 15.938,
+     "end": 16.39
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "clip": 3,
+   "text": "Fatima's declared level is drawn dotted. What a recruiter actually observes is drawn solid, branch by branch.",
+   "start": 17.455,
+   "dur": 6.687,
+   "words": [
+    {
+     "w": "Fatima's",
+     "start": 17.501,
+     "end": 17.931
+    },
+    {
+     "w": "declared",
+     "start": 17.977,
+     "end": 18.326
+    },
+    {
+     "w": "level",
+     "start": 18.372,
+     "end": 18.639
+    },
+    {
+     "w": "is",
+     "start": 18.709,
+     "end": 18.802
+    },
+    {
+     "w": "drawn",
+     "start": 18.86,
+     "end": 19.127
+    },
+    {
+     "w": "dotted.",
+     "start": 19.185,
+     "end": 19.638
+    },
+    {
+     "w": "What",
+     "start": 20.056,
+     "end": 20.23
+    },
+    {
+     "w": "a",
+     "start": 20.265,
+     "end": 20.288
+    },
+    {
+     "w": "recruiter",
+     "start": 20.369,
+     "end": 20.799
+    },
+    {
+     "w": "actually",
+     "start": 20.88,
+     "end": 21.298
+    },
+    {
+     "w": "observes",
+     "start": 21.356,
+     "end": 21.762
+    },
+    {
+     "w": "is",
+     "start": 21.82,
+     "end": 21.89
+    },
+    {
+     "w": "drawn",
+     "start": 21.936,
+     "end": 22.18
+    },
+    {
+     "w": "solid,",
+     "start": 22.273,
+     "end": 22.761
+    },
+    {
+     "w": "branch",
+     "start": 22.877,
+     "end": 23.19
+    },
+    {
+     "w": "by",
+     "start": 23.237,
+     "end": 23.341
+    },
+    {
+     "w": "branch.",
+     "start": 23.399,
+     "end": 23.875
+    }
+   ]
+  }
+ ]
+}

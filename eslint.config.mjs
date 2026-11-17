@@ -18,6 +18,13 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      "demos/**",
+      ".claude/**",
+      ".agents/skills/demo-setup/**",
+      ".agents/skills/film-demo/**",
+      ".agents/skills/narrate/**",
+      ".agents/skills/produce-video/**",
+      ".agents/skills/sync-narration/**",
     ],
   },
 ];

@@ -1,0 +1,220 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Clip 1 · Context</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  /* A — the event */
+  #a-eyebrow { left: 0; right: 0; top: 150px; text-align: center; }
+  #a-title { left: 0; right: 0; top: 196px; text-align: center; font-size: 96px; font-weight: 600; }
+  #a-companies { left: 0; right: 0; top: 400px; display: flex; justify-content: center; gap: 28px; }
+  .co { width: 330px; padding: 26px 28px; display: flex; align-items: center; gap: 18px; font-size: 28px; font-weight: 600; }
+  .co i { width: 52px; height: 52px; border-radius: 14px; flex: none; }
+  #a-talents { left: 0; right: 0; top: 590px; display: flex; justify-content: center; gap: 22px; }
+  .tal { width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 26px; color: #fff; }
+  .lab { font-size: 24px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+  #a-colab { left: 0; right: 0; top: 520px; text-align: center; }
+  #a-talab { left: 0; right: 0; top: 700px; text-align: center; }
+  #a-clock { left: 0; right: 0; top: 770px; display: flex; justify-content: center; }
+  #a-clock .pill { background: var(--ink); color: #fff; font-size: 30px; padding: 16px 30px; }
+
+  /* B — Fatima */
+  #fatima { left: 250px; top: 190px; width: 620px; padding: 48px; display: flex; flex-direction: column; align-items: center; transform-origin: 0 0; }
+  #fatima img { width: 300px; height: 300px; }
+  #fatima h2 { font-size: 76px; margin-top: 26px; }
+  #fatima .tag { margin-top: 14px; background: #F1F2F6; color: var(--muted); font-size: 22px; }
+  #path { left: 960px; top: 230px; width: 720px; }
+  .step { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 46px; }
+  .dot { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 26px; flex: none; background: #fff; border: 3px solid var(--line); color: var(--muted); }
+  .step.now .dot { background: var(--red); border-color: var(--red); color: #fff; }
+  .step h3 { font-family: 'SG'; font-size: 44px; font-weight: 600; }
+  .step p { font-size: 26px; color: var(--muted); margin-top: 6px; }
+  #path-line { left: 991px; top: 300px; width: 3px; height: 300px; background: var(--line); transform-origin: top; }
+
+  /* C — Kaarna */
+  #kaarna { left: 1000px; top: 200px; width: 680px; padding: 48px; }
+  #kaarna .head { display: flex; gap: 26px; align-items: center; }
+  #kaarna img { width: 110px; height: 110px; }
+  #kaarna h2 { font-size: 58px; }
+  #kaarna .sub { font-size: 24px; color: var(--muted); margin-top: 6px; }
+  #kaarna .hire { margin-top: 36px; font-size: 30px; font-weight: 700; }
+  #kaarna .hire span { color: var(--red); }
+  .need { display: flex; gap: 16px; align-items: center; font-size: 28px; margin-top: 20px; }
+  .need b { width: 14px; height: 14px; border-radius: 50%; background: var(--gold); flex: none; }
+
+  #link { left: 760px; top: 470px; width: 220px; height: 0; border-top: 4px dashed #C9CBD4; }
+  #link-q { left: 836px; top: 436px; width: 72px; height: 72px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; font-family: 'SG'; font-weight: 700; font-size: 40px; }
+  /* D — identical CVs */
+  #cvs { left: 0; right: 0; top: 150px; height: 720px; }
+  .cv { position: absolute; width: 470px; height: 640px; padding: 40px 38px; left: 725px; top: 40px; transform-origin: 50% 100%; }
+  .cv .nm { font-family: 'SG'; font-size: 34px; font-weight: 600; }
+  .cv .rl { font-size: 20px; color: var(--muted); margin: 6px 0 26px; }
+  .cv .ln { height: 12px; border-radius: 6px; background: #E8E9EF; margin: 12px 0; }
+  .cv mark { display: inline-block; background: #FCE58C; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 24px; margin: 8px 0; color: var(--ink); }
+  #stamp { left: 1090px; top: 210px; border: 5px solid var(--red); color: var(--red); font-family: 'SG'; font-weight: 700; font-size: 40px; padding: 10px 24px; border-radius: 12px; letter-spacing: .06em; background: rgba(255,255,255,.85); }
+  #doubt { left: 1350px; top: 470px; width: 380px; padding: 30px; display: flex; gap: 20px; align-items: center; }
+  #doubt img { width: 80px; height: 80px; }
+  #doubt .q { font-family: 'SG'; font-size: 40px; font-weight: 700; color: var(--red); }
+
+  /* E — Rosace: measure, match, check, decide */
+  #e-head { left: 0; right: 0; top: 64px; display: flex; justify-content: center; align-items: center; gap: 22px; }
+  #e-head img { width: 84px; height: 84px; }
+  #e-head .display { font-size: 64px; font-weight: 600; }
+  #e-head .sub { font-size: 28px; color: var(--muted); margin-left: 10px; }
+  .rc { width: 640px; height: 700px; top: 190px; padding: 34px 40px; }
+  .rc .t { display: flex; align-items: center; gap: 16px; }
+  .rc .t img { width: 64px; height: 64px; }
+  .rc h3 { font-family: 'SG'; font-size: 40px; font-weight: 600; }
+  .rc .s { font-size: 24px; color: var(--muted); margin-top: 4px; }
+  .rc svg { display: block; margin: 10px auto 0; }
+  .rc .lg { display: flex; justify-content: center; gap: 26px; font-size: 22px; color: var(--muted); margin-top: 4px; align-items: center; }
+  .rc .lg span { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+  #m-card .lg { gap: 18px; font-size: 21px; }
+  #k-card { left: 200px; } #f-card { left: 1080px; } #m-card { left: 200px; }
+  #gap { background: #FBE7EA; color: var(--red); font-size: 22px; padding: 6px 16px; font-weight: 700; }
+  .qc { left: 960px; width: 760px; padding: 30px 36px; border-left: 10px solid var(--gold); }
+  .qc .k { font-size: 20px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .qc .v { font-family: 'SG'; font-size: 34px; margin-top: 12px; line-height: 1.25; }
+  .qc .k .n { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; letter-spacing: 0; margin-right: 12px; font-size: 18px; }
+  .qc .m { font-size: 22px; color: var(--muted); margin-top: 10px; }
+  #q1 { top: 200px; } #q2 { top: 450px; }
+  #decide { left: 960px; top: 740px; }
+  #decide .pill { background: var(--ink); color: #fff; font-size: 34px; padding: 20px 34px; }
+</style></head>
+<body><div class="stage">
+  <div class="glow g1"></div><div class="glow g2"></div>
+
+  <div id="a-eyebrow" class="abs eyebrow">Espoo · Fictional demo</div>
+  <div id="a-title" class="abs display">A recruitment evening</div>
+  <div id="a-companies" class="abs">
+    <div class="co card"><i style="background:#3B4A6B"></i>NordChip</div>
+    <div class="co card"><i style="background:#8C6BB1"></i>Lumora</div>
+    <div class="co card"><i style="background:#2F7D6D"></i>Vireo Data</div>
+    <div class="co card"><img src="kaarna.svg" style="width:52px;height:52px">Kaarna Health</div>
+  </div>
+  <div id="a-colab" class="abs lab">4 companies</div>
+  <div id="a-talents" class="abs"></div>
+  <div id="a-talab" class="abs lab">10 talents</div>
+  <div id="a-clock" class="abs"><span class="pill">⏱ 15 minutes per conversation</span></div>
+
+  <div id="fatima" class="abs card"><img src="fatima.svg" alt=""><h2 class="display">Fatima</h2><span class="pill tag">Fictional talent</span></div>
+  <div id="path-line" class="abs"></div>
+  <div id="path" class="abs">
+    <div class="step" id="st1"><div class="dot">1</div><div><h3>Pharmacy assistant</h3><p>3 years · patient data, strict rules</p></div></div>
+    <div class="step" id="st2"><div class="dot">2</div><div><h3>Coding bootcamp</h3><p>12 weeks · React, TypeScript, tests</p></div></div>
+    <div class="step now" id="st3"><div class="dot">3</div><div><h3>Junior web developer</h3><p>Looking for a first job in Espoo</p></div></div>
+  </div>
+
+  <div id="kaarna" class="abs card">
+    <div class="head"><img src="kaarna.svg" alt=""><div><h2 class="display">Kaarna Health</h2><div class="sub">Espoo start-up · booking app for physio clinics</div></div></div>
+    <div class="hire">Hiring: <span>Junior web developer</span></div>
+    <div class="need" id="n1"><b></b>Ships code with tests and a review</div>
+    <div class="need" id="n2"><b></b>Follows the health-data rules</div>
+    <div class="need" id="n3"><b></b>Flags a late ticket early</div>
+  </div>
+
+  <div id="link" class="abs"></div><div id="link-q" class="abs">?</div>
+  <div id="cvs" class="abs"></div>
+  <div id="stamp" class="abs">AI-POLISHED</div>
+  <div id="doubt" class="abs card"><img src="kaarna.svg" alt=""><div class="q">What is real?</div></div>
+
+  <div id="e-head" class="abs"><img src="rosace-logo.svg" alt=""><span class="display">Rosace</span><span class="sub">one shared skills map</span></div>
+  <div id="k-card" class="abs card rc"><div class="t"><img src="kaarna.svg" alt=""><div><h3>Kaarna Health</h3><div class="s">The level each skill needs</div></div></div><svg id="k-svg" width="470" height="470"></svg>
+    <div class="lg"><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#F0C300" stroke-width="10" stroke-linecap="round"/></svg>Most important</span><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#C8102E" stroke-width="10" stroke-linecap="round"/></svg>Also needed</span></div></div>
+  <div id="f-card" class="abs card rc"><div class="t"><img src="fatima.svg" alt="" style="border-radius:50%"><div><h3>Fatima</h3><div class="s">The level she declares</div></div></div><svg id="f-svg" width="470" height="470"></svg>
+    <div class="lg"><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#17181C" stroke-width="7" stroke-dasharray="1 9" stroke-linecap="round"/></svg>Her own words, not yet checked</span></div></div>
+  <div id="m-card" class="abs card rc"><div class="t"><img src="kaarna.svg" alt=""><div><h3>Kaarna × Fatima</h3><div class="s">Need and claim on the same map</div></div></div><svg id="m-svg" width="470" height="470"></svg>
+    <div class="lg"><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#F0C300" stroke-width="10" stroke-linecap="round"/></svg>Kaarna needs</span><span><svg width="40" height="12"><line x1="4" y1="6" x2="36" y2="6" stroke="#17181C" stroke-width="7" stroke-dasharray="1 9" stroke-linecap="round"/></svg>Fatima says</span><span id="gap" class="pill">? to check</span></div></div>
+  <div id="q1" class="abs card qc"><div class="k"><span class="n">1</span>Before the meeting · online exercise</div><div class="v">Get it right: find the errors in a small piece of code.</div><div class="m">Reviewed by a person, with a grid</div></div>
+  <div id="q2" class="abs card qc"><div class="k"><span class="n">2</span>During the conversation · question</div><div class="v">Keep commitments: “When did you warn your team that a task would be late?”</div><div class="m">Asked and noted by the recruiter</div></div>
+  <div id="decide" class="abs"><span class="pill">✓ The recruiter decides</span></div>
+</div>
+<script src="lib.js"></script>
+<script>
+// Talents (initials only, fictional) and the CV stack
+const greys = ['#6B7280','#9CA3AF','#4B5563','#A1A1AA','#71717A','#525252','#8B8B94','#5B6170','#7C7F8A','#C8102E']
+const ini = ['AK','JM','SL','TV','PR','KN','EO','MH','LS','F']
+$('#a-talents').innerHTML = ini.map((x, i) => `<div class="tal" style="background:${greys[i]}">${x}</div>`).join('')
+const names = ['A. Korhonen', 'J. Mäkelä', 'S. Lindqvist', 'T. Virtanen', 'Fatima']
+$('#cvs').innerHTML = names.map((n) => `<div class="cv card"><div class="nm">${n}</div><div class="rl">Junior web developer</div>
+  <mark>Passionate</mark> <mark>Detail-oriented</mark><div class="ln" style="width:92%"></div><div class="ln" style="width:80%"></div>
+  <mark>Team player</mark><div class="ln" style="width:88%"></div><div class="ln" style="width:70%"></div>
+  <mark>Results-driven</mark><div class="ln" style="width:90%"></div><div class="ln" style="width:76%"></div><div class="ln" style="width:84%"></div></div>`).join('')
+
+// Mini rosaces: same 12 skills for both sides (0 Not yet … 3 Advanced)
+const MAJ = [2, 3, 8], MIN = [5, 6, 10]
+const NEED = [0, 0, 2, 2, 0, 1, 1, 0, 2, 0, 1, 0]
+const SAYS = [1, 1, 2, 2, 1, 1, 2, 1, 1, 2, 3, 2]
+const CHECK = [3, 8]
+const FAMC = [['#C8102E', [0, 1]], ['#5C5C5C', [2, 3]], ['#9A9AA2', [4, 5]], ['#F0C300', [6, 7, 8]], ['#3D3D3D', [9, 10, 11]]]
+const RC = 235, RR = 180, HB = 26
+const rr = (lv) => HB + (lv / 3) * (RR - HB), an = (i) => (-90 + i * 30) * Math.PI / 180
+const pt = (i, r) => [RC + r * Math.cos(an(i)), RC + r * Math.sin(an(i))]
+function base() {
+  let h = ''
+  FAMC.forEach(([c, idx]) => { const a0 = an(idx[0]) - 0.24, a1 = an(idx[idx.length - 1]) + 0.24, r = RR + 26
+    h += `<path d="M${RC + r * Math.cos(a0)} ${RC + r * Math.sin(a0)} A${r} ${r} 0 0 1 ${RC + r * Math.cos(a1)} ${RC + r * Math.sin(a1)}" stroke="${c}" stroke-width="9" fill="none" stroke-linecap="round"/>` })
+  h += `<circle cx="${RC}" cy="${RC}" r="${RR}" fill="#E7E8EE"/><circle cx="${RC}" cy="${RC}" r="${rr(1)}" fill="#DADCE4"/>`
+  ;[1, 2, 3].forEach((lv) => { h += `<circle cx="${RC}" cy="${RC}" r="${rr(lv)}" fill="none" stroke="#C8102E" stroke-opacity=".45" stroke-width="2" stroke-dasharray="5 7"/>` })
+  for (let i = 0; i < 12; i++) { const [x, y] = pt(i, RR); h += `<line x1="${RC}" y1="${RC}" x2="${x}" y2="${y}" stroke="#C8102E" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 7"/>` }
+  return h
+}
+const needLines = (cls) => NEED.map((lv, i) => lv ? `<line class="${cls}" data-i="${i}" x1="${RC}" y1="${RC}" x2="${RC}" y2="${RC}" stroke="${MAJ.includes(i) ? '#F0C300' : '#C8102E'}" stroke-width="15" stroke-linecap="round"/>` : '').join('')
+const saysLines = (cls) => SAYS.map((lv, i) => `<line class="${cls}" data-i="${i}" x1="${RC}" y1="${RC}" x2="${RC}" y2="${RC}" stroke="#17181C" stroke-width="7" stroke-dasharray="1 10" stroke-linecap="round"/>`).join('')
+const hub = `<circle cx="${RC}" cy="${RC}" r="8" fill="#C8102E"/>`
+$('#k-svg').innerHTML = base() + needLines('kn') + hub
+$('#f-svg').innerHTML = base() + saysLines('fs') + hub
+$('#m-svg').innerHTML = base() + needLines('mn') + saysLines('ms') + CHECK.map((i) => { const [x, y] = pt(i, RR + 2); return `<g class="qm" data-i="${i}"><circle cx="${x}" cy="${y}" r="24" fill="#C8102E"/><text x="${x}" y="${y + 9}" text-anchor="middle" font-family="SG" font-weight="700" font-size="28" fill="#fff">?</text></g>` }).join('') + hub
+function grow(sel, levels, p) {
+  $$(sel).forEach((el) => { const i = +el.dataset.i, [x, y] = pt(i, HB * 0.5 + (rr(levels[i]) - HB * 0.5) * p); el.setAttribute('x2', x); el.setAttribute('y2', y); el.style.opacity = p > 0.01 ? 1 : 0 })
+}
+
+const A_OUT = L('i01b') - 0.45, B_SHIFT = L('i02') - 0.35, C_OUT = L('i03') - 0.45, D_OUT = TIMING.total + 5
+
+window.setT = (t) => {
+  // A — the event
+  const aOut = 1 - ramp(t, A_OUT, 0.45)
+  rise('#a-eyebrow', Math.min(ramp(t, 0.05, 0.6), aOut))
+  rise('#a-title', Math.min(ramp(t, W('i00', 'Espoo') - 0.2, 0.6), aOut))
+  $$('#a-companies .co').forEach((el, i) => rise(el, Math.min(ramp(t, W('i00', 'four') - 0.1 + i * 0.12, 0.45), aOut)))
+  rise('#a-colab', Math.min(ramp(t, W('i00', 'companies'), 0.4), aOut), 10)
+  $$('#a-talents .tal').forEach((el, i) => put(el, { o: Math.min(ramp(t, W('i00', 'ten') - 0.1 + i * 0.06, 0.35), aOut), s: 0.6 + 0.4 * ramp(t, W('i00', 'ten') - 0.1 + i * 0.06, 0.35) }))
+  rise('#a-talab', Math.min(ramp(t, W('i00', 'job'), 0.4), aOut), 10)
+  rise('#a-clock', Math.min(ramp(t, W('i00', 'fifteen') - 0.1, 0.45), aOut))
+
+  // B — Fatima, then shrinks left for C
+  const bIn = ramp(t, L('i01b') - 0.3, 0.6)
+  const shift = easeInOut((t - B_SHIFT) / 0.8)
+  const bOut = 1 - ramp(t, C_OUT, 0.45)
+  put('#fatima', { o: Math.min(bIn, bOut), x: -60 * shift, y: (1 - bIn) * 30 + 40 * shift, s: 1 - 0.18 * shift })
+  const pathO = Math.min(1 - ramp(t, B_SHIFT, 0.4), bOut)
+  put('#path-line', { o: pathO, s: 1 })
+  $('#path-line').style.transform = `scaleY(${ramp(t, W('i01c', 'pharmacy') - 0.2, 2.2)})`
+  rise('#st1', Math.min(ramp(t, W('i01c', 'pharmacy') - 0.15, 0.5), pathO))
+  rise('#st2', Math.min(ramp(t, W('i01c', 'bootcamp') - 0.6, 0.5), pathO))
+  rise('#st3', Math.min(ramp(t, W('i01c', 'bootcamp') + 0.35, 0.5), pathO))
+
+  // C — Kaarna
+  const cIn = ramp(t, W('i02', 'Kaarna') - 0.2, 0.6)
+  put('#kaarna', { o: Math.min(cIn, bOut), x: (1 - cIn) * 60 })
+  ;['#n1', '#n2', '#n3'].forEach((id, i) => rise(id, Math.min(ramp(t, W('i02', 'junior') + i * 0.35, 0.45), bOut), 14))
+
+  const lk = Math.min(ramp(t, W('i02', 'needs') - 0.2, 0.5), bOut)
+  put('#link', { o: lk }); put('#link-q', { o: lk, s: 0.6 + 0.4 * lk })
+  // D — identical CVs
+  const dIn = ramp(t, L('i03') - 0.2, 0.7), dOut = 1 - ramp(t, D_OUT, 0.45)
+  $$('#cvs .cv').forEach((el, i) => {
+    const k = [-2, -1, 1, 2, 0][i], p = ramp(t, L('i03') - 0.2 + i * 0.08, 0.7)
+    put(el, { o: Math.min(p, dOut), x: k * 250 * p, y: Math.abs(k) * 26 * p + (1 - p) * 40, r: k * 5 * p })
+    el.style.zIndex = i === 4 ? 9 : 5 - Math.abs(k)
+  })
+  // Fatima's CV in the middle, in front
+  const fcv = $$('#cvs .cv')[4]; const p4 = ramp(t, L('i03') - 0.2 + 4 * 0.08, 0.7)
+  put(fcv, { o: Math.min(p4, dOut), y: (1 - p4) * 40 - 14 * p4, s: 1.04 })
+  put('#stamp', { o: Math.min(ramp(t, W('i03', 'polished') - 0.1, 0.25), dOut), s: 1.6 - 0.6 * ramp(t, W('i03', 'polished') - 0.1, 0.3), r: -8 })
+  rise('#doubt', Math.min(ramp(t, W('i03', 'Kaarna') - 0.15, 0.5), dOut))
+
+  // no E scene in the 2-minute cut
+  ;['#e-head', '#k-card', '#f-card', '#m-card', '#q1', '#q2', '#decide'].forEach((id) => put(id, { o: 0 }))
+}
+window.setT(0)
+</script>
+</body></html>

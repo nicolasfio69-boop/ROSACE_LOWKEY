@@ -1,0 +1,50 @@
+At Espoo's matchmaking events,
+companies send their needs the night before,
+and every CV now sounds the same, because AI wrote it.
+Rosace turns each claim into a question
+you can check during the conversation.
+Before the event, Kaarna Health, a small Espoo start-up,
+opens the recruiter space and drops in its job post.
+Claude reads it and proposes what matters,
+citing the sentence each requirement comes from.
+Nothing applies until the recruiter accepts.
+The skills come from one shared framework:
+twelve components, the same for every company.
+The three majors are drawn in gold.
+The recruiter stays in charge.
+For a junior, Kaarna cares most about
+flagging a late ticket early, so they swap one major.
+Claude then writes level examples for this exact job,
+so Intermediate means something concrete.
+Technical skills sit beside the rosace.
+Each requirement already says how it will be checked,
+and Kaarna will meet two people.
+Now the talent. Fatima was a pharmacy assistant,
+then did a coding bootcamp.
+Her CV stays on her device:
+it is never stored, and never sent to AI.
+It only points to clues. For each skill,
+she answers three plain questions,
+and she confirms her own level.
+Where she has no real example,
+she simply leaves the skill unanswered.
+She keeps her card for six months, with her consent,
+and sees her own rosace, never a rank or a score.
+The organiser sees the whole event:
+three other companies and ten talents.
+Ties are never hidden; they go to a person.
+For Kaarna, Fatima is suggested,
+with the reasons behind it.
+Profiles from other jobs are not pushed forward.
+Every meeting is a human click, with a short reason.
+At the event, the recruiter walks in
+with questions that check each claim, not with a ranking.
+After the talk, they note what they actually saw.
+Observed stays separate from declared:
+Fatima's own words are never overwritten.
+Synthetic data only. Nationality, language, degree
+and career path never enter a calculation.
+Recruitment is high-risk under the EU AI Act,
+so Rosace only suggests, and always shows why.
+Stronger signal, less noise,
+for Espoo's next matchmaking event.

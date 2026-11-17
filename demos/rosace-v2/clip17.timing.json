@@ -1,0 +1,100 @@
+{
+ "clip": 17,
+ "total": 7.566,
+ "lines": [
+  {
+   "id": "u07",
+   "clip": 17,
+   "text": "Afterwards, the recruiter notes what was seen, skill by skill. Observed stays separate from what Fatima declared.",
+   "start": 0.3,
+   "dur": 6.766,
+   "words": [
+    {
+     "w": "Afterwards,",
+     "start": 0.335,
+     "end": 0.869
+    },
+    {
+     "w": "the",
+     "start": 0.892,
+     "end": 0.962
+    },
+    {
+     "w": "recruiter",
+     "start": 1.043,
+     "end": 1.484
+    },
+    {
+     "w": "notes",
+     "start": 1.565,
+     "end": 1.786
+    },
+    {
+     "w": "what",
+     "start": 1.833,
+     "end": 1.983
+    },
+    {
+     "w": "was",
+     "start": 2.018,
+     "end": 2.123
+    },
+    {
+     "w": "seen,",
+     "start": 2.181,
+     "end": 2.622
+    },
+    {
+     "w": "skill",
+     "start": 2.785,
+     "end": 3.156
+    },
+    {
+     "w": "by",
+     "start": 3.249,
+     "end": 3.388
+    },
+    {
+     "w": "skill.",
+     "start": 3.458,
+     "end": 3.946
+    },
+    {
+     "w": "Observed",
+     "start": 4.305,
+     "end": 4.7
+    },
+    {
+     "w": "stays",
+     "start": 4.816,
+     "end": 5.107
+    },
+    {
+     "w": "separate",
+     "start": 5.153,
+     "end": 5.524
+    },
+    {
+     "w": "from",
+     "start": 5.548,
+     "end": 5.652
+    },
+    {
+     "w": "what",
+     "start": 5.699,
+     "end": 5.826
+    },
+    {
+     "w": "Fatima",
+     "start": 5.873,
+     "end": 6.233
+    },
+    {
+     "w": "declared.",
+     "start": 6.279,
+     "end": 6.778
+    }
+   ]
+  }
+ ]
+}

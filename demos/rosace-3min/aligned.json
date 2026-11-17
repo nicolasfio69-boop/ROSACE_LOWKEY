@@ -1,0 +1,3700 @@
+{
+  "duration": 140.08,
+  "words": [
+    {
+      "word": "At",
+      "start": 0.0,
+      "end": 0.24
+    },
+    {
+      "word": "Espoo's",
+      "start": 0.24,
+      "end": 0.68
+    },
+    {
+      "word": "matchmaking",
+      "start": 0.68,
+      "end": 1.26
+    },
+    {
+      "word": "events,",
+      "start": 1.26,
+      "end": 1.74
+    },
+    {
+      "word": "companies",
+      "start": 2.14,
+      "end": 2.42
+    },
+    {
+      "word": "send",
+      "start": 2.42,
+      "end": 2.68
+    },
+    {
+      "word": "their",
+      "start": 2.68,
+      "end": 2.9
+    },
+    {
+      "word": "needs",
+      "start": 2.9,
+      "end": 3.16
+    },
+    {
+      "word": "the",
+      "start": 3.16,
+      "end": 3.4
+    },
+    {
+      "word": "night",
+      "start": 3.4,
+      "end": 3.58
+    },
+    {
+      "word": "before,",
+      "start": 3.58,
+      "end": 3.96
+    },
+    {
+      "word": "and",
+      "start": 4.42,
+      "end": 4.72
+    },
+    {
+      "word": "every",
+      "start": 4.72,
+      "end": 5.1
+    },
+    {
+      "word": "CV",
+      "start": 5.1,
+      "end": 5.48
+    },
+    {
+      "word": "now",
+      "start": 5.48,
+      "end": 5.92
+    },
+    {
+      "word": "sounds",
+      "start": 5.92,
+      "end": 6.26
+    },
+    {
+      "word": "the",
+      "start": 6.26,
+      "end": 6.46
+    },
+    {
+      "word": "same,",
+      "start": 6.46,
+      "end": 6.78
+    },
+    {
+      "word": "because",
+      "start": 7.08,
+      "end": 7.42
+    },
+    {
+      "word": "AI",
+      "start": 7.42,
+      "end": 7.82
+    },
+    {
+      "word": "wrote",
+      "start": 7.82,
+      "end": 8.22
+    },
+    {
+      "word": "it.",
+      "start": 8.22,
+      "end": 8.62
+    },
+    {
+      "word": "Rosace",
+      "start": 9.04,
+      "end": 9.6
+    },
+    {
+      "word": "turns",
+      "start": 9.6,
+      "end": 9.92
+    },
+    {
+      "word": "each",
+      "start": 9.92,
+      "end": 10.3
+    },
+    {
+      "word": "claim",
+      "start": 10.3,
+      "end": 10.6
+    },
+    {
+      "word": "into",
+      "start": 10.6,
+      "end": 10.94
+    },
+    {
+      "word": "a",
+      "start": 10.94,
+      "end": 11.08
+    },
+    {
+      "word": "question",
+      "start": 11.08,
+      "end": 11.44
+    },
+    {
+      "word": "you",
+      "start": 11.44,
+      "end": 11.64
+    },
+    {
+      "word": "can",
+      "start": 11.64,
+      "end": 11.78
+    },
+    {
+      "word": "check",
+      "start": 11.78,
+      "end": 12.04
+    },
+    {
+      "word": "during",
+      "start": 12.04,
+      "end": 12.36
+    },
+    {
+      "word": "the",
+      "start": 12.36,
+      "end": 12.52
+    },
+    {
+      "word": "conversation.",
+      "start": 12.52,
+      "end": 13.16
+    },
+    {
+      "word": "Before",
+      "start": 13.82,
+      "end": 14.14
+    },
+    {
+      "word": "the",
+      "start": 14.14,
+      "end": 14.38
+    },
+    {
+      "word": "event,",
+      "start": 14.38,
+      "end": 14.72
+    },
+    {
+      "word": "Kaarna",
+      "start": 15.22,
+      "end": 15.48
+    },
+    {
+      "word": "Health,",
+      "start": 15.48,
+      "end": 15.88
+    },
+    {
+      "word": "a",
+      "start": 16.1,
+      "end": 16.2
+    },
+    {
+      "word": "small",
+      "start": 16.2,
+      "end": 16.5
+    },
+    {
+      "word": "Espoo",
+      "start": 16.5,
+      "end": 17.04
+    },
+    {
+      "word": "start-up,",
+      "start": 17.04,
+      "end": 17.4
+    },
+    {
+      "word": "opens",
+      "start": 17.9,
+      "end": 18.14
+    },
+    {
+      "word": "the",
+      "start": 18.14,
+      "end": 18.38
+    },
+    {
+      "word": "recruiter",
+      "start": 18.38,
+      "end": 18.78
+    },
+    {
+      "word": "space",
+      "start": 18.78,
+      "end": 19.06
+    },
+    {
+      "word": "and",
+      "start": 19.06,
+      "end": 19.46
+    },
+    {
+      "word": "drops",
+      "start": 19.46,
+      "end": 19.72
+    },
+    {
+      "word": "in",
+      "start": 19.72,
+      "end": 19.96
+    },
+    {
+      "word": "its",
+      "start": 19.96,
+      "end": 20.14
+    },
+    {
+      "word": "job",
+      "start": 20.14,
+      "end": 20.36
+    },
+    {
+      "word": "post.",
+      "start": 20.36,
+      "end": 20.88
+    },
+    {
+      "word": "Claude",
+      "start": 21.34,
+      "end": 21.72
+    },
+    {
+      "word": "reads",
+      "start": 21.72,
+      "end": 21.96
+    },
+    {
+      "word": "it",
+      "start": 21.96,
+      "end": 22.16
+    },
+    {
+      "word": "and",
+      "start": 22.16,
+      "end": 22.32
+    },
+    {
+      "word": "proposes",
+      "start": 22.32,
+      "end": 22.78
+    },
+    {
+      "word": "what",
+      "start": 22.78,
+      "end": 23.0
+    },
+    {
+      "word": "matters,",
+      "start": 23.0,
+      "end": 23.38
+    },
+    {
+      "word": "citing",
+      "start": 23.96,
+      "end": 24.18
+    },
+    {
+      "word": "the",
+      "start": 24.18,
+      "end": 24.38
+    },
+    {
+      "word": "sentence",
+      "start": 24.38,
+      "end": 24.68
+    },
+    {
+      "word": "each",
+      "start": 24.68,
+      "end": 25.08
+    },
+    {
+      "word": "requirement",
+      "start": 25.08,
+      "end": 25.62
+    },
+    {
+      "word": "comes",
+      "start": 25.62,
+      "end": 25.98
+    },
+    {
+      "word": "from.",
+      "start": 25.98,
+      "end": 26.24
+    },
+    {
+      "word": "Nothing",
+      "start": 26.78,
+      "end": 27.18
+    },
+    {
+      "word": "applies",
+      "start": 27.18,
+      "end": 27.68
+    },
+    {
+      "word": "until",
+      "start": 27.68,
+      "end": 28.06
+    },
+    {
+      "word": "the",
+      "start": 28.06,
+      "end": 28.24
+    },
+    {
+      "word": "recruiter",
+      "start": 28.24,
+      "end": 28.68
+    },
+    {
+      "word": "accepts.",
+      "start": 28.68,
+      "end": 29.0
+    },
+    {
+      "word": "The",
+      "start": 29.52,
+      "end": 29.84
+    },
+    {
+      "word": "skills",
+      "start": 29.84,
+      "end": 30.1
+    },
+    {
+      "word": "come",
+      "start": 30.1,
+      "end": 30.44
+    },
+    {
+      "word": "from",
+      "start": 30.44,
+      "end": 30.7
+    },
+    {
+      "word": "one",
+      "start": 30.7,
+      "end": 31.04
+    },
+    {
+      "word": "shared",
+      "start": 31.04,
+      "end": 31.48
+    },
+    {
+      "word": "framework:",
+      "start": 31.48,
+      "end": 31.96
+    },
+    {
+      "word": "twelve",
+      "start": 32.5,
+      "end": 32.64
+    },
+    {
+      "word": "components,",
+      "start": 32.64,
+      "end": 33.2
+    },
+    {
+      "word": "the",
+      "start": 33.64,
+      "end": 33.82
+    },
+    {
+      "word": "same",
+      "start": 33.82,
+      "end": 34.1
+    },
+    {
+      "word": "for",
+      "start": 34.1,
+      "end": 34.32
+    },
+    {
+      "word": "every",
+      "start": 34.32,
+      "end": 34.6
+    },
+    {
+      "word": "company.",
+      "start": 34.6,
+      "end": 35.04
+    },
+    {
+      "word": "The",
+      "start": 35.58,
+      "end": 35.68
+    },
+    {
+      "word": "three",
+      "start": 35.68,
+      "end": 35.92
+    },
+    {
+      "word": "majors",
+      "start": 35.92,
+      "end": 36.24
+    },
+    {
+      "word": "are",
+      "start": 36.24,
+      "end": 36.5
+    },
+    {
+      "word": "drawn",
+      "start": 36.5,
+      "end": 36.8
+    },
+    {
+      "word": "in",
+      "start": 36.8,
+      "end": 36.98
+    },
+    {
+      "word": "gold.",
+      "start": 36.98,
+      "end": 37.3
+    },
+    {
+      "word": "The",
+      "start": 37.92,
+      "end": 38.04
+    },
+    {
+      "word": "recruiter",
+      "start": 38.04,
+      "end": 38.46
+    },
+    {
+      "word": "stays",
+      "start": 38.46,
+      "end": 38.72
+    },
+    {
+      "word": "in",
+      "start": 38.72,
+      "end": 38.92
+    },
+    {
+      "word": "charge.",
+      "start": 38.92,
+      "end": 39.4
+    },
+    {
+      "word": "For",
+      "start": 40.06,
+      "end": 40.18
+    },
+    {
+      "word": "a",
+      "start": 40.18,
+      "end": 40.28
+    },
+    {
+      "word": "junior,",
+      "start": 40.28,
+      "end": 40.6
+    },
+    {
+      "word": "Kaarna",
+      "start": 41.18,
+      "end": 41.4
+    },
+    {
+      "word": "cares",
+      "start": 41.4,
+      "end": 41.62
+    },
+    {
+      "word": "most",
+      "start": 41.62,
+      "end": 41.9
+    },
+    {
+      "word": "about",
+      "start": 41.9,
+      "end": 42.24
+    },
+    {
+      "word": "flagging",
+      "start": 42.24,
+      "end": 42.7
+    },
+    {
+      "word": "a",
+      "start": 42.7,
+      "end": 42.82
+    },
+    {
+      "word": "late",
+      "start": 42.82,
+      "end": 43.0
+    },
+    {
+      "word": "ticket",
+      "start": 43.0,
+      "end": 43.3
+    },
+    {
+      "word": "early,",
+      "start": 43.3,
+      "end": 43.76
+    },
+    {
+      "word": "so",
+      "start": 44.1,
+      "end": 44.32
+    },
+    {
+      "word": "they",
+      "start": 44.32,
+      "end": 44.48
+    },
+    {
+      "word": "swap",
+      "start": 44.48,
+      "end": 44.76
+    },
+    {
+      "word": "one",
+      "start": 44.76,
+      "end": 45.04
+    },
+    {
+      "word": "major.",
+      "start": 45.04,
+      "end": 45.42
+    },
+    {
+      "word": "Claude",
+      "start": 46.08,
+      "end": 46.44
+    },
+    {
+      "word": "then",
+      "start": 46.44,
+      "end": 46.58
+    },
+    {
+      "word": "writes",
+      "start": 46.58,
+      "end": 46.8
+    },
+    {
+      "word": "level",
+      "start": 46.8,
+      "end": 47.12
+    },
+    {
+      "word": "examples",
+      "start": 47.12,
+      "end": 47.56
+    },
+    {
+      "word": "for",
+      "start": 47.56,
+      "end": 47.86
+    },
+    {
+      "word": "this",
+      "start": 47.86,
+      "end": 48.06
+    },
+    {
+      "word": "exact",
+      "start": 48.06,
+      "end": 48.46
+    },
+    {
+      "word": "job,",
+      "start": 48.46,
+      "end": 48.96
+    },
+    {
+      "word": "so",
+      "start": 49.36,
+      "end": 49.62
+    },
+    {
+      "word": "Intermediate",
+      "start": 49.62,
+      "end": 50.26
+    },
+    {
+      "word": "means",
+      "start": 50.26,
+      "end": 50.6
+    },
+    {
+      "word": "something",
+      "start": 50.6,
+      "end": 51.0
+    },
+    {
+      "word": "concrete.",
+      "start": 51.0,
+      "end": 51.58
+    },
+    {
+      "word": "Technical",
+      "start": 52.28,
+      "end": 52.62
+    },
+    {
+      "word": "skills",
+      "start": 52.62,
+      "end": 53.14
+    },
+    {
+      "word": "sit",
+      "start": 53.14,
+      "end": 53.46
+    },
+    {
+      "word": "beside",
+      "start": 53.46,
+      "end": 53.78
+    },
+    {
+      "word": "the",
+      "start": 53.78,
+      "end": 53.96
+    },
+    {
+      "word": "rosace.",
+      "start": 53.96,
+      "end": 54.5
+    },
+    {
+      "word": "Each",
+      "start": 55.1,
+      "end": 55.32
+    },
+    {
+      "word": "requirement",
+      "start": 55.32,
+      "end": 55.86
+    },
+    {
+      "word": "already",
+      "start": 55.86,
+      "end": 56.32
+    },
+    {
+      "word": "says",
+      "start": 56.32,
+      "end": 56.68
+    },
+    {
+      "word": "how",
+      "start": 56.68,
+      "end": 56.96
+    },
+    {
+      "word": "it",
+      "start": 56.96,
+      "end": 57.08
+    },
+    {
+      "word": "will",
+      "start": 57.08,
+      "end": 57.18
+    },
+    {
+      "word": "be",
+      "start": 57.18,
+      "end": 57.32
+    },
+    {
+      "word": "checked,",
+      "start": 57.32,
+      "end": 57.74
+    },
+    {
+      "word": "and",
+      "start": 57.74,
+      "end": 58.22
+    },
+    {
+      "word": "Kaarna",
+      "start": 58.22,
+      "end": 58.62
+    },
+    {
+      "word": "will",
+      "start": 58.62,
+      "end": 58.8
+    },
+    {
+      "word": "meet",
+      "start": 58.8,
+      "end": 58.98
+    },
+    {
+      "word": "two",
+      "start": 58.98,
+      "end": 59.24
+    },
+    {
+      "word": "people.",
+      "start": 59.24,
+      "end": 59.64
+    },
+    {
+      "word": "Now",
+      "start": 60.04,
+      "end": 60.4
+    },
+    {
+      "word": "the",
+      "start": 60.4,
+      "end": 60.62
+    },
+    {
+      "word": "talent.",
+      "start": 60.62,
+      "end": 61.0
+    },
+    {
+      "word": "Fatima",
+      "start": 61.7,
+      "end": 62.1
+    },
+    {
+      "word": "was",
+      "start": 62.1,
+      "end": 62.32
+    },
+    {
+      "word": "a",
+      "start": 62.32,
+      "end": 62.44
+    },
+    {
+      "word": "pharmacy",
+      "start": 62.44,
+      "end": 62.82
+    },
+    {
+      "word": "assistant,",
+      "start": 62.82,
+      "end": 63.42
+    },
+    {
+      "word": "then",
+      "start": 63.8,
+      "end": 64.0
+    },
+    {
+      "word": "did",
+      "start": 64.0,
+      "end": 64.18
+    },
+    {
+      "word": "a",
+      "start": 64.18,
+      "end": 64.32
+    },
+    {
+      "word": "coding",
+      "start": 64.32,
+      "end": 64.56
+    },
+    {
+      "word": "bootcamp.",
+      "start": 64.56,
+      "end": 65.24
+    },
+    {
+      "word": "Her",
+      "start": 65.76,
+      "end": 65.9
+    },
+    {
+      "word": "CV",
+      "start": 65.9,
+      "end": 66.2
+    },
+    {
+      "word": "stays",
+      "start": 66.2,
+      "end": 66.6
+    },
+    {
+      "word": "on",
+      "start": 66.6,
+      "end": 66.8
+    },
+    {
+      "word": "her",
+      "start": 66.8,
+      "end": 66.92
+    },
+    {
+      "word": "device:",
+      "start": 66.92,
+      "end": 67.26
+    },
+    {
+      "word": "it",
+      "start": 67.86,
+      "end": 67.98
+    },
+    {
+      "word": "is",
+      "start": 67.98,
+      "end": 68.12
+    },
+    {
+      "word": "never",
+      "start": 68.12,
+      "end": 68.34
+    },
+    {
+      "word": "stored,",
+      "start": 68.34,
+      "end": 68.7
+    },
+    {
+      "word": "and",
+      "start": 68.7,
+      "end": 69.08
+    },
+    {
+      "word": "never",
+      "start": 69.08,
+      "end": 69.42
+    },
+    {
+      "word": "sent",
+      "start": 69.42,
+      "end": 69.62
+    },
+    {
+      "word": "to",
+      "start": 69.62,
+      "end": 69.84
+    },
+    {
+      "word": "AI.",
+      "start": 69.84,
+      "end": 70.16
+    },
+    {
+      "word": "It",
+      "start": 70.72,
+      "end": 70.84
+    },
+    {
+      "word": "only",
+      "start": 70.84,
+      "end": 71.06
+    },
+    {
+      "word": "points",
+      "start": 71.06,
+      "end": 71.34
+    },
+    {
+      "word": "to",
+      "start": 71.34,
+      "end": 71.54
+    },
+    {
+      "word": "clues.",
+      "start": 71.54,
+      "end": 71.8
+    },
+    {
+      "word": "For",
+      "start": 72.48,
+      "end": 72.6
+    },
+    {
+      "word": "each",
+      "start": 72.6,
+      "end": 72.82
+    },
+    {
+      "word": "skill,",
+      "start": 72.82,
+      "end": 73.16
+    },
+    {
+      "word": "she",
+      "start": 73.38,
+      "end": 73.48
+    },
+    {
+      "word": "answers",
+      "start": 73.48,
+      "end": 73.78
+    },
+    {
+      "word": "three",
+      "start": 73.78,
+      "end": 74.24
+    },
+    {
+      "word": "plain",
+      "start": 74.24,
+      "end": 74.6
+    },
+    {
+      "word": "questions,",
+      "start": 74.6,
+      "end": 75.08
+    },
+    {
+      "word": "and",
+      "start": 75.64,
+      "end": 75.78
+    },
+    {
+      "word": "she",
+      "start": 75.78,
+      "end": 75.92
+    },
+    {
+      "word": "confirms",
+      "start": 75.92,
+      "end": 76.3
+    },
+    {
+      "word": "her",
+      "start": 76.3,
+      "end": 76.54
+    },
+    {
+      "word": "own",
+      "start": 76.54,
+      "end": 76.74
+    },
+    {
+      "word": "level.",
+      "start": 76.74,
+      "end": 77.02
+    },
+    {
+      "word": "Where",
+      "start": 77.62,
+      "end": 77.86
+    },
+    {
+      "word": "she",
+      "start": 77.86,
+      "end": 78.02
+    },
+    {
+      "word": "has",
+      "start": 78.02,
+      "end": 78.2
+    },
+    {
+      "word": "no",
+      "start": 78.2,
+      "end": 78.38
+    },
+    {
+      "word": "real",
+      "start": 78.38,
+      "end": 78.6
+    },
+    {
+      "word": "example,",
+      "start": 78.6,
+      "end": 79.08
+    },
+    {
+      "word": "she",
+      "start": 79.52,
+      "end": 79.66
+    },
+    {
+      "word": "simply",
+      "start": 79.66,
+      "end": 79.98
+    },
+    {
+      "word": "leaves",
+      "start": 79.98,
+      "end": 80.26
+    },
+    {
+      "word": "the",
+      "start": 80.26,
+      "end": 80.48
+    },
+    {
+      "word": "skill",
+      "start": 80.48,
+      "end": 80.78
+    },
+    {
+      "word": "unanswered.",
+      "start": 80.78,
+      "end": 81.6
+    },
+    {
+      "word": "She",
+      "start": 82.0,
+      "end": 82.24
+    },
+    {
+      "word": "keeps",
+      "start": 82.24,
+      "end": 82.46
+    },
+    {
+      "word": "her",
+      "start": 82.46,
+      "end": 82.6
+    },
+    {
+      "word": "card",
+      "start": 82.6,
+      "end": 82.8
+    },
+    {
+      "word": "for",
+      "start": 82.8,
+      "end": 83.0
+    },
+    {
+      "word": "six",
+      "start": 83.0,
+      "end": 83.3
+    },
+    {
+      "word": "months,",
+      "start": 83.3,
+      "end": 83.5
+    },
+    {
+      "word": "with",
+      "start": 83.5,
+      "end": 83.84
+    },
+    {
+      "word": "her",
+      "start": 83.84,
+      "end": 83.98
+    },
+    {
+      "word": "consent,",
+      "start": 83.98,
+      "end": 84.34
+    },
+    {
+      "word": "and",
+      "start": 84.34,
+      "end": 85.0
+    },
+    {
+      "word": "sees",
+      "start": 85.0,
+      "end": 85.22
+    },
+    {
+      "word": "her",
+      "start": 85.22,
+      "end": 85.42
+    },
+    {
+      "word": "own",
+      "start": 85.42,
+      "end": 85.66
+    },
+    {
+      "word": "rosace,",
+      "start": 85.66,
+      "end": 86.26
+    },
+    {
+      "word": "never",
+      "start": 86.74,
+      "end": 86.92
+    },
+    {
+      "word": "a",
+      "start": 86.92,
+      "end": 87.14
+    },
+    {
+      "word": "rank",
+      "start": 87.14,
+      "end": 87.38
+    },
+    {
+      "word": "or",
+      "start": 87.38,
+      "end": 87.58
+    },
+    {
+      "word": "a",
+      "start": 87.58,
+      "end": 87.72
+    },
+    {
+      "word": "score.",
+      "start": 87.72,
+      "end": 87.96
+    },
+    {
+      "word": "The",
+      "start": 88.64,
+      "end": 88.8
+    },
+    {
+      "word": "organiser",
+      "start": 88.8,
+      "end": 89.24
+    },
+    {
+      "word": "sees",
+      "start": 89.24,
+      "end": 89.56
+    },
+    {
+      "word": "the",
+      "start": 89.56,
+      "end": 89.76
+    },
+    {
+      "word": "whole",
+      "start": 89.76,
+      "end": 89.92
+    },
+    {
+      "word": "event:",
+      "start": 89.92,
+      "end": 90.28
+    },
+    {
+      "word": "three",
+      "start": 90.82,
+      "end": 91.0
+    },
+    {
+      "word": "other",
+      "start": 91.0,
+      "end": 91.24
+    },
+    {
+      "word": "companies",
+      "start": 91.24,
+      "end": 91.64
+    },
+    {
+      "word": "and",
+      "start": 91.64,
+      "end": 92.06
+    },
+    {
+      "word": "ten",
+      "start": 92.06,
+      "end": 92.42
+    },
+    {
+      "word": "talents.",
+      "start": 92.42,
+      "end": 92.88
+    },
+    {
+      "word": "Ties",
+      "start": 93.64,
+      "end": 93.92
+    },
+    {
+      "word": "are",
+      "start": 93.92,
+      "end": 94.04
+    },
+    {
+      "word": "never",
+      "start": 94.04,
+      "end": 94.26
+    },
+    {
+      "word": "hidden;",
+      "start": 94.26,
+      "end": 94.58
+    },
+    {
+      "word": "they",
+      "start": 95.08,
+      "end": 95.16
+    },
+    {
+      "word": "go",
+      "start": 95.16,
+      "end": 95.34
+    },
+    {
+      "word": "to",
+      "start": 95.34,
+      "end": 95.46
+    },
+    {
+      "word": "a",
+      "start": 95.46,
+      "end": 95.56
+    },
+    {
+      "word": "person.",
+      "start": 95.56,
+      "end": 95.92
+    },
+    {
+      "word": "For",
+      "start": 96.66,
+      "end": 96.76
+    },
+    {
+      "word": "Kaarna,",
+      "start": 96.76,
+      "end": 97.18
+    },
+    {
+      "word": "Fatima",
+      "start": 97.6,
+      "end": 97.92
+    },
+    {
+      "word": "is",
+      "start": 97.92,
+      "end": 98.12
+    },
+    {
+      "word": "suggested,",
+      "start": 98.12,
+      "end": 98.66
+    },
+    {
+      "word": "with",
+      "start": 98.66,
+      "end": 99.0
+    },
+    {
+      "word": "the",
+      "start": 99.0,
+      "end": 99.16
+    },
+    {
+      "word": "reasons",
+      "start": 99.16,
+      "end": 99.42
+    },
+    {
+      "word": "behind",
+      "start": 99.42,
+      "end": 99.84
+    },
+    {
+      "word": "it.",
+      "start": 99.84,
+      "end": 100.2
+    },
+    {
+      "word": "Profiles",
+      "start": 100.66,
+      "end": 101.24
+    },
+    {
+      "word": "from",
+      "start": 101.24,
+      "end": 101.4
+    },
+    {
+      "word": "other",
+      "start": 101.4,
+      "end": 101.6
+    },
+    {
+      "word": "jobs",
+      "start": 101.6,
+      "end": 101.96
+    },
+    {
+      "word": "are",
+      "start": 101.96,
+      "end": 102.14
+    },
+    {
+      "word": "not",
+      "start": 102.14,
+      "end": 102.3
+    },
+    {
+      "word": "pushed",
+      "start": 102.3,
+      "end": 102.6
+    },
+    {
+      "word": "forward.",
+      "start": 102.6,
+      "end": 103.02
+    },
+    {
+      "word": "Every",
+      "start": 103.58,
+      "end": 103.84
+    },
+    {
+      "word": "meeting",
+      "start": 103.84,
+      "end": 104.18
+    },
+    {
+      "word": "is",
+      "start": 104.18,
+      "end": 104.36
+    },
+    {
+      "word": "a",
+      "start": 104.36,
+      "end": 104.46
+    },
+    {
+      "word": "human",
+      "start": 104.46,
+      "end": 104.74
+    },
+    {
+      "word": "click,",
+      "start": 104.74,
+      "end": 105.06
+    },
+    {
+      "word": "with",
+      "start": 105.06,
+      "end": 105.48
+    },
+    {
+      "word": "a",
+      "start": 105.48,
+      "end": 105.6
+    },
+    {
+      "word": "short",
+      "start": 105.6,
+      "end": 105.82
+    },
+    {
+      "word": "reason.",
+      "start": 105.82,
+      "end": 106.26
+    },
+    {
+      "word": "At",
+      "start": 106.86,
+      "end": 107.02
+    },
+    {
+      "word": "the",
+      "start": 107.02,
+      "end": 107.16
+    },
+    {
+      "word": "event,",
+      "start": 107.16,
+      "end": 107.52
+    },
+    {
+      "word": "the",
+      "start": 107.86,
+      "end": 107.92
+    },
+    {
+      "word": "recruiter",
+      "start": 107.92,
+      "end": 108.36
+    },
+    {
+      "word": "walks",
+      "start": 108.36,
+      "end": 108.62
+    },
+    {
+      "word": "in",
+      "start": 108.62,
+      "end": 108.86
+    },
+    {
+      "word": "with",
+      "start": 108.86,
+      "end": 109.04
+    },
+    {
+      "word": "questions",
+      "start": 109.04,
+      "end": 109.44
+    },
+    {
+      "word": "that",
+      "start": 109.44,
+      "end": 109.74
+    },
+    {
+      "word": "check",
+      "start": 109.74,
+      "end": 109.98
+    },
+    {
+      "word": "each",
+      "start": 109.98,
+      "end": 110.3
+    },
+    {
+      "word": "claim,",
+      "start": 110.3,
+      "end": 110.8
+    },
+    {
+      "word": "not",
+      "start": 111.12,
+      "end": 111.36
+    },
+    {
+      "word": "with",
+      "start": 111.36,
+      "end": 111.56
+    },
+    {
+      "word": "a",
+      "start": 111.56,
+      "end": 111.64
+    },
+    {
+      "word": "ranking.",
+      "start": 111.64,
+      "end": 111.96
+    },
+    {
+      "word": "After",
+      "start": 112.52,
+      "end": 112.92
+    },
+    {
+      "word": "the",
+      "start": 112.92,
+      "end": 113.1
+    },
+    {
+      "word": "talk,",
+      "start": 113.1,
+      "end": 113.34
+    },
+    {
+      "word": "they",
+      "start": 113.78,
+      "end": 114.0
+    },
+    {
+      "word": "note",
+      "start": 114.0,
+      "end": 114.24
+    },
+    {
+      "word": "what",
+      "start": 114.24,
+      "end": 114.44
+    },
+    {
+      "word": "they",
+      "start": 114.44,
+      "end": 114.6
+    },
+    {
+      "word": "actually",
+      "start": 114.6,
+      "end": 115.06
+    },
+    {
+      "word": "saw.",
+      "start": 115.06,
+      "end": 115.46
+    },
+    {
+      "word": "Observed",
+      "start": 116.06,
+      "end": 116.66
+    },
+    {
+      "word": "stays",
+      "start": 116.66,
+      "end": 117.04
+    },
+    {
+      "word": "separate",
+      "start": 117.04,
+      "end": 117.46
+    },
+    {
+      "word": "from",
+      "start": 117.46,
+      "end": 117.7
+    },
+    {
+      "word": "declared:",
+      "start": 117.7,
+      "end": 118.22
+    },
+    {
+      "word": "Fatima's",
+      "start": 118.8,
+      "end": 119.22
+    },
+    {
+      "word": "own",
+      "start": 119.22,
+      "end": 119.4
+    },
+    {
+      "word": "words",
+      "start": 119.4,
+      "end": 119.7
+    },
+    {
+      "word": "are",
+      "start": 119.7,
+      "end": 119.92
+    },
+    {
+      "word": "never",
+      "start": 119.92,
+      "end": 120.22
+    },
+    {
+      "word": "overwritten.",
+      "start": 120.22,
+      "end": 120.86
+    },
+    {
+      "word": "Synthetic",
+      "start": 121.56,
+      "end": 122.0
+    },
+    {
+      "word": "data",
+      "start": 122.0,
+      "end": 122.22
+    },
+    {
+      "word": "only.",
+      "start": 122.22,
+      "end": 122.64
+    },
+    {
+      "word": "Nationality,",
+      "start": 123.2,
+      "end": 123.92
+    },
+    {
+      "word": "language,",
+      "start": 124.14,
+      "end": 124.5
+    },
+    {
+      "word": "degree",
+      "start": 124.78,
+      "end": 125.02
+    },
+    {
+      "word": "and",
+      "start": 125.3,
+      "end": 125.38
+    },
+    {
+      "word": "career",
+      "start": 125.38,
+      "end": 125.7
+    },
+    {
+      "word": "path",
+      "start": 125.7,
+      "end": 126.18
+    },
+    {
+      "word": "never",
+      "start": 126.18,
+      "end": 126.72
+    },
+    {
+      "word": "enter",
+      "start": 126.72,
+      "end": 127.16
+    },
+    {
+      "word": "a",
+      "start": 127.16,
+      "end": 127.3
+    },
+    {
+      "word": "calculation.",
+      "start": 127.3,
+      "end": 127.9
+    },
+    {
+      "word": "Recruitment",
+      "start": 128.54,
+      "end": 128.98
+    },
+    {
+      "word": "is",
+      "start": 128.98,
+      "end": 129.22
+    },
+    {
+      "word": "high-risk",
+      "start": 129.22,
+      "end": 129.94
+    },
+    {
+      "word": "under",
+      "start": 129.94,
+      "end": 130.18
+    },
+    {
+      "word": "the",
+      "start": 130.18,
+      "end": 130.38
+    },
+    {
+      "word": "EU",
+      "start": 130.38,
+      "end": 130.7
+    },
+    {
+      "word": "AI",
+      "start": 130.7,
+      "end": 131.18
+    },
+    {
+      "word": "Act,",
+      "start": 131.18,
+      "end": 131.64
+    },
+    {
+      "word": "so",
+      "start": 131.98,
+      "end": 132.14
+    },
+    {
+      "word": "Rosace",
+      "start": 132.14,
+      "end": 132.6
+    },
+    {
+      "word": "only",
+      "start": 132.6,
+      "end": 132.96
+    },
+    {
+      "word": "suggests,",
+      "start": 132.96,
+      "end": 133.38
+    },
+    {
+      "word": "and",
+      "start": 133.38,
+      "end": 133.96
+    },
+    {
+      "word": "always",
+      "start": 133.96,
+      "end": 134.38
+    },
+    {
+      "word": "shows",
+      "start": 134.38,
+      "end": 134.7
+    },
+    {
+      "word": "why.",
+      "start": 134.7,
+      "end": 135.1
+    },
+    {
+      "word": "Stronger",
+      "start": 135.74,
+      "end": 136.18
+    },
+    {
+      "word": "signal,",
+      "start": 136.18,
+      "end": 136.52
+    },
+    {
+      "word": "less",
+      "start": 136.88,
+      "end": 137.02
+    },
+    {
+      "word": "noise,",
+      "start": 137.02,
+      "end": 137.42
+    },
+    {
+      "word": "for",
+      "start": 137.42,
+      "end": 138.04
+    },
+    {
+      "word": "Espoo's",
+      "start": 138.04,
+      "end": 138.54
+    },
+    {
+      "word": "next",
+      "start": 138.54,
+      "end": 138.8
+    },
+    {
+      "word": "matchmaking",
+      "start": 138.8,
+      "end": 139.54
+    },
+    {
+      "word": "event.",
+      "start": 139.54,
+      "end": 139.86
+    }
+  ],
+  "sentences": [
+    {
+      "text": "At Espoo's matchmaking events, companies send their needs the night before, and every CV now sounds the same, because AI wrote it.",
+      "start": 0.0,
+      "end": 8.62,
+      "words": [
+        {
+          "word": "At",
+          "start": 0.0,
+          "end": 0.24
+        },
+        {
+          "word": "Espoo's",
+          "start": 0.24,
+          "end": 0.68
+        },
+        {
+          "word": "matchmaking",
+          "start": 0.68,
+          "end": 1.26
+        },
+        {
+          "word": "events,",
+          "start": 1.26,
+          "end": 1.74
+        },
+        {
+          "word": "companies",
+          "start": 2.14,
+          "end": 2.42
+        },
+        {
+          "word": "send",
+          "start": 2.42,
+          "end": 2.68
+        },
+        {
+          "word": "their",
+          "start": 2.68,
+          "end": 2.9
+        },
+        {
+          "word": "needs",
+          "start": 2.9,
+          "end": 3.16
+        },
+        {
+          "word": "the",
+          "start": 3.16,
+          "end": 3.4
+        },
+        {
+          "word": "night",
+          "start": 3.4,
+          "end": 3.58
+        },
+        {
+          "word": "before,",
+          "start": 3.58,
+          "end": 3.96
+        },
+        {
+          "word": "and",
+          "start": 4.42,
+          "end": 4.72
+        },
+        {
+          "word": "every",
+          "start": 4.72,
+          "end": 5.1
+        },
+        {
+          "word": "CV",
+          "start": 5.1,
+          "end": 5.48
+        },
+        {
+          "word": "now",
+          "start": 5.48,
+          "end": 5.92
+        },
+        {
+          "word": "sounds",
+          "start": 5.92,
+          "end": 6.26
+        },
+        {
+          "word": "the",
+          "start": 6.26,
+          "end": 6.46
+        },
+        {
+          "word": "same,",
+          "start": 6.46,
+          "end": 6.78
+        },
+        {
+          "word": "because",
+          "start": 7.08,
+          "end": 7.42
+        },
+        {
+          "word": "AI",
+          "start": 7.42,
+          "end": 7.82
+        },
+        {
+          "word": "wrote",
+          "start": 7.82,
+          "end": 8.22
+        },
+        {
+          "word": "it.",
+          "start": 8.22,
+          "end": 8.62
+        }
+      ]
+    },
+    {
+      "text": "Rosace turns each claim into a question you can check during the conversation.",
+      "start": 9.04,
+      "end": 13.16,
+      "words": [
+        {
+          "word": "Rosace",
+          "start": 9.04,
+          "end": 9.6
+        },
+        {
+          "word": "turns",
+          "start": 9.6,
+          "end": 9.92
+        },
+        {
+          "word": "each",
+          "start": 9.92,
+          "end": 10.3
+        },
+        {
+          "word": "claim",
+          "start": 10.3,
+          "end": 10.6
+        },
+        {
+          "word": "into",
+          "start": 10.6,
+          "end": 10.94
+        },
+        {
+          "word": "a",
+          "start": 10.94,
+          "end": 11.08
+        },
+        {
+          "word": "question",
+          "start": 11.08,
+          "end": 11.44
+        },
+        {
+          "word": "you",
+          "start": 11.44,
+          "end": 11.64
+        },
+        {
+          "word": "can",
+          "start": 11.64,
+          "end": 11.78
+        },
+        {
+          "word": "check",
+          "start": 11.78,
+          "end": 12.04
+        },
+        {
+          "word": "during",
+          "start": 12.04,
+          "end": 12.36
+        },
+        {
+          "word": "the",
+          "start": 12.36,
+          "end": 12.52
+        },
+        {
+          "word": "conversation.",
+          "start": 12.52,
+          "end": 13.16
+        }
+      ]
+    },
+    {
+      "text": "Before the event, Kaarna Health, a small Espoo start-up, opens the recruiter space and drops in its job post.",
+      "start": 13.82,
+      "end": 20.88,
+      "words": [
+        {
+          "word": "Before",
+          "start": 13.82,
+          "end": 14.14
+        },
+        {
+          "word": "the",
+          "start": 14.14,
+          "end": 14.38
+        },
+        {
+          "word": "event,",
+          "start": 14.38,
+          "end": 14.72
+        },
+        {
+          "word": "Kaarna",
+          "start": 15.22,
+          "end": 15.48
+        },
+        {
+          "word": "Health,",
+          "start": 15.48,
+          "end": 15.88
+        },
+        {
+          "word": "a",
+          "start": 16.1,
+          "end": 16.2
+        },
+        {
+          "word": "small",
+          "start": 16.2,
+          "end": 16.5
+        },
+        {
+          "word": "Espoo",
+          "start": 16.5,
+          "end": 17.04
+        },
+        {
+          "word": "start-up,",
+          "start": 17.04,
+          "end": 17.4
+        },
+        {
+          "word": "opens",
+          "start": 17.9,
+          "end": 18.14
+        },
+        {
+          "word": "the",
+          "start": 18.14,
+          "end": 18.38
+        },
+        {
+          "word": "recruiter",
+          "start": 18.38,
+          "end": 18.78
+        },
+        {
+          "word": "space",
+          "start": 18.78,
+          "end": 19.06
+        },
+        {
+          "word": "and",
+          "start": 19.06,
+          "end": 19.46
+        },
+        {
+          "word": "drops",
+          "start": 19.46,
+          "end": 19.72
+        },
+        {
+          "word": "in",
+          "start": 19.72,
+          "end": 19.96
+        },
+        {
+          "word": "its",
+          "start": 19.96,
+          "end": 20.14
+        },
+        {
+          "word": "job",
+          "start": 20.14,
+          "end": 20.36
+        },
+        {
+          "word": "post.",
+          "start": 20.36,
+          "end": 20.88
+        }
+      ]
+    },
+    {
+      "text": "Claude reads it and proposes what matters, citing the sentence each requirement comes from. Nothing applies until the recruiter accepts.",
+      "start": 21.34,
+      "end": 29.0,
+      "words": [
+        {
+          "word": "Claude",
+          "start": 21.34,
+          "end": 21.72
+        },
+        {
+          "word": "reads",
+          "start": 21.72,
+          "end": 21.96
+        },
+        {
+          "word": "it",
+          "start": 21.96,
+          "end": 22.16
+        },
+        {
+          "word": "and",
+          "start": 22.16,
+          "end": 22.32
+        },
+        {
+          "word": "proposes",
+          "start": 22.32,
+          "end": 22.78
+        },
+        {
+          "word": "what",
+          "start": 22.78,
+          "end": 23.0
+        },
+        {
+          "word": "matters,",
+          "start": 23.0,
+          "end": 23.38
+        },
+        {
+          "word": "citing",
+          "start": 23.96,
+          "end": 24.18
+        },
+        {
+          "word": "the",
+          "start": 24.18,
+          "end": 24.38
+        },
+        {
+          "word": "sentence",
+          "start": 24.38,
+          "end": 24.68
+        },
+        {
+          "word": "each",
+          "start": 24.68,
+          "end": 25.08
+        },
+        {
+          "word": "requirement",
+          "start": 25.08,
+          "end": 25.62
+        },
+        {
+          "word": "comes",
+          "start": 25.62,
+          "end": 25.98
+        },
+        {
+          "word": "from.",
+          "start": 25.98,
+          "end": 26.24
+        },
+        {
+          "word": "Nothing",
+          "start": 26.78,
+          "end": 27.18
+        },
+        {
+          "word": "applies",
+          "start": 27.18,
+          "end": 27.68
+        },
+        {
+          "word": "until",
+          "start": 27.68,
+          "end": 28.06
+        },
+        {
+          "word": "the",
+          "start": 28.06,
+          "end": 28.24
+        },
+        {
+          "word": "recruiter",
+          "start": 28.24,
+          "end": 28.68
+        },
+        {
+          "word": "accepts.",
+          "start": 28.68,
+          "end": 29.0
+        }
+      ]
+    },
+    {
+      "text": "The skills come from one shared framework: twelve components, the same for every company. The three majors are drawn in gold.",
+      "start": 29.52,
+      "end": 37.3,
+      "words": [
+        {
+          "word": "The",
+          "start": 29.52,
+          "end": 29.84
+        },
+        {
+          "word": "skills",
+          "start": 29.84,
+          "end": 30.1
+        },
+        {
+          "word": "come",
+          "start": 30.1,
+          "end": 30.44
+        },
+        {
+          "word": "from",
+          "start": 30.44,
+          "end": 30.7
+        },
+        {
+          "word": "one",
+          "start": 30.7,
+          "end": 31.04
+        },
+        {
+          "word": "shared",
+          "start": 31.04,
+          "end": 31.48
+        },
+        {
+          "word": "framework:",
+          "start": 31.48,
+          "end": 31.96
+        },
+        {
+          "word": "twelve",
+          "start": 32.5,
+          "end": 32.64
+        },
+        {
+          "word": "components,",
+          "start": 32.64,
+          "end": 33.2
+        },
+        {
+          "word": "the",
+          "start": 33.64,
+          "end": 33.82
+        },
+        {
+          "word": "same",
+          "start": 33.82,
+          "end": 34.1
+        },
+        {
+          "word": "for",
+          "start": 34.1,
+          "end": 34.32
+        },
+        {
+          "word": "every",
+          "start": 34.32,
+          "end": 34.6
+        },
+        {
+          "word": "company.",
+          "start": 34.6,
+          "end": 35.04
+        },
+        {
+          "word": "The",
+          "start": 35.58,
+          "end": 35.68
+        },
+        {
+          "word": "three",
+          "start": 35.68,
+          "end": 35.92
+        },
+        {
+          "word": "majors",
+          "start": 35.92,
+          "end": 36.24
+        },
+        {
+          "word": "are",
+          "start": 36.24,
+          "end": 36.5
+        },
+        {
+          "word": "drawn",
+          "start": 36.5,
+          "end": 36.8
+        },
+        {
+          "word": "in",
+          "start": 36.8,
+          "end": 36.98
+        },
+        {
+          "word": "gold.",
+          "start": 36.98,
+          "end": 37.3
+        }
+      ]
+    },
+    {
+      "text": "The recruiter stays in charge. For a junior, Kaarna cares most about flagging a late ticket early, so they swap one major.",
+      "start": 37.92,
+      "end": 45.42,
+      "words": [
+        {
+          "word": "The",
+          "start": 37.92,
+          "end": 38.04
+        },
+        {
+          "word": "recruiter",
+          "start": 38.04,
+          "end": 38.46
+        },
+        {
+          "word": "stays",
+          "start": 38.46,
+          "end": 38.72
+        },
+        {
+          "word": "in",
+          "start": 38.72,
+          "end": 38.92
+        },
+        {
+          "word": "charge.",
+          "start": 38.92,
+          "end": 39.4
+        },
+        {
+          "word": "For",
+          "start": 40.06,
+          "end": 40.18
+        },
+        {
+          "word": "a",
+          "start": 40.18,
+          "end": 40.28
+        },
+        {
+          "word": "junior,",
+          "start": 40.28,
+          "end": 40.6
+        },
+        {
+          "word": "Kaarna",
+          "start": 41.18,
+          "end": 41.4
+        },
+        {
+          "word": "cares",
+          "start": 41.4,
+          "end": 41.62
+        },
+        {
+          "word": "most",
+          "start": 41.62,
+          "end": 41.9
+        },
+        {
+          "word": "about",
+          "start": 41.9,
+          "end": 42.24
+        },
+        {
+          "word": "flagging",
+          "start": 42.24,
+          "end": 42.7
+        },
+        {
+          "word": "a",
+          "start": 42.7,
+          "end": 42.82
+        },
+        {
+          "word": "late",
+          "start": 42.82,
+          "end": 43.0
+        },
+        {
+          "word": "ticket",
+          "start": 43.0,
+          "end": 43.3
+        },
+        {
+          "word": "early,",
+          "start": 43.3,
+          "end": 43.76
+        },
+        {
+          "word": "so",
+          "start": 44.1,
+          "end": 44.32
+        },
+        {
+          "word": "they",
+          "start": 44.32,
+          "end": 44.48
+        },
+        {
+          "word": "swap",
+          "start": 44.48,
+          "end": 44.76
+        },
+        {
+          "word": "one",
+          "start": 44.76,
+          "end": 45.04
+        },
+        {
+          "word": "major.",
+          "start": 45.04,
+          "end": 45.42
+        }
+      ]
+    },
+    {
+      "text": "Claude then writes level examples for this exact job, so Intermediate means something concrete.",
+      "start": 46.08,
+      "end": 51.58,
+      "words": [
+        {
+          "word": "Claude",
+          "start": 46.08,
+          "end": 46.44
+        },
+        {
+          "word": "then",
+          "start": 46.44,
+          "end": 46.58
+        },
+        {
+          "word": "writes",
+          "start": 46.58,
+          "end": 46.8
+        },
+        {
+          "word": "level",
+          "start": 46.8,
+          "end": 47.12
+        },
+        {
+          "word": "examples",
+          "start": 47.12,
+          "end": 47.56
+        },
+        {
+          "word": "for",
+          "start": 47.56,
+          "end": 47.86
+        },
+        {
+          "word": "this",
+          "start": 47.86,
+          "end": 48.06
+        },
+        {
+          "word": "exact",
+          "start": 48.06,
+          "end": 48.46
+        },
+        {
+          "word": "job,",
+          "start": 48.46,
+          "end": 48.96
+        },
+        {
+          "word": "so",
+          "start": 49.36,
+          "end": 49.62
+        },
+        {
+          "word": "Intermediate",
+          "start": 49.62,
+          "end": 50.26
+        },
+        {
+          "word": "means",
+          "start": 50.26,
+          "end": 50.6
+        },
+        {
+          "word": "something",
+          "start": 50.6,
+          "end": 51.0
+        },
+        {
+          "word": "concrete.",
+          "start": 51.0,
+          "end": 51.58
+        }
+      ]
+    },
+    {
+      "text": "Technical skills sit beside the rosace. Each requirement already says how it will be checked, and Kaarna will meet two people.",
+      "start": 52.28,
+      "end": 59.64,
+      "words": [
+        {
+          "word": "Technical",
+          "start": 52.28,
+          "end": 52.62
+        },
+        {
+          "word": "skills",
+          "start": 52.62,
+          "end": 53.14
+        },
+        {
+          "word": "sit",
+          "start": 53.14,
+          "end": 53.46
+        },
+        {
+          "word": "beside",
+          "start": 53.46,
+          "end": 53.78
+        },
+        {
+          "word": "the",
+          "start": 53.78,
+          "end": 53.96
+        },
+        {
+          "word": "rosace.",
+          "start": 53.96,
+          "end": 54.5
+        },
+        {
+          "word": "Each",
+          "start": 55.1,
+          "end": 55.32
+        },
+        {
+          "word": "requirement",
+          "start": 55.32,
+          "end": 55.86
+        },
+        {
+          "word": "already",
+          "start": 55.86,
+          "end": 56.32
+        },
+        {
+          "word": "says",
+          "start": 56.32,
+          "end": 56.68
+        },
+        {
+          "word": "how",
+          "start": 56.68,
+          "end": 56.96
+        },
+        {
+          "word": "it",
+          "start": 56.96,
+          "end": 57.08
+        },
+        {
+          "word": "will",
+          "start": 57.08,
+          "end": 57.18
+        },
+        {
+          "word": "be",
+          "start": 57.18,
+          "end": 57.32
+        },
+        {
+          "word": "checked,",
+          "start": 57.32,
+          "end": 57.74
+        },
+        {
+          "word": "and",
+          "start": 57.74,
+          "end": 58.22
+        },
+        {
+          "word": "Kaarna",
+          "start": 58.22,
+          "end": 58.62
+        },
+        {
+          "word": "will",
+          "start": 58.62,
+          "end": 58.8
+        },
+        {
+          "word": "meet",
+          "start": 58.8,
+          "end": 58.98
+        },
+        {
+          "word": "two",
+          "start": 58.98,
+          "end": 59.24
+        },
+        {
+          "word": "people.",
+          "start": 59.24,
+          "end": 59.64
+        }
+      ]
+    },
+    {
+      "text": "Now the talent. Fatima was a pharmacy assistant, then did a coding bootcamp. Her CV stays on her device: it is never stored, and never sent to AI.",
+      "start": 60.04,
+      "end": 70.16,
+      "words": [
+        {
+          "word": "Now",
+          "start": 60.04,
+          "end": 60.4
+        },
+        {
+          "word": "the",
+          "start": 60.4,
+          "end": 60.62
+        },
+        {
+          "word": "talent.",
+          "start": 60.62,
+          "end": 61.0
+        },
+        {
+          "word": "Fatima",
+          "start": 61.7,
+          "end": 62.1
+        },
+        {
+          "word": "was",
+          "start": 62.1,
+          "end": 62.32
+        },
+        {
+          "word": "a",
+          "start": 62.32,
+          "end": 62.44
+        },
+        {
+          "word": "pharmacy",
+          "start": 62.44,
+          "end": 62.82
+        },
+        {
+          "word": "assistant,",
+          "start": 62.82,
+          "end": 63.42
+        },
+        {
+          "word": "then",
+          "start": 63.8,
+          "end": 64.0
+        },
+        {
+          "word": "did",
+          "start": 64.0,
+          "end": 64.18
+        },
+        {
+          "word": "a",
+          "start": 64.18,
+          "end": 64.32
+        },
+        {
+          "word": "coding",
+          "start": 64.32,
+          "end": 64.56
+        },
+        {
+          "word": "bootcamp.",
+          "start": 64.56,
+          "end": 65.24
+        },
+        {
+          "word": "Her",
+          "start": 65.76,
+          "end": 65.9
+        },
+        {
+          "word": "CV",
+          "start": 65.9,
+          "end": 66.2
+        },
+        {
+          "word": "stays",
+          "start": 66.2,
+          "end": 66.6
+        },
+        {
+          "word": "on",
+          "start": 66.6,
+          "end": 66.8
+        },
+        {
+          "word": "her",
+          "start": 66.8,
+          "end": 66.92
+        },
+        {
+          "word": "device:",
+          "start": 66.92,
+          "end": 67.26
+        },
+        {
+          "word": "it",
+          "start": 67.86,
+          "end": 67.98
+        },
+        {
+          "word": "is",
+          "start": 67.98,
+          "end": 68.12
+        },
+        {
+          "word": "never",
+          "start": 68.12,
+          "end": 68.34
+        },
+        {
+          "word": "stored,",
+          "start": 68.34,
+          "end": 68.7
+        },
+        {
+          "word": "and",
+          "start": 68.7,
+          "end": 69.08
+        },
+        {
+          "word": "never",
+          "start": 69.08,
+          "end": 69.42
+        },
+        {
+          "word": "sent",
+          "start": 69.42,
+          "end": 69.62
+        },
+        {
+          "word": "to",
+          "start": 69.62,
+          "end": 69.84
+        },
+        {
+          "word": "AI.",
+          "start": 69.84,
+          "end": 70.16
+        }
+      ]
+    },
+    {
+      "text": "It only points to clues. For each skill, she answers three plain questions, and she confirms her own level.",
+      "start": 70.72,
+      "end": 77.02,
+      "words": [
+        {
+          "word": "It",
+          "start": 70.72,
+          "end": 70.84
+        },
+        {
+          "word": "only",
+          "start": 70.84,
+          "end": 71.06
+        },
+        {
+          "word": "points",
+          "start": 71.06,
+          "end": 71.34
+        },
+        {
+          "word": "to",
+          "start": 71.34,
+          "end": 71.54
+        },
+        {
+          "word": "clues.",
+          "start": 71.54,
+          "end": 71.8
+        },
+        {
+          "word": "For",
+          "start": 72.48,
+          "end": 72.6
+        },
+        {
+          "word": "each",
+          "start": 72.6,
+          "end": 72.82
+        },
+        {
+          "word": "skill,",
+          "start": 72.82,
+          "end": 73.16
+        },
+        {
+          "word": "she",
+          "start": 73.38,
+          "end": 73.48
+        },
+        {
+          "word": "answers",
+          "start": 73.48,
+          "end": 73.78
+        },
+        {
+          "word": "three",
+          "start": 73.78,
+          "end": 74.24
+        },
+        {
+          "word": "plain",
+          "start": 74.24,
+          "end": 74.6
+        },
+        {
+          "word": "questions,",
+          "start": 74.6,
+          "end": 75.08
+        },
+        {
+          "word": "and",
+          "start": 75.64,
+          "end": 75.78
+        },
+        {
+          "word": "she",
+          "start": 75.78,
+          "end": 75.92
+        },
+        {
+          "word": "confirms",
+          "start": 75.92,
+          "end": 76.3
+        },
+        {
+          "word": "her",
+          "start": 76.3,
+          "end": 76.54
+        },
+        {
+          "word": "own",
+          "start": 76.54,
+          "end": 76.74
+        },
+        {
+          "word": "level.",
+          "start": 76.74,
+          "end": 77.02
+        }
+      ]
+    },
+    {
+      "text": "Where she has no real example, she simply leaves the skill unanswered.",
+      "start": 77.62,
+      "end": 81.6,
+      "words": [
+        {
+          "word": "Where",
+          "start": 77.62,
+          "end": 77.86
+        },
+        {
+          "word": "she",
+          "start": 77.86,
+          "end": 78.02
+        },
+        {
+          "word": "has",
+          "start": 78.02,
+          "end": 78.2
+        },
+        {
+          "word": "no",
+          "start": 78.2,
+          "end": 78.38
+        },
+        {
+          "word": "real",
+          "start": 78.38,
+          "end": 78.6
+        },
+        {
+          "word": "example,",
+          "start": 78.6,
+          "end": 79.08
+        },
+        {
+          "word": "she",
+          "start": 79.52,
+          "end": 79.66
+        },
+        {
+          "word": "simply",
+          "start": 79.66,
+          "end": 79.98
+        },
+        {
+          "word": "leaves",
+          "start": 79.98,
+          "end": 80.26
+        },
+        {
+          "word": "the",
+          "start": 80.26,
+          "end": 80.48
+        },
+        {
+          "word": "skill",
+          "start": 80.48,
+          "end": 80.78
+        },
+        {
+          "word": "unanswered.",
+          "start": 80.78,
+          "end": 81.6
+        }
+      ]
+    },
+    {
+      "text": "She keeps her card for six months, with her consent, and sees her own rosace, never a rank or a score.",
+      "start": 82.0,
+      "end": 87.96,
+      "words": [
+        {
+          "word": "She",
+          "start": 82.0,
+          "end": 82.24
+        },
+        {
+          "word": "keeps",
+          "start": 82.24,
+          "end": 82.46
+        },
+        {
+          "word": "her",
+          "start": 82.46,
+          "end": 82.6
+        },
+        {
+          "word": "card",
+          "start": 82.6,
+          "end": 82.8
+        },
+        {
+          "word": "for",
+          "start": 82.8,
+          "end": 83.0
+        },
+        {
+          "word": "six",
+          "start": 83.0,
+          "end": 83.3
+        },
+        {
+          "word": "months,",
+          "start": 83.3,
+          "end": 83.5
+        },
+        {
+          "word": "with",
+          "start": 83.5,
+          "end": 83.84
+        },
+        {
+          "word": "her",
+          "start": 83.84,
+          "end": 83.98
+        },
+        {
+          "word": "consent,",
+          "start": 83.98,
+          "end": 84.34
+        },
+        {
+          "word": "and",
+          "start": 84.34,
+          "end": 85.0
+        },
+        {
+          "word": "sees",
+          "start": 85.0,
+          "end": 85.22
+        },
+        {
+          "word": "her",
+          "start": 85.22,
+          "end": 85.42
+        },
+        {
+          "word": "own",
+          "start": 85.42,
+          "end": 85.66
+        },
+        {
+          "word": "rosace,",
+          "start": 85.66,
+          "end": 86.26
+        },
+        {
+          "word": "never",
+          "start": 86.74,
+          "end": 86.92
+        },
+        {
+          "word": "a",
+          "start": 86.92,
+          "end": 87.14
+        },
+        {
+          "word": "rank",
+          "start": 87.14,
+          "end": 87.38
+        },
+        {
+          "word": "or",
+          "start": 87.38,
+          "end": 87.58
+        },
+        {
+          "word": "a",
+          "start": 87.58,
+          "end": 87.72
+        },
+        {
+          "word": "score.",
+          "start": 87.72,
+          "end": 87.96
+        }
+      ]
+    },
+    {
+      "text": "The organiser sees the whole event: three other companies and ten talents. Ties are never hidden; they go to a person.",
+      "start": 88.64,
+      "end": 95.92,
+      "words": [
+        {
+          "word": "The",
+          "start": 88.64,
+          "end": 88.8
+        },
+        {
+          "word": "organiser",
+          "start": 88.8,
+          "end": 89.24
+        },
+        {
+          "word": "sees",
+          "start": 89.24,
+          "end": 89.56
+        },
+        {
+          "word": "the",
+          "start": 89.56,
+          "end": 89.76
+        },
+        {
+          "word": "whole",
+          "start": 89.76,
+          "end": 89.92
+        },
+        {
+          "word": "event:",
+          "start": 89.92,
+          "end": 90.28
+        },
+        {
+          "word": "three",
+          "start": 90.82,
+          "end": 91.0
+        },
+        {
+          "word": "other",
+          "start": 91.0,
+          "end": 91.24
+        },
+        {
+          "word": "companies",
+          "start": 91.24,
+          "end": 91.64
+        },
+        {
+          "word": "and",
+          "start": 91.64,
+          "end": 92.06
+        },
+        {
+          "word": "ten",
+          "start": 92.06,
+          "end": 92.42
+        },
+        {
+          "word": "talents.",
+          "start": 92.42,
+          "end": 92.88
+        },
+        {
+          "word": "Ties",
+          "start": 93.64,
+          "end": 93.92
+        },
+        {
+          "word": "are",
+          "start": 93.92,
+          "end": 94.04
+        },
+        {
+          "word": "never",
+          "start": 94.04,
+          "end": 94.26
+        },
+        {
+          "word": "hidden;",
+          "start": 94.26,
+          "end": 94.58
+        },
+        {
+          "word": "they",
+          "start": 95.08,
+          "end": 95.16
+        },
+        {
+          "word": "go",
+          "start": 95.16,
+          "end": 95.34
+        },
+        {
+          "word": "to",
+          "start": 95.34,
+          "end": 95.46
+        },
+        {
+          "word": "a",
+          "start": 95.46,
+          "end": 95.56
+        },
+        {
+          "word": "person.",
+          "start": 95.56,
+          "end": 95.92
+        }
+      ]
+    },
+    {
+      "text": "For Kaarna, Fatima is suggested, with the reasons behind it. Profiles from other jobs are not pushed forward.",
+      "start": 96.66,
+      "end": 103.02,
+      "words": [
+        {
+          "word": "For",
+          "start": 96.66,
+          "end": 96.76
+        },
+        {
+          "word": "Kaarna,",
+          "start": 96.76,
+          "end": 97.18
+        },
+        {
+          "word": "Fatima",
+          "start": 97.6,
+          "end": 97.92
+        },
+        {
+          "word": "is",
+          "start": 97.92,
+          "end": 98.12
+        },
+        {
+          "word": "suggested,",
+          "start": 98.12,
+          "end": 98.66
+        },
+        {
+          "word": "with",
+          "start": 98.66,
+          "end": 99.0
+        },
+        {
+          "word": "the",
+          "start": 99.0,
+          "end": 99.16
+        },
+        {
+          "word": "reasons",
+          "start": 99.16,
+          "end": 99.42
+        },
+        {
+          "word": "behind",
+          "start": 99.42,
+          "end": 99.84
+        },
+        {
+          "word": "it.",
+          "start": 99.84,
+          "end": 100.2
+        },
+        {
+          "word": "Profiles",
+          "start": 100.66,
+          "end": 101.24
+        },
+        {
+          "word": "from",
+          "start": 101.24,
+          "end": 101.4
+        },
+        {
+          "word": "other",
+          "start": 101.4,
+          "end": 101.6
+        },
+        {
+          "word": "jobs",
+          "start": 101.6,
+          "end": 101.96
+        },
+        {
+          "word": "are",
+          "start": 101.96,
+          "end": 102.14
+        },
+        {
+          "word": "not",
+          "start": 102.14,
+          "end": 102.3
+        },
+        {
+          "word": "pushed",
+          "start": 102.3,
+          "end": 102.6
+        },
+        {
+          "word": "forward.",
+          "start": 102.6,
+          "end": 103.02
+        }
+      ]
+    },
+    {
+      "text": "Every meeting is a human click, with a short reason.",
+      "start": 103.58,
+      "end": 106.26,
+      "words": [
+        {
+          "word": "Every",
+          "start": 103.58,
+          "end": 103.84
+        },
+        {
+          "word": "meeting",
+          "start": 103.84,
+          "end": 104.18
+        },
+        {
+          "word": "is",
+          "start": 104.18,
+          "end": 104.36
+        },
+        {
+          "word": "a",
+          "start": 104.36,
+          "end": 104.46
+        },
+        {
+          "word": "human",
+          "start": 104.46,
+          "end": 104.74
+        },
+        {
+          "word": "click,",
+          "start": 104.74,
+          "end": 105.06
+        },
+        {
+          "word": "with",
+          "start": 105.06,
+          "end": 105.48
+        },
+        {
+          "word": "a",
+          "start": 105.48,
+          "end": 105.6
+        },
+        {
+          "word": "short",
+          "start": 105.6,
+          "end": 105.82
+        },
+        {
+          "word": "reason.",
+          "start": 105.82,
+          "end": 106.26
+        }
+      ]
+    },
+    {
+      "text": "At the event, the recruiter walks in with questions that check each claim, not with a ranking.",
+      "start": 106.86,
+      "end": 111.96,
+      "words": [
+        {
+          "word": "At",
+          "start": 106.86,
+          "end": 107.02
+        },
+        {
+          "word": "the",
+          "start": 107.02,
+          "end": 107.16
+        },
+        {
+          "word": "event,",
+          "start": 107.16,
+          "end": 107.52
+        },
+        {
+          "word": "the",
+          "start": 107.86,
+          "end": 107.92
+        },
+        {
+          "word": "recruiter",
+          "start": 107.92,
+          "end": 108.36
+        },
+        {
+          "word": "walks",
+          "start": 108.36,
+          "end": 108.62
+        },
+        {
+          "word": "in",
+          "start": 108.62,
+          "end": 108.86
+        },
+        {
+          "word": "with",
+          "start": 108.86,
+          "end": 109.04
+        },
+        {
+          "word": "questions",
+          "start": 109.04,
+          "end": 109.44
+        },
+        {
+          "word": "that",
+          "start": 109.44,
+          "end": 109.74
+        },
+        {
+          "word": "check",
+          "start": 109.74,
+          "end": 109.98
+        },
+        {
+          "word": "each",
+          "start": 109.98,
+          "end": 110.3
+        },
+        {
+          "word": "claim,",
+          "start": 110.3,
+          "end": 110.8
+        },
+        {
+          "word": "not",
+          "start": 111.12,
+          "end": 111.36
+        },
+        {
+          "word": "with",
+          "start": 111.36,
+          "end": 111.56
+        },
+        {
+          "word": "a",
+          "start": 111.56,
+          "end": 111.64
+        },
+        {
+          "word": "ranking.",
+          "start": 111.64,
+          "end": 111.96
+        }
+      ]
+    },
+    {
+      "text": "After the talk, they note what they actually saw. Observed stays separate from declared: Fatima's own words are never overwritten.",
+      "start": 112.52,
+      "end": 120.86,
+      "words": [
+        {
+          "word": "After",
+          "start": 112.52,
+          "end": 112.92
+        },
+        {
+          "word": "the",
+          "start": 112.92,
+          "end": 113.1
+        },
+        {
+          "word": "talk,",
+          "start": 113.1,
+          "end": 113.34
+        },
+        {
+          "word": "they",
+          "start": 113.78,
+          "end": 114.0
+        },
+        {
+          "word": "note",
+          "start": 114.0,
+          "end": 114.24
+        },
+        {
+          "word": "what",
+          "start": 114.24,
+          "end": 114.44
+        },
+        {
+          "word": "they",
+          "start": 114.44,
+          "end": 114.6
+        },
+        {
+          "word": "actually",
+          "start": 114.6,
+          "end": 115.06
+        },
+        {
+          "word": "saw.",
+          "start": 115.06,
+          "end": 115.46
+        },
+        {
+          "word": "Observed",
+          "start": 116.06,
+          "end": 116.66
+        },
+        {
+          "word": "stays",
+          "start": 116.66,
+          "end": 117.04
+        },
+        {
+          "word": "separate",
+          "start": 117.04,
+          "end": 117.46
+        },
+        {
+          "word": "from",
+          "start": 117.46,
+          "end": 117.7
+        },
+        {
+          "word": "declared:",
+          "start": 117.7,
+          "end": 118.22
+        },
+        {
+          "word": "Fatima's",
+          "start": 118.8,
+          "end": 119.22
+        },
+        {
+          "word": "own",
+          "start": 119.22,
+          "end": 119.4
+        },
+        {
+          "word": "words",
+          "start": 119.4,
+          "end": 119.7
+        },
+        {
+          "word": "are",
+          "start": 119.7,
+          "end": 119.92
+        },
+        {
+          "word": "never",
+          "start": 119.92,
+          "end": 120.22
+        },
+        {
+          "word": "overwritten.",
+          "start": 120.22,
+          "end": 120.86
+        }
+      ]
+    },
+    {
+      "text": "Synthetic data only. Nationality, language, degree and career path never enter a calculation. Recruitment is high-risk under the EU AI Act, so Rosace only suggests, and always shows why.",
+      "start": 121.56,
+      "end": 135.1,
+      "words": [
+        {
+          "word": "Synthetic",
+          "start": 121.56,
+          "end": 122.0
+        },
+        {
+          "word": "data",
+          "start": 122.0,
+          "end": 122.22
+        },
+        {
+          "word": "only.",
+          "start": 122.22,
+          "end": 122.64
+        },
+        {
+          "word": "Nationality,",
+          "start": 123.2,
+          "end": 123.92
+        },
+        {
+          "word": "language,",
+          "start": 124.14,
+          "end": 124.5
+        },
+        {
+          "word": "degree",
+          "start": 124.78,
+          "end": 125.02
+        },
+        {
+          "word": "and",
+          "start": 125.3,
+          "end": 125.38
+        },
+        {
+          "word": "career",
+          "start": 125.38,
+          "end": 125.7
+        },
+        {
+          "word": "path",
+          "start": 125.7,
+          "end": 126.18
+        },
+        {
+          "word": "never",
+          "start": 126.18,
+          "end": 126.72
+        },
+        {
+          "word": "enter",
+          "start": 126.72,
+          "end": 127.16
+        },
+        {
+          "word": "a",
+          "start": 127.16,
+          "end": 127.3
+        },
+        {
+          "word": "calculation.",
+          "start": 127.3,
+          "end": 127.9
+        },
+        {
+          "word": "Recruitment",
+          "start": 128.54,
+          "end": 128.98
+        },
+        {
+          "word": "is",
+          "start": 128.98,
+          "end": 129.22
+        },
+        {
+          "word": "high-risk",
+          "start": 129.22,
+          "end": 129.94
+        },
+        {
+          "word": "under",
+          "start": 129.94,
+          "end": 130.18
+        },
+        {
+          "word": "the",
+          "start": 130.18,
+          "end": 130.38
+        },
+        {
+          "word": "EU",
+          "start": 130.38,
+          "end": 130.7
+        },
+        {
+          "word": "AI",
+          "start": 130.7,
+          "end": 131.18
+        },
+        {
+          "word": "Act,",
+          "start": 131.18,
+          "end": 131.64
+        },
+        {
+          "word": "so",
+          "start": 131.98,
+          "end": 132.14
+        },
+        {
+          "word": "Rosace",
+          "start": 132.14,
+          "end": 132.6
+        },
+        {
+          "word": "only",
+          "start": 132.6,
+          "end": 132.96
+        },
+        {
+          "word": "suggests,",
+          "start": 132.96,
+          "end": 133.38
+        },
+        {
+          "word": "and",
+          "start": 133.38,
+          "end": 133.96
+        },
+        {
+          "word": "always",
+          "start": 133.96,
+          "end": 134.38
+        },
+        {
+          "word": "shows",
+          "start": 134.38,
+          "end": 134.7
+        },
+        {
+          "word": "why.",
+          "start": 134.7,
+          "end": 135.1
+        }
+      ]
+    },
+    {
+      "text": "Stronger signal, less noise, for Espoo's next matchmaking event.",
+      "start": 135.74,
+      "end": 139.86,
+      "words": [
+        {
+          "word": "Stronger",
+          "start": 135.74,
+          "end": 136.18
+        },
+        {
+          "word": "signal,",
+          "start": 136.18,
+          "end": 136.52
+        },
+        {
+          "word": "less",
+          "start": 136.88,
+          "end": 137.02
+        },
+        {
+          "word": "noise,",
+          "start": 137.02,
+          "end": 137.42
+        },
+        {
+          "word": "for",
+          "start": 137.42,
+          "end": 138.04
+        },
+        {
+          "word": "Espoo's",
+          "start": 138.04,
+          "end": 138.54
+        },
+        {
+          "word": "next",
+          "start": 138.54,
+          "end": 138.8
+        },
+        {
+          "word": "matchmaking",
+          "start": 138.8,
+          "end": 139.54
+        },
+        {
+          "word": "event.",
+          "start": 139.54,
+          "end": 139.86
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+ "clip": 15,
+ "total": 11.484,
+ "lines": [
+  {
+   "id": "u05",
+   "clip": 15,
+   "text": "There is no ranking. For each company, people are suggested or need more information, always with the reasons. Fatima is suggested for Kaarna, and the organiser approves the meeting.",
+   "start": 0.3,
+   "dur": 10.684,
+   "words": [
+    {
+     "w": "There",
+     "start": 0.346,
+     "end": 0.521
+    },
+    {
+     "w": "is",
+     "start": 0.555,
+     "end": 0.613
+    },
+    {
+     "w": "no",
+     "start": 0.672,
+     "end": 0.764
+    },
+    {
+     "w": "ranking.",
+     "start": 0.857,
+     "end": 1.357
+    },
+    {
+     "w": "For",
+     "start": 1.67,
+     "end": 1.821
+    },
+    {
+     "w": "each",
+     "start": 1.902,
+     "end": 2.1
+    },
+    {
+     "w": "company,",
+     "start": 2.158,
+     "end": 2.634
+    },
+    {
+     "w": "people",
+     "start": 2.668,
+     "end": 2.935
+    },
+    {
+     "w": "are",
+     "start": 2.97,
+     "end": 3.075
+    },
+    {
+     "w": "suggested",
+     "start": 3.11,
+     "end": 3.725
+    },
+    {
+     "w": "or",
+     "start": 3.783,
+     "end": 3.876
+    },
+    {
+     "w": "need",
+     "start": 3.934,
+     "end": 4.108
+    },
+    {
+     "w": "more",
+     "start": 4.166,
+     "end": 4.305
+    },
+    {
+     "w": "information,",
+     "start": 4.34,
+     "end": 5.095
+    },
+    {
+     "w": "always",
+     "start": 5.327,
+     "end": 5.745
+    },
+    {
+     "w": "with",
+     "start": 5.78,
+     "end": 5.919
+    },
+    {
+     "w": "the",
+     "start": 5.942,
+     "end": 6.012
+    },
+    {
+     "w": "reasons.",
+     "start": 6.059,
+     "end": 6.616
+    },
+    {
+     "w": "Fatima",
+     "start": 7.103,
+     "end": 7.487
+    },
+    {
+     "w": "is",
+     "start": 7.521,
+     "end": 7.591
+    },
+    {
+     "w": "suggested",
+     "start": 7.626,
+     "end": 8.102
+    },
+    {
+     "w": "for",
+     "start": 8.137,
+     "end": 8.241
+    },
+    {
+     "w": "Kaarna,",
+     "start": 8.299,
+     "end": 8.833
+    },
+    {
+     "w": "and",
+     "start": 8.973,
+     "end": 9.124
+    },
+    {
+     "w": "the",
+     "start": 9.158,
+     "end": 9.228
+    },
+    {
+     "w": "organiser",
+     "start": 9.275,
+     "end": 9.809
+    },
+    {
+     "w": "approves",
+     "start": 9.867,
+     "end": 10.203
+    },
+    {
+     "w": "the",
+     "start": 10.227,
+     "end": 10.296
+    },
+    {
+     "w": "meeting.",
+     "start": 10.331,
+     "end": 10.714
+    }
+   ]
+  }
+ ]
+}

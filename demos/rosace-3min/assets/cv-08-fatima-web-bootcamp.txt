@@ -1,0 +1,11 @@
+Fatima (fictional)
+Bootcamp graduate, junior web developer
+
+Full-stack web bootcamp, 12 weeks, 2026.
+Final project in a team of four: a booking app in React and TypeScript, with automated tests for the payment flow.
+Planned our sprints on a shared board and flagged when a ticket would slip.
+Before the bootcamp: pharmacy assistant (3 years), handling patient data under strict privacy rules.
+Learned Git and testing on my own before the course started.
+Languages: Arabic (native), English (fluent), Finnish (B1).
+
+Fictional, made for the Rosace demo. No real person or company.

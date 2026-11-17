@@ -1,0 +1,440 @@
+{
+ "clip": 10,
+ "total": 31.6,
+ "lines": [
+  {
+   "id": "nico",
+   "clip": 10,
+   "text": "The idea is simple, look at what people can actually do. I took inspiration from Centrale Lyon, a French engineering school where skills are assessed through practical situations. I adapted that approach to recruitment. First, define the skills the job needs. Then, assess them through short exercises before the event and during the interview. Use those results to help connect the right candidates with the right opportunities. AI helps with the exercises and the feedback. The recruiter reviews the results and makes the final decision.",
+   "start": 0,
+   "dur": 31.6,
+   "words": [
+    {
+     "w": "The",
+     "start": 0.096,
+     "end": 0.21
+    },
+    {
+     "w": "idea",
+     "start": 0.21,
+     "end": 0.459
+    },
+    {
+     "w": "is",
+     "start": 0.459,
+     "end": 0.688
+    },
+    {
+     "w": "simple,",
+     "start": 0.688,
+     "end": 1.032
+    },
+    {
+     "w": "look",
+     "start": 1.223,
+     "end": 1.376
+    },
+    {
+     "w": "at",
+     "start": 1.376,
+     "end": 1.739
+    },
+    {
+     "w": "what",
+     "start": 1.739,
+     "end": 1.949
+    },
+    {
+     "w": "people",
+     "start": 1.949,
+     "end": 2.159
+    },
+    {
+     "w": "can",
+     "start": 2.159,
+     "end": 2.522
+    },
+    {
+     "w": "actually",
+     "start": 2.522,
+     "end": 2.923
+    },
+    {
+     "w": "do.",
+     "start": 2.923,
+     "end": 3.229
+    },
+    {
+     "w": "I",
+     "start": 3.382,
+     "end": 3.478
+    },
+    {
+     "w": "took",
+     "start": 3.478,
+     "end": 3.611
+    },
+    {
+     "w": "inspiration",
+     "start": 3.611,
+     "end": 3.955
+    },
+    {
+     "w": "from",
+     "start": 3.955,
+     "end": 4.395
+    },
+    {
+     "w": "Centrale",
+     "start": 4.395,
+     "end": 4.605
+    },
+    {
+     "w": "Lyon,",
+     "start": 4.605,
+     "end": 5.006
+    },
+    {
+     "w": "a",
+     "start": 5.159,
+     "end": 5.216
+    },
+    {
+     "w": "French",
+     "start": 5.216,
+     "end": 5.522
+    },
+    {
+     "w": "engineering",
+     "start": 5.522,
+     "end": 5.904
+    },
+    {
+     "w": "school",
+     "start": 5.904,
+     "end": 6.305
+    },
+    {
+     "w": "where",
+     "start": 6.305,
+     "end": 6.649
+    },
+    {
+     "w": "skills",
+     "start": 6.649,
+     "end": 6.955
+    },
+    {
+     "w": "are",
+     "start": 6.955,
+     "end": 7.318
+    },
+    {
+     "w": "assessed",
+     "start": 7.318,
+     "end": 7.624
+    },
+    {
+     "w": "through",
+     "start": 7.624,
+     "end": 8.006
+    },
+    {
+     "w": "practical",
+     "start": 8.006,
+     "end": 8.503
+    },
+    {
+     "w": "situations.",
+     "start": 8.503,
+     "end": 8.961
+    },
+    {
+     "w": "I",
+     "start": 9.286,
+     "end": 9.401
+    },
+    {
+     "w": "adapted",
+     "start": 9.401,
+     "end": 9.802
+    },
+    {
+     "w": "that",
+     "start": 9.802,
+     "end": 10.146
+    },
+    {
+     "w": "approach",
+     "start": 10.146,
+     "end": 10.471
+    },
+    {
+     "w": "to",
+     "start": 10.471,
+     "end": 10.796
+    },
+    {
+     "w": "recruitment.",
+     "start": 10.796,
+     "end": 11.082
+    },
+    {
+     "w": "First,",
+     "start": 11.292,
+     "end": 11.522
+    },
+    {
+     "w": "define",
+     "start": 11.713,
+     "end": 11.961
+    },
+    {
+     "w": "the",
+     "start": 11.961,
+     "end": 12.133
+    },
+    {
+     "w": "skills",
+     "start": 12.133,
+     "end": 12.362
+    },
+    {
+     "w": "the",
+     "start": 12.362,
+     "end": 12.668
+    },
+    {
+     "w": "job",
+     "start": 12.668,
+     "end": 12.821
+    },
+    {
+     "w": "needs.",
+     "start": 12.821,
+     "end": 13.127
+    },
+    {
+     "w": "Then,",
+     "start": 13.662,
+     "end": 13.795
+    },
+    {
+     "w": "assess",
+     "start": 14.349,
+     "end": 14.521
+    },
+    {
+     "w": "them",
+     "start": 14.521,
+     "end": 14.827
+    },
+    {
+     "w": "through",
+     "start": 14.827,
+     "end": 15.133
+    },
+    {
+     "w": "short",
+     "start": 15.133,
+     "end": 15.458
+    },
+    {
+     "w": "exercises",
+     "start": 15.458,
+     "end": 15.993
+    },
+    {
+     "w": "before",
+     "start": 15.993,
+     "end": 16.719
+    },
+    {
+     "w": "the",
+     "start": 16.719,
+     "end": 16.967
+    },
+    {
+     "w": "event",
+     "start": 16.967,
+     "end": 17.216
+    },
+    {
+     "w": "and",
+     "start": 17.216,
+     "end": 17.77
+    },
+    {
+     "w": "during",
+     "start": 17.77,
+     "end": 18.209
+    },
+    {
+     "w": "the",
+     "start": 18.209,
+     "end": 18.381
+    },
+    {
+     "w": "interview.",
+     "start": 18.381,
+     "end": 18.649
+    },
+    {
+     "w": "Use",
+     "start": 18.801,
+     "end": 19.069
+    },
+    {
+     "w": "those",
+     "start": 19.069,
+     "end": 19.451
+    },
+    {
+     "w": "results",
+     "start": 19.451,
+     "end": 19.852
+    },
+    {
+     "w": "to",
+     "start": 19.852,
+     "end": 20.426
+    },
+    {
+     "w": "help",
+     "start": 20.426,
+     "end": 20.636
+    },
+    {
+     "w": "connect",
+     "start": 20.636,
+     "end": 21.037
+    },
+    {
+     "w": "the",
+     "start": 21.037,
+     "end": 21.343
+    },
+    {
+     "w": "right",
+     "start": 21.343,
+     "end": 21.534
+    },
+    {
+     "w": "candidates",
+     "start": 21.534,
+     "end": 21.954
+    },
+    {
+     "w": "with",
+     "start": 21.954,
+     "end": 22.795
+    },
+    {
+     "w": "the",
+     "start": 22.795,
+     "end": 23.101
+    },
+    {
+     "w": "right",
+     "start": 23.101,
+     "end": 23.406
+    },
+    {
+     "w": "opportunities.",
+     "start": 23.406,
+     "end": 24.342
+    },
+    {
+     "w": "AI",
+     "start": 24.629,
+     "end": 25.011
+    },
+    {
+     "w": "helps",
+     "start": 25.011,
+     "end": 25.393
+    },
+    {
+     "w": "with",
+     "start": 25.393,
+     "end": 25.89
+    },
+    {
+     "w": "the",
+     "start": 25.89,
+     "end": 26.081
+    },
+    {
+     "w": "exercises",
+     "start": 26.081,
+     "end": 26.521
+    },
+    {
+     "w": "and",
+     "start": 26.521,
+     "end": 26.826
+    },
+    {
+     "w": "the",
+     "start": 26.826,
+     "end": 26.96
+    },
+    {
+     "w": "feedback.",
+     "start": 26.96,
+     "end": 27.209
+    },
+    {
+     "w": "The",
+     "start": 27.209,
+     "end": 27.648
+    },
+    {
+     "w": "recruiter",
+     "start": 27.648,
+     "end": 28.24
+    },
+    {
+     "w": "reviews",
+     "start": 28.24,
+     "end": 28.699
+    },
+    {
+     "w": "the",
+     "start": 28.699,
+     "end": 29.005
+    },
+    {
+     "w": "results",
+     "start": 29.005,
+     "end": 29.368
+    },
+    {
+     "w": "and",
+     "start": 29.368,
+     "end": 29.864
+    },
+    {
+     "w": "makes",
+     "start": 29.864,
+     "end": 30.113
+    },
+    {
+     "w": "the",
+     "start": 30.113,
+     "end": 30.571
+    },
+    {
+     "w": "final",
+     "start": 30.571,
+     "end": 30.877
+    },
+    {
+     "w": "decision.",
+     "start": 30.877,
+     "end": 31.278
+    }
+   ]
+  }
+ ]
+}

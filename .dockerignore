@@ -12,3 +12,7 @@ test-results
 docs
 e2e
 *.log
+.claude
+demos
+demo.config.json
+skills-lock.json

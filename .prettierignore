@@ -4,3 +4,8 @@ package-lock.json
 test-results
 playwright-report
 docs/CADRAGE.md
+
+# demo-video tooling and vendored skills (generated or third-party files)
+demos/
+.claude/skills/
+.agents/skills/
